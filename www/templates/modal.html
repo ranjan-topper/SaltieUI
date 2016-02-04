@@ -1,0 +1,42 @@
+<ion-modal-view ng-repeat="cabin in cabinInfo | filter:{roomType:category}:true">
+	
+        <ion-header-bar id="modal" class="bar bar-header modalHead"  >
+			<h2 class="title bold modalhead" id="{{cabin.roomType}}">{{cabin.roomType}}</h2>
+          <button class="button button-icon button-primary modalClose ion-ios-close-empty" id="arrw" ng-click="modal.hide()"></button>
+        </ion-header-bar>
+
+        <ion-content>
+									<img ng-src="http://104.236.50.241:8080/images/CabinType/{{cabin.image}}" width="100%"/>
+			<div class="cabinTypeBorder">
+				<div class="cabinTitle">
+					<span class="bold" style="color: #00232D;" id="{{cabin.roomType}}">{{cabin.roomType}}</span>&nbsp;&nbsp;&nbsp;<span class="roman" style="color: #9c867a;">/</span>&nbsp;&nbsp;&nbsp;<span class="roman" style="color: #339fa6;" id="{{date}}">{{date}}</span>&nbsp;&nbsp;&nbsp;<span class="roman" style="color: #9c867a;">/</span>&nbsp;&nbsp;&nbsp;<span class="roman" style="color: #9c867a;" id="{{price}}">{{price | dollorCheck}}</span></div>
+				<hr style="background-color: #00232D;">
+                  <p class="itDesc" id="{{cabin.desc}}" >
+				 {{cabin.desc}}
+				</p>
+				<hr style="background-color: #b0a283;">
+			<span class="bold cabinRoomFeature"  id="feat">Room Features</span>
+				<hr style="background-color: #b0a283;">
+			          <div class="list">
+		<div class="row list-item" >
+
+			 <div class="col light cabinItems" >
+                  <ul style="" ng-repeat="include in cabin.included">
+				 
+				 <li>{{include}}</li>
+				 
+				 </ul>
+                </div>
+			  </div>
+						  			
+				</div>
+          </div>
+				          
+        </ion-content>
+	 <ion-footer-bar  style="background-color: #00707e;   border: none;">
+      <button class="button-block bookbt thin" id="readyboook" ng-click="modal.hide();book1()">
+Ready to Book
+</button>
+
+    </ion-footer-bar>
+      </ion-modal-view>

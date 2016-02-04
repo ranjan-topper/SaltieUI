@@ -1,0 +1,19 @@
+<ion-modal-view >
+        <ion-header-bar id="modal" class="bar bar-header modalHead" >
+			<h2 class="title bold modalhead" id="video">Video</h2>
+          <button class="button button-icon button-primary modalClose ion-ios-close-empty" style="color: white;" id="videoo" ng-click="closeVidio()"></button>
+        </ion-header-bar>
+
+       <ion-content>
+			 <ion-list>
+        <div class="card">
+            <ion-item>
+                <div class="video-container">
+                    <iframe width="640" height="360" src="{{trustSrc(videoURL)}}" frameborder="0" allowfullscreen></iframe>
+                </div>
+            </ion-item>
+        </div>
+
+		</ion-list>
+      </ion-content> 
+      </ion-modal-view>

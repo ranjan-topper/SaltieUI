@@ -1,0 +1,32 @@
+<ion-view cache-view="false" title="" id="welcome-view" hide-nav-bar="true">
+    <ion-content scroll="false" on-swipe-left="swipetohome()">
+
+        <div align="center" class="logo-welcome" id="logo"><img ng-src="./img/logo.png" style="width: 18vmin;">
+        <div  align="center" class="saltie" id="title">
+		<img ng-src="./img/word.png" style="width: 45vmin;">
+		<p class="subtitle bold" id="subttl">The Perfect Cruise is Waiting for you.</p>
+		
+				<a ng-click="swipetohome()" id="swipe" class="button-icon ion-android-arrow-forward frontarrow"></a>
+</div>
+		</div>
+    </ion-content>
+    <div id="footer" class="bar bar-footer" ng-hide="welcomeBack">
+<!--
+ <div class="login-btns" align="center">
+                <button id="btn-login" class="button button-clear button-positive" ng-click="signUp()">Sign Up</button>
+                <button id="btn-reg" class="button button-clear button-positive" ng-click="login()">Login</button>
+            </div>    
+-->
+		 <div class="login-btns" align="center">
+		 <ul class="tab-group">
+        <li class="tab"><a ng-click="signUp()" href="#">Sign Up</a></li>
+        <li class="tab"><a class="buttonBorder" ng-click="login()" href="#">Log In</a></li>
+      </ul>
+		</div>
+	</div>
+	<div id="footer" class="bar bar-footer welcomeBack" ng-show="welcomeBack">
+ <div class="login-btns" align="center">
+                <span>Welcome back, {{name.split(" ")[0] | capitalize:true}}</span>
+            </div>    
+	</div>
+</ion-view>

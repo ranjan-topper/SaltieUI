@@ -1,0 +1,53 @@
+<ion-view id="signup-view" cache-view="false" hide-nav-bar="true">
+    <ion-content id="sendemail">
+       <button  class="button button-icon button-clear ion-ios-arrow-thin-left leftarrow" id="bck8" ng-click="back()">
+        </button>
+		<button  class="button button-icon button-clear ion-ios-close-empty closebutton"  id="clse3" ng-click="close()">
+        </button>
+		<form name="authorizationForm1" novalidate="" ng-submit="Sendemail(authorizationForm1,user)">
+        	<div class="list list-inset" id="input">
+				<p class="sentemailhead roman">If you forgot your password, we can send you an email to reset it.</p>
+
+  			<label class="item item-input color3" ng-class="{ 'has-errors' : authorizationForm1.email.$invalid && authorizationForm1.$submitted, 'no-errors' : authorizationForm1.email.$valid  && authorizationForm1.$submitted}">
+              <input type="email" id="emlg" name="email" ng-keyup="resetEmail(authorizationForm1)" placeholder="Email" ng-model="user.email" required>
+            </label>
+<div class="error-container" ng-show="authorizationForm1.email.$error && authorizationForm1.$submitted" ng-messages="authorizationForm1.email.$error">
+                <div ng-messages-include="templates/error-list.html"></div> 
+            </div>
+			
+			
+				<button type="submit" id="send" class="button button-block color4 submitSendMail light" style="color:white;">
+					Send</button>				 
+			</div>
+		</form>
+		
+		<form name="authorizationForm" novalidate="" ng-class="{'hideVerCode':enableVerCode}" ng-submit="Sendotp(authorizationForm,user)">
+        	<div class="list list-inset" id="input">
+			<p class="sentemailhead roman" id="txt">Please check your email and enter the verification code below to reset your password.</p>	
+  			<label class="item item-input color1" ng-class="{ 'has-errors' : authorizationForm.otp.$invalid && authorizationForm.$submitted, 'no-errors' : authorizationForm.otp.$valid}">
+              <input type="text" name="otp" placeholder="Verification Code" ng-keyup="setOTP(authorizationForm)" ng-model="user.otp" ng-minlength="5" ng-maxlength="20" required>
+            </label>
+				<div class="error-container" ng-show="authorizationForm.otp.$error && authorizationForm.$submitted" ng-messages="authorizationForm.otp.$error">
+                <div ng-messages-include="templates/error-list.html"></div> 
+            </div>
+			<label class="item item-input color2" ng-class="{ 'has-errors' : authorizationForm.password.$invalid && authorizationForm.$submitted, 'no-errors' : authorizationForm.password.$valid}">
+              <input type="password" name="password" id="password" ng-keyup="resetFrom(authorizationForm)" placeholder="New Password" ng-model="user.password" ng-minlength="5" ng-maxlength="20" required>
+            </label>
+				<div class="error-container" ng-show="authorizationForm.password.$error && authorizationForm.$submitted" ng-messages="authorizationForm.password.$error">
+                <div ng-messages-include="templates/error-list.html"></div> 
+            </div>
+			<label class="item item-input color3" ng-class="{ 'has-errors' : authorizationForm.passwordc.$invalid && authorizationForm.$submitted, 'no-errors' : authorizationForm.passwordc.$valid}">
+              <input type="password" name="passwordc" id="passwordc" ng-keyup="setpassword(authorizationForm)" placeholder="Confirm Password" ng-model="user.passwordc" ng-minlength="5" ng-maxlength="20" required>
+            </label>
+				<div class="error-container" ng-show="authorizationForm.passwordc.$error && authorizationForm.$submitted" ng-messages="authorizationForm.passwordc.$error">
+                <div ng-messages-include="templates/error-list.html"></div> 
+            </div>
+		
+			
+				<button type="submit" class="button button-block light submitloginbt" style=" color:#00232d;" id="submit4">
+					Submit</button>				 
+			</div>
+			
+		</form>
+			 </ion-content>
+</ion-view>

@@ -1,0 +1,7 @@
+{
+    "jscodehints.detectedExclusions": [
+        "C:/Users/EswaranP/Desktop/saltie/saltie1.0/www/js/app.js",
+        "C:/Users/ranjan/Desktop/saltie1.0/platforms/android/assets/www/lib/ionic/js/ionic.min.js",
+        "C:/Users/ranjan/Desktop/saltie1.0/plugins/org.apache.cordova.inappbrowser/tests/resources/inject.js"
+    ]
+}

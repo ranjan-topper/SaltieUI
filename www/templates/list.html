@@ -1,0 +1,67 @@
+<ion-view cache-view="true" id="list">
+	<ion-nav-buttons side="left" style="padding-left: 3%;">
+<button class="button button-icon button-clear ion-ios-arrow-thin-left navBarButton" id="back4" style="color: white;" ng-click="back()">
+        </button>     
+	</ion-nav-buttons>
+	<ion-nav-title>
+	
+		<a href="" class="cruisecount" id="view{{count}}" style="text-decoration: none;"><span class="thin">View <span class="bold">{{count}}</span> Cruises</span></a>
+    </ion-nav-title>
+	<ion-content  id="filter">
+		<ion-scroll delegate-handle="filterScroll" direction="x" >
+		   <div align="center" class="filter">
+			   <a class="button icon-right ion-ios-arrow-down" ng-click="showFilter()">SHOW FILTERS</a>
+		   </div>
+		   
+	  </ion-scroll>
+<!--
+		<div>
+		<ion-scroll delegate-handle="filterScroll" direction="x" >
+            <div class="row" style="transform: translate3d(-10px, 0px,0px);">
+                <div class="col col-50 button" id="any" ng-click="lifestyle('ANY','Any')" ng-class="{act: islengthActive('ANY'), button1: !islengthActive('ANY')}">
+						<a class="lifestyle">Any</a></div><span class="border"></span>
+                    
+						             <div class="col col-67 button" id="fewdays" ng-click="lifestyle('FEW DAY','FewDays')" ng-class="{act:islengthActive('FEW DAY'), button1: !islengthActive('FEW DAY')}">
+<a class="lifestyle" >Few Days</a></div><span class="border"></span>
+						                <div class="col col-50 button" id="oneweek" ng-click="lifestyle('ONE WEEK','OneWeek')" ng-class="{act: islengthActive('ONE WEEK'), button1: !islengthActive('ONE WEEK')}">
+<a class="lifestyle" >1 Week</a></div><span class="border"></span>
+						                <div class="col col-50 button" id="twoweek" ng-click="lifestyle('TWO WEEK','TwoWeek')" ng-class="{act: islengthActive('TWO WEEK'), button1: !islengthActive('TWO WEEK')}">
+ <a class="lifestyle" >2 Weeks</a></div><span class="border"></span>
+						                <div class="col col-50 button" id="more" ng-click="lifestyle('MORE','More')" ng-class="{act: islengthActive('MORE'), button1: !islengthActive('MORE')}">
+<a class="lifestyle" >2+ Weeks</a></div>
+                </div>
+        </ion-scroll>
+		</div>
+-->
+
+	</ion-content>
+	<ion-content delegate-handle="listPage" style="margin-top: 7vh;">
+	<div class="list list-item" ng-repeat="itinerary in list">
+			<a type="item-text-wrap" id="detail(itinerary.tripId)" ng-click="detail(itinerary.tripId)" on-swipe-left="detail(itinerary.tripId)" href="" style="background-image:url('http://104.236.50.241:8080/images/ports/{{ itinerary.destinationImage[0][0] }}');" class="eventListPicture">
+				<div class="gradient"></div>
+				<div class="marginList">
+				<div class="position" id="{{ itinerary.tripName}}"><span class="bold tripname overwrap" >{{ itinerary.tripName | capitalize:true }}</span>
+				<span class="roman overwrap tripdes">{{ itinerary.tripDesc.split("(")[0].trim()}}</span>
+				
+			</div>
+		<div class="cruiseLine" id="{{ itinerary.cruiseLineName}} cruiseline"><span class="bold">{{ itinerary.cruiseLineName}} Cruise Line</span>
+			
+			</div>
+			<div class="shipName" id="{{ itinerary.shipName}}"><span class="roman ">{{ itinerary.shipName}}</span>
+			
+			</div>
+		<div class="price" id="{{ itinerary.priceFrom}}price"><span class="thin ">From &nbsp;{{'$'}}</span><span class="bold">{{ itinerary.priceFrom}}</span>
+			
+			</div>
+				</div>
+							</a>
+
+		
+<!--		{{isFavorite(itinerary.tripId);}}-->
+		<p><img id="{{$index}}" src="{{isFavorite(itinerary.tripId)}}" ng-click="favorite(itinerary.tripId,$index)" class="favorite" width="8%"></p>
+		
+
+		</div>
+		 <ion-infinite-scroll id="scroll"  ng-if="!noMoreItemsAvailable" on-infinite="loadMore()" distance='2%'></ion-infinite-scroll>
+	</ion-content>
+</ion-view>

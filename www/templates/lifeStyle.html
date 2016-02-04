@@ -1,0 +1,59 @@
+<ion-view id="lifestyle" cache-view="true">
+	<ion-nav-buttons side="left">
+<button class="button button-icon button-clear ion-android-arrow-back" style="color: #00232d;">
+        </button>     
+	</ion-nav-buttons>
+	<ion-nav-title>
+     <a href="" class="cruisecount" id="view{{count}}" style="text-decoration: none;" ng-click="viewall(count)"><span class="thin">View <span class="bold">{{count}}</span> Cruises</span></a>
+    </ion-nav-title>
+	
+  <ion-content id="filter">
+	   <ion-scroll delegate-handle="filterScroll" direction="x" >
+		   <div align="center" class="filter">
+			   <a class="button icon-right ion-ios-arrow-down" ng-click="showFilter()">SHOW FILTERS</a>
+		
+		   </div>
+		   
+	  </ion-scroll>
+<!--
+	  <ion-scroll delegate-handle="filterScroll" direction="x" >
+            <div class="row" >
+				 <div class="col col-50 button" ng-click="lifestyle('All')" ng-class="{act: isLifestyleActive('All'), button1: !isLifestyleActive('All')}">
+						<a class="lifestyle" >All</a></div><span class="border"></span>
+                <div class="col col-50 button" id="single" ng-click="lifestyle('Single')" ng-class="{act: isLifestyleActive('Single'), button1: !isLifestyleActive('Single')}">
+						<a class="lifestyle" >Single</a></div><span class="border"></span>
+                    
+						             <div class="col col-50 button" id="family" ng-click="lifestyle('Family')" ng-class="{act: isLifestyleActive('Family'), button1: !isLifestyleActive('Family')}">
+<a class="lifestyle" >Family</a></div><span class="border"></span>
+						                <div class="col col-50 button" id="senior" ng-click="lifestyle('Senior')" ng-class="{act: isLifestyleActive('Senior'), button1: !isLifestyleActive('Senior')}">
+<a class="lifestyle" >Senior</a></div><span class="border"></span>
+                    
+						                <div class="col col-50 button" id="summer" ng-click="lifestyle('Summer')" ng-class="{act: isLifestyleActive('Summer'), button1: !isLifestyleActive('Summer')}">
+ <a class="lifestyle">Summer</a></div><span class="border"></span>
+                   
+						                <div class="col col-50 button" id="romantic" ng-click="lifestyle('Romantic')" ng-class="{act: isLifestyleActive('Romantic'), button1: !isLifestyleActive('Romantic')}">
+  <a class="lifestyle" >Romantic</a></div>
+                </div>
+            </div>
+        </ion-scroll>
+-->
+</ion-content>
+<ion-content style="margin-top: 7vh;" class="" on-swipe-left="viewall(count)" scroll="false">
+<div class="background homepageImg">
+      <div class="destination" align="center">
+		 <div class="medium" style="margin-bottom: 10%;">CARIBBEAN</div>
+		  <div><button class="button button-icon button-clear ion-android-arrow-forward" id="clck" ng-click="viewall(count)" style="color:white;font-size: 7vmin;">
+			  </button>  </div>
+      </div>
+	
+	<div class="lifestyleBottom">
+	<div class="medium lifeBottomText">Saltie is currently offering only Caribbean destinations. Please check back soon for additional destinations.
+		</div>
+	</div>
+	</div>
+
+</ion-content>
+
+	
+	  
+</ion-view>
