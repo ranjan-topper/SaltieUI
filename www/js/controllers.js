@@ -985,17 +985,16 @@ app.controller('lifeStyleCtrl', function($scope, $location, $http, $rootScope, $
 		//reset to previously selected month
 	
 $rootScope.resetDateMonth=function(months,index){
-				
-			if(months==null || months =='')
+			if(months==null)
 				return;
 			for(j=0;j<12;j++){
 					 $rootScope.month[index][j].value=false;
 				}
              var str=months.split("-");
+			if(str =='')
+				return;
 		   for(i=0;i<str.length;i++){
-				 
 				 var a=str[i]-1;
-				
 				 $rootScope.month[index][a].value=true;
              }
          }
@@ -1251,10 +1250,7 @@ app.controller('listController', function($scope, $location, $rootScope, $filter
         }
 		
 		
-		//reseting the password error
-        $rootScope.setpassword = function(form) {
-            form.password.$setValidity("password", true);
-        }
+	
 		
 		//signup functionality 
         $rootScope.signUp = function(form, user) {
@@ -1437,10 +1433,25 @@ app.controller('listController', function($scope, $location, $rootScope, $filter
         }
 
 		//back button function
-        $scope.back = function() {
+        	$scope.back = function() {
 			$rootScope.page="lifestyle";
             $location.path('/app/lifeStyle');
         }
+			
+		//reseting the password error
+        $rootScope.setpassword = function(form) {
+            form.password.$setValidity("password", true);
+			form.$setPristine();
+        }
+			
+			$rootScope.resetEmail=function(form)
+		{
+			
+			form.email.$setValidity("emailNot", true);
+			form.email.$setValidity("emailExist", true);
+			form.$setPristine();
+			
+		}
       }
 })
 
