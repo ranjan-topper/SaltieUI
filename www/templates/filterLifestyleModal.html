@@ -1,30 +1,43 @@
-<ion-modal-view >
+<ion-modal-view>
 	
-	<ion-content class="scroll-contents" style="padding-left:5%; padding-right:5%;" id="filterNew">
-	<div><button  class="button filterButton button-icon button-clear ion-ios-arrow-thin-left backFilter colorFilter" ng-click="filterModal.hide()" >
+	<ion-header-bar align-title="left" class="headerBar">
+<!--
+  <div class="buttons">
+    <button class="button" ng-click="doSomething()">Left Button</button>
+  </div>
+  
+  <div class="buttons">
+    <button class="button">Right Button</button>
+  </div>
+-->
+			<button  class="button  button-icon button-clear ion-ios-arrow-thin-left backFilter colorFilter" id="cls20" ng-click="filterModal.hide()" >
         </button>
-		<button  class="button filterButton button-clear  resetbutton colorFilter" ng-click="resetFilter()">Reset
+		<h1 class="title headerFont" id="title">Select Filter</h1>
+		<button  class="button  button-clear  resetbutton colorFilter" id="reset" ng-click="resetFilter()">Reset
         </button>
-		</div>
+</ion-header-bar>
+	
+	<ion-content class="" style="padding-left:5%; padding-right:5%;" id="filterNew">
+
 		<div class="row">
-		<div class="col filterHead">
+		<div class="col filterHead" id="exptype">
 			Experience Type
 			</div>
 		</div>
 		<div style="font-size: 0px;">
-		<span class="button  circle" ng-click="lifestyle('Family')" ng-disabled="disableLife('Family')" ng-class="{Fcolor1: isLifestyleActive('Family'), button2: !isLifestyleActive('Family')}">
+		<span class="button  circle" ng-click="lifestyle('Family')" id="exp1" ng-disabled="disableLife('Family')" ng-class="{Fcolor1: isLifestyleActive('Family'), button2: !isLifestyleActive('Family')}">
 			Exp1
 			</span>
-			<span class="circle button" ng-click="lifestyle('Senior')" ng-disabled="disableLife('Senior')" ng-class="{Fcolor2: isLifestyleActive('Senior'), button2: !isLifestyleActive('Senior')}">
+			<span class="circle button" ng-click="lifestyle('Senior')" id="exp2" ng-disabled="disableLife('Senior')" ng-class="{Fcolor2: isLifestyleActive('Senior'), button2: !isLifestyleActive('Senior')}">
 			Exp2
 			</span>
-			<span class="circle button " ng-click="lifestyle('Romantic')" ng-disabled="disableLife('Romantic')" ng-class="{Fcolor3: isLifestyleActive('Romantic'), button2: !isLifestyleActive('Romantic')}">
+			<span class="circle button " ng-click="lifestyle('Romantic')" id="exp3" ng-disabled="disableLife('Romantic')" ng-class="{Fcolor3: isLifestyleActive('Romantic'), button2: !isLifestyleActive('Romantic')}">
 			Exp3
 			</span>
-			<span class=" circle button " ng-click="lifestyle('Single')" ng-disabled="disableLife('Single')" ng-class="{Fcolor4: isLifestyleActive('Single'), button2: !isLifestyleActive('Single')}">
+			<span class=" circle button " ng-click="lifestyle('Single')" id="exp4" ng-disabled="disableLife('Single')" ng-class="{Fcolor4: isLifestyleActive('Single'), button2: !isLifestyleActive('Single')}">
 			Exp4
 			</span>
-			<span class=" circle button " ng-click="lifestyle('Summer')" ng-disabled="disableLife('Summer')" ng-class="{Fcolor5: isLifestyleActive('Summer'), button2: !isLifestyleActive('Summer')}">
+			<span class=" circle button " ng-click="lifestyle('Summer')" id="exp5" ng-disabled="disableLife('Summer')" ng-class="{Fcolor5: isLifestyleActive('Summer'), button2: !isLifestyleActive('Summer')}">
 			Exp5
 			</span>
 		</div>
@@ -32,7 +45,7 @@
 			<i class="ion-ios-arrow-down selectArrowCss"></i>
 		<select id="cruiseLine" onchange="filterCruiseLine()">
 		<option value="">Cruise Line</option>
-		 <option ng-repeat="cruiseLine in shipPort.cruiseLineName | orderBy:'toString()'" value="{{cruiseLine}}">{{cruiseLine}}</option>
+		 <option ng-repeat="cruiseLine in shipPort.cruiseLineName | orderBy:'toString()'" id="cl" value="{{cruiseLine}}">{{cruiseLine}}</option>
 		</select>
 		
 		</div>	
@@ -41,7 +54,7 @@
 		<i class="ion-ios-arrow-down selectArrowCss"></i>
 		<select id="portName" onchange="filterPortName()">
 		<option value="">Port of Departure</option>
-		 <option ng-repeat="shipport in shipPort.ports | orderBy:'toString()'" value="{{shipport}}">{{shipport.split(",")[0].split("(")[0].trim()}}</option>
+		 <option ng-repeat="shipport in shipPort.ports | orderBy:'toString()'" id="sp" value="{{shipport}}">{{shipport.split(",")[0].split("(")[0].trim()}}</option>
 		</select>
 		
 		</div>
@@ -51,35 +64,35 @@
 		<i class="ion-ios-arrow-down selectArrowCss"></i>
 		<select id="shipName" onchange="filterShipName()">
 		<option value="">Ship Name</option>
-		 <option ng-repeat="shipName in shipPort.shipName | orderBy:'toString()' " value="{{shipName}}">{{shipName}}</option>
+		 <option ng-repeat="shipName in shipPort.shipName | orderBy:'toString()' " id="sn" value="{{shipName}}">{{shipName}}</option>
 		</select>
 		
 		</div>
 		
 		
 		<div class="row">
-		<div class="col filterHead">
+		<div class="col filterHead" id="cruiseduration">
 			Cruise Duration
 			</div>
 		</div>
 		<div style="font-size: 0px;">
-		<span class="button  circle"  ng-click="duration('FEW DAYS')"  ng-disabled="disableDuration('FEW DAYS')" ng-class="{Fcolor4: isDurationActive('FEW DAYS'), button2: !isDurationActive('FEW DAY')}">
+		<span class="button  circle"  ng-click="duration('FEW DAYS')"  id="fewdays" ng-disabled="disableDuration('FEW DAYS')" ng-class="{Fcolor4: isDurationActive('FEW DAYS'), button2: !isDurationActive('FEW DAY')}">
 			Few Days
 			</span>
-			<span class="   circle button " ng-click="duration('ONE WEEK')" ng-disabled="disableDuration('ONE WEEK')" ng-class="{Fcolor3: isDurationActive('ONE WEEK'), button2: !isDurationActive('ONE WEEK')}">
+			<span class="   circle button " ng-click="duration('ONE WEEK')" id="oneweek" ng-disabled="disableDuration('ONE WEEK')" ng-class="{Fcolor3: isDurationActive('ONE WEEK'), button2: !isDurationActive('ONE WEEK')}">
 			1 Week
 			</span>
-			<span class="  circle button " ng-click="duration('TWO WEEKS')" ng-disabled="disableDuration('TWO WEEKS')" ng-class="{Fcolor2: isDurationActive('TWO WEEKS'), button2: !isDurationActive('TWO WEEK')}">
+			<span class="  circle button " ng-click="duration('TWO WEEKS')" id="twoweek" ng-disabled="disableDuration('TWO WEEKS')" ng-class="{Fcolor2: isDurationActive('TWO WEEKS'), button2: !isDurationActive('TWO WEEK')}">
 			2 Weeks
 			</span>
-			<span class=" circle button " ng-click="duration('MORE')" ng-disabled="disableDuration('MORE')" ng-class="{Fcolor1: isDurationActive('MORE'), button2: !isDurationActive('MORE')}">
+			<span class=" circle button " ng-click="duration('MORE')" id="more" ng-disabled="disableDuration('MORE')" ng-class="{Fcolor1: isDurationActive('MORE'), button2: !isDurationActive('MORE')}">
 			2+ Weeks
 			</span>
 			
 		</div>
 		
 		<div class="row">
-		<div class="col col-50 filterHead">
+		<div class="col col-50 filterHead" id="datesoftravel">
 			Dates of Travel
 			</div>
 				<div class="yearSelect">
@@ -129,17 +142,17 @@ Sort by Price			</div>
 			
 		</div>
 		<div style="font-size: 0px;">
-		<span class="button sortByPrice" ng-click="sortBy('asc')" ng-class="{act2: isSortByActive('asc'), button1: !isSortByActive('asc')}">
+		<span class="button sortByPrice" ng-click="sortBy('asc')" id="lth" ng-class="{act2: isSortByActive('asc'), button1: !isSortByActive('asc')}">
 			Low to High
 			</span>
-			<span class="button sortByPrice" ng-click="sortBy('desc')" ng-class="{act2: isSortByActive('desc'), button1: !isSortByActive('desc')}">
+			<span class="button sortByPrice" ng-click="sortBy('desc')" id="htl" ng-class="{act2: isSortByActive('desc'), button1: !isSortByActive('desc')}">
 					High to Low
 			</span>
 			
 		</div>
 		
 	
-		<div class="applyFilter" ng-click="applyFilter()">
+		<div class="applyFilter" ng-click="applyFilter()" id="apply">
 		Apply Filters
 		
 		</div>

@@ -1,7 +1,7 @@
 <ion-modal-view cache-view="false" id="signup-view">
-        <ion-content>
+        <ion-content ng-controller="formValidation">
 			<div>
-		<button  class="button button-icon button-clear ion-ios-close-empty closebutton" id="cls" ng-click="profileSet.hide()">
+		<button  class="button button-icon button-clear ion-ios-close-empty closebutton" id="cls" ng-click="closeProfile()">
         </button>
 			</div>
 		<div  align="center" class="allHead" style="padding-bottom: 5vh;padding-top: 10vh;">
@@ -9,18 +9,18 @@
 		</div>
 			
 			<form name="authorizationForm" id="profile" novalidate="" ng-class="{'hideVerCode':enableVerCode}" ng-submit="editProfile(authorizationForm,user)">
-        	<div class="list list-inset" id="input">
-				<div class="profileHead">First Name*</div>
+        	<div class="list list-inset" >
+				<div class="profileHead" id="firstName">First Name*</div>
   			<label class="item item-input color1" ng-class="{ 'has-errors' : authorizationForm.firstName.$invalid && authorizationForm.$submitted, 'no-errors' : authorizationForm.firstName.$valid}">
-              <input type="text" name="firstName" placeholder="First Name" ng-model="user.firstName" ng-minlength="3" ng-maxlength="20" required>
+              <input type="text" name="firstName" id="fn" placeholder="First Name" ng-model="user.firstName" ng-minlength="3" ng-maxlength="20" required>
             </label>
 				<div class="error-container" ng-show="authorizationForm.firstName.$error && authorizationForm.$submitted" ng-messages="authorizationForm.firstName.$error">
                 <div ng-messages-include="templates/error-list.html"></div> 
             </div>
 				
-				<div class="profileHead">Last Name*</div>
+				<div class="profileHead" id="lastName">Last Name*</div>
 				<label class="item item-input color1" ng-class="{ 'has-errors' : authorizationForm.lastName.$invalid && authorizationForm.$submitted, 'no-errors' : authorizationForm.lastName.$valid}">
-              <input type="text" name="lastName" placeholder="Last Name" ng-model="user.lastName" ng-minlength="1" ng-maxlength="20" required>
+              <input type="text" name="lastName" id="ln" placeholder="Last Name" ng-model="user.lastName" ng-minlength="1" ng-maxlength="20" required>
             </label>
 				<div class="error-container" ng-show="authorizationForm.lastName.$error && authorizationForm.$submitted" ng-messages="authorizationForm.lastName.$error">
                 <div ng-messages-include="templates/error-list.html"></div> 
@@ -34,16 +34,16 @@
             </div>
 				
 				
-			<div id="input" ng-hide="changePasshide">
+			<div id="change" ng-hide="changePasshide">
 			<label class="item item-input color3" ng-class="{ 'has-errors' : authorizationForm.newPassword.$invalid && authorizationForm.$submitted, 'no-errors' : authorizationForm.newPassword.$valid}">
-              <input type="password" name="newPassword" id="newPassword" placeholder="New Password" ng-model="user.newPassword" ng-minlength="5" ng-maxlength="20" required>
+              <input type="password" name="newPassword" onkeypress="return AvoidSpace(event)" id="newPassword" placeholder="New Password" ng-model="user.newPassword" ng-minlength="5" ng-maxlength="20" required>
             </label>
 				<div class="error-container" ng-show="authorizationForm.newPassword.$error && authorizationForm.$submitted" ng-messages="authorizationForm.newPassword.$error">
                 <div ng-messages-include="templates/error-list.html"></div> 
             </div>
 				
 				<label class="item item-input color3" ng-class="{ 'has-errors' : authorizationForm.passwordc.$invalid && authorizationForm.$submitted, 'no-errors' : authorizationForm.passwordc.$valid}">
-              <input type="password" name="passwordc" id="passwordc" ng-keyup="setConpassword(authorizationForm)" placeholder="Confirm Password" ng-model="user.passwordc" ng-minlength="5" ng-maxlength="20" required>
+              <input type="password" name="passwordc" id="passwordc" onkeypress="return AvoidSpace(event)" ng-keyup="setConpassword(authorizationForm)" placeholder="Confirm Password" ng-model="user.passwordc" ng-minlength="5" ng-maxlength="20" required>
             </label>
 				<div class="error-container" ng-show="authorizationForm.passwordc.$error && authorizationForm.$submitted" ng-messages="authorizationForm.passwordc.$error">
                 <div ng-messages-include="templates/error-list.html"></div> 
@@ -51,7 +51,7 @@
 				</div>
 			
 				<button type="submit" class="button button-block light submitloginbt saveButton"  id="submit4">
-					Save</button><button type="button" class="button button-block light submitloginbt" ng-click="showPassfield(authorizationForm,user)" style=" color: #FFFFFF;background-color: #00232d;" id="submit4">
+					Save</button><button type="button" class="button button-block light submitloginbt" ng-click="showPassfield(authorizationForm,user)" style=" color: #FFFFFF;background-color: #00232d;" id="submit6">
 					Change Password</button>				 
 			</div>
 			

@@ -1,12 +1,17 @@
-<ion-modal-view >
-	
-	<ion-content class="scroll-contents faqModalPadd" id="filterNew">
-		<div>
-		<button  class="button button-icon button-clear ion-ios-close-empty backFilter colorFilter modalFloat" ng-click="termModal.hide()" >
+<ion-modal-view id="modalAll">
+	<ion-header-bar align-title="left" class="headerBar">
+
+			<button  class="button  button-icon button-clear ">
         </button>
-			</div>
-		<div style="padding-top: 8vh;">
-		<div class="faqhead1 bold">Saltie Terms and Conditions</div>
+		<h1 class="title headerFont" id="title"></h1>
+		<button  class="button button-icon button-clear ion-ios-close-empty backFilter colorClose modalFloat" d="cls13" ng-click="termModal.hide()" >
+        </button>
+</ion-header-bar>
+	
+	<ion-content class=" faqModalPadd" id="filterNew">
+		
+		<div style="padding-top: 1vh;">
+		<div class="faqhead1 bold" id="tac">Saltie Terms and Conditions</div>
 		<div class="termhead">
 			<span class="faqhead2">
 			Limitation of Liability. 

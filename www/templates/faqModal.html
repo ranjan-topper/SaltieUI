@@ -1,12 +1,17 @@
-<ion-modal-view >
-	
-	<ion-content class="scroll-contents faqModalPadd" id="filterNew">
-		<div>
-		<button  class="button button-icon button-clear ion-ios-close-empty backFilter colorFilter modalFloat" ng-click="faqModal.hide()" >
+<ion-modal-view id="modalAll">
+	<ion-header-bar align-title="left" class="headerBar">
+
+			<button  class="button  button-icon button-clear ">
         </button>
-			</div>
-		<div style="padding-top: 8vh;">
-		<div class="faqhead1 bold">Frequently Asked Questions</div>
+		<h1 class="title headerFont" id="title"></h1>
+		<button  class="button button-icon button-clear ion-ios-close-empty backFilter colorClose modalFloat" id="cls14" ng-click="faqModal.hide()" >
+        </button>
+</ion-header-bar>
+	
+	<ion-content class="faqModalPadd" id="filterNew">
+		
+		<div style="padding-top: 2vh;">
+		<div class="faqhead1 bold" id="faqtitle">Frequently Asked Questions</div>
 		<div class="faqhead2">
 			What is your cancellation policy?
 			
@@ -16,7 +21,7 @@
 			</div>
 			
 			
-			<div class="faqhead2">
+			<div class="faqhead2">   
 Can I change the timing of the Cruise?			
 			</div>	
 			<div class="light faqhead3">

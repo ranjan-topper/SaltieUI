@@ -8,7 +8,7 @@
     </ion-nav-title>
 	<ion-content style="margin-top: -1px;">
 	<div class="list list-item" ng-repeat="itinerary in userFav" >
-			<a type="item-text-wrap" ng-click="detail(itinerary.tripId)" on-swipe-left="detail(itinerary.tripId)" href="" style="background-image:url('http://104.236.50.241:8080/images/ports/{{ itinerary.destinationImage[0] }}');" class="eventListPicture">
+			<a type="item-text-wrap" ng-click="detail(itinerary.tripId)" id="detail{{itinerary.tripId}}" on-swipe-left="detail(itinerary.tripId)" href="" style="background-image:url('{{linkUrl}}images/ports/{{ itinerary.destinationImage[0] }}');" class="eventListPicture">
 								<div class="gradient"></div>
 				<div class="marginList">
 				<div class="position" id="{{ itinerary.tripName}}"><span class="bold tripname overwrap" >{{ itinerary.tripName | capitalize:true }}</span>

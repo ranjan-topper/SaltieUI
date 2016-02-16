@@ -5,7 +5,7 @@
 	</ion-nav-buttons>
 	<ion-nav-title>
 	
-		<a href="" class="cruisecount" id="view{{count}}" style="text-decoration: none;"><span class="thin">View <span class="bold">{{count}}</span> Cruises</span></a>
+		<a href="" class="cruisecount" id="viewCount" style="text-decoration: none;"><span class="thin">View <span class="bold">{{count}}</span> Cruises</span></a>
     </ion-nav-title>
 	<ion-content  id="filter">
 		<ion-scroll delegate-handle="filterScroll" direction="x" >
@@ -37,7 +37,7 @@
 	</ion-content>
 	<ion-content delegate-handle="listPage" style="margin-top: 7vh;">
 	<div class="list list-item" ng-repeat="itinerary in list">
-			<a type="item-text-wrap" id="detail(itinerary.tripId)" ng-click="detail(itinerary.tripId)" on-swipe-left="detail(itinerary.tripId)" href="" style="background-image:url('http://104.236.50.241:8080/images/ports/{{ itinerary.destinationImage[0][0] }}');" class="eventListPicture">
+			<a type="item-text-wrap" id="detail{{itinerary.tripId}}" ng-click="detail(itinerary.tripId)" on-swipe-left="detail(itinerary.tripId)" href="" style="background-image:url('{{linkUrl}}images/ports/{{ itinerary.destinationImage[0][0] }}');" class="eventListPicture">
 				<div class="gradient"></div>
 				<div class="marginList">
 				<div class="position" id="{{ itinerary.tripName}}"><span class="bold tripname overwrap" >{{ itinerary.tripName | capitalize:true }}</span>

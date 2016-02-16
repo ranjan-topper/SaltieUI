@@ -1,4 +1,4 @@
-<ion-view id="signup-view" cache-view="false" hide-nav-bar="true">
+<ion-view id="signup-view" cache-view="false" hide-nav-bar="true" ng-controller="formValidation">
     <ion-content id="sendemail">
        <button  class="button button-icon button-clear ion-ios-arrow-thin-left leftarrow" id="bck8" ng-click="back()">
         </button>
@@ -31,13 +31,13 @@
                 <div ng-messages-include="templates/error-list.html"></div> 
             </div>
 			<label class="item item-input color2" ng-class="{ 'has-errors' : authorizationForm.password.$invalid && authorizationForm.$submitted, 'no-errors' : authorizationForm.password.$valid}">
-              <input type="password" name="password" id="password" ng-keyup="resetFrom(authorizationForm)" placeholder="New Password" ng-model="user.password" ng-minlength="5" ng-maxlength="20" required>
+              <input type="password" name="password" id="password" onkeypress="return AvoidSpace(event)" ng-keyup="resetFrom(authorizationForm)" placeholder="New Password" ng-model="user.password" ng-minlength="5" ng-maxlength="20" required>
             </label>
 				<div class="error-container" ng-show="authorizationForm.password.$error && authorizationForm.$submitted" ng-messages="authorizationForm.password.$error">
                 <div ng-messages-include="templates/error-list.html"></div> 
             </div>
 			<label class="item item-input color3" ng-class="{ 'has-errors' : authorizationForm.passwordc.$invalid && authorizationForm.$submitted, 'no-errors' : authorizationForm.passwordc.$valid}">
-              <input type="password" name="passwordc" id="passwordc" ng-keyup="setpassword(authorizationForm)" placeholder="Confirm Password" ng-model="user.passwordc" ng-minlength="5" ng-maxlength="20" required>
+              <input type="password" name="passwordc" id="passwordc" onkeypress="return AvoidSpace(event)" ng-keyup="setpassword(authorizationForm)" placeholder="Confirm Password" ng-model="user.passwordc" ng-minlength="5" ng-maxlength="20" required>
             </label>
 				<div class="error-container" ng-show="authorizationForm.passwordc.$error && authorizationForm.$submitted" ng-messages="authorizationForm.passwordc.$error">
                 <div ng-messages-include="templates/error-list.html"></div> 

@@ -1,4 +1,4 @@
-<ion-view id="signup-view" hide-nav-bar="true" cache-view="false">
+<ion-view id="signup-view" hide-nav-bar="true" cache-view="false" ng-controller="formValidation">
     <ion-content id="emaillogin">
 		<button  class="button button-icon button-clear ion-ios-arrow-thin-left leftarrow" id="back3" ng-click="back()">
         </button>
@@ -19,7 +19,7 @@
           
             
             <label class="item item-input color4" ng-class="{ 'has-errors' : authorizationForm.password.$invalid && authorizationForm.$submitted, 'no-errors' : authorizationForm.password.$valid  && authorizationForm.$submitted}">
-              <input type="password" id="password1" name="password" ng-keyup="setpassword(authorizationForm)" placeholder="Password" ng-model="user.password" ng-minlength="5" ng-maxlength="20" required>
+              <input type="password" id="password1" name="password" onkeypress="return AvoidSpace(event)" ng-keyup="setpassword(authorizationForm)" placeholder="Password" ng-model="user.password" ng-minlength="5" ng-maxlength="20" required>
             </label>
 				<div class="error-container" ng-show="authorizationForm.password.$error && authorizationForm.$submitted" ng-messages="authorizationForm.password.$error">
                 <div ng-messages-include="templates/error-list.html"></div> 

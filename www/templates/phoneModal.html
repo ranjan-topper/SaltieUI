@@ -1,14 +1,21 @@
-<ion-modal-view >
-	
-	<ion-content class="scroll-contents">
-		<button class="button bookOverPhone button-icon button-clear ion-ios-close-empty backFilter colorFilter" ng-click="phoneModal.hide()" >
+<ion-modal-view id="modalAll">
+	<ion-header-bar align-title="left" class="headerBar">
+
+			<button  class="button  button-icon button-clear ">
         </button>
+		<h1 class="title headerFont" id="title"></h1>
+		<button class="button bookOverPhone button-icon button-clear ion-ios-close-empty backFilter modalFloat colorClose" id="cls12" ng-click="phoneModal.hide()" >
+        </button>
+</ion-header-bar>
+	
+	<ion-content class="">
+		
 	
 		<div algin="center" class="phoneImg">
 			
 		
 		</div>
-		<div align="center" class="anchorCenter">
+		<div align="center" id="bookovrphone" class="anchorCenter">
 		
 		<img src="./img/logo1.png" width="15%">
 			<p class="phoneText">We’d love to speak with you. </p>
@@ -17,7 +24,7 @@
 		<span class="roman ">
 			Please call us toll free at 
 			</span><br><br>
-			<span class="light">
+			<span class="light" id="numbr">
 				 <a class="numberLink" ng-href="tel:+1-800-684-3421">1 800 684 3421</a>
 			</span>
 		

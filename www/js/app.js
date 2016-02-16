@@ -5,10 +5,12 @@
 // 'starter.controllers' is found in controllers.js
 var app = angular.module('starter', ['ionic', 'ngStorage', 'ngCordova','ngMessages','starter.controllers','ngIOS9UIWebViewPatch']);
 
-app.run(function ($ionicPlatform,$rootScope, $state, $location) 
+app.run(function ($ionicPlatform,$rootScope, $state, $location,$ionicHistory) 
 {
 	$ionicPlatform.registerBackButtonAction(function (event)
 	{
+		
+		console.log(event);
         if ( ($state.$current.name=="app.lifeStyle") ||
              ($state.$current.name=="start")
             ){
@@ -17,9 +19,9 @@ app.run(function ($ionicPlatform,$rootScope, $state, $location)
               navigator.app.exitApp();
             } else 
 			{
-                navigator.app.backHistory();
+                $ionicHistory.goBack();
             }
-        }, 100);
+        },100);
 
   $ionicPlatform.ready(function() 
 	{

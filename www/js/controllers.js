@@ -53,9 +53,9 @@ var app = angular.module('starter.controllers', []);
 //status-500 server Erro
 //Below controller is f3or the start.html
 
-app.controller('startCtrl', function($scope, $location, $state, $localStorage, $timeout,$rootScope) {
+app.controller('startCtrl', function($scope, $location, $state, $localStorage, $timeout,$rootScope,serviceLink) {
 //    HardwareBackButtonManager.disable(); //HardwareBackButtonManager is a directive used to block the back button functionality of the mobile
-	
+	$rootScope.linkUrl=serviceLink.url;
 	
 if(typeof analytics !== 'undefined') { analytics.trackView("Start Controller"); }
 if ($localStorage.userName == "" || $localStorage.userName == null || $localStorage.userName == "Guest") {
@@ -189,16 +189,7 @@ app.controller('emailloginCtrl', function($scope, $location, $state, $http, $loc
 	if(typeof analytics !== 'undefined') { analytics.trackView("Email Controller"); }
 	
     if ($localStorage.userName == "" || $localStorage.userName == null || $localStorage.userName == "Guest") {
-        $scope.setpassword = function(form) {
-            form.password.$setValidity("password", true);
-			form.$setPristine();
-        }
-		$scope.resetEmail=function(form)
-		{
-			form.email.$setValidity("emailNot", true);
-			form.email.$setValidity("emailExist", true);
-			form.$setPristine();
-		}
+        
         $scope.close = function() {
             $location.path('/start');
         }
@@ -254,27 +245,7 @@ app.controller('sendemailCtrl', function($scope, $location, $state, $localStorag
 	if(typeof analytics !== 'undefined') { analytics.trackView("Forgot Password Controller"); }
 	
     if ($localStorage.userName == "" || $localStorage.userName == null || $localStorage.userName == "Guest") {
-        $scope.setpassword = function(form) {
-            form.passwordc.$setValidity("dontMatch", true);
-			form.$setPristine();
-        }
-		
-		$scope.setOTP=function(form)
-		{
-			form.otp.$setValidity("otpMiss", true);
-			form.$setPristine();
-		}
-		$scope.resetEmail=function(form)
-		{
-			form.email.$setValidity("emailNot", true);
-			form.email.$setValidity("emailExist", true);
-			form.$setPristine();
-		}
-		$scope.resetFrom=function(form)
-		{
-			form.$setPristine();
-		}
-
+       
         $scope.close = function() {
             $location.path('/start');
         }
@@ -378,16 +349,7 @@ app.controller('signuphomeCtrl', function($scope, $state, $location, $http, $loc
             $location.path('/start');
         }
        
-		$scope.resetEmail=function(form)
-		{
-			form.email.$setValidity("emailNot", true);
-			form.email.$setValidity("emailExist", true);
-			form.$setPristine();
-		}
-		$scope.resetFrom=function(form)
-		{
-			form.$setPristine();
-		}
+		
 
         $scope.signUp = function(form, user) {
             if (form.$valid) //checking form valid or not
@@ -546,15 +508,20 @@ if(typeof analytics !== 'undefined') { analytics.trackView("App Main Controller"
 		  
 		  $scope.profileSet.show();
 	  }
-	  $scope.setpassword = function(form) {
-            form.password.$setValidity("password", true);
-			form.$setPristine();
-        }
 	  
-	  $scope.setConpassword = function(form) {
-            form.passwordc.$setValidity("dontMatch", true);
-			form.$setPristine();
-        }
+	  
+	  $scope.closeProfile=function()
+	  {
+		  
+		    $scope.profileSet.remove();
+		  $ionicModal.fromTemplateUrl('templates/profileSetting.html', {
+            scope: $scope
+        }).then(function(modal) {
+            $scope.profileSet = modal;
+        })
+		  
+	  }
+	 
 	  
 	  $scope.showPassfield=function(form,user)
 	  {
@@ -761,9 +728,12 @@ app.controller('lifeStyleCtrl', function($scope, $location, $http, $rootScope, $
             $rootScope.filterModal = modal;
         })
 		 
+
+		 
 		 $rootScope.showFilter=function()
 		 {
-			 if($rootScope.applyFilterFlag==0)
+			
+				 if($rootScope.applyFilterFlag==0)
 			 {
 				 $rootScope.clickFilterFlag=0;
 			 }
@@ -1165,6 +1135,9 @@ $rootScope.monthSelect=function()
 			 $rootScope.resetFilterHome();	
 			 $rootScope.showFilter();
 		 }
+		 
+		 
+		
     }
 })
 
@@ -1415,6 +1388,17 @@ app.controller('listController', function($scope, $location, $rootScope, $filter
                 favService.favorite(tripId, index);
             }
         }
+		
+		$rootScope.closeLoginSign=function()
+		{
+			$rootScope.logsignModal.remove();
+			$rootScope.hideForm = true;
+			$ionicModal.fromTemplateUrl('templates/loginSignup.html', {
+            scope: $rootScope
+        }).then(function(modal) {
+            $rootScope.logsignModal = modal;
+        })
+		}
 
 		//function which fecth the data for detail page when itinerary is clicked
         $scope.detail = function(tripId) {
@@ -1438,20 +1422,7 @@ app.controller('listController', function($scope, $location, $rootScope, $filter
             $location.path('/app/lifeStyle');
         }
 			
-		//reseting the password error
-        $rootScope.setpassword = function(form) {
-            form.password.$setValidity("password", true);
-			form.$setPristine();
-        }
-			
-			$rootScope.resetEmail=function(form)
-		{
-			
-			form.email.$setValidity("emailNot", true);
-			form.email.$setValidity("emailExist", true);
-			form.$setPristine();
-			
-		}
+		
       }
 })
 
@@ -1588,7 +1559,6 @@ $rootScope.moreLoad=false;
 
         $scope.back = function() {
             window.history.back();
-
             //    				$ionicHistory.goBack();
         }
 
@@ -1686,8 +1656,12 @@ $rootScope.moreLoad=false;
 		}
 
         $scope.activityModal = function(index) {
-            $scope.activity = $rootScope.detail.tripDetails.ship.shipActivity[index];
-            $scope.modal2.show()
+            $scope.activity = $rootScope.detail.tripDetails.ship.shipActivity;
+//			$ionicSlideBoxDelegate.$getByHandle('activity').slide(index,200);
+			$timeout(function() {
+    		$ionicSlideBoxDelegate.$getByHandle('activity').slide(index);
+			},   100);
+            $scope.modal2.show();
         }
 
         $scope.dateFormat = function(date1, index) {
@@ -1803,7 +1777,7 @@ app.controller('bookingController', function($scope, $location, $ionicModal, $ro
         $location.path('/start');
     } else {
         $scope.back = function() {
-            $ionicNavBarDelegate.back();
+            window.history.back();
         }
 
     }
@@ -2052,8 +2026,8 @@ app.filter('dollorCheck', function() {
 
 app.factory('serviceLink', function() {
     return {
-        url: 'http://104.236.50.241:8080/'
-//		  url: 'http://159.203.121.122:8080/'
+//        url: 'http://104.236.50.241:8080/'
+		  url: 'http://159.203.121.122:8080/'
     };
 });
 
@@ -2092,10 +2066,7 @@ app.factory('favService', function($http, $q, $ionicLoading, $ionicPopup, $local
                     alert("Error, Try again !");
                 }
             });
-
-
         }
-
     }
     return new favService();
 
@@ -2229,7 +2200,7 @@ app.factory('profileSet', function($http, $q, $ionicLoading, $ionicPopup, $local
             } else {
                 $ionicPopup.show({
                     title: 'Error',
-                    subTitle: 'Oops somthing went worng !',
+                    subTitle: 'Oops something went worng !',
                     buttons: [{
                         text: 'Ok'
                     }]
@@ -2264,5 +2235,56 @@ app.factory('detailData',function($http, $q, $ionicLoading, $ionicPopup, $localS
 
     return new detailData();
 })
+
+
+
+app.controller('formValidation',function($scope, $location, $state, $http, $localStorage, $state, loginService, serviceLink){
+	
+		$scope.setpassword = function(form,user) 
+		{
+            form.password.$setValidity("password", true);
+			form.$setPristine();
+        }
+		$scope.resetEmail=function(form)
+		{
+			form.email.$setValidity("emailNot", true);
+			form.email.$setValidity("emailExist", true);
+			form.$setPristine();
+		}
+
+ 		$scope.setpasswordc = function(form) {
+            form.passwordc.$setValidity("dontMatch", true);
+			form.$setPristine();
+        }
+		
+		$scope.setOTP=function(form)
+		{
+			form.otp.$setValidity("otpMiss", true);
+			form.$setPristine();
+		}
+		$scope.resetEmail=function(form)
+		{
+			form.email.$setValidity("emailNot", true);
+			form.email.$setValidity("emailExist", true);
+			form.$setPristine();
+		}
+		$scope.resetFrom=function(form)
+		{
+			form.$setPristine();
+		}
+	  	$scope.setConpassword = function(form) {
+            form.passwordc.$setValidity("dontMatch", true);
+			form.$setPristine();
+        }
+})
+
+
+
+
+function AvoidSpace(event) {
+    var k = event ? event.which : window.event.keyCode;
+    if (k == 32) return false;
+}
+
 
 

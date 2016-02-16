@@ -6,7 +6,7 @@
         </ion-header-bar>
 
         <ion-content>
-									<img ng-src="http://104.236.50.241:8080/images/CabinType/{{cabin.image}}" width="100%"/>
+									<img ng-src="{{linkUrl}}images/CabinType/{{cabin.image}}" width="100%"/>
 			<div class="cabinTypeBorder">
 				<div class="cabinTitle">
 					<span class="bold" style="color: #00232D;" id="{{cabin.roomType}}">{{cabin.roomType}}</span>&nbsp;&nbsp;&nbsp;<span class="roman" style="color: #9c867a;">/</span>&nbsp;&nbsp;&nbsp;<span class="roman" style="color: #339fa6;" id="{{date}}">{{date}}</span>&nbsp;&nbsp;&nbsp;<span class="roman" style="color: #9c867a;">/</span>&nbsp;&nbsp;&nbsp;<span class="roman" style="color: #9c867a;" id="{{price}}">{{price | dollorCheck}}</span></div>

@@ -814,7 +814,21 @@ font-size: 5.5vmin;    text-decoration: none;
     06. FilterLifestyle Modal
    ========================================================================== */
 
+.headerFont
+{
+	color: #339FA6;
+	font-family: thin;
+    /* letter-spacing: 2px; */
+    font-size: 5vmin !important;
+}
 
+.headerBar
+{
+       background-color: #00232D;
+    border: solid;
+    border-color: #9C867A;
+    border-width: 0 0 4px 0;
+}
 .selectArrowCss
 {
 	pointer-events: none;
@@ -873,8 +887,10 @@ a.button .icon:before, a.button.icon:before, a.button.icon-left:before, a.button
 
 .colorFilter
 {
+        padding-left: 5% !important;
+    padding-right: 5% !important;
     padding: 0px;
-    color: #00232d !important;
+    color: #FFFFFF !important;
 }
 .resetbutton {
     
@@ -1973,6 +1989,18 @@ transform: translate3d(-5px, 0px,0px);
    17. Common Modal css
    ========================================================================== */
 
+#modalAll .headerBar {
+        background-color: transparent;
+    border: none;
+}
+
+#modalAll .bar .button.button-icon .icon:before, .bar .button.button-icon:before, .bar .button.button-icon.icon-left:before, .bar .button.button-icon.icon-right:before {
+       vertical-align: top;
+    font-size: 10vmin !important;
+    line-height: 7vh !important;
+}
+
+
 #profile button.button-block, button.button-full, .button-full > button.button, input.button.button-block {
 	width: 49%;
     display: inline;
@@ -2027,8 +2055,8 @@ color: rgb(176, 162, 131) !important;
 }
 .modalFloat
 {
-    float: right;
-    font-size: 10vmin !important;
+	padding-left: 5% !important;
+    padding-right: 5% !important;
 }
 .backdrop {
     position: fixed;
@@ -2070,7 +2098,7 @@ color: rgb(176, 162, 131) !important;
 
 .aboutCon
 {
-    padding-top: 20vw;
+        padding-top: 13vw;
     padding-bottom: 12vw;
 }
 
@@ -2120,6 +2148,11 @@ color: rgb(176, 162, 131) !important;
 /* ==========================================================================
   11. Phone Modal
    ========================================================================== */
+
+.colorClose {
+        padding: 0px;
+    color: #00232d !important;
+}
 .numberLink
 {
 	text-decoration: none;
@@ -2129,7 +2162,6 @@ color: rgb(176, 162, 131) !important;
 .phoneImg
 {
     height: 52vh;
-    margin-top: 7vh;
     background: url(../img/phonePage.jpg) no-repeat center center;
     -webkit-background-size: cover;
     -moz-background-size: cover;

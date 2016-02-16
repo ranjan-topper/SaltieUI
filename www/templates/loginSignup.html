@@ -1,7 +1,7 @@
 <ion-modal-view id="signup-view">
-        <ion-content>
+        <ion-content ng-controller="formValidation">
 			<div>
-		<button  class="button button-icon button-clear ion-ios-close-empty closebutton" id="cls" ng-click="logsignModal.hide()">
+		<button  class="button button-icon button-clear ion-ios-close-empty closebutton" id="cls" ng-click="closeLoginSign()">
         </button>
 			</div>
 		<div  align="center" class="allHead">
@@ -15,7 +15,7 @@
 		 <form name="authorizationForm1" novalidate="" ng-hide="hideForm" >
         	<div class="list list-inset" id="input">
 				 <label class="item item-input color3" ng-class="{ 'has-errors' : authorizationForm1.email.$invalid && authorizationForm1.$submitted, 'no-errors' : authorizationForm1.email.$valid  && authorizationForm1.$submitted}">
-              <input type="email" name="email" placeholder="Email" ng-keyup="resetEmail(authorizationForm1)" ng-model="user.email1" ng-minlength="5" required>
+              <input type="email" name="email" id="eml9" placeholder="Email" ng-keyup="resetEmail(authorizationForm1)" ng-model="user.email1" ng-minlength="5" required>
             </label>
           <div class="error-container" ng-show="authorizationForm1.email.$error && authorizationForm1.$submitted" ng-messages="authorizationForm1.email.$error">
                 <div ng-messages-include="templates/error-list.html"></div> 
@@ -23,7 +23,7 @@
           
             
             <label class="item item-input color4" ng-class="{ 'has-errors' : authorizationForm1.password.$invalid && authorizationForm1.$submitted, 'no-errors' : authorizationForm1.password.$valid  && authorizationForm1.$submitted}">
-              <input type="password" name="password" ng-keyup="setpassword(authorizationForm1)" placeholder="Password" ng-model="user.password1" ng-minlength="5" ng-maxlength="20" required>
+              <input type="password" name="password" id="pswd9" onkeypress="return AvoidSpace(event)" ng-keyup="setpassword(authorizationForm1)" placeholder="Password" ng-model="user.password1" ng-minlength="5" ng-maxlength="20" required>
             </label>
 				<div class="error-container" ng-show="authorizationForm1.password.$error && authorizationForm1.$submitted" ng-messages="authorizationForm1.password.$error">
                 <div ng-messages-include="templates/error-list.html"></div> 
@@ -64,7 +64,7 @@
             </div>
 				
             <label class="item item-input color4" ng-class="{ 'has-errors' : authorizationForm.password.$invalid && authorizationForm.$submitted, 'no-errors' : authorizationForm.password.$valid  && authorizationForm.$submitted}" >
-              <input type="password" name="password" placeholder="Password" id="passwd1" ng-model="user.password" ng-minlength="5" ng-maxlength="20" required>
+              <input type="password" name="password" onkeypress="return AvoidSpace(event)" id="passwd1" placeholder="Password" id="passwd1" ng-model="user.password" ng-minlength="5" ng-maxlength="20" required>
             </label>
 				
 				<div class="error-container" ng-show="authorizationForm.password.$error && authorizationForm.$submitted" ng-messages="authorizationForm.password.$error">
