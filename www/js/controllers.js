@@ -834,7 +834,7 @@ $rootScope.moreLoad=false;
         }
 
         $scope.displayPrice = function(prices, index, date) {
-            $scope.date = date;
+            $rootScope.date = date;
             $scope.priceList = prices;
             $scope.index1 = index;
         };
@@ -894,8 +894,6 @@ $rootScope.moreLoad=false;
 
         }
     }
-
-
 });
 
 
@@ -1266,8 +1264,8 @@ app.filter('dollorCheck', function() {
 
 app.factory('serviceLink', function() {
     return {
-//        url: 'http://104.236.50.241:8080/'
-		  url: 'http://159.203.121.122:8080/'
+        url: 'http://104.236.50.241:8080/'
+//		  url: 'http://159.203.121.122:8080/'
     };
 });
 
@@ -2235,8 +2233,10 @@ app.controller('modalCtrl',function($scope, $location, $http, $rootScope, $filte
 //			$ionicSlideBoxDelegate.$getByHandle('activity').slide(index,200);
 			$timeout(function() {
     		$ionicSlideBoxDelegate.$getByHandle('activity').slide(index);
+				$ionicSlideBoxDelegate.$getByHandle('activity').update();
 			},   100);
             $scope.modal2.show();
+			
         }
 		
 		
@@ -2254,7 +2254,7 @@ app.controller('modalCtrl',function($scope, $location, $http, $rootScope, $filte
         $scope.setPrice = function(prices, index, date) {
             if (index == 0) {
                 $scope.priceList = prices;
-                $scope.date = date;
+                $rootScope.date = date;
             }
 
 
