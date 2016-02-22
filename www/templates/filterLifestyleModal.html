@@ -12,12 +12,12 @@
 -->
 			<button  class="button  button-icon button-clear ion-ios-arrow-thin-left backFilter colorFilter" id="cls20" ng-click="filterModal.hide()" >
         </button>
-		<h1 class="title headerFont" id="title">Select Filter</h1>
+		<h1 class="title headerFont" id="title">Select Filters</h1>
 		<button  class="button  button-clear  resetbutton colorFilter" id="reset" ng-click="resetFilter()">Reset
         </button>
 </ion-header-bar>
 	
-	<ion-content class="" style="padding-left:5%; padding-right:5%;" id="filterNew">
+	<ion-content class="" style="padding-left:5%; padding-right:5%;" id="filterNew" ng-controller="filterController">
 
 		<div class="row">
 		<div class="col filterHead" id="exptype">

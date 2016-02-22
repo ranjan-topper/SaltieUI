@@ -32,7 +32,7 @@
             </div>
 				
             <label class="item item-input color4" ng-class="{ 'has-errors' : authorizationForm.password.$invalid && authorizationForm.$submitted, 'no-errors' : authorizationForm.password.$valid  && authorizationForm.$submitted}" >
-              <input type="password" name="password" onkeypress="return AvoidSpace(event)" id="plc4" placeholder="Password" ng-keyup="resetFrom(authorizationForm)" ng-model="user.password" ng-minlength="5" ng-maxlength="20" required>
+              <input type="password" onselectstart="return false" onpaste="return false;" onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false" autocomplete=off name="password" onkeypress="return AvoidSpace(event)" id="plc4" placeholder="Password" ng-keyup="resetFrom(authorizationForm)" ng-model="user.password" ng-minlength="5" ng-maxlength="20" required>
             </label>
 				
 				<div class="error-container" ng-show="authorizationForm.password.$error && authorizationForm.$submitted" ng-messages="authorizationForm.password.$error">

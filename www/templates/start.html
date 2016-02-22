@@ -19,12 +19,12 @@
 -->
 		 <div class="login-btns" align="center">
 		 <ul class="tab-group">
-        <li class="tab"><a ng-click="signUp()" href="#">Sign Up</a></li>
-        <li class="tab"><a class="buttonBorder" ng-click="login()" href="#">Log In</a></li>
+        <li class="tab"><a ng-click="signUp()" id="btn-login" href="#">Sign Up</a></li>
+        <li class="tab"><a class="buttonBorder" id="btn-reg" ng-click="login()" href="#">Log In</a></li>
       </ul>
 		</div>
 	</div>
-	<div id="footer" class="bar bar-footer welcomeBack" ng-show="welcomeBack">
+	<div id="footer" class="bar bar-footer welcomeBack" id="welcomeback" ng-show="welcomeBack">
  <div class="login-btns" align="center">
                 <span>Welcome back, {{name.split(" ")[0] | capitalize:true}}</span>
             </div>    

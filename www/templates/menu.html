@@ -1,4 +1,4 @@
-<ion-side-menus enable-menu-with-back-views="true">
+<ion-side-menus enable-menu-with-back-views="true" ng-controller="modalCtrl">
   <ion-side-menu-content>
     <ion-nav-bar class="bar-stable" >
      
@@ -12,7 +12,7 @@
   </ion-side-menu-content>
 
   <ion-side-menu side="left" width="{{screenWidth}} - ({{screenWidth}}/5)">
-    <ion-content>
+    <ion-content >
       <ion-list id="menu">
 		  <ion-item menu-close class="hamburgerImg" >
 <img src="./img/hamburger.png"  width="80%">

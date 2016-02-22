@@ -87,7 +87,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
   })
   
   .state('sendemail', {
-    url: "/sendemail",
+    url: "/sendemail/:email",
     templateUrl: "templates/sendemail.html",
 	  	controller:'sendemailCtrl'
 
@@ -105,21 +105,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
             templateUrl: 'templates/share.html',
             controller: 'shareController'
         })
-  
-   
-  
-  
-//  .state('home', {
-//            url: '/home',
-//            templateUrl: 'templates/home.html',
-//        })
-  
-  
-  
-  
-  
-  
-  
+
   //home state
   
   
@@ -183,12 +169,6 @@ app.config(function($stateProvider, $urlRouterProvider) {
         }
       }
     });
-	
-	 
-
-
- 
- 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/start');
 	

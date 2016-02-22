@@ -1,6 +1,6 @@
 <ion-modal-view id="signup-view">
         <ion-content ng-controller="formValidation">
-			<div>
+			<div ng-controller="loginSignUpController">
 		<button  class="button button-icon button-clear ion-ios-close-empty closebutton" id="cls" ng-click="closeLoginSign()">
         </button>
 			</div>
@@ -23,7 +23,7 @@
           
             
             <label class="item item-input color4" ng-class="{ 'has-errors' : authorizationForm1.password.$invalid && authorizationForm1.$submitted, 'no-errors' : authorizationForm1.password.$valid  && authorizationForm1.$submitted}">
-              <input type="password" name="password" id="pswd9" onkeypress="return AvoidSpace(event)" ng-keyup="setpassword(authorizationForm1)" placeholder="Password" ng-model="user.password1" ng-minlength="5" ng-maxlength="20" required>
+              <input type="password" onselectstart="return false" onpaste="return false;" onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false" autocomplete=off name="password" id="pswd9" onkeypress="return AvoidSpace(event)" ng-keyup="setpassword(authorizationForm1)" placeholder="Password" ng-model="user.password1" ng-minlength="5" ng-maxlength="20" required>
             </label>
 				<div class="error-container" ng-show="authorizationForm1.password.$error && authorizationForm1.$submitted" ng-messages="authorizationForm1.password.$error">
                 <div ng-messages-include="templates/error-list.html"></div> 
@@ -64,7 +64,7 @@
             </div>
 				
             <label class="item item-input color4" ng-class="{ 'has-errors' : authorizationForm.password.$invalid && authorizationForm.$submitted, 'no-errors' : authorizationForm.password.$valid  && authorizationForm.$submitted}" >
-              <input type="password" name="password" onkeypress="return AvoidSpace(event)" id="passwd1" placeholder="Password" id="passwd1" ng-model="user.password" ng-minlength="5" ng-maxlength="20" required>
+              <input type="password" onselectstart="return false" onpaste="return false;" onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false" autocomplete=off name="password" onkeypress="return AvoidSpace(event)" id="passwd1" placeholder="Password" id="passwd1" ng-model="user.password" ng-minlength="5" ng-maxlength="20" required>
             </label>
 				
 				<div class="error-container" ng-show="authorizationForm.password.$error && authorizationForm.$submitted" ng-messages="authorizationForm.password.$error">

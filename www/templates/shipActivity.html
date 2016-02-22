@@ -4,7 +4,7 @@
           <button class="button button-icon button-primary modalClose ion-ios-close-empty" id="modal" ng-click="modal2.hide()"></button>
         </ion-header-bar>
 	
-        <ion-content class="padding" direction="xy" style="padding: 0px;">
+        <ion-content class="padding" direction="xy" style="padding: 0px;" >
 <!--
 			
 					
@@ -29,7 +29,7 @@
 						
 					<ion-slide  ng-repeat="act in activity">
 					
-				 <a  type="item-text-wrap"  href="" style="margin-top: 2px;background-image:url('{{linkUrl}}images/Activity/{{ act.activityImage }}');" class="eventListPicture">
+				 <a  type="item-text-wrap"  href="" style='margin-top: 2px;background-image:url("{{linkUrl}}images/Activity/{{ act.activityImage }}");' class="eventListPicture">
 				 </a>
 						<div class="shipActiviyPadd">	
  						<div class="modalhead1" id="{{act.activityTitle}}">

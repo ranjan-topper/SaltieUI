@@ -323,6 +323,19 @@ label {
 /* ==========================================================================
    01. General Styles
    ========================================================================== */
+
+/* copy and paste functionality  */
+
+input, textarea {
+        -webkit-user-select: auto !important;
+        -khtml-user-select: auto !important;
+        -moz-user-select: auto !important;
+        -ms-user-select: auto !important;
+        -o-user-select: auto !important;
+        user-select: auto !important;  
+  }
+
+
 /* Place Holder css*/
 input::-webkit-input-placeholder {
   color: white ;
@@ -420,9 +433,6 @@ hr {
 
 #btn-reg {
 	border-left: 2px solid #9c867a;
-    float: right;
-	  width: 125px;
-
 }
 
 #login-divider {
@@ -452,9 +462,6 @@ hr {
     background-color: rgba(0, 35, 45,1);
 }
 
-#btn-reg, #btn-login {
-    color: white;
-}
 
 .login-btns {
         width: 100%;
@@ -779,6 +786,7 @@ font-size: 5.5vmin;    text-decoration: none;
 }
 .position
 {
+	padding-right: 5vw;
     width: 100%;
     position: absolute;
     bottom: 9vh;
@@ -1687,7 +1695,7 @@ ion-scroll[delegate-handle=calendarScroll1] {
 
 	.arrowbox
 {
-	    border-bottom: 2px solid #00232D;
+	border-bottom: 2px solid #00232D;
     border-right: 0;
     border-left: 0;
     right: 0px;
@@ -1722,11 +1730,11 @@ ion-scroll[delegate-handle=calendarScroll1] {
 }
 .arrowbutton
 {	
-    line-height: 21vh;
+        line-height: 21vh;
     top: 0px;
-    right: 5vw;
+    /* right: 5vw; */
     border: none;
-    padding-right: 5px;
+    padding-right: 5%;
     /* min-width: 0px; */
     color: #00707E;
     position: absolute;
@@ -2013,10 +2021,6 @@ transform: translate3d(-5px, 0px,0px);
     color: #00232d
 }
 
-#profile .spacing
-{
-	    margin-top: 3vh;
-}
 
 #profile .submitloginbt {
     min-height: 7vh !important;

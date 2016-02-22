@@ -233,7 +233,9 @@ app.controller('emailloginCtrl', function($scope, $location, $state, $http, $loc
 });
 
 //This is for forgot password functionality
-app.controller('sendemailCtrl', function($scope, $location, $state, $localStorage, $ionicPopup, $ionicLoading, $http, loginService, serviceLink) {
+app.controller('sendemailCtrl', function($scope, $location, $state, $localStorage, $ionicPopup, $ionicLoading, $http, loginService, serviceLink,$stateParams) {
+	console.log($stateParams);
+	$scope.user=$stateParams;
 	$scope.enableVerCode=true;
 	var isIPad = ionic.Platform.isIPad();
   var isIOS = ionic.Platform.isIOS();
@@ -443,152 +445,11 @@ if(typeof analytics !== 'undefined') { analytics.trackView("App Main Controller"
     }
 	
 	
+	 
 	
-	 $ionicModal.fromTemplateUrl('templates/aboutModal.html', {
-            scope: $scope
-        }).then(function(modal) {
-            $scope.aboutModal = modal;
-        })
-	 
-	  $ionicModal.fromTemplateUrl('templates/profileSetting.html', {
-            scope: $scope
-        }).then(function(modal) {
-            $scope.profileSet = modal;
-        })
-	 
-	  $ionicModal.fromTemplateUrl('templates/phoneModal.html', {
-            scope: $scope
-        }).then(function(modal) {
-            $scope.phoneModal = modal;
-        })
-	  $ionicModal.fromTemplateUrl('templates/faqModal.html', {
-            scope: $scope
-        }).then(function(modal) {
-            $scope.faqModal = modal;
-        })
 	  
-	    $ionicModal.fromTemplateUrl('templates/termModal.html', {
-            scope: $scope
-        }).then(function(modal) {
-            $scope.termModal = modal;
-        })
-	
-	 
-	 $scope.aboutClick=function()
-	 {
-		 $scope.aboutModal.show();
-	 }
-	 $scope.phoneClick=function()
-	 {
-		 $scope.phoneModal.show();
-	 }
-	 
-	 $scope.faqClick=function()
-	 {
-		 $scope.faqModal.show();
-	 }
-	 
-	  $scope.termClick=function()
-	 {
-		 $scope.termModal.show();
-	 }
-	  
-	  $scope.profileSetting=function()
-	  {
-		  	$scope.changePasshide=true;
-			$scope.passwordValidity=0;
-		    profileGet.profile()
-                    .then(
-                        /* success function */
-                        function(data) {
-							$scope.user=data;
-                        }, function(error) {
-                            //If an error happened, handle it here
-                        })
-		  
-		  $scope.profileSet.show();
-	  }
-	  
-	  
-	  $scope.closeProfile=function()
-	  {
-		  
-		    $scope.profileSet.remove();
-		  $ionicModal.fromTemplateUrl('templates/profileSetting.html', {
-            scope: $scope
-        }).then(function(modal) {
-            $scope.profileSet = modal;
-        })
-		  
-	  }
-	 
-	  
-	  $scope.showPassfield=function(form,user)
-	  {
-		  if($scope.passwordValidity==0)
-		  {
-		  $scope.changePasshide=false;
-		  form.newPassword.$setValidity("required", false);
-		  form.passwordc.$setValidity("required", false);
-		  form.$setPristine();
-		  $scope.passwordValidity=1;
-		  }
-		  else
-		  {
-			  	$scope.changePasshide=true;
-				$scope.passwordValidity=0;
-			  	user.newPassword="";
-			  	user.passwordc="";
-		  }
-		  
-	  }
-	  
-	  $scope.editProfile=function(form,user)
-	  {
-		  if (user.newPassword != user.passwordc) {
-                form.passwordc.$setValidity("dontMatch", false);
-            }
-		  if($scope.passwordValidity==0)
-		  {
-			  	form.password.$setValidity("password", true);
-			  	form.passwordc.$setValidity("dontMatch", true);
-			  	form.newPassword.$setValidity("required", true);
-		  		form.passwordc.$setValidity("required", true);
-		  }
-		      if (form.$valid) //checking form valid or not
-            {
-				
-				if(user.newPassword == '' || user.newPassword == undefined )
-				{
-					user.newPassword ="";
-				}
-                var data = "userName=" + $localStorage.userName +"&firstName=" + user.firstName + "&lastName=" + user.lastName+"&oldPassword=" + user.oldPassword +"&newPassword=" + user.newPassword ;
-				 $scope.status = "";
-                profileSet.profileS(data)
-                    .then(
-                        /* success function */
-                       function(status) {
-                            $scope.status = status;
-                            if ($scope.status == 200) {
-										$ionicPopup.show({
-													title: 'Success',
-													subTitle: 'Your Profile is Updated',
-													buttons: [{
-														text: 'Ok'
-													}]
-												}).then(function(res) {
-													 });   
-								$localStorage.Name=user.firstName;
-								$scope.profileSet.hide();
-							} else {
-                                profileSet.errors(form, $scope.status);
-                            }
 
-                        }, function(error) {
-                            //If an error happened, handle it here
-                        })
-            }
-	  }
+	 
 	 
 
 })
@@ -626,11 +487,7 @@ app.controller('lifeStyleCtrl', function($scope, $location, $http, $rootScope, $
         $rootScope.favourite = [];
 		$rootScope.preStyle="";
         $rootScope.page = "lifestyle"; //page remember form myfavourite page
-		$rootScope.month[0]=[{month:"Jan",value: false,number:1},{ month:"Feb",value: false,number:2}, {month:"Mar",value: false,number:3}, {month:"Apr",value: false,number:4}, {month:"May",value: false,number:5},{month:"Jun",value: false,number:6},{ month:"Jul",value: false,number:7},{ month:"Aug", value: false,number:8}, {month:"Sep",value: false,number:9}, {month:"Oct",value: false,number:10},{month:"Nov",value: false,number:11},{ month:"Dec",value: false,number:12}];
-	
-	 	$rootScope.month[1]=[{month:"Jan",value: false,number:1},{ month:"Feb",value: false,number:2}, {month:"Mar",value: false,number:3}, {month:"Apr",value: false,number:4}, {month:"May",value: false,number:5},{month:"Jun",value: false,number:6},{ month:"Jul",value: false,number:7},{ month:"Aug", value: false,number:8}, {month:"Sep",value: false,number:9}, {month:"Oct",value: false,number:10},{month:"Nov",value: false,number:11},{ month:"Dec",value: false,number:12}];
-	
-		$rootScope.month[2]=[{month:"Jan",value: false,number:1,id:"mon1"},{ month:"Feb",value: false,number:2,id:"mon2"}, {month:"Mar",value: false,number:3,id:"mon3"}, {month:"Apr",value: false,number:4,id:"mon4"}, {month:"May",value: false,number:5,id:"mon5"},{month:"Jun",value: false,number:6,id:"mon6"},{ month:"Jul",value: false,number:7,id:"mon7"},{ month:"Aug", value: false,number:8,id:"mon8"}, {month:"Sep",value: false,number:9,id:"mon9"}, {month:"Oct",value: false,number:10,id:"mon10"},{month:"Nov",value: false,number:11,id:"mon11"},{ month:"Dec",value: false,number:12,id:"mon12"}];
+		
 		
         $ionicLoading.show({
             template: '<img src="./img/logo1.png" width="20%"/><br><ion-spinner icon="dots" class="spinner-balanced"/>'
@@ -642,92 +499,12 @@ app.controller('lifeStyleCtrl', function($scope, $location, $http, $rootScope, $
         });
 		
 		
-		$rootScope.filterPortName=function()
-		{
-			var x=document.getElementById("portName");
-			var port = x.options[x.selectedIndex].value;
-			$rootScope.filterShipPort.ports=port;
-			$rootScope.filterShipPort.flag=3;
-			$rootScope.filterLifstyle();
-		}
-	
-		$rootScope.filterShipName=function()
-		{
-			var y=document.getElementById("shipName");
-			var ship = y.options[y.selectedIndex].value;
-			$rootScope.filterShipPort.ship=ship;
-			$rootScope.filterShipPort.flag=4;
-			$rootScope.filterLifstyle();
-		}
-		
-		$rootScope.filterCruiseLine=function()
-		{
-			var y=document.getElementById("cruiseLine");
-			var cruiseLine = y.options[y.selectedIndex].value;
-			$rootScope.filterShipPort.cruiseLine=cruiseLine;
-			$rootScope.filterShipPort.flag=2;
-			$rootScope.filterLifstyle();
-		}
-		
-        $rootScope.lifestyle = function(style) 
-		{
-			if($rootScope.preStyle==style)
-			{
-					 $rootScope.filterShipPort.style = "All";	
-				     $rootScope.preStyle="";
-			}
-			else
-			{
-				$rootScope.filterShipPort.style = style;
-				$rootScope.preStyle=style;
-			}
-			
-				$rootScope.filterShipPort.flag=0;
-				$rootScope.filterLifstyle();
-		}
-
-        $rootScope.isLifestyleActive = function(style) {
-            return $rootScope.filterShipPort.style == style;
-        }
-		
-		$rootScope.duration=function(cruiseDur)
-		{
-			if($rootScope.preDuration==cruiseDur)
-			{
-				$rootScope.filterShipPort.duration=""
-				$rootScope.preDuration="";
-			}
-			else{
-			$rootScope.filterShipPort.duration = cruiseDur;
-				$rootScope.preDuration=cruiseDur;
-			}
-			$rootScope.filterShipPort.flag=1;
-			 $rootScope.filterLifstyle();
-		}
-		
-		
-		$rootScope.isDurationActive = function(cruiseDur) 
-		{
-            return $rootScope.filterShipPort.duration == cruiseDur;
-        }
-		 
-		 $rootScope.isYearActive=function(year)
-		 {
-			 return $rootScope.yearColor==year;
-		 }
-		
+				
         $scope.viewall = function() {
             $location.path('/app/list');
         }
 		
-		
-		//filter modal start's here
-		 $ionicModal.fromTemplateUrl('templates/filterLifestyleModal.html', {
-            scope: $rootScope
-        }).then(function(modal) {
-            $rootScope.filterModal = modal;
-        })
-		 
+	
 
 		 
 		 $rootScope.showFilter=function()
@@ -775,35 +552,7 @@ app.controller('lifeStyleCtrl', function($scope, $location, $http, $rootScope, $
 			 }
 		 }
 		 
-		 
-		 //disable lifesytle button 
-		 $rootScope.disableLife=function(lifestyle)
-		 {
-			 for(i=0;i<$rootScope.shipPort.lifestyle.length;i++)
-			 {
-				 if($rootScope.shipPort.lifestyle[i] == lifestyle)
-				 {
-					 return false;
-				 }
-			 }
-			 return true;
-		 }
-		 //disable duration button
-		 	 $rootScope.disableDuration=function(duration)
-		 {
-			 for(i=0;i<$rootScope.shipPort.duration.length;i++)
-			 {
-				 if($rootScope.shipPort.duration[i] == duration)
-				 {
-					 return false;
-				 }
-			 }
-			 return true;
-		 }
-			 
-			 
-			 
-		 
+		  
 		 $rootScope.filterLifstyle=function()
 		 {
 			 if($rootScope.filterShipPort.style=="All")
@@ -826,316 +575,6 @@ app.controller('lifeStyleCtrl', function($scope, $location, $http, $rootScope, $
 			 
 			  $rootScope.filterModal.show();
 		 }
-		 
-		 $rootScope.nextClick=function(page)
-	{
-		$rootScope.myActiveSlide=page;
-	}
-		 
-		 
-		 
-	 $rootScope.perYear=function(year,index)
-		 {
-		$rootScope.myActiveSlide=index;
-	 }
-	 
-	 
-	 
-	 $rootScope.slideHasChanged=function(index)
-	 {
-		 $rootScope.myActiveSlide=index;
-	 }
-	 
-	 $rootScope.set_color=function(year,index)
-	 {
-		 if(index==0)
-		 {
-			  return {
-                color: "#339fa6"
-            }
-		 }
-		 else if(index==1)
-		 {
-			 return {
-                color: "#9c867a"
-            }
-		 }
-		 else if(index==2){
-			 return {
-                color: "#00232d"
-            }
-		 }
-	 }
-	
-	
-		
-	
-	$rootScope.disableCheck=function(number,year)
-	{
-		var d = new Date();
-		var index1=0;
-//		if(year==d.getFullYear())
-//		{
-//			
-//			var n = d.getMonth();
-//			if(number<=n)
-//			{
-//				$rootScope.disableColor=true;
-//				return true;
-//
-//			}
-//			else if(number>n)
-//			{
-//				$rootScope.disableColor=false;
-//				return false;
-//			}
-//		}
-		if(year==d.getFullYear()+1)
-			index1=1;
-		if(year==d.getFullYear()+2)
-			index1=2;
-		
-		if($rootScope.shipPort.month=="" || $rootScope.shipPort.month[year]=='' )
-			return;
-		else{
-				if($rootScope.shipPort.year.indexOf(year.toString())>=0)
-				{
-					if($rootScope.shipPort.month[year].indexOf(parseInt(number)) < 0){
-						$rootScope.month[index1][parseInt(number)-1].value=false;
-						$rootScope.disableColor=true;
-						return true;
-					}
-					else {
-						
-						$rootScope.disableColor=false;
-						return false;
-					}
-				}
-				else
-				{
-					$rootScope.month[index1][parseInt(number)-1].value=false;
-					$rootScope.disableColor=true;
-					return true;
-				}
-			}
-	}
-	
-	
-	
-	
-	
-	
-	
-			 
-		$rootScope.yearColor="";
-		$rootScope.selectedYear=[{year:"",value:[]},{year:"",value:[]},{year:"",value:[]}];
-		$rootScope.year=[];
-		$rootScope.year[0]=new Date().getFullYear();
-		$rootScope.year[1]=new Date().getFullYear()+1;
-		$rootScope.year[2]=new Date().getFullYear()+2;
-		
-		$rootScope.commonMonthYear=function(monthArg){
-		
-			var monthArr='';
-		 monthArg.forEach(function(month) {
-				 
-
-			 if (month.value) {
-	      // If this is not the first item
-        	if (monthArr) {
-					monthArr += '-'
-        	}
-        	monthArr += month.number;
-			 }
-		 })
-		 return monthArr;
-	}
-		
-		
-		//reset to previously selected month
-	
-$rootScope.resetDateMonth=function(months,index){
-			if(months==null)
-				return;
-			for(j=0;j<12;j++){
-					 $rootScope.month[index][j].value=false;
-				}
-             var str=months.split("-");
-			if(str =='')
-				return;
-		   for(i=0;i<str.length;i++){
-				 var a=str[i]-1;
-				 $rootScope.month[index][a].value=true;
-             }
-         }
-
-
-$rootScope.monthSelect=function()
-{
-	
-			var yearArr='';
-			var monthArr='';
-			var month=$rootScope.commonMonthYear($rootScope.month[0]);
-			if(month)
-				yearArr=$rootScope.year[0];
-			
-			monthArr=month;
-			 var month1=$rootScope.commonMonthYear($rootScope.month[1]);
-			if(month1){
-				if(yearArr){
-					yearArr+="-";
-					monthArr+="@";
-				}
-				monthArr+=month1;
-				yearArr+=$rootScope.year[1];
-				
-			}
-			 var month2=$rootScope.commonMonthYear($rootScope.month[2]);
-			if(month2){
-				if(yearArr){
-					yearArr+="-";
-					monthArr+="@";
-				}
-				monthArr+=month2;
-				yearArr+=$rootScope.year[2];
-			}
-	
-			$rootScope.filterShipPort.month=monthArr;
-			$rootScope.filterShipPort.year=yearArr;
-	$rootScope.filterLifstyle();
-}
-
-
-
-
-		$rootScope.applyFilter=function()
-		{
-			$rootScope.applyFilterFlag=1; 
-			  $rootScope.list = [];
-			$rootScope.noMoreItemsAvailable=false;
-			 $ionicScrollDelegate.scrollTop();
-			
-			var yearArr='';
-			var monthArr='';
-			var month=$rootScope.commonMonthYear($rootScope.month[0]);
-			if(month)
-				yearArr=$rootScope.year[0];
-			
-			monthArr=month;
-			 var month1=$rootScope.commonMonthYear($rootScope.month[1]);
-			if(month1){
-				if(yearArr){
-					yearArr+="-";
-					monthArr+="@";
-				}
-				monthArr+=month1;
-				yearArr+=$rootScope.year[1];
-				
-			}
-			 var month2=$rootScope.commonMonthYear($rootScope.month[2]);
-			if(month2){
-				if(yearArr){
-					yearArr+="-";
-					monthArr+="@";
-				}
-				monthArr+=month2;
-				yearArr+=$rootScope.year[2];
-			}
-	
-			$rootScope.filterShipPort.month=monthArr;
-			$rootScope.filterShipPort.year=yearArr;
-			
-			var po = document.getElementById("portName");
-			var sh = document.getElementById("shipName");
-			var cl = document.getElementById("cruiseLine");
-			var cruiseline = cl.options[cl.selectedIndex].value;
-			var port = po.options[po.selectedIndex].value;
-			var ship = sh.options[sh.selectedIndex].value;
-			$rootScope.filterShipPort.ship=ship;
-			$rootScope.filterShipPort.ports=port;
-			$rootScope.filterShipPort.cruiseLine=cruiseline;
-			$rootScope.backArrow.expType=angular.copy($rootScope.filterShipPort.style);
-            $rootScope.backArrow.duration=angular.copy($rootScope.filterShipPort.duration);
-             $rootScope.backArrow.orderBy=angular.copy($rootScope.filterShipPort.orderby)
-             $rootScope.shipPort1=angular.copy($rootScope.shipPort);
-            $rootScope.backArrow.ship=sh.selectedIndex;
-             $rootScope.backArrow.cruiseLine=cl.selectedIndex;
-              $rootScope.backArrow.port=po.selectedIndex;
-            $rootScope.backArrow.month1=angular.copy(month);
-            $rootScope.backArrow.month2=angular.copy(month1);
-            $rootScope.backArrow.month3=angular.copy(month2); 
-			
-			
-				$rootScope.filterShipPort1=angular.copy($rootScope.filterShipPort); 			
-		  $rootScope.list = [];	
-		$rootScope.totalDisplayed=0;
-
-				$rootScope.countCruise="";
-
-				advanceFilter.filter($rootScope.filterShipPort1).then(
-                        /* success function */
-                        function(data) {
-							$rootScope.countCruise=data.AllCount;
-								if($rootScope.countCruise==0){
-									$rootScope.count=0;
-									// $rootScope.resetFilter();
-											 $ionicPopup.show({
-													title: 'For the selected month there is no cruise available',
-													subTitle: 'Please try different months',
-													buttons: [{
-														text: 'Ok'
-													}]
-												}).then(function(res) {
-													 });
-												}
-												else{
-													$rootScope.filterModal.hide();
-											$location.path('/app/list');
-												}
-                                $ionicLoading.hide();
-                        },function(error) {
-                alert("There was a problem");
-                console.log(error);
-            })
-			}
-		
-	
-		
-		$rootScope.orderBy="asc";
-		$rootScope.sortBy=function(orderBy)
-		{
-			$rootScope.filterShipPort.orderby=orderBy
-			$rootScope.orderBy=orderBy;
-		}
-		 $rootScope.isSortByActive=function(orderBy)
-		 {
-			 return $rootScope.filterShipPort.orderby==orderBy;
-		 }
-		 
-		 $rootScope.resetFilterHome=function(){
-			 $rootScope.clickFilterFlag=0;
-			 $rootScope.preStyle="";
-			 $rootScope.preDuration="";
-			 $rootScope.filterShipPort={style:"All",duration:"",year:"",month:"",ports:"",ship:"",orderby:"asc",cruiseLine:"",flag:-1};
-			 document.getElementById("portName").selectedIndex= 0;
-			 document.getElementById("cruiseLine").selectedIndex= 0;
-			 document.getElementById("shipName").selectedIndex= 0;
-			 for(i=0;i<$rootScope.month.length;i++)
-			 {
-				 for(j=0;j<12;j++){
-					 $rootScope.month[i][j].value=false;
-				 }
-				 
-			 }
-		
-		 }
-		 
-		 $rootScope.resetFilter=function()
-		 {
-			 $rootScope.resetFilterHome();	
-			 $rootScope.showFilter();
-		 }
-		 
 		 
 		
     }
@@ -1162,156 +601,7 @@ app.controller('listController', function($scope, $location, $rootScope, $filter
 		$rootScope.page = "list";
         $scope.favoriteId = 0;
 		
-        //toggle the email login field function
-        $rootScope.hideForm = true;
-        $rootScope.toggle = function() {
-		$rootScope.hideForm = $scope.hideForm === false ? true : false;
-        }
-        //login through facebook
-        $rootScope.facebookLogin = function() {
-            facebookService.facebook().then(function(result) {
-                $ionicLoading.show({
-                    template: '<img src="./img/logo1.png" width="20%"/><br><ion-spinner icon="dots" class="spinner-balanced"/>'
-                });
-
-                $scope.profileData = result.data; //assign facebook data to profiledata
-                //post request to store the facebook user detail in our database such as(email,firstname,lastname,token a unique id given by the facebook)
-                var url = serviceLink.url + 'CruiseAppVersion-0/rest/cruise/user/registration/fb';
-                var data = "userName=" + result.data.id + "&token=" + result.data.id + "&firstName=" + $scope.profileData.first_name + "&lastName=" + $scope.profileData.last_name;
-                loginService.login(url, data)
-                    .then(
-                        /* success function */
-                        function(status) {
-                            if (status == 200) {
-								
-								$localStorage.Name=$scope.profileData.first_name;
-                                $localStorage.userName = result.data.id;
-								//menu item do be displayed when facebook login
-								$rootScope.loginLogout="Log out";
-								$rootScope.showMyFav=false;
-								$rootScope.showProfileSet=true;
-
-								if($rootScope.logSignClicked=="Favourite")
-								{
-                                $rootScope.logsignModal.hide();
-									if($rootScope.isFavourite($rootScope.tripidfav)==false) 
-                                favService.favorite($rootScope.tripidfav, $rootScope.indexfav);
-								}
-								else
-								{
-									$rootScope.logsignModal.hide();
-									$rootScope.share();
-								}
-								
-                            } else {
-
-                                $ionicPopup.show({
-                                    title: 'Error',
-                                    subTitle: 'Oops somthing went worng !',
-                                    buttons: [{
-                                        text: 'Ok'
-                                    }]
-                                }).then(function(res) {});
-                                $ionicLoading.hide();
-
-                            }
-                        });
-            }, function(error) {
-                alert("There was a problem signing in!  See the console for logs");
-                console.log(error);
-            });
-        }
-		
-		
-	
-		
-		//signup functionality 
-        $rootScope.signUp = function(form, user) {
-            if (form.$valid) //checking form valid or not
-            {
-                var url = serviceLink.url + 'CruiseAppVersion-0/rest/cruise/user/registration/app';
-
-                var data = "userName=" + user.email + "&password=" + user.password + "&firstName=" + user.firstName + "&lastName=" + user.lastName;
-                $scope.status = "";
-                loginService.login(url, data)
-                    .then(
-                        /* success function */
-                        function(status) {
-                            $scope.status = status;
-                            if ($scope.status == 200) {
-								//menu item do be displayed when signup
-								$rootScope.loginLogout="Log out";
-								$rootScope.showMyFav=false;
-								$rootScope.showProfileSet=false;
-                                $localStorage.userName = user.email;
-								if($rootScope.logSignClicked=="Favourite")
-								{
-                                $rootScope.logsignModal.hide();
-                                favService.favorite($rootScope.tripidfav, $rootScope.indexfav);
-								}
-								else
-								{
-									$rootScope.logsignModal.hide();
-									$rootScope.share();
-								}
-                                
-                            } else {
-                                loginService.errors(form, $scope.status);
-                            }
-
-                        }, function(error) {
-                            //If an error happened, handle it here
-                        })
-            }
-        }
-		
-		
-		//Login functionality
-        $rootScope.Login = function(form, user) {
-            if (form.$valid) //cheacking the form valid or not
-            {
-                var url = serviceLink.url + 'CruiseAppVersion-0/rest/cruise/user/login';
-                var obj = {
-                    userName: user.email1,
-                    password: user.password1
-                };
-                var data = "userName=" + obj.userName + "&password=" + obj.password;
-                $scope.status = "";
-                loginService.login(url, data)
-                    .then(
-                        /* success function */
-                        function(status) {
-                            $scope.status = status;
-                            if ($scope.status == 200) {
-								//menu item do be displayed when login
-								$rootScope.loginLogout="Log out";
-								$rootScope.showMyFav=false;
-								$rootScope.showProfileSet=false;
-								$localStorage.userName = user.email1;
-								//favourite the cruise while login is finished
-								if($rootScope.logSignClicked=="Favourite")
-								{
-                                $rootScope.logsignModal.hide();
-									if($rootScope.favourite1!=null || $rootScope.favourite1!='')
-										$rootScope.favourite=angular.copy($rootScope.favourite1);
-									if($rootScope.isFavourite($rootScope.tripidfav)==false) 
-                                favService.favorite($rootScope.tripidfav, $rootScope.indexfav);
-								}
-								else
-								{
-									$rootScope.logsignModal.hide();
-									$rootScope.share();
-								}
-                            } else {
-                                loginService.errors(form, $scope.status);
-                            }
-
-
-                        }, function(error) {
-                            //If an error happened, handle it here
-                        });
-            }
-        }
+      
 		
 		
 		//function to determine the favourited cruise
@@ -1324,12 +614,6 @@ app.controller('listController', function($scope, $location, $rootScope, $filter
     		return false;
 		}
 
-		//modal declaration	
-		$ionicModal.fromTemplateUrl('templates/loginSignup.html', {
-            scope: $rootScope
-        }).then(function(modal) {
-            $rootScope.logsignModal = modal;
-        })
 
         //load 10 data in list page and loadmore functionality
         $rootScope.loadMore = function() {
@@ -1464,12 +748,6 @@ app.controller('detailController', function($scope, $location, $ionicModal, $roo
 
         }
 
-        $ionicModal.fromTemplateUrl('templates/loginSignup.html', {
-            scope: $rootScope
-        }).then(function(modal) {
-            $rootScope.logsignModal = modal;
-        })
-
 
         $scope.favorite = function(tripId, index) {
             if ($localStorage.userName == "Guest") {
@@ -1537,32 +815,14 @@ app.controller('detailController', function($scope, $location, $ionicModal, $roo
 $rootScope.moreLoad=false;
         $scope.tripID = $rootScope.tripid;
 
-        $ionicModal.fromTemplateUrl('templates/modal.html', {
-            scope: $scope
-        }).then(function(modal) {
-            $scope.modal = modal;
-        })
-
-        $ionicModal.fromTemplateUrl('templates/video.html', {
-            scope: $scope
-        }).then(function(modal) {
-            $scope.showVideo = modal;
-        })
-
-        $ionicModal.fromTemplateUrl('templates/shipActivity.html', {
-            scope: $scope
-        }).then(function(modal) {
-            $scope.modal2 = modal;
-        });
-
-
+        
 
         $scope.back = function() {
             window.history.back();
             //    				$ionicHistory.goBack();
         }
 
-        $scope.CabinIndex = 0;
+        $rootScope.CabinIndex = 0;
         $scope.index1 = 0;
         $scope.isActive = function(index2) {
             //alert($scope.index1==index2);
@@ -1570,29 +830,15 @@ $rootScope.moreLoad=false;
         }
 
         $scope.isCabinActive = function(index) {
-            return $scope.CabinIndex == index;
+            return $rootScope.CabinIndex == index;
         }
 
-        $scope.setPrice = function(prices, index, date) {
-            if (index == 0) {
-                $scope.priceList = prices;
-                $scope.date = date;
-            }
-
-
-        };
         $scope.displayPrice = function(prices, index, date) {
             $scope.date = date;
             $scope.priceList = prices;
             $scope.index1 = index;
         };
-        $scope.displayCabin = function(cat, index, price) {
-            $scope.CabinIndex = index;
-            $scope.category = cat;
-            $scope.cabinInfo = $scope.detail.tripDetails.ship.cabinType;
-            $scope.price = price;
-            $scope.modal.show();
-        };
+       
 
 
         $scope.book1 = function(modal) {
@@ -1615,16 +861,7 @@ $rootScope.moreLoad=false;
 			}
         }
 
-        $scope.video = function() 
-		{
-					$scope.videoURL=$rootScope.detail.tripDetails.ship.videoUrl+'?autoplay=1&rel=0';
-            $scope.showVideo.show();
-        }
-		
-		 $scope.trustSrc = function(src) {
-    return $sce.trustAsResourceUrl(src);
-  }
-		
+     
 		
 			
 		$scope.showVideo=function()
@@ -1632,15 +869,7 @@ $rootScope.moreLoad=false;
             window.open($rootScope.detail.tripDetails.ship.videoUrl+'?autoplay=1', '_blank', 'closebuttoncaption=back');
             return false;
 		}
-		$scope.closeVidio=function()
-		{
-			$scope.showVideo.remove();
-			$ionicModal.fromTemplateUrl('templates/video.html', {
-            scope: $scope
-        }).then(function(modal) {
-            $scope.showVideo = modal;
-        })
-		}
+		
 		
 		
 		$scope.showVideoCheck=function()
@@ -1655,14 +884,6 @@ $rootScope.moreLoad=false;
 			}
 		}
 
-        $scope.activityModal = function(index) {
-            $scope.activity = $rootScope.detail.tripDetails.ship.shipActivity;
-//			$ionicSlideBoxDelegate.$getByHandle('activity').slide(index,200);
-			$timeout(function() {
-    		$ionicSlideBoxDelegate.$getByHandle('activity').slide(index);
-			},   100);
-            $scope.modal2.show();
-        }
 
         $scope.dateFormat = function(date1, index) {
 
@@ -1912,7 +1133,26 @@ app.factory('loginService', function($http, $q, $ionicLoading, $ionicPopup,$loca
 //                        text: 'Ok'
 //                    }]
 //                }).then(function(res) {});
-            } else {
+            }
+			
+			else if(status == 498)
+			{
+				$ionicLoading.hide();
+                form.otp.$setValidity("optExp", false);
+			}
+			else if(status == 423)
+			{
+				$ionicPopup.show({
+                    title: 'Error',
+                    subTitle: 'Account Locked',
+                    buttons: [{
+                        text: 'Ok'
+                    }]
+                }).then(function(res) {});
+			}
+			
+			
+			else {
                 $ionicPopup.show({
                     title: 'Error',
                     subTitle: 'Oops somthing went worng !',
@@ -2113,7 +1353,7 @@ app.factory('themeFilter', function($http, $q, $ionicLoading, $ionicPopup, $loca
            $http.get(serviceLink.url + 'CruiseAppVersion-0/rest/cruise/theme5?lifestyle='+data.style+'&duration='+data.duration+'&year='+data.year+'&month='+data.month+'&port='+data.ports+'&shipName='+data.ship+'&cruiseLineName='+data.cruiseLine).success(function(data) {
                 $ionicLoading.hide();
                 // console.log(data);
-					                        deferred.resolve(data);
+			   deferred.resolve(data);
 
             });
 return deferred.promise;
@@ -2197,7 +1437,10 @@ app.factory('profileSet', function($http, $q, $ionicLoading, $ionicPopup, $local
             } else if (status == 412) {
                 $ionicLoading.hide();
                 form.password.$setValidity("password", false);
-            } else {
+            } 
+			
+			
+			else {
                 $ionicPopup.show({
                     title: 'Error',
                     subTitle: 'Oops something went worng !',
@@ -2238,7 +1481,7 @@ app.factory('detailData',function($http, $q, $ionicLoading, $ionicPopup, $localS
 
 
 
-app.controller('formValidation',function($scope, $location, $state, $http, $localStorage, $state, loginService, serviceLink){
+app.controller('formValidation',function($scope, $location, $state, $http, $localStorage, $state, loginService, serviceLink,themeFilter){
 	
 		$scope.setpassword = function(form,user) 
 		{
@@ -2260,6 +1503,7 @@ app.controller('formValidation',function($scope, $location, $state, $http, $loca
 		$scope.setOTP=function(form)
 		{
 			form.otp.$setValidity("otpMiss", true);
+			form.otp.$setValidity("otpExp", true);
 			form.$setPristine();
 		}
 		$scope.resetEmail=function(form)
@@ -2285,6 +1529,878 @@ function AvoidSpace(event) {
     var k = event ? event.which : window.event.keyCode;
     if (k == 32) return false;
 }
+
+
+
+
+app.controller('filterController',function($scope, $location, $http, $rootScope, $filter, $localStorage, $ionicLoading, serviceLink, $ionicModal,themeFilter,$ionicPopup,advanceFilter,$ionicScrollDelegate,$timeout){
+	/* ==========================================================================
+  						declaring values
+   ========================================================================== */
+		$rootScope.orderBy="asc";
+		$rootScope.month[0]=[{month:"Jan",value: false,number:1},{ month:"Feb",value: false,number:2}, {month:"Mar",value: false,number:3}, {month:"Apr",value: false,number:4}, {month:"May",value: false,number:5},{month:"Jun",value: false,number:6},{ month:"Jul",value: false,number:7},{ month:"Aug", value: false,number:8}, {month:"Sep",value: false,number:9}, {month:"Oct",value: false,number:10},{month:"Nov",value: false,number:11},{ month:"Dec",value: false,number:12}];
+	
+	 	$rootScope.month[1]=[{month:"Jan",value: false,number:1},{ month:"Feb",value: false,number:2}, {month:"Mar",value: false,number:3}, {month:"Apr",value: false,number:4}, {month:"May",value: false,number:5},{month:"Jun",value: false,number:6},{ month:"Jul",value: false,number:7},{ month:"Aug", value: false,number:8}, {month:"Sep",value: false,number:9}, {month:"Oct",value: false,number:10},{month:"Nov",value: false,number:11},{ month:"Dec",value: false,number:12}];
+	
+		$rootScope.month[2]=[{month:"Jan",value: false,number:1,id:"mon1"},{ month:"Feb",value: false,number:2,id:"mon2"}, {month:"Mar",value: false,number:3,id:"mon3"}, {month:"Apr",value: false,number:4,id:"mon4"}, {month:"May",value: false,number:5,id:"mon5"},{month:"Jun",value: false,number:6,id:"mon6"},{ month:"Jul",value: false,number:7,id:"mon7"},{ month:"Aug", value: false,number:8,id:"mon8"}, {month:"Sep",value: false,number:9,id:"mon9"}, {month:"Oct",value: false,number:10,id:"mon10"},{month:"Nov",value: false,number:11,id:"mon11"},{ month:"Dec",value: false,number:12,id:"mon12"}];
+		$rootScope.yearColor="";
+		$rootScope.selectedYear=[{year:"",value:[]},{year:"",value:[]},{year:"",value:[]}];
+		$rootScope.year=[];
+		$rootScope.year[0]=new Date().getFullYear();
+		$rootScope.year[1]=new Date().getFullYear()+1;
+		$rootScope.year[2]=new Date().getFullYear()+2;
+	
+	
+	
+	/* ==========================================================================
+  						Experience Type Functionality
+   ========================================================================== */
+
+	$rootScope.lifestyle = function(style) 
+		{
+			if($rootScope.preStyle==style)
+			{
+					 $rootScope.filterShipPort.style = "All";	
+				     $rootScope.preStyle="";
+			}
+			else
+			{
+				$rootScope.filterShipPort.style = style;
+				$rootScope.preStyle=style;
+			}
+			
+				$rootScope.filterShipPort.flag=0;
+				$rootScope.filterLifstyle();
+		}
+
+        $rootScope.isLifestyleActive = function(style) {
+            return $rootScope.filterShipPort.style == style;
+        }
+	
+		 //disable lifesytle button 
+		 $rootScope.disableLife=function(lifestyle)
+		 {
+			 for(i=0;i<$rootScope.shipPort.lifestyle.length;i++)
+			 {
+				 if($rootScope.shipPort.lifestyle[i] == lifestyle)
+				 {
+					 return false;
+				 }
+			 }
+			 return true;
+		 }
+		 
+	
+	
+	
+	/* ==========================================================================
+  						Duration Functionality
+   ========================================================================== */
+	
+	$rootScope.duration=function(cruiseDur)
+		{
+			if($rootScope.preDuration==cruiseDur)
+			{
+				$rootScope.filterShipPort.duration=""
+				$rootScope.preDuration="";
+			}
+			else{
+			$rootScope.filterShipPort.duration = cruiseDur;
+				$rootScope.preDuration=cruiseDur;
+			}
+			$rootScope.filterShipPort.flag=1;
+			 $rootScope.filterLifstyle();
+		}
+		
+		
+		$rootScope.isDurationActive = function(cruiseDur) 
+		{
+            return $rootScope.filterShipPort.duration == cruiseDur;
+        }
+		 
+		//disable duration button
+		 	 $rootScope.disableDuration=function(duration)
+		 {
+			 for(i=0;i<$rootScope.shipPort.duration.length;i++)
+			 {
+				 if($rootScope.shipPort.duration[i] == duration)
+				 {
+					 return false;
+				 }
+			 }
+			 return true;
+		 }
+			 
+	
+	/* ==========================================================================
+  						CruiseLine Functionality
+   	========================================================================== */
+	$rootScope.filterCruiseLine=function()
+		{
+			var y=document.getElementById("cruiseLine");
+			var cruiseLine = y.options[y.selectedIndex].value;
+			$rootScope.filterShipPort.cruiseLine=cruiseLine;
+			$rootScope.filterShipPort.flag=2;
+			$rootScope.filterLifstyle();
+		}
+	/* ==========================================================================
+  						SelectPort Functionality
+   	========================================================================== */
+		 
+		 $rootScope.filterPortName=function()
+		{
+			var x=document.getElementById("portName");
+			var port = x.options[x.selectedIndex].value;
+			$rootScope.filterShipPort.ports=port;
+			$rootScope.filterShipPort.flag=3;
+			$rootScope.filterLifstyle();
+		}
+
+		
+	/* ==========================================================================
+  						SelectShip Functionality
+   	========================================================================== */
+		
+		$rootScope.filterShipName=function()
+		{
+			var y=document.getElementById("shipName");
+			var ship = y.options[y.selectedIndex].value;
+			$rootScope.filterShipPort.ship=ship;
+			$rootScope.filterShipPort.flag=4;
+			$rootScope.filterLifstyle();
+		}
+	
+	/* ==========================================================================
+  						Month and Year Functionality
+   	========================================================================== */
+		$rootScope.disableCheck=function(number,year)
+	{
+		var d = new Date();
+		var index1=0;
+		if(year==d.getFullYear()+1)
+			index1=1;
+		if(year==d.getFullYear()+2)
+			index1=2;
+		
+		if($rootScope.shipPort.month=="" || $rootScope.shipPort.month[year]=='' )
+			return;
+		else{
+				if($rootScope.shipPort.year.indexOf(year.toString())>=0)
+				{
+					if($rootScope.shipPort.month[year].indexOf(parseInt(number)) < 0){
+						$rootScope.month[index1][parseInt(number)-1].value=false;
+						$rootScope.disableColor=true;
+						return true;
+					}
+					else {
+						
+						$rootScope.disableColor=false;
+						return false;
+					}
+				}
+				else
+				{
+					$rootScope.month[index1][parseInt(number)-1].value=false;
+					$rootScope.disableColor=true;
+					return true;
+				}
+			}
+	}
+	
+		$rootScope.commonMonthYear=function(monthArg){
+			var monthArr='';
+		 monthArg.forEach(function(month) {
+				 
+
+			 if (month.value) {
+	      // If this is not the first item
+        	if (monthArr) {
+					monthArr += '-'
+        	}
+        	monthArr += month.number;
+			 }
+		 })
+		 return monthArr;
+	}
+		
+		
+		//reset to previously selected month
+	
+$rootScope.resetDateMonth=function(months,index){
+			if(months==null)
+				return;
+			for(j=0;j<12;j++){
+					 $rootScope.month[index][j].value=false;
+				}
+             var str=months.split("-");
+			if(str =='')
+				return;
+		   for(i=0;i<str.length;i++){
+				 var a=str[i]-1;
+				 $rootScope.month[index][a].value=true;
+             }
+         }
+
+
+	$rootScope.monthSelect=function()
+	{
+			var yearArr='';
+			var monthArr='';
+			var month=$rootScope.commonMonthYear($rootScope.month[0]);
+			if(month)
+				yearArr=$rootScope.year[0];
+			
+			monthArr=month;
+			 var month1=$rootScope.commonMonthYear($rootScope.month[1]);
+			if(month1){
+				if(yearArr){
+					yearArr+="-";
+					monthArr+="@";
+				}
+				monthArr+=month1;
+				yearArr+=$rootScope.year[1];
+				
+			}
+			 var month2=$rootScope.commonMonthYear($rootScope.month[2]);
+			if(month2){
+				if(yearArr){
+					yearArr+="-";
+					monthArr+="@";
+				}
+				monthArr+=month2;
+				yearArr+=$rootScope.year[2];
+			}
+	
+			$rootScope.filterShipPort.month=monthArr;
+			$rootScope.filterShipPort.year=yearArr;
+			$rootScope.filterLifstyle();
+	}
+
+
+		 $rootScope.isYearActive=function(year)
+		 	{
+			 return $rootScope.yearColor==year;
+		 	}
+		 $rootScope.nextClick=function(page)
+			{
+			$rootScope.myActiveSlide=page;
+			}
+		 $rootScope.perYear=function(year,index)
+			{
+			$rootScope.myActiveSlide=index;
+			}
+		 $rootScope.slideHasChanged=function(index)
+		 {
+			 $rootScope.myActiveSlide=index;
+		 }
+		 
+		// set Color for month box 
+		 	 
+	 $rootScope.set_color=function(year,index)
+	 {
+		 if(index==0)
+		 {
+			  return {
+                color: "#339fa6"
+            }
+		 }
+		 else if(index==1)
+		 {
+			 return {
+                color: "#9c867a"
+            }
+		 }
+		 else if(index==2){
+			 return {
+                color: "#00232d"
+            }
+		 }
+	 }
+	 
+	/* ==========================================================================
+  						Apply Filter Functionality
+   	========================================================================== */
+
+	// function for clicking apply filter
+		$rootScope.applyFilter=function()
+		{
+			$rootScope.applyFilterFlag=1; 
+			  $rootScope.list = [];
+			$rootScope.noMoreItemsAvailable=false;
+			 $ionicScrollDelegate.scrollTop();
+			
+			var yearArr='';
+			var monthArr='';
+			var month=$rootScope.commonMonthYear($rootScope.month[0]);
+			if(month)
+				yearArr=$rootScope.year[0];
+			
+			monthArr=month;
+			 var month1=$rootScope.commonMonthYear($rootScope.month[1]);
+			if(month1){
+				if(yearArr){
+					yearArr+="-";
+					monthArr+="@";
+				}
+				monthArr+=month1;
+				yearArr+=$rootScope.year[1];
+				
+			}
+			 var month2=$rootScope.commonMonthYear($rootScope.month[2]);
+			if(month2){
+				if(yearArr){
+					yearArr+="-";
+					monthArr+="@";
+				}
+				monthArr+=month2;
+				yearArr+=$rootScope.year[2];
+			}
+	
+			$rootScope.filterShipPort.month=monthArr;
+			$rootScope.filterShipPort.year=yearArr;
+			
+			var po = document.getElementById("portName");
+			var sh = document.getElementById("shipName");
+			var cl = document.getElementById("cruiseLine");
+			var cruiseline = cl.options[cl.selectedIndex].value;
+			var port = po.options[po.selectedIndex].value;
+			var ship = sh.options[sh.selectedIndex].value;
+			$rootScope.filterShipPort.ship=ship;
+			$rootScope.filterShipPort.ports=port;
+			$rootScope.filterShipPort.cruiseLine=cruiseline;
+			$rootScope.backArrow.expType=angular.copy($rootScope.filterShipPort.style);
+            $rootScope.backArrow.duration=angular.copy($rootScope.filterShipPort.duration);
+             $rootScope.backArrow.orderBy=angular.copy($rootScope.filterShipPort.orderby)
+             $rootScope.shipPort1=angular.copy($rootScope.shipPort);
+            $rootScope.backArrow.ship=sh.selectedIndex;
+             $rootScope.backArrow.cruiseLine=cl.selectedIndex;
+              $rootScope.backArrow.port=po.selectedIndex;
+            $rootScope.backArrow.month1=angular.copy(month);
+            $rootScope.backArrow.month2=angular.copy(month1);
+            $rootScope.backArrow.month3=angular.copy(month2); 
+			
+			
+				$rootScope.filterShipPort1=angular.copy($rootScope.filterShipPort); 			
+		  $rootScope.list = [];	
+		$rootScope.totalDisplayed=0;
+
+				$rootScope.countCruise="";
+
+				advanceFilter.filter($rootScope.filterShipPort1).then(
+                        /* success function */
+                        function(data) {
+							$rootScope.countCruise=data.AllCount;
+								if($rootScope.countCruise==0){
+									$rootScope.count=0;
+									// $rootScope.resetFilter();
+											 $ionicPopup.show({
+													title: 'For the selected month there is no cruise available',
+													subTitle: 'Please try different months',
+													buttons: [{
+														text: 'Ok'
+													}]
+												}).then(function(res) {
+													 });
+												}
+												else{
+													$rootScope.filterModal.hide();
+											$location.path('/app/list');
+												}
+                                $ionicLoading.hide();
+                        },function(error) {
+                alert("There was a problem");
+                console.log(error);
+            })
+			}
+	
+	
+		
+	/* ==========================================================================
+  						SortBY Functionality
+   	========================================================================== */
+		
+		
+		$rootScope.sortBy=function(orderBy)
+		{
+			$rootScope.filterShipPort.orderby=orderBy
+			$rootScope.orderBy=orderBy;
+		}
+		 $rootScope.isSortByActive=function(orderBy)
+		 {
+			 return $rootScope.filterShipPort.orderby==orderBy;
+		 }
+		 
+	/* ==========================================================================
+  						Reset Functionality
+   	========================================================================== */ 
+		 
+		 
+		 $rootScope.resetFilterHome=function(){
+			 $rootScope.clickFilterFlag=0;
+			 $rootScope.preStyle="";
+			 $rootScope.preDuration="";
+			 $rootScope.filterShipPort={style:"All",duration:"",year:"",month:"",ports:"",ship:"",orderby:"asc",cruiseLine:"",flag:-1};
+			 document.getElementById("portName").selectedIndex= 0;
+			 document.getElementById("cruiseLine").selectedIndex= 0;
+			 document.getElementById("shipName").selectedIndex= 0;
+			 for(i=0;i<$rootScope.month.length;i++)
+			 {
+				 for(j=0;j<12;j++){
+					 $rootScope.month[i][j].value=false;
+				 }
+				 
+			 }
+		
+		 }
+		 
+		 $rootScope.resetFilter=function()
+		 {
+			 $rootScope.resetFilterHome();	
+			 $rootScope.showFilter();
+		 }
+		
+});
+
+
+
+app.controller('loginSignUpController',function($scope, $location, $http, $rootScope, $filter, $localStorage, $ionicLoading, serviceLink,$ionicPopup,loginService,favService){
+
+	  //toggle the email login field function
+        $rootScope.hideForm = true;
+        $rootScope.toggle = function() {
+		$rootScope.hideForm = $scope.hideForm === false ? true : false;
+        }
+				 
+	/* ==========================================================================
+  						login through facebook
+   	========================================================================== */ 
+        
+        $rootScope.facebookLogin = function() {
+            facebookService.facebook().then(function(result) {
+                $ionicLoading.show({
+                    template: '<img src="./img/logo1.png" width="20%"/><br><ion-spinner icon="dots" class="spinner-balanced"/>'
+                });
+
+                $scope.profileData = result.data; //assign facebook data to profiledata
+                //post request to store the facebook user detail in our database such as(email,firstname,lastname,token a unique id given by the facebook)
+                var url = serviceLink.url + 'CruiseAppVersion-0/rest/cruise/user/registration/fb';
+                var data = "userName=" + result.data.id + "&token=" + result.data.id + "&firstName=" + $scope.profileData.first_name + "&lastName=" + $scope.profileData.last_name;
+                loginService.login(url, data)
+                    .then(
+                        /* success function */
+                        function(status) {
+                            if (status == 200) {
+								
+								$localStorage.Name=$scope.profileData.first_name;
+                                $localStorage.userName = result.data.id;
+								//menu item do be displayed when facebook login
+								$rootScope.loginLogout="Log out";
+								$rootScope.showMyFav=false;
+								$rootScope.showProfileSet=true;
+
+								if($rootScope.logSignClicked=="Favourite")
+								{
+                                $rootScope.logsignModal.hide();
+									if($rootScope.isFavourite($rootScope.tripidfav)==false) 
+                                favService.favorite($rootScope.tripidfav, $rootScope.indexfav);
+								}
+								else
+								{
+									$rootScope.logsignModal.hide();
+									$rootScope.share();
+								}
+								
+                            } else {
+
+                                $ionicPopup.show({
+                                    title: 'Error',
+                                    subTitle: 'Oops somthing went worng !',
+                                    buttons: [{
+                                        text: 'Ok'
+                                    }]
+                                }).then(function(res) {});
+                                $ionicLoading.hide();
+
+                            }
+                        });
+            }, function(error) {
+                alert("There was a problem signing in!  See the console for logs");
+                console.log(error);
+            });
+        }
+		
+		
+/* ==========================================================================
+  						signup functionality 
+   	========================================================================== */ 
+        
+        $rootScope.signUp = function(form, user) {
+            if (form.$valid) //checking form valid or not
+            {
+                var url = serviceLink.url + 'CruiseAppVersion-0/rest/cruise/user/registration/app';
+
+                var data = "userName=" + user.email + "&password=" + user.password + "&firstName=" + user.firstName + "&lastName=" + user.lastName;
+                $scope.status = "";
+                loginService.login(url, data)
+                    .then(
+                        /* success function */
+                        function(status) {
+                            $scope.status = status;
+                            if ($scope.status == 200) {
+								//menu item do be displayed when signup
+								$rootScope.loginLogout="Log out";
+								$rootScope.showMyFav=false;
+								$rootScope.showProfileSet=false;
+                                $localStorage.userName = user.email;
+								if($rootScope.logSignClicked=="Favourite")
+								{
+                                $rootScope.logsignModal.hide();
+                                favService.favorite($rootScope.tripidfav, $rootScope.indexfav);
+								}
+								else
+								{
+									$rootScope.logsignModal.hide();
+									$rootScope.share();
+								}
+                                
+                            } else {
+                                loginService.errors(form, $scope.status);
+                            }
+
+                        }, function(error) {
+                            //If an error happened, handle it here
+                        })
+            }
+        }
+		
+				
+/* ==========================================================================
+  						Login  functionality 
+   	========================================================================== */ 
+        $rootScope.Login = function(form, user) {
+            if (form.$valid) //cheacking the form valid or not
+            {
+                var url = serviceLink.url + 'CruiseAppVersion-0/rest/cruise/user/login';
+                var obj = {
+                    userName: user.email1,
+                    password: user.password1
+                };
+                var data = "userName=" + obj.userName + "&password=" + obj.password;
+                $scope.status = "";
+                loginService.login(url, data)
+                    .then(
+                        /* success function */
+                        function(status) {
+                            $scope.status = status;
+                            if ($scope.status == 200) {
+								//menu item do be displayed when login
+								$rootScope.loginLogout="Log out";
+								$rootScope.showMyFav=false;
+								$rootScope.showProfileSet=false;
+								$localStorage.userName = user.email1;
+								//favourite the cruise while login is finished
+								if($rootScope.logSignClicked=="Favourite")
+								{
+                                $rootScope.logsignModal.hide();
+									if($rootScope.favourite1!=null || $rootScope.favourite1!='')
+										$rootScope.favourite=angular.copy($rootScope.favourite1);
+									if($rootScope.isFavourite($rootScope.tripidfav)==false) 
+                                favService.favorite($rootScope.tripidfav, $rootScope.indexfav);
+								}
+								else
+								{
+									$rootScope.logsignModal.hide();
+									$rootScope.share();
+								}
+                            } else {
+                                loginService.errors(form, $scope.status);
+                            }
+
+
+                        }, function(error) {
+                            //If an error happened, handle it here
+                        });
+            }
+        }
+	
+});
+
+
+
+app.controller('modalCtrl',function($scope, $location, $http, $rootScope, $filter, $localStorage, $ionicLoading, serviceLink,$ionicPopup,loginService,$ionicModal,$ionicSlideBoxDelegate,$timeout,profileSet,profileGet,$sce){
+		
+	$rootScope.linkUrl=serviceLink.url;
+	
+	
+	/* ==========================================================================
+  						All Modal declaration
+   	========================================================================== */ 
+	 $ionicModal.fromTemplateUrl('templates/aboutModal.html', {
+            scope: $scope
+        }).then(function(modal) {
+            $scope.aboutModal = modal;
+        })
+	 
+	  $ionicModal.fromTemplateUrl('templates/profileSetting.html', {
+            scope: $scope
+        }).then(function(modal) {
+            $scope.profileSet = modal;
+        })
+	 
+	  $ionicModal.fromTemplateUrl('templates/phoneModal.html', {
+            scope: $scope
+        }).then(function(modal) {
+            $scope.phoneModal = modal;
+        })
+	  $ionicModal.fromTemplateUrl('templates/faqModal.html', {
+            scope: $scope
+        }).then(function(modal) {
+            $scope.faqModal = modal;
+        })
+	  
+	    $ionicModal.fromTemplateUrl('templates/termModal.html', {
+            scope: $scope
+        }).then(function(modal) {
+            $scope.termModal = modal;
+        })
+	
+		//filter modal start's here
+		 $ionicModal.fromTemplateUrl('templates/filterLifestyleModal.html', {
+            scope: $rootScope
+        }).then(function(modal) {
+            $rootScope.filterModal = modal;
+        })
+		 
+	
+			//modal declaration	
+		$ionicModal.fromTemplateUrl('templates/loginSignup.html', {
+            scope: $rootScope
+        }).then(function(modal) {
+            $rootScope.logsignModal = modal;
+        })
+
+
+	
+		$ionicModal.fromTemplateUrl('templates/modal.html', {
+            scope: $scope,
+			animation: 'slide-in-up'
+        }).then(function(modal) {
+            $scope.modal = modal;
+        })
+
+        $ionicModal.fromTemplateUrl('templates/video.html', {
+            scope: $scope
+        }).then(function(modal) {
+            $scope.showVideo = modal;
+        })
+
+        $ionicModal.fromTemplateUrl('templates/shipActivity.html', {
+            scope: $scope
+        }).then(function(modal) {
+            $scope.modal2 = modal;
+        });
+	
+	
+	/* ==========================================================================
+  						Video Modal functionality
+   	========================================================================== */
+	  $scope.video = function() 
+		{
+		  	$rootScope.videoURL=$rootScope.detail.tripDetails.ship.videoUrl+'?autoplay=1&rel=0';
+            $scope.showVideo.show();
+        }
+		
+	  $scope.closeVidio=function()
+		{
+			$scope.showVideo.remove();
+			$ionicModal.fromTemplateUrl('templates/video.html', {
+            scope: $scope
+        }).then(function(modal) {
+            $scope.showVideo = modal;
+        })
+		}
+	  
+	   
+		 $scope.trustSrc = function(src) {
+    return $sce.trustAsResourceUrl(src);
+  }
+		
+	  
+	  
+	/* ==========================================================================
+  						Activity Modal functionality
+   	========================================================================== */
+        $scope.activityModal = function(index) {
+            $scope.activity = $rootScope.detail.tripDetails.ship.shipActivity;
+//			$ionicSlideBoxDelegate.$getByHandle('activity').slide(index,200);
+			$timeout(function() {
+    		$ionicSlideBoxDelegate.$getByHandle('activity').slide(index);
+			},   100);
+            $scope.modal2.show();
+        }
+		
+		
+	/* ==========================================================================
+  						Cabintype Modal functionality
+   	========================================================================== */
+ 		$scope.displayCabin = function(cat, index, price) {
+            $rootScope.CabinIndex = index;
+            $scope.category = cat;
+            $scope.cabinInfo = $scope.detail.tripDetails.ship.cabinType;
+            $scope.price = price;
+            $scope.modal.show();
+        };
+	
+        $scope.setPrice = function(prices, index, date) {
+            if (index == 0) {
+                $scope.priceList = prices;
+                $scope.date = date;
+            }
+
+
+        };
+	
+	/* ==========================================================================
+  						about Modal functionality
+   	========================================================================== */
+	
+	 $scope.aboutClick=function()
+	 {
+		 $scope.aboutModal.show();
+	 }
+	 
+	/* ==========================================================================
+  						Phone and Faq Modal functionality
+   	========================================================================== */
+	 $scope.phoneClick=function()
+	 {
+		 $scope.phoneModal.show();
+	 }
+	 
+	 $scope.faqClick=function()
+	 {
+		 $scope.faqModal.show();
+	 }
+	 
+	/* ==========================================================================
+  						Term Modal functionality
+   	========================================================================== */
+	  $scope.termClick=function()
+	 {
+		 $scope.termModal.show();
+	 }
+	  
+	/* ==========================================================================
+  						ProfileSetting Modal functionality
+   	========================================================================== */
+	  $scope.profileSetting=function()
+	  {
+		  $scope.buttonName="Change Password";
+		  	$scope.changePasshide=true;
+			$scope.passwordValidity=0;
+		    profileGet.profile()
+                    .then(
+                        /* success function */
+                        function(data) {
+							$scope.user=data;
+                        }, function(error) {
+                            //If an error happened, handle it here
+                        })
+		  
+		  $scope.profileSet.show();
+	  }
+	  
+	  
+	  $scope.closeProfile=function()
+	  {
+		    $scope.profileSet.remove();
+		  $ionicModal.fromTemplateUrl('templates/profileSetting.html', {
+            scope: $scope
+        }).then(function(modal) {
+            $scope.profileSet = modal;
+        })
+		  
+	  }
+	  
+	   
+	  $scope.editProfile=function(form,user)
+	  {
+		  
+		  if (user.newPassword != user.passwordc) {
+                form.passwordc.$setValidity("dontMatch", false);
+            }
+		  if($scope.passwordValidity==0)
+		  {
+			  	form.password.$setValidity("password", true);
+			  	form.passwordc.$setValidity("dontMatch", true);
+			  	form.newPassword.$setValidity("required", true);
+		  		form.passwordc.$setValidity("required", true);
+		  }
+		      if (form.$valid) //checking form valid or not
+            {
+				
+				if(user.newPassword == '' || user.newPassword == undefined )
+				{
+					user.newPassword ="";
+				}
+                var data = "userName=" + $localStorage.userName +"&firstName=" + user.firstName + "&lastName=" + user.lastName+"&oldPassword=" + user.oldPassword +"&newPassword=" + user.newPassword ;
+				 $scope.status = "";
+                profileSet.profileS(data)
+                    .then(
+                        /* success function */
+                       function(status) {
+                            $scope.status = status;
+                            if ($scope.status == 200) {
+										$ionicPopup.show({
+													title: 'Success',
+													subTitle: 'Your Profile is Updated',
+													buttons: [{
+														text: 'Ok'
+													}]
+												}).then(function(res) {
+													 });   
+								$localStorage.Name=user.firstName;
+								$scope.closeProfile();
+							} else {
+                                profileSet.errors(form, $scope.status);
+                            }
+
+                        }, function(error) {
+                            //If an error happened, handle it here
+                        })
+            }
+	  }
+	  
+	  
+	  	  $scope.showPassfield=function(form,user)
+	  {
+		  if($scope.passwordValidity==0)
+		  {
+			  $scope.buttonName="Back";
+			  $scope.changePasshide=false;
+			  form.newPassword.$setValidity("required", false);
+			  form.passwordc.$setValidity("required", false);
+			  form.$setPristine();
+			  $scope.passwordValidity=1;
+		  }
+		  else
+		  {
+			  $scope.changePasshide=true;
+			  $scope.buttonName="Change Password";
+			  $scope.passwordValidity=0;
+			  user.newPassword="";
+			  user.passwordc="";
+		  }
+	  }
+});
+
+
+
+
+
+
+
+
 
 
 
