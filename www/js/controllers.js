@@ -1074,9 +1074,25 @@ app.factory('loginService', function($http, $q, $ionicLoading, $ionicPopup,$loca
 
         self.errors = function(form, status) {
             if (status == 400)
-                alert("Bad Request");
+			{
+				$ionicPopup.show({
+                    title: 'Error',
+                    subTitle: 'Bad Request',
+                    buttons: [{
+                        text: 'Ok'
+                    }]
+                }).then(function(res) {});
+			}
             else if (status == 500)
-                alert("Server Error");
+			{
+				$ionicPopup.show({
+                    title: 'Error',
+                    subTitle: 'Server Error',
+                    buttons: [{
+                        text: 'Ok'
+                    }]
+                }).then(function(res) {});
+			}
             else if (status == 404) {
                 $ionicLoading.hide();
                 form.email.$setValidity("emailNot", false);
@@ -1141,8 +1157,18 @@ app.factory('loginService', function($http, $q, $ionicLoading, $ionicPopup,$loca
 			else if(status == 423)
 			{
 				$ionicPopup.show({
+                    title: 'Account Locked',
+                    subTitle: 'Your account is locked, due to password reset. Please use forgot password and reset your password with Verification Code',
+                    buttons: [{
+                        text: 'Ok'
+                    }]
+                }).then(function(res) {});
+			}
+			else if(status == 503)
+			{
+				$ionicPopup.show({
                     title: 'Error',
-                    subTitle: 'Account Locked',
+                    subTitle: 'Service Down Try Later',
                     buttons: [{
                         text: 'Ok'
                     }]
@@ -1418,9 +1444,25 @@ app.factory('profileSet', function($http, $q, $ionicLoading, $ionicPopup, $local
 		
 		self.errors = function(form, status) {
             if (status == 400)
-                alert("Bad Request");
+			{
+				$ionicPopup.show({
+                    title: 'Error',
+                    subTitle: 'Bad Request',
+                    buttons: [{
+                        text: 'Ok'
+                    }]
+                }).then(function(res) {});
+			}
             else if (status == 500)
-                alert("Server Error");
+			{
+				$ionicPopup.show({
+                    title: 'Error',
+                    subTitle: 'Server Error',
+                    buttons: [{
+                        text: 'Ok'
+                    }]
+                }).then(function(res) {});
+			}
           else if (status == 400) {
                 $ionicLoading.hide();
                 $ionicPopup.show({
