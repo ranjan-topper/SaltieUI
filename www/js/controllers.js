@@ -18,7 +18,6 @@ function filterCruiseLine()
 var scope;
 	if(angular.element(document.getElementById("lifestyle")).length > 0)
 	{
-	
 	 scope = angular.element(document.getElementById("lifestyle")).scope();
 	}else{
 		scope = angular.element(document.getElementById("list")).scope();
@@ -1290,8 +1289,8 @@ app.filter('dollorCheck', function() {
 
 app.factory('serviceLink', function() {
     return {
-        url: 'http://104.236.50.241:8080/'
-//		  url: 'http://159.203.121.122:8080/'
+//        url: 'http://104.236.50.241:8080/'
+		  url: 'http://159.203.121.122:8080/'
     };
 });
 

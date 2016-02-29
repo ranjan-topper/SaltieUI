@@ -76,6 +76,10 @@
 /* ==========================================================================
    16. Custromize Ionic Framework Css
    ========================================================================== */
+.backdrop:not(.visible),
+.loading-container:not(.visible) { display: none; }
+
+
 .has-header {
     top: 7vh !important;
 }
