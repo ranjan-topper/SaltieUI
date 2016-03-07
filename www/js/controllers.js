@@ -853,7 +853,7 @@ $rootScope.moreLoad=false;
 // var loc="http://104.236.50.241:8080/Saltie-site/index.html?trip="+btoa($scope.tripID)+"&user="+btoa($localStorage.userName);
 //           var enc=encodeURIComponent(loc); 
 				var url="http://104.236.50.241:8080/Saltie-site/index.html?trip="+btoa($scope.tripID).split('=')[0]+"&user="+btoa($localStorage.Name).split('=')[0];
-            window.plugins.socialsharing.share("This exciting cruise is brought to you by Saltie, the right app for cruise shopping!.",$rootScope.detail.tripDetails.tripDesc,null,"<a>"+url+"</a>");
+            window.plugins.socialsharing.share("This exciting cruise is brought to you by Saltie, the right app for cruise shopping!.",$rootScope.detail.tripDetails.tripDesc,null,url);
 				
 //			window.plugins.socialsharing.share('Message, subject, image and link', 'The subject', 'https://www.google.nl/images/srpr/logo4w.png', url)
 				
