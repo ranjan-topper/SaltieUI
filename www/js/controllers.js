@@ -845,17 +845,36 @@ $rootScope.moreLoad=false;
             $location.path('/app/booking');
         }
 		
+		
+				
+		$scope.getEncryptedString=function(sWord)
+{
+var sToEncrypt = sWord;
+var sXorKey= sToEncrypt.length;
+var sResult="";//the result will be here
+
+for(i=0;i<sToEncrypt.length;++i)
+{
+sResult+=String.fromCharCode(sXorKey^sToEncrypt.charCodeAt(i));
+}
+return sResult;
+}
+
+	
+		
+		
         $rootScope.share = function() {
 			if ($localStorage.userName == "Guest") {
 				$rootScope.logSignClicked="share";
                 $rootScope.logsignModal.show();
             } else {
-// var loc="http://104.236.50.241:8080/Saltie-site/index.html?trip="+btoa($scope.tripID)+"&user="+btoa($localStorage.userName);
-//           var enc=encodeURIComponent(loc); 
-				var url="http://104.236.50.241:8080/Saltie-site/index.html?trip="+btoa($scope.tripID).split('=')[0]+"&user="+btoa($localStorage.Name).split('=')[0];
-            window.plugins.socialsharing.share("This exciting cruise is brought to you by Saltie, the right app for cruise shopping!.",$rootScope.detail.tripDetails.tripDesc,null,url);
+//				var url="http://104.236.50.241:8080/Saltie-site/index.html?trip="+btoa($scope.tripID).split('=')[0]+"&user="+btoa($localStorage.Name).split('=')[0];
 				
-//			window.plugins.socialsharing.share('Message, subject, image and link', 'The subject', 'https://www.google.nl/images/srpr/logo4w.png', url)
+				var url="http://saltietesting.com:8080/Saltie-site/index.html?trip="+btoa($scope.tripID).split('=')[0]+"&user="+btoa($localStorage.Name).split('=')[0];
+				
+				
+            window.plugins.socialsharing.share("This exciting cruise is brought to you by Saltie, the right app for cruise shopping!.",$rootScope.detail.tripDetails.tripDesc,null,url);
+
 				
 			}
         }
@@ -1248,7 +1267,6 @@ app.factory('facebookService', function($http, $q, $ionicLoading, $ionicPopup, $
 
 
 app.filter('orderByCategory', function() {
-
     return function(obj) {
         var array = [];
         if (obj == null)
@@ -1270,6 +1288,35 @@ app.filter('orderByCategory', function() {
         return array;
     }
 });
+
+
+
+app.filter('orderByCabin', function() {
+    return function(obj) {
+        var array = [];
+        if (obj == null)
+            return;
+      obj.forEach(function(value) {
+
+            if (value.roomType == "Interior")
+                array[0] = value;
+            else if (value.roomType == "Oceanview")
+                array[1] = value;
+            else if (value.roomType == "Balcony")
+                array[2] = value;
+            else if (value.roomType == "Suite")
+                array[3] = value;
+            else
+                array[4] = value;
+
+        });
+        return array;
+    }
+});
+
+
+
+
   
 
 //dollor filter for price
@@ -1289,8 +1336,8 @@ app.filter('dollorCheck', function() {
 
 app.factory('serviceLink', function() {
     return {
-        url: 'http://104.236.50.241:8080/'
-//		  url: 'http://159.203.121.122:8080/'
+//        url: 'http://104.236.50.241:8080/'
+		  url: 'http://159.203.121.122:8080/'
     };
 });
 
@@ -2166,7 +2213,7 @@ app.controller('loginSignUpController',function($scope, $location, $http, $rootS
 
 
 
-app.controller('modalCtrl',function($scope, $location, $http, $rootScope, $filter, $localStorage, $ionicLoading, serviceLink,$ionicPopup,loginService,$ionicModal,$ionicSlideBoxDelegate,$timeout,profileSet,profileGet,$sce){
+app.controller('modalCtrl',function($scope, $location, $http, $rootScope, $filter, $localStorage, $ionicLoading, serviceLink,$ionicPopup,loginService,$ionicModal,$ionicSlideBoxDelegate,$timeout,profileSet,profileGet,$sce,$filter){
 		
 	$rootScope.linkUrl=serviceLink.url;
 	
@@ -2273,14 +2320,24 @@ app.controller('modalCtrl',function($scope, $location, $http, $rootScope, $filte
             $scope.activity = $rootScope.detail.tripDetails.ship.shipActivity;
 //			$ionicSlideBoxDelegate.$getByHandle('activity').slide(index,200);
 			$timeout(function() {
+								$ionicSlideBoxDelegate.$getByHandle('detailSlide').stop();
     		$ionicSlideBoxDelegate.$getByHandle('activity').slide(index);
 				$ionicSlideBoxDelegate.$getByHandle('activity').update();
+				
 			},   100);
             $scope.modal2.show();
-			$timeout(function() {
-				$ionicSlideBoxDelegate.$getByHandle('activity').next();
-			},   4000);
         }
+		
+		$scope.closeModal = function()
+		{
+			$scope.modal2.remove();
+			  $ionicModal.fromTemplateUrl('templates/shipActivity.html', {
+            scope: $scope
+        }).then(function(modal) {
+            $scope.modal2 = modal;
+        });
+			$ionicSlideBoxDelegate.$getByHandle('detailSlide').start();
+		}
 		
 		
 	/* ==========================================================================
@@ -2292,6 +2349,11 @@ app.controller('modalCtrl',function($scope, $location, $http, $rootScope, $filte
             $scope.cabinInfo = $scope.detail.tripDetails.ship.cabinType;
             $scope.price = price;
             $scope.modal.show();
+				$timeout(function() {
+				console.log(index);
+					$ionicSlideBoxDelegate.$getByHandle('cabinType').update();
+				$ionicSlideBoxDelegate.$getByHandle('cabinType').slide(index);
+			},   100);
         };
 	
         $scope.setPrice = function(prices, index, date) {
@@ -2302,6 +2364,14 @@ app.controller('modalCtrl',function($scope, $location, $http, $rootScope, $filte
 
 
         };
+	
+	
+	$scope.cabinSlideChanged = function(index)
+	{
+		var sample = $filter('orderByCategory')($scope.priceList);
+		$scope.category= sample[index];
+		$scope.price = $scope.priceList[$scope.category][0];
+	}
 	
 	/* ==========================================================================
   						about Modal functionality
@@ -2338,7 +2408,7 @@ app.controller('modalCtrl',function($scope, $location, $http, $rootScope, $filte
    	========================================================================== */
 	  $scope.profileSetting=function()
 	  {
-		  $scope.buttonName="Change Password";
+		  	$scope.buttonName="Change Password";
 		  	$scope.changePasshide=true;
 			$scope.passwordValidity=0;
 		    profileGet.profile()
@@ -2371,7 +2441,7 @@ app.controller('modalCtrl',function($scope, $location, $http, $rootScope, $filte
 		  
 		  if (user.newPassword != user.passwordc) {
                 form.passwordc.$setValidity("dontMatch", false);
-            }
+		  }
 		  if($scope.passwordValidity==0)
 		  {
 			  	form.password.$setValidity("password", true);

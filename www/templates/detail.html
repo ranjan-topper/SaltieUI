@@ -7,7 +7,7 @@
         </button>
     </ion-nav-buttons>
     <ion-nav-title>
-        <a href="" class="cruisecount" id="count" style="text-decoration: none;"><span class="thin">The</span>&nbsp;<span class="bold">Cruise</span></a>
+        <a href="" class="cruisecount" id="count" style="text-decoration: none;"><span class="thin">Your</span>&nbsp;<span class="bold">Cruise</span></a>
     </ion-nav-title>
     <ion-content class="has-header" id="day" style="background-color: #9C867A;padding-top: 3px;">
 
@@ -52,7 +52,7 @@
 
     </ion-content>
     <ion-content class="detailContentStart">
-        <ion-slide-box show-pager="false" auto-play="true" does-continue = "true">
+        <ion-slide-box delegate-handle="detailSlide" show-pager="false" auto-play="true" does-continue = "true">
             <!--			auto-play="true" does-continue = "true"-->
             <ion-slide>
                 <a type="item-text-wrap" href="" style='background-image:url("{{linkUrl}}images/ports/{{ detail.tripDetails.destinationImage[0]}}");' class="eventListPicture">

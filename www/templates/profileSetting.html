@@ -27,7 +27,7 @@
             </div>
 				<div class="profileHead" id="firstName">Enter Password*</div>
 			<label class="item item-input color2 spacing" ng-class="{ 'has-errors' : authorizationForm.password.$invalid && authorizationForm.$submitted, 'no-errors' : authorizationForm.password.$valid}">
-              <input type="password" onkeypress="return AvoidSpace(event)"  onselectstart="return false" onpaste="return false;" onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false" autocomplete=off name="password" ng-keyup="setpassword(authorizationForm)" id="password" placeholder="Password" ng-model="user.oldPassword" ng-minlength="5" ng-maxlength="20" required>
+              <input type="password" onkeypress="return AvoidSpace(event)"  onselectstart="return false" onpaste="return false;" onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false" autocomplete=off name="password" ng-keyup="setpassword(authorizationForm)" id="password" placeholder="Password" ng-model="user.oldPassword" required>
             </label>
 				<div class="error-container" ng-show="authorizationForm.password.$error && authorizationForm.$submitted" ng-messages="authorizationForm.password.$error">
                 <div ng-messages-include="templates/error-list.html"></div> 

@@ -1,11 +1,16 @@
-<ion-modal-view ng-repeat="cabin in cabinInfo | filter:{roomType:category}:true">
+<ion-modal-view >
 	
         <ion-header-bar id="modal" class="bar bar-header modalHead"  >
-			<h2 class="title bold modalhead" id="{{cabin.roomType}}">{{cabin.roomType}}</h2>
+			<h2 class="title bold modalhead" id="{{roomType}}">{{category}}</h2>
           <button class="button button-icon button-primary modalClose ion-ios-close-empty" id="arrw" ng-click="modal.hide()"></button>
         </ion-header-bar>
 
         <ion-content>
+			
+			
+			<ion-slide-box on-slide-changed="cabinSlideChanged($index)" delegate-handle="cabinType" does-continue="true" show-pager="false">
+					<ion-slide  ng-repeat="cabin in cabinInfo | orderByCabin">
+			
 									<img ng-src="{{linkUrl}}images/CabinType/{{cabin.image}}" width="100%"/>
 			<div class="cabinTypeBorder">
 				<div class="cabinTitle">
@@ -31,6 +36,9 @@
 						  			
 				</div>
           </div>
+						
+				</ion-slide>
+			</ion-slide-box>
 				          
         </ion-content>
 	 <ion-footer-bar  style="background-color: #00707e;   border: none;">

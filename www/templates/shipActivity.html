@@ -1,7 +1,7 @@
 <ion-modal-view>
         <ion-header-bar id="modal" class="bar bar-header bar-positive modalHead" >
 			<h2 class="title modalhead">Ship Activity</h2>
-          <button class="button button-icon button-primary modalClose ion-ios-close-empty" id="modal" ng-click="modal2.hide()"></button>
+          <button class="button button-icon button-primary modalClose ion-ios-close-empty" id="modal" ng-click="closeModal()"></button>
         </ion-header-bar>
 	
         <ion-content class="padding" direction="xy" style="padding: 0px;" >
@@ -24,7 +24,7 @@
 			</div>
 -->
 			
-			<ion-slide-box auto-play="true" delegate-handle="activity" does-continue="true" show-pager="false">
+			<ion-slide-box delegate-handle="activity" does-continue="true" show-pager="false">
 
 						
 					<ion-slide  ng-repeat="act in activity">
