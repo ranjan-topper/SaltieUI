@@ -2,10 +2,10 @@
 	
         <ion-header-bar id="modal" class="bar bar-header modalHead"  >
 			<h2 class="title bold modalhead" id="{{roomType}}">{{category}}</h2>
-          <button class="button button-icon button-primary modalClose ion-ios-close-empty" id="arrw" ng-click="modal.hide()"></button>
+          <button class="button button-icon button-primary modalClose ion-ios-close-empty" id="arrw" ng-click="cabinTypeClose()"></button>
         </ion-header-bar>
 
-        <ion-content>
+        <ion-content >
 			
 			
 			<ion-slide-box on-slide-changed="cabinSlideChanged($index)" delegate-handle="cabinType" does-continue="true" show-pager="false">
@@ -41,8 +41,8 @@
 			</ion-slide-box>
 				          
         </ion-content>
-	 <ion-footer-bar  style="background-color: #00707e;   border: none;">
-      <button class="button-block bookbt thin" id="readyboook" ng-click="modal.hide();book1()">
+	 <ion-footer-bar id="cabinType" ng-hide="readyBookDisable" style="background-color: #00707e;   border: none;">
+      <button class="button-block bookbt thin"  id="readyboook" ng-click="modal.hide();book1()">
 Ready to Book
 </button>
 

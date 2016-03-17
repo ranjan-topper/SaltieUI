@@ -834,7 +834,7 @@ $rootScope.moreLoad=false;
 
         $scope.displayPrice = function(prices, index, date) {
             $rootScope.date = date;
-            $scope.priceList = prices;
+            $rootScope.priceList = prices;
             $scope.index1 = index;
         };
        
@@ -1285,7 +1285,12 @@ app.filter('orderByCategory', function() {
                 array[4] = key;
 
         });
-        return array;
+		var filteredArray = [];
+			angular.forEach(array,function(item) {
+				if (item) filteredArray.push(item);
+				});
+			return filteredArray;
+        //return array;
     }
 });
 
@@ -1310,7 +1315,12 @@ app.filter('orderByCabin', function() {
                 array[4] = value;
 
         });
-        return array;
+		var filteredArray = [];
+			angular.forEach(array,function(item) {
+				if (item) filteredArray.push(item);
+				});
+			return filteredArray;
+       // return array;
     }
 });
 
@@ -2216,6 +2226,7 @@ app.controller('loginSignUpController',function($scope, $location, $http, $rootS
 app.controller('modalCtrl',function($scope, $location, $http, $rootScope, $filter, $localStorage, $ionicLoading, serviceLink,$ionicPopup,loginService,$ionicModal,$ionicSlideBoxDelegate,$timeout,profileSet,profileGet,$sce,$filter){
 		
 	$rootScope.linkUrl=serviceLink.url;
+	$scope.readyBookDisable = false;
 	
 	
 	/* ==========================================================================
@@ -2275,7 +2286,8 @@ app.controller('modalCtrl',function($scope, $location, $http, $rootScope, $filte
         })
 
         $ionicModal.fromTemplateUrl('templates/video.html', {
-            scope: $scope
+            scope: $scope,
+			hardwareBackButtonClose: false
         }).then(function(modal) {
             $scope.showVideo = modal;
         })
@@ -2348,6 +2360,11 @@ app.controller('modalCtrl',function($scope, $location, $http, $rootScope, $filte
             $scope.category = cat;
             $scope.cabinInfo = $scope.detail.tripDetails.ship.cabinType;
             $scope.price = price;
+			
+			if($scope.price == "Sold Out")
+			{
+				$scope.readyBookDisable = true;
+			}
             $scope.modal.show();
 				$timeout(function() {
 				console.log(index);
@@ -2358,19 +2375,28 @@ app.controller('modalCtrl',function($scope, $location, $http, $rootScope, $filte
 	
         $scope.setPrice = function(prices, index, date) {
             if (index == 0) {
-                $scope.priceList = prices;
+                $rootScope.priceList = prices;
                 $rootScope.date = date;
             }
-
-
         };
+	
+	$scope.cabinTypeClose = function()
+	{
+		$scope.modal.hide();
+		$scope.readyBookDisable = false;
+	}
 	
 	
 	$scope.cabinSlideChanged = function(index)
 	{
-		var sample = $filter('orderByCategory')($scope.priceList);
+		$scope.readyBookDisable = false;
+		var sample = $filter('orderByCategory')($rootScope.priceList);
 		$scope.category= sample[index];
-		$scope.price = $scope.priceList[$scope.category][0];
+		$scope.price = $rootScope.priceList[$scope.category][0];
+		if($scope.price == "Sold Out")
+			{
+				$scope.readyBookDisable = true;
+			}
 	}
 	
 	/* ==========================================================================
