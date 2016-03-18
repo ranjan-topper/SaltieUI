@@ -840,7 +840,7 @@ $rootScope.moreLoad=false;
        
 
 
-        $scope.book1 = function(modal) {
+        $rootScope.book1 = function(modal) {
             $scope.useragent = navigator.userAgent;
             $location.path('/app/booking');
         }
@@ -870,8 +870,8 @@ return sResult;
             } else {
 //				var url="http://104.236.50.241:8080/Saltie-site/index.html?trip="+btoa($scope.tripID).split('=')[0]+"&user="+btoa($localStorage.Name).split('=')[0];
 				
-				var url="http://saltietesting.com:8080/Saltie-site/index.html?trip="+btoa($scope.tripID).split('=')[0]+"&user="+btoa($localStorage.Name).split('=')[0];
-				
+				var url= serviceLink.url+"Saltie-site/index.html?trip="+btoa($scope.tripID).split('=')[0]+"&user="+btoa($localStorage.Name).split('=')[0];
+				console.log(url);
 				
             window.plugins.socialsharing.share("This exciting cruise is brought to you by Saltie, the right app for cruise shopping!.",$rootScope.detail.tripDetails.tripDesc,null,url);
 
@@ -1346,8 +1346,8 @@ app.filter('dollorCheck', function() {
 
 app.factory('serviceLink', function() {
     return {
-//        url: 'http://104.236.50.241:8080/'
-		  url: 'http://159.203.121.122:8080/'
+        url: 'http://104.236.50.241:8080/'
+//		  url: 'http://159.203.121.122:8080/'
     };
 });
 
@@ -2329,25 +2329,35 @@ app.controller('modalCtrl',function($scope, $location, $http, $rootScope, $filte
   						Activity Modal functionality
    	========================================================================== */
         $scope.activityModal = function(index) {
-            $scope.activity = $rootScope.detail.tripDetails.ship.shipActivity;
+			$ionicSlideBoxDelegate.$getByHandle('detailSlide').stop();
 //			$ionicSlideBoxDelegate.$getByHandle('activity').slide(index,200);
+			
+			 $ionicLoading.show({
+                    template: '<img src="./img/logo1.png" width="20%"/><br><ion-spinner icon="dots" class="spinner-balanced"/>'
+                });
+						
+
+			$scope.modal2.show();
 			$timeout(function() {
-								$ionicSlideBoxDelegate.$getByHandle('detailSlide').stop();
-    		$ionicSlideBoxDelegate.$getByHandle('activity').slide(index);
-				$ionicSlideBoxDelegate.$getByHandle('activity').update();
-				
-			},   100);
-            $scope.modal2.show();
+							console.log(index);
+								$ionicSlideBoxDelegate.$getByHandle('activity').update();
+    							$ionicSlideBoxDelegate.$getByHandle('activity').slide(index);
+											$ionicLoading.hide();
+				},500);
+
+//			$timeout(function() {
+//								console.log(index);
+//								$ionicSlideBoxDelegate.$getByHandle('activity').update();
+//								$ionicSlideBoxDelegate.$getByHandle('detailSlide').stop();
+//    		$ionicSlideBoxDelegate.$getByHandle('activity').slide(index);
+//				
+//			},   100);
         }
 		
 		$scope.closeModal = function()
 		{
-			$scope.modal2.remove();
-			  $ionicModal.fromTemplateUrl('templates/shipActivity.html', {
-            scope: $scope
-        }).then(function(modal) {
-            $scope.modal2 = modal;
-        });
+			$scope.modal2.hide();
+
 			$ionicSlideBoxDelegate.$getByHandle('detailSlide').start();
 		}
 		
@@ -2370,7 +2380,7 @@ app.controller('modalCtrl',function($scope, $location, $http, $rootScope, $filte
 				console.log(index);
 					$ionicSlideBoxDelegate.$getByHandle('cabinType').update();
 				$ionicSlideBoxDelegate.$getByHandle('cabinType').slide(index);
-			},   100);
+			},   300);
         };
 	
         $scope.setPrice = function(prices, index, date) {

@@ -25,9 +25,7 @@
 -->
 			
 			<ion-slide-box delegate-handle="activity" does-continue="true" show-pager="false">
-
-						
-					<ion-slide  ng-repeat="act in activity">
+					<ion-slide  ng-repeat="act in detail.tripDetails.ship.shipActivity">
 					
 				 <a  type="item-text-wrap"  href="" style='margin-top: 2px;background-image:url("{{linkUrl}}images/Activity/{{ act.activityImage }}");' class="eventListPicture">
 				 </a>
