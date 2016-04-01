@@ -21,7 +21,7 @@ app.run(function ($ionicPlatform,$rootScope, $state, $location,$ionicHistory)
 			{
                 $ionicHistory.goBack();
             }
-        },100);
+	},100);
 
   $ionicPlatform.ready(function() 
 	{
@@ -164,6 +164,28 @@ app.config(function($stateProvider, $urlRouterProvider) {
       views: {
         'menuContent': {
           templateUrl: "templates/booking.html",
+		controller:'bookingController'
+
+        }
+      }
+    })
+  
+  .state('app.emailUs', {
+      url: "/emailUs",
+      views: {
+        'menuContent': {
+          templateUrl: "templates/emailUs.html",
+		controller:'bookingController'
+
+        }
+      }
+    })
+  
+  .state('app.engage', {
+      url: "/engageUser",
+      views: {
+        'menuContent': {
+          templateUrl: "templates/engageUser.html",
 		controller:'bookingController'
 
         }

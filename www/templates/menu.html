@@ -23,11 +23,16 @@
         <ion-item menu-close ng-click="myFavourite()" ng-class="{'hideMyFav':showMyFav}" id="fav">
           My Favorites
         </ion-item>
-		  <ion-item menu-close ng-click="profileSetting()" ng-class="{'hideMyFav':showProfileSet}" id="profile">
+        <ion-item menu-close ng-click="profileSetting()" ng-class="{'hideMyFav':showProfileSet}" id="profile">
           Profile Settings
         </ion-item>
-        <ion-item menu-close ng-click="phoneClick()" id="book">
+<!--
+        <ion-item menu-close ng-click="phoneClick()" id="book" ng-class="{'hideMyFav':hidePhBook}">
           Book Over Phone
+        </ion-item>
+-->
+        <ion-item menu-close ng-click="emailUs()" id="engage">
+          Engage Us
         </ion-item>
         <ion-item menu-close ng-click="aboutClick()" id="about">
           About

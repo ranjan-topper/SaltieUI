@@ -148,6 +148,8 @@ app.controller('loginCtrl', function($scope, $state, $cordovaOauth, $localStorag
 								$localStorage.Name=$scope.profileData.first_name;
 								$rootScope.loginLogout="Log out";
 								$rootScope.showMyFav=false;
+                                $rootScope.showEngage = false;
+                                $rootScope.hidePhBook=true;
 								$rootScope.showProfileSet=true;
                                 $localStorage.userName = result.data.id;
                                 $location.path('/app/lifeStyle');
@@ -408,6 +410,17 @@ if(typeof analytics !== 'undefined') { analytics.trackView("App Main Controller"
     }
 	
 
+	
+	$scope.emailUs = function(){
+            $rootScope.logSignClicked = "nextStep";
+            if($localStorage.userName == "Guest"){
+                $rootScope.logsignModal.show();
+            }else{
+//                $scope.engageUser($rootScope.logSignClicked);
+                $location.path('/app/engageUser');    
+            }
+        }
+	
     $scope.loginData = {};
 
     $scope.logout = function() {
@@ -417,6 +430,8 @@ if(typeof analytics !== 'undefined') { analytics.trackView("App Main Controller"
 		}
         delete $localStorage.stylelife;
         delete $localStorage.userName;
+        // delete $localStorage.Name;
+        // $localStorage.Name = "Guest";
         delete $localStorage.accessToken;
         delete $localStorage.emailver;
         $state.go('start', {}, {reload: true}).then(function(){
@@ -456,15 +471,21 @@ if(typeof analytics !== 'undefined') { analytics.trackView("App Main Controller"
 
 //Lifestyle page controller start
 app.controller('lifeStyleCtrl', function($scope, $location, $http, $rootScope, $filter, $localStorage, $ionicLoading, serviceLink, $ionicModal,themeFilter,$ionicPopup,advanceFilter,$ionicScrollDelegate,$ionicSlideBoxDelegate,$timeout) {
-	
+	//initialise the rootscope details value
+    $rootScope.TempDetail = "";
+    
 	if($localStorage.userName=="Guest")
 	{
 		$rootScope.loginLogout="Login";
 		$rootScope.showMyFav=true;
+		$rootScope.showEngage=true;
+		$rootScope.hidePhBook=false;
 		$rootScope.showProfileSet=true;
 	}
 	else{
 		$rootScope.showMyFav=false;
+		$rootScope.showEngage=false;
+        $rootScope.hidePhBook=true;
 		$rootScope.loginLogout="Log Out";
 	}
 
@@ -475,6 +496,8 @@ app.controller('lifeStyleCtrl', function($scope, $location, $http, $rootScope, $
     if ($localStorage.userName == "" || $localStorage.userName == null) {
         $location.path('/start');
     } else {
+        $rootScope.is_engaged = "lifeStyle";
+        
 		$rootScope.clickFilterFlag=0;
 		$rootScope.applyFilterFlag='';
 		$rootScope.filterShipPort={style:"",duration:"",year:"",month:"",ports:"",ship:"",orderby:"asc",cruiseLine:"",flag:-1};
@@ -591,6 +614,8 @@ app.controller('listController', function($scope, $location, $rootScope, $filter
     if ($localStorage.userName == "" || $localStorage.userName == null) {
         $location.path('/start');
     } else {
+        $rootScope.is_engaged = "list";
+        
         $rootScope.userFav = [];
         $rootScope.favourite = [];
 		$rootScope.list = [];
@@ -691,6 +716,7 @@ app.controller('listController', function($scope, $location, $rootScope, $filter
                     .then(
                         /* success function */
                         function(data) {
+                            $rootScope.TempDetail = data;
 							$rootScope.detail=data;
 							 $location.path('/app/detail');
 							$ionicSlideBoxDelegate.update();
@@ -711,7 +737,7 @@ app.controller('listController', function($scope, $location, $rootScope, $filter
 
 
 
-app.controller('detailController', function($scope, $location, $ionicModal, $rootScope, $http, $ionicLoading, $localStorage, $ionicSlideBoxDelegate, $ionicScrollDelegate, $timeout, $ionicHistory, serviceLink, favService,$sce) {
+app.controller('detailController', function($scope, $state, $location, $ionicModal, $rootScope, $http, $ionicLoading, $localStorage, $ionicSlideBoxDelegate, $ionicScrollDelegate, $timeout, $ionicHistory, serviceLink, favService,$sce) {
 
 	
 	if(typeof analytics !== 'undefined') { analytics.trackView("Detail Controller"); }
@@ -720,7 +746,7 @@ app.controller('detailController', function($scope, $location, $ionicModal, $roo
         $location.path('/start');
     } else {
 
-
+        $rootScope.is_engaged = "detail";
 		$rootScope.load=false;
 	
         $rootScope.isFavorite = function(tripId) {
@@ -911,6 +937,39 @@ return sResult;
             return date2;
 
         }
+    //Next Step functionality
+        $scope.emailUs = function(){
+            $rootScope.logSignClicked = "nextStep";
+            if($localStorage.userName == "Guest"){
+                $rootScope.logsignModal.show();
+            }else{
+//                $scope.engageUser($rootScope.logSignClicked);
+                $location.path('/app/engageUser');    
+            }
+        }
+        $scope.engageUser = function(){
+//            if($rootScope.is_engaged == "detail"){
+//                $rootScope.redirectEmailUs = true;
+//            }else if($rootScope.is_engaged = "list"){
+//                $rootScope.redirectEmailUs = false;
+//            }else if($rootScope.is_engaged = "lifeStyle"){
+//                $rootScope.redirectEmailUs = false;
+//            }else{
+//                $rootScope.redirectEmailUs = false;
+//            }
+//            
+            
+            if($state.$current.name=="app.detail"){
+                $rootScope.redirectEmailUs = true;
+            }else if($state.$current.name=="app.list"){
+                $rootScope.redirectEmailUs = false;
+            }else if($state.$current.name=="app.lifeStyle"){
+                $rootScope.redirectEmailUs = false;
+            }else{
+                $rootScope.redirectEmailUs = false;
+            }
+            $location.path('/app/emailUs');
+        }
     }
 });
 
@@ -1005,8 +1064,6 @@ app.service('FavouriteService', function($rootScope) {
     }
 
 });
-
-
 
 app.controller('bookingController', function($scope, $location, $ionicModal, $rootScope, $http, $ionicLoading, $localStorage, $ionicNavBarDelegate) {
 
@@ -1212,6 +1269,207 @@ app.factory('loginService', function($http, $q, $ionicLoading, $ionicPopup,$loca
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+app.factory('engageService', function($http, $q, $ionicLoading, $ionicPopup,$localStorage,$rootScope) {
+
+    //    Create a class that represents our name service.
+    function engageService() {
+        var self = this;
+        //    getName returns a promise which when fulfilled returns the name.
+        self.submit = function(url, data) {
+            //    Create a deferred operation.
+            var deferred = $q.defer();
+            $ionicLoading.show({
+                template: '<img src="./img/logo1.png" width="20%"/><br><ion-spinner icon="dots" class="spinner-balanced"/>'
+            });
+            //    Get the name from the server.
+            $http({
+                method: 'POST',
+                url: url,
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                    //"Accept": "text/plain"
+                },
+                data: data
+            })
+                .success(function(data, status) {
+                    $ionicLoading.hide();
+                    console.log(data);
+				    //$localStorage.Name=data.user;
+				    //$rootScope.favourite1=data.favourite;
+                    //deferred.resolve(status);
+                })
+                .error(function(data, status) {
+                    $ionicLoading.hide();
+                    //deferred.resolve(status);
+                    alert(status);
+                });
+
+            //    Now return the promise.
+            return deferred.promise;
+        };
+
+        self.errors = function(form, status) {
+            if (status == 400)
+			{
+				$ionicPopup.show({
+                    title: 'Error',
+                    subTitle: 'Bad Request',
+                    buttons: [{
+                        text: 'Ok'
+                    }]
+                }).then(function(res) {});
+			}
+            else if (status == 500)
+			{
+				$ionicPopup.show({
+                    title: 'Error',
+                    subTitle: 'Server Error',
+                    buttons: [{
+                        text: 'Ok'
+                    }]
+                }).then(function(res) {});
+			}
+            else if (status == 404) {
+                $ionicLoading.hide();
+                form.email.$setValidity("emailNot", false);
+//                $ionicPopup.show({
+//                    title: 'Error',
+//                    subTitle: 'User not found',
+//                    buttons: [{
+//                        text: 'Ok'
+//                    }]
+//                }).then(function(res) {
+//
+//                });
+            } else if (status == 401) {
+                $ionicLoading.hide();
+                form.password.$setValidity("password", false);
+//                $ionicPopup.show({
+//                    title: 'Error',
+//                    subTitle: 'Password is wrong',
+//                    buttons: [{
+//                        text: 'Ok'
+//                    }]
+//                }).then(function(res) {});
+            } else if (status == 400) {
+                $ionicLoading.hide();
+                $ionicPopup.show({
+                    title: 'Field Missing',
+                    subTitle: 'Bad Request',
+                    buttons: [{
+                        text: 'Ok'
+                    }]
+                }).then(function(res) {
+
+                });
+            } else if (status == 302) {
+                $ionicLoading.hide();
+                form.email.$setValidity("emailExist", false);
+//                $ionicPopup.show({
+//                    title: 'User name already exist',
+//                    subTitle: 'Exist',
+//                    buttons: [{
+//                        text: 'Ok'
+//                    }]
+//                }).then(function(res) {
+//                });
+            } else if (status == 412) {
+                $ionicLoading.hide();
+                form.otp.$setValidity("otpMiss", false);
+//                $ionicPopup.show({
+//                    title: 'Error',
+//                    subTitle: 'OTP Miss Matched',
+//                    buttons: [{
+//                        text: 'Ok'
+//                    }]
+//                }).then(function(res) {});
+            }
+			
+			else if(status == 498)
+			{
+				$ionicLoading.hide();
+                form.otp.$setValidity("optExp", false);
+			}
+			else if(status == 423)
+			{
+				$ionicPopup.show({
+                    title: 'Account Locked',
+                    subTitle: 'Your account is locked, due to password reset. Please use forgot password and reset your password with Verification Code',
+                    buttons: [{
+                        text: 'Ok'
+                    }]
+                }).then(function(res) {});
+			}
+			else if(status == 503)
+			{
+				$ionicPopup.show({
+                    title: 'Error',
+                    subTitle: 'Service Down Try Later',
+                    buttons: [{
+                        text: 'Ok'
+                    }]
+                }).then(function(res) {});
+			}
+			
+			
+			else {
+                $ionicPopup.show({
+                    title: 'Error',
+                    subTitle: 'Oops somthing went worng !',
+                    buttons: [{
+                        text: 'Ok'
+                    }]
+                }).then(function(res) {});
+
+            }
+        };
+    }
+    return new engageService();
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 app.factory('facebookService', function($http, $q, $ionicLoading, $ionicPopup, $cordovaOauth, $localStorage,$rootScope) {
 
     //    Create a class that represents our name service.
@@ -1346,8 +1604,8 @@ app.filter('dollorCheck', function() {
 
 app.factory('serviceLink', function() {
     return {
-        url: 'http://104.236.50.241:8080/'
-//		  url: 'http://159.203.121.122:8080/'
+//        url: 'http://104.236.50.241:8080/'
+		  url: 'http://159.203.121.122:8080/'
     };
 });
 
@@ -2092,6 +2350,8 @@ app.controller('loginSignUpController',function($scope, $location, $http, $rootS
 								//menu item do be displayed when facebook login
 								$rootScope.loginLogout="Log out";
 								$rootScope.showMyFav=false;
+								$rootScope.showEngage=false;
+                                $rootScope.hidePhBook=true;
 								$rootScope.showProfileSet=true;
 
 								if($rootScope.logSignClicked=="Favourite")
@@ -2100,6 +2360,10 @@ app.controller('loginSignUpController',function($scope, $location, $http, $rootS
 									if($rootScope.isFavourite($rootScope.tripidfav)==false) 
                                 favService.favorite($rootScope.tripidfav, $rootScope.indexfav);
 								}
+                                 else if($rootScope.logSignClicked == "nextStep"){
+                                    $rootScope.logsignModal.hide();
+                                    $location.path('/app/engageUser');
+                                }
 								else
 								{
 									$rootScope.logsignModal.hide();
@@ -2146,6 +2410,8 @@ app.controller('loginSignUpController',function($scope, $location, $http, $rootS
 								//menu item do be displayed when signup
 								$rootScope.loginLogout="Log out";
 								$rootScope.showMyFav=false;
+                                $rootScope.showEngage=false;
+                                $rootScope.hidePhBook=true;
 								$rootScope.showProfileSet=false;
                                 $localStorage.userName = user.email;
 								if($rootScope.logSignClicked=="Favourite")
@@ -2153,6 +2419,10 @@ app.controller('loginSignUpController',function($scope, $location, $http, $rootS
                                 $rootScope.logsignModal.hide();
                                 favService.favorite($rootScope.tripidfav, $rootScope.indexfav);
 								}
+								 else if($rootScope.logSignClicked == "nextStep"){
+                                    $rootScope.logsignModal.hide();
+                                    $location.path('/app/engageUser');
+                                }
 								else
 								{
 									$rootScope.logsignModal.hide();
@@ -2192,6 +2462,8 @@ app.controller('loginSignUpController',function($scope, $location, $http, $rootS
 								//menu item do be displayed when login
 								$rootScope.loginLogout="Log out";
 								$rootScope.showMyFav=false;
+                                $rootScope.showEngage = false;
+                                $rootScope.hidePhBook=true;
 								$rootScope.showProfileSet=false;
 								$localStorage.userName = user.email1;
 								//favourite the cruise while login is finished
@@ -2203,6 +2475,10 @@ app.controller('loginSignUpController',function($scope, $location, $http, $rootS
 									if($rootScope.isFavourite($rootScope.tripidfav)==false) 
                                 favService.favorite($rootScope.tripidfav, $rootScope.indexfav);
 								}
+                                else if($rootScope.logSignClicked == "nextStep"){
+                                    $rootScope.logsignModal.hide();
+                                    $location.path('/app/engageUser');
+                                }
 								else
 								{
 									$rootScope.logsignModal.hide();
@@ -2312,7 +2588,8 @@ app.controller('modalCtrl',function($scope, $location, $http, $rootScope, $filte
 		{
 			$scope.showVideo.remove();
 			$ionicModal.fromTemplateUrl('templates/video.html', {
-            scope: $scope
+            scope: $scope,
+				hardwareBackButtonClose: false
         }).then(function(modal) {
             $scope.showVideo = modal;
         })
@@ -2416,6 +2693,14 @@ app.controller('modalCtrl',function($scope, $location, $http, $rootScope, $filte
 	 $scope.aboutClick=function()
 	 {
 		 $scope.aboutModal.show();
+	 }
+     /* ==========================================================================
+  						engage User functionality
+   	========================================================================== */
+	
+	 $scope.engageClick=function()
+	 {
+         $location.path('/app/engageUser');
 	 }
 	 
 	/* ==========================================================================
@@ -2541,6 +2826,84 @@ app.controller('modalCtrl',function($scope, $location, $http, $rootScope, $filte
 			  user.passwordc="";
 		  }
 	  }
+});
+//engage page  controller start here
+app.controller('engageFormCtrl', function($scope, $state, $rootScope, $state, $location, $http, $localStorage, $ionicLoading, $ionicPopup, engageService, serviceLink) {
+    $scope.detail = angular.copy($rootScope.TempDetail);
+    $rootScope.TempDetail = "";
+    
+    $scope.personCount = [];
+    $scope.personCount = [0,1,2,3,4,5];
+    
+    $scope.gePrefContact = function(type){
+       $scope.pref = type;
+    }
+    //alert($rootScope.logSignClicked);
+    $scope.user = {};
+    $scope.user.firstName = $localStorage.Name.split(" ")[0];
+    $scope.user.lastName = $localStorage.Name.substr($localStorage.Name.indexOf(' ')+1);
+	var isIPad = ionic.Platform.isIPad();
+    var isIOS = ionic.Platform.isIOS();
+	  if(isIPad==true || isIOS==true)
+	  {
+ 		document.getElementById("signuphome").style.marginTop = "20px";
+	  }
+	
+	if(typeof analytics !== 'undefined') { analytics.trackView("Sign Up Home Controller"); }
+	
+    if ($localStorage.userName != "" || $localStorage.userName != null || $localStorage.userName != "Guest") {
+        $scope.close = function() {
+            $location.path('/start');
+        }
+       
+		
+
+        $scope.submitEmailUs = function(form, user) {
+                var kid = document.getElementById("kid");
+                var adult = document.getElementById("adult");
+                var senior = document.getElementById("senior");
+                var kids = kid.options[kid.selectedIndex].value;
+                var adults = adult.options[adult.selectedIndex].value;
+                var seniors = senior.options[senior.selectedIndex].value;
+               
+            if (form.$valid) //checking form valid or not
+            {
+                if($scope.pref == undefined){
+                    $scope.pref = "email";
+                }
+                
+                var url = serviceLink.url + 'SaltieApp/rest/cruise/requestQuote';
+                
+                var data = "firstName=" + user.firstName + "&lastName=" + user.lastName + "&email=" + user.email + "&phone=" + user.phone + "&tripId=" + $rootScope.detail.tripDetails.tripId + "&country=" + user.country + "&state=" + user.state + "&roomType=" + user.roomType + "&preferedContact =" + $scope.pref + "&adults=" + adults + "&kids=" + kids + "&seniors=" + seniors + "&comments=" + user.comment;
+                $scope.status = "";
+                
+                engageService.submit(url, data)
+                    .then(
+                        /* success function */
+                        function(status) {
+                            alert(status);
+                            $scope.status = status;
+                            if ($scope.status == 204) {
+                                alert(2);
+                                //$location.path('/emaillogin');
+                                $ionicLoading.hide();
+                            } else {
+                                //engageService.errors(form, $scope.status);
+                                alert(01);
+                            }
+
+                        }, function(error) {
+                            
+                        })
+            }
+        }
+    } else {
+        $state.go('app.lifeStyle');
+    }
+    //go back to listing from emailUs
+    $scope.goToListing = function(){
+        $location.path('/app/list');
+    }
 });
 
 
