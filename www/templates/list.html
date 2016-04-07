@@ -4,8 +4,12 @@
         </button>     
 	</ion-nav-buttons>
 	<ion-nav-title>
-	
-		<a href="" class="cruisecount" id="viewCount" style="text-decoration: none;"><span class="thin">View <span class="bold">{{count}}</span> Cruises</span></a>
+		<a href="" class="cruisecount" id="viewCount" style="text-decoration: none;">
+            <span class="bold">{{countSailing}}</span>
+            <span class="thin"> Sailings |</span>
+            <span class="bold"> {{count}}</span> 
+            <span class="thin">Cruises</span>
+        </a>
     </ion-nav-title>
 	<ion-content  id="filter">
 		<ion-scroll delegate-handle="filterScroll" direction="x" >
@@ -50,9 +54,14 @@
 			<div class="shipName" id="{{ itinerary.shipName}}"><span class="roman ">{{ itinerary.shipName}}</span>
 			
 			</div>
-		<div class="price" id="{{ itinerary.priceFrom}}price"><span class="thin ">From &nbsp;{{'$'}}</span><span class="bold">{{ itinerary.priceFrom}}</span>
-			
-			</div>
+        <div class="sail">
+            <span class="thin ">Sailing &nbsp;</span>
+            <span class="bold">{{ itinerary.noOfSailing}}</span>			
+        </div>
+		<div class="price" id="{{ itinerary.priceFrom}}price">
+            <span class="thin ">From &nbsp;{{'$'}}</span>
+            <span class="bold">{{ itinerary.priceFrom}}</span>			
+		</div>
 				</div>
 							</a>
 

@@ -138,7 +138,7 @@ app.controller('loginCtrl', function($scope, $state, $cordovaOauth, $localStorag
 
                 $scope.profileData = result.data; //assign facebook data to profiledata
                 //post request to store the facebook user detail in our database such as(email,firstname,lastname,token a unique id given by the facebook)
-                var url = serviceLink.url + 'CruiseAppVersion-0/rest/cruise/user/registration/fb';
+                var url = serviceLink.url + 'SaltieApp/rest/cruise/user/registration/fb';
                 var data = "userName=" + result.data.id + "&token=" + result.data.id + "&firstName=" + $scope.profileData.first_name + "&lastName=" + $scope.profileData.last_name;
                 loginService.login(url, data)
                     .then(
@@ -200,7 +200,7 @@ app.controller('emailloginCtrl', function($scope, $location, $state, $http, $loc
         $scope.Login = function(form, user) {
             if (form.$valid) //cheacking the form valid or not
             {
-                var url = serviceLink.url + 'CruiseAppVersion-0/rest/cruise/user/login';
+                var url = serviceLink.url + 'SaltieApp/rest/cruise/user/login';
                 var obj = {
                     userName: user.email,
                     password: user.password
@@ -262,12 +262,10 @@ app.controller('sendemailCtrl', function($scope, $location, $state, $localStorag
                     template: '<img src="./img/logo1.png" width="20%"/><br><ion-spinner icon="dots" class="spinner-balanced"/>'
                 });
 
-                $http.get(serviceLink.url + 'CruiseAppVersion-0/rest/cruise/user/forgot/email?email=' + user.email, {
-                    headers: {
-                        'Accept': 'text/plain'
-                    }
+                $http.get(serviceLink.url + 'SaltieApp/rest/cruise/user/forgot/email?email=' + user.email, {
+
                 }).success(function(data, status, headers, config) {
-                    if (status == 200) {
+                    if (status == 204) {
 //						 $ionicPopup.show({
 //                                    title: 'Success',
 //                                    subTitle: 'Please check your mail for OTP',
@@ -302,10 +300,10 @@ app.controller('sendemailCtrl', function($scope, $location, $state, $localStorag
 
                 $http({
                     method: 'POST',
-                    url: serviceLink.url + 'CruiseAppVersion-0/rest/cruise/user/forgot/reset',
+                    url: serviceLink.url + 'SaltieApp/rest/cruise/user/forgot/reset',
                     headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                        "Accept": "text/plain"
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                         
                     },
                     data: "email=" + $localStorage.emailver + "&password=" + user.password + "&code=" + user.otp
                 }).success(function(data, status, headers, config) {
@@ -316,7 +314,15 @@ app.controller('sendemailCtrl', function($scope, $location, $state, $localStorag
                     }
                 }).error(function(data, status, headers, config) {
                     $ionicLoading.hide();
+                    
+                    if(status == 400)
+                        {
+                        $ionicLoading.hide();
+                        form.otp.$setValidity("optExp", false);
+                        }
+                    else{
                     loginService.errors(form, status);
+                    }
 
                 });
 
@@ -357,7 +363,7 @@ app.controller('signuphomeCtrl', function($scope, $state, $location, $http, $loc
         $scope.signUp = function(form, user) {
             if (form.$valid) //checking form valid or not
             {
-                var url = serviceLink.url + 'CruiseAppVersion-0/rest/cruise/user/registration/app';
+                var url = serviceLink.url + 'SaltieApp/rest/cruise/user/registration/app';
 
                 var data = "userName=" + user.email + "&password=" + user.password + "&firstName=" + user.firstName + "&lastName=" + user.lastName;
                 $scope.status = "";
@@ -385,7 +391,7 @@ app.controller('signuphomeCtrl', function($scope, $state, $location, $http, $loc
 });
 
 //Menu Page controller starts
-app.controller('AppCtrl', function($scope, $ionicModal, $timeout, $ionicHistory, $localStorage, $location, $ionicLoading, $http, $rootScope, $state, serviceLink, $window,profileGet,profileSet,$ionicPopup) {
+app.controller('AppCtrl', function($scope, $ionicModal, $timeout, $ionicHistory, $localStorage, $location, $ionicLoading, $http, $rootScope, $state, serviceLink, $window,profileGet,profileSet,$ionicPopup, TokenStorage) {
 
 if(typeof analytics !== 'undefined') { analytics.trackView("App Main Controller"); } 
 	
@@ -398,7 +404,10 @@ if(typeof analytics !== 'undefined') { analytics.trackView("App Main Controller"
             //template: 'loading'
             template: '<img src="./img/logo1.png" width="20%"/><br><ion-spinner icon="dots" class="spinner-balanced"/>'
         });
-        $http.get(serviceLink.url + 'CruiseAppVersion-0/rest/cruise/favourite/list?userName=' + $localStorage.userName).success(function(data) {
+        $http({
+            method: 'GET',
+            url: serviceLink.url + 'SaltieApp/rest/cruise/favourite/list'
+        }).success(function(data) {
             /*
                 $rootScope.myFav = data.tripList;//myfav success is assigned to rootscope so that it can be accessed by all the controller
 */
@@ -410,17 +419,6 @@ if(typeof analytics !== 'undefined') { analytics.trackView("App Main Controller"
     }
 	
 
-	
-	$scope.emailUs = function(){
-            $rootScope.logSignClicked = "nextStep";
-            if($localStorage.userName == "Guest"){
-                $rootScope.logsignModal.show();
-            }else{
-//                $scope.engageUser($rootScope.logSignClicked);
-                $location.path('/app/engageUser');    
-            }
-        }
-	
     $scope.loginData = {};
 
     $scope.logout = function() {
@@ -430,8 +428,10 @@ if(typeof analytics !== 'undefined') { analytics.trackView("App Main Controller"
 		}
         delete $localStorage.stylelife;
         delete $localStorage.userName;
-        // delete $localStorage.Name;
+        delete $localStorage.Name;
+        TokenStorage.clear();
         // $localStorage.Name = "Guest";
+        //delete $localStorage.auth_token;
         delete $localStorage.accessToken;
         delete $localStorage.emailver;
         $state.go('start', {}, {reload: true}).then(function(){
@@ -443,6 +443,7 @@ if(typeof analytics !== 'undefined') { analytics.trackView("App Main Controller"
 
     $scope.home = function() {
 		$rootScope.applyFilterFlag=0;
+        $rootScope.engageData = "";
 		if($rootScope.clickFilterFlag!=0)
 		{
 			$rootScope.backArrow={ship:0,cruiseLine:0,port:0,month1:"",month2:"",month3:"",expType:"",duration:"",orderBy:"asc"}; 
@@ -459,7 +460,22 @@ if(typeof analytics !== 'undefined') { analytics.trackView("App Main Controller"
     }
 	
 	
-	 
+	      /* ==========================================================================
+  						engage User functionality
+   	========================================================================== */
+	
+	 $scope.engageClick=function()
+	 {
+         if($localStorage.userName == "Guest"){
+//             $rootScope.logSignClicked = "nextStep";
+             $rootScope.logSignClicked = "engageUs";
+             $rootScope.logsignModal.show();
+         }else{
+             
+            //$rootScope.TempDetail = angular.copy($rootScope.engageData);
+            $location.path('/app/engageUser');   
+         }
+	 }
 	
 	  
 
@@ -468,12 +484,47 @@ if(typeof analytics !== 'undefined') { analytics.trackView("App Main Controller"
 
 })
 
+//engage Us controller
+app.controller('engageController', function($scope, $location, $http, $rootScope, $filter, $localStorage, $ionicLoading, serviceLink, $ionicModal,themeFilter,$ionicPopup,advanceFilter,$ionicScrollDelegate,$ionicSlideBoxDelegate,$timeout, facebookService){
+    $scope.engageUser = function(){
+    
+        // $rootScope.TempDetail=angular.copy($rootScope.detail);
+        $location.path('/app/emailUs');
+    }
+
+    //$scope.is_showBookingPopup = false;
+    $scope.bookOnline = function(){
+         $scope.detail = angular.copy($rootScope.TempDetail);
+         $rootScope.TempDetail = "";
+
+        $scope.name = $localStorage.Name.split(" ")[0];
+        if($scope.detail == undefined || $scope.detail == "" || $scope.detail == null){
+            $scope.is_showBookingPopup = true;
+        }else{
+            $scope.is_showBookingPopup = false;
+            $location.path('/app/booking');
+        }
+        //$location.path('/app/emailUs');
+    }
+    $scope.back = function() {
+        $rootScope.engageData = "";
+        window.history.back();
+        console.log($rootScope.TempDetail);
+    }
+    $scope.goToList = function(){
+        $scope.is_showBookingPopup = false;
+        $location.path('/app/list');
+    }
+    $scope.closePopup = function(){
+        $scope.is_showBookingPopup = false;
+    }
+})
 
 //Lifestyle page controller start
-app.controller('lifeStyleCtrl', function($scope, $location, $http, $rootScope, $filter, $localStorage, $ionicLoading, serviceLink, $ionicModal,themeFilter,$ionicPopup,advanceFilter,$ionicScrollDelegate,$ionicSlideBoxDelegate,$timeout) {
+app.controller('lifeStyleCtrl', function($scope, $location, $http, $rootScope, $filter, $localStorage, $ionicLoading, serviceLink, $ionicModal,themeFilter,$ionicPopup,advanceFilter,$ionicScrollDelegate,$ionicSlideBoxDelegate,$timeout, facebookService) {
 	//initialise the rootscope details value
     $rootScope.TempDetail = "";
-    
+    $rootScope.engageData = "";
 	if($localStorage.userName=="Guest")
 	{
 		$rootScope.loginLogout="Login";
@@ -487,6 +538,8 @@ app.controller('lifeStyleCtrl', function($scope, $location, $http, $rootScope, $
 		$rootScope.showEngage=false;
         $rootScope.hidePhBook=true;
 		$rootScope.loginLogout="Log Out";
+        //default token header
+       // $http.defaults.headers.common['X-Auth-Token']= $localStorage.auth_token;
 	}
 
 	
@@ -514,7 +567,7 @@ app.controller('lifeStyleCtrl', function($scope, $location, $http, $rootScope, $
         $ionicLoading.show({
             template: '<img src="./img/logo1.png" width="20%"/><br><ion-spinner icon="dots" class="spinner-balanced"/>'
         });
-        $http.get(serviceLink.url + 'CruiseAppVersion-0/rest/cruise/count').success(function(data) {
+        $http.get(serviceLink.url + 'SaltieApp/rest/cruise/count').success(function(data) {
             $rootScope.lifestylecount = data;
 			$rootScope.count = $rootScope.lifestylecount[$localStorage.stylelife];
             $ionicLoading.hide()
@@ -607,13 +660,14 @@ app.controller('lifeStyleCtrl', function($scope, $location, $http, $rootScope, $
 //list page controlled start
 app.controller('listController', function($scope, $location, $rootScope, $filter, $localStorage, $http, $ionicLoading, FavouriteService, $timeout, $ionicScrollDelegate, $ionicModal, loginService, facebookService, serviceLink, favService,$ionicPopup,$q,detailData,$ionicSlideBoxDelegate) {
 	
-	
+
 	if(typeof analytics !== 'undefined') { analytics.trackView("List Controller"); }
 	
 //    HardwareBackButtonManager.enable();
     if ($localStorage.userName == "" || $localStorage.userName == null) {
         $location.path('/start');
     } else {
+        
         $rootScope.is_engaged = "list";
         
         $rootScope.userFav = [];
@@ -644,13 +698,24 @@ app.controller('listController', function($scope, $location, $rootScope, $filter
 						console.log($rootScope.filterShipPort1.style);
 						var q = $q.defer(); 
 			//get listing data
-            $http.get(serviceLink.url + 'CruiseAppVersion-0/rest/cruise/search?lifestyle='+$rootScope.filterShipPort1.style+'&duration='+$rootScope.filterShipPort1.duration+'&year='+$rootScope.filterShipPort1.year+'&month='+$rootScope.filterShipPort1.month+'&sortBy='+$rootScope.filterShipPort1.orderby+'&departPort='+$rootScope.filterShipPort1.ports+'&userName='+$localStorage.userName+'&shipName='+$rootScope.filterShipPort1.ship + "&cruiseLineName="+$rootScope.filterShipPort1.cruiseLine+"&page=" + $scope.totalDisplayed).success(function(data) {
+//            $http({
+//                method: 'GET',
+//                url: serviceLink.url + 'SaltieApp/rest/cruise/search?lifestyle='+$rootScope.filterShipPort1.style+'&duration='+$rootScope.filterShipPort1.duration+'&year='+$rootScope.filterShipPort1.year+'&month='+$rootScope.filterShipPort1.month+'&sortBy='+$rootScope.filterShipPort1.orderby+'&departPort='+$rootScope.filterShipPort1.ports+'&userName='+$localStorage.userName+'&shipName='+$rootScope.filterShipPort1.ship + "&cruiseLineName="+$rootScope.filterShipPort1.cruiseLine+"&page=" + $scope.totalDisplayed,
+//                headers: {
+//                    'X-Auth-Token': $localStorage.auth_token
+//                }
+//            })
+            $http.get(
+                serviceLink.url + 'SaltieApp/rest/cruise/search?lifestyle='+$rootScope.filterShipPort1.style+'&duration='+$rootScope.filterShipPort1.duration+'&year='+$rootScope.filterShipPort1.year+'&month='+$rootScope.filterShipPort1.month+'&sortBy='+$rootScope.filterShipPort1.orderby+'&departPort='+$rootScope.filterShipPort1.ports+'&userName='+$localStorage.userName+'&shipName='+$rootScope.filterShipPort1.ship + "&cruiseLineName="+$rootScope.filterShipPort1.cruiseLine+"&page=" + $scope.totalDisplayed
+            )
+            .success(function(data) {
                 var i = data.tripList.length;//get the total length
 				$rootScope.countCruise=data.AllCount;
 				$ionicLoading.hide();//hide the loading screen
                 if (i != 0) {
                     if ($rootScope.totalDisplayed == 0) {
                        $rootScope.count=data.AllCount;
+                       $rootScope.countSailing=data.TotalSailing;
                     }
                     $rootScope.list = $rootScope.list.concat(data.tripList);//concat 10-10 data for each call
                     $rootScope.favourite = data.favourite;
@@ -739,13 +804,11 @@ app.controller('listController', function($scope, $location, $rootScope, $filter
 
 app.controller('detailController', function($scope, $state, $location, $ionicModal, $rootScope, $http, $ionicLoading, $localStorage, $ionicSlideBoxDelegate, $ionicScrollDelegate, $timeout, $ionicHistory, serviceLink, favService,$sce) {
 
-	
 	if(typeof analytics !== 'undefined') { analytics.trackView("Detail Controller"); }
 
     if ($localStorage.userName == "" || $localStorage.userName == null) {
         $location.path('/start');
     } else {
-
         $rootScope.is_engaged = "detail";
 		$rootScope.load=false;
 	
@@ -843,8 +906,10 @@ $rootScope.moreLoad=false;
         
 
         $scope.back = function() {
-            window.history.back();
-            //    				$ionicHistory.goBack();
+                $rootScope.TempDetail = "";
+                window.history.back();
+                console.log($rootScope.TempDetail);
+                $rootScope.engageData = $rootScope.TempDetail;
         }
 
         $rootScope.CabinIndex = 0;
@@ -938,7 +1003,7 @@ return sResult;
 
         }
     //Next Step functionality
-        $scope.emailUs = function(){
+        $rootScope.emailUs = function(){
             $rootScope.logSignClicked = "nextStep";
             if($localStorage.userName == "Guest"){
                 $rootScope.logsignModal.show();
@@ -946,29 +1011,6 @@ return sResult;
 //                $scope.engageUser($rootScope.logSignClicked);
                 $location.path('/app/engageUser');    
             }
-        }
-        $scope.engageUser = function(){
-//            if($rootScope.is_engaged == "detail"){
-//                $rootScope.redirectEmailUs = true;
-//            }else if($rootScope.is_engaged = "list"){
-//                $rootScope.redirectEmailUs = false;
-//            }else if($rootScope.is_engaged = "lifeStyle"){
-//                $rootScope.redirectEmailUs = false;
-//            }else{
-//                $rootScope.redirectEmailUs = false;
-//            }
-//            
-            
-            if($state.$current.name=="app.detail"){
-                $rootScope.redirectEmailUs = true;
-            }else if($state.$current.name=="app.list"){
-                $rootScope.redirectEmailUs = false;
-            }else if($state.$current.name=="app.lifeStyle"){
-                $rootScope.redirectEmailUs = false;
-            }else{
-                $rootScope.redirectEmailUs = false;
-            }
-            $location.path('/app/emailUs');
         }
     }
 });
@@ -1007,17 +1049,16 @@ app.controller('myFavouriteController', function($scope, $location, $ionicModal,
             });
             $http({
                 method: 'POST',
-                url: serviceLink.url + 'CruiseAppVersion-0/rest/cruise/favourite/set',
+                url: serviceLink.url + 'SaltieApp/rest/cruise/favourite/set',
                 headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                    "Accept": "text/plain"
+                    'Content-Type': 'application/x-www-form-urlencoded'
                 },
-                data: "userName=" + $localStorage.userName + "&tripId=" + myfavtripID
-            }).success(function(data) {
+                data: "tripId=" + myfavtripID
+            }).success(function(data, status) {
 
 
                 // console.log(data);
-                if (data == 'success') {
+                if (status == 200) {
 
 
                     FavouriteService.addNew(myfavtripID);
@@ -1071,6 +1112,7 @@ app.controller('bookingController', function($scope, $location, $ionicModal, $ro
         $location.path('/start');
     } else {
         $scope.back = function() {
+            $rootScope.TempDetail = $scope.detail;
             window.history.back();
         }
 
@@ -1109,7 +1151,7 @@ app.filter('capitalize', function() {
 
 
 
-app.factory('loginService', function($http, $q, $ionicLoading, $ionicPopup,$localStorage,$rootScope) {
+app.factory('loginService', function($http, $q, $ionicLoading, $ionicPopup,$localStorage,$rootScope, TokenStorage) {
 
     //    Create a class that represents our name service.
     function loginService() {
@@ -1126,14 +1168,15 @@ app.factory('loginService', function($http, $q, $ionicLoading, $ionicPopup,$loca
                 method: 'POST',
                 url: url,
                 headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                    "Accept": "text/plain"
+                    'Content-Type': 'application/x-www-form-urlencoded'                     
                 },
                 data: data
             })
                 .success(function(data, status) {
                     $ionicLoading.hide();
 				$localStorage.Name=data.user;
+				//$localStorage.auth_token=data.token;
+                TokenStorage.store(data.token);
 				$rootScope.favourite1=data.favourite;
                     deferred.resolve(status);
                 })
@@ -1180,6 +1223,9 @@ app.factory('loginService', function($http, $q, $ionicLoading, $ionicPopup,$loca
 //                }).then(function(res) {
 //
 //                });
+            } else if (status == 403) {
+                $ionicLoading.hide();
+                alert();
             } else if (status == 401) {
                 $ionicLoading.hide();
                 form.password.$setValidity("password", false);
@@ -1267,23 +1313,6 @@ app.factory('loginService', function($http, $q, $ionicLoading, $ionicPopup,$loca
 })
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 app.factory('engageService', function($http, $q, $ionicLoading, $ionicPopup,$localStorage,$rootScope) {
 
     //    Create a class that represents our name service.
@@ -1302,7 +1331,6 @@ app.factory('engageService', function($http, $q, $ionicLoading, $ionicPopup,$loc
                 url: url,
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
-                    //"Accept": "text/plain"
                 },
                 data: data
             })
@@ -1311,7 +1339,7 @@ app.factory('engageService', function($http, $q, $ionicLoading, $ionicPopup,$loc
                     console.log(data);
 				    //$localStorage.Name=data.user;
 				    //$rootScope.favourite1=data.favourite;
-                    //deferred.resolve(status);
+                    deferred.resolve(status);
                 })
                 .error(function(data, status) {
                     $ionicLoading.hide();
@@ -1441,33 +1469,6 @@ app.factory('engageService', function($http, $q, $ionicLoading, $ionicPopup,$loc
     }
     return new engageService();
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 app.factory('facebookService', function($http, $q, $ionicLoading, $ionicPopup, $cordovaOauth, $localStorage,$rootScope) {
@@ -1624,16 +1625,15 @@ app.factory('favService', function($http, $q, $ionicLoading, $ionicPopup, $local
 			//post request for favourite starts here
             $http({
                 method: 'POST',
-                url: serviceLink.url + 'CruiseAppVersion-0/rest/cruise/favourite/set',
+                url: serviceLink.url + 'SaltieApp/rest/cruise/favourite/set',
                 headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                    "Accept": "text/plain"
+                    'Content-Type': 'application/x-www-form-urlencoded'           
                 },
-                data: "userName=" + $localStorage.userName + "&tripId=" + tripId
-            }).success(function(data) {
+                data: "tripId=" + tripId
+            }).success(function(data, status) {
                 $ionicLoading.hide();
                 // console.log(data);
-                if (data == 'success') {
+                if (status == 200) {
                     FavouriteService.addNew(tripId);//calling FavouriteService Service were tripId is added and removed
 
                     if (document.getElementById(index).src.indexOf("/img/Unfavorite.png") >= 0)
@@ -1665,7 +1665,11 @@ app.factory('advanceFilter', function($http, $q, $ionicLoading, $ionicPopup, $lo
                 template: '<img src="./img/logo1.png" width="20%"/><br><ion-spinner icon="dots" class="spinner-balanced"/>'
             });
 			//post request for favourite starts here
-           $http.get(serviceLink.url + 'CruiseAppVersion-0/rest/cruise/search?lifestyle='+data.style+'&duration='+data.duration+'&year='+data.year+'&month='+data.month+'&sortBy='+data.orderby+'&departPort='+data.ports+'&userName='+$localStorage.userName+'&shipName='+data.ship+'&cruiseLineName='+data.cruiseLine).success(function(data) {
+            $http({
+                method: 'GET',
+                url: serviceLink.url + 'SaltieApp/rest/cruise/search?lifestyle='+data.style+'&duration='+data.duration+'&year='+data.year+'&month='+data.month+'&sortBy='+data.orderby+'&departPort='+data.ports+'&userName='+$localStorage.userName+'&shipName='+data.ship+'&cruiseLineName='+data.cruiseLine
+            })
+           .success(function(data) {
                 $ionicLoading.hide();
                 // console.log(data);
 					                        deferred.resolve(data);
@@ -1688,7 +1692,7 @@ app.factory('themeFilter', function($http, $q, $ionicLoading, $ionicPopup, $loca
             $ionicLoading.show({
                 template: '<img src="./img/logo1.png" width="20%"/><br><ion-spinner icon="dots" class="spinner-balanced"/>'
             });
-           $http.get(serviceLink.url + 'CruiseAppVersion-0/rest/cruise/theme5?lifestyle='+data.style+'&duration='+data.duration+'&year='+data.year+'&month='+data.month+'&port='+data.ports+'&shipName='+data.ship+'&cruiseLineName='+data.cruiseLine).success(function(data) {
+           $http.get(serviceLink.url + 'SaltieApp/rest/cruise/theme5?lifestyle='+data.style+'&duration='+data.duration+'&year='+data.year+'&month='+data.month+'&port='+data.ports+'&shipName='+data.ship+'&cruiseLineName='+data.cruiseLine).success(function(data) {
                 $ionicLoading.hide();
                 // console.log(data);
 			   deferred.resolve(data);
@@ -1712,7 +1716,11 @@ app.factory('profileGet',function($http, $q, $ionicLoading, $ionicPopup, $localS
             //template: 'loading'
             template: '<img src="./img/logo1.png" width="20%"/><br><ion-spinner icon="dots" class="spinner-balanced"/>'
         });
-        $http.get(serviceLink.url + 'CruiseAppVersion-0/rest/cruise/user/profile?userName='+$localStorage.userName).success(function(data) {
+        $http({
+            method: 'GET',
+            url: serviceLink.url + 'SaltieApp/rest/cruise/user/detail'
+        }).success(function(data) {
+            
 			$ionicLoading.hide();
 			deferred.resolve(data);
          }).error(function(data){
@@ -1737,10 +1745,9 @@ app.factory('profileSet', function($http, $q, $ionicLoading, $ionicPopup, $local
             });
             $http({
                 method: 'POST',
-                url: serviceLink.url + 'CruiseAppVersion-0/rest/cruise/user/profile/update ',
+                url: serviceLink.url + 'SaltieApp/rest/cruise/user/editProfile ',
                 headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                    "Accept": "text/plain"
+                    'Content-Type': 'application/x-www-form-urlencoded'
                 },
                 data: data
             }).success(function(data, status) {
@@ -1820,7 +1827,7 @@ app.factory('detailData',function($http, $q, $ionicLoading, $ionicPopup, $localS
             //template: 'loading'
             template: '<img src="./img/logo1.png" width="20%"/><br><ion-spinner icon="dots" class="spinner-balanced"/>'
         });
-        $http.get(serviceLink.url + 'CruiseAppVersion-0/rest/cruise/details/' + tripID + '/tripId').success(function(data) {
+        $http.get(serviceLink.url + 'SaltieApp/rest/cruise/details/' + tripID + '/tripId').success(function(data) {
 			$ionicLoading.hide();
 			deferred.resolve(data);
          }).error(function(data){
@@ -1881,7 +1888,7 @@ app.controller('formValidation',function($scope, $location, $state, $http, $loca
 
 function AvoidSpace(event) {
     var k = event ? event.which : window.event.keyCode;
-    if (k == 32) return false;
+    if (k == 32 || k == 229) return false;
 }
 
 
@@ -2317,7 +2324,7 @@ $rootScope.resetDateMonth=function(months,index){
 
 
 
-app.controller('loginSignUpController',function($scope, $location, $http, $rootScope, $filter, $localStorage, $ionicLoading, serviceLink,$ionicPopup,loginService,favService){
+app.controller('loginSignUpController',function($scope, $location, $http, $rootScope, $filter, $localStorage, $ionicLoading, serviceLink,$ionicPopup,loginService,favService,facebookService){
 
 	  //toggle the email login field function
         $rootScope.hideForm = true;
@@ -2337,7 +2344,7 @@ app.controller('loginSignUpController',function($scope, $location, $http, $rootS
 
                 $scope.profileData = result.data; //assign facebook data to profiledata
                 //post request to store the facebook user detail in our database such as(email,firstname,lastname,token a unique id given by the facebook)
-                var url = serviceLink.url + 'CruiseAppVersion-0/rest/cruise/user/registration/fb';
+                var url = serviceLink.url + 'SaltieApp/rest/cruise/user/registration/fb';
                 var data = "userName=" + result.data.id + "&token=" + result.data.id + "&firstName=" + $scope.profileData.first_name + "&lastName=" + $scope.profileData.last_name;
                 loginService.login(url, data)
                     .then(
@@ -2360,7 +2367,11 @@ app.controller('loginSignUpController',function($scope, $location, $http, $rootS
 									if($rootScope.isFavourite($rootScope.tripidfav)==false) 
                                 favService.favorite($rootScope.tripidfav, $rootScope.indexfav);
 								}
-                                 else if($rootScope.logSignClicked == "nextStep"){
+                                else if($rootScope.logSignClicked == "nextStep"){
+                                    $rootScope.logsignModal.hide();
+                                    $location.path('/app/emailUs');
+                                }
+                                else if($rootScope.logSignClicked == "engageUs"){
                                     $rootScope.logsignModal.hide();
                                     $location.path('/app/engageUser');
                                 }
@@ -2397,7 +2408,7 @@ app.controller('loginSignUpController',function($scope, $location, $http, $rootS
         $rootScope.signUp = function(form, user) {
             if (form.$valid) //checking form valid or not
             {
-                var url = serviceLink.url + 'CruiseAppVersion-0/rest/cruise/user/registration/app';
+                var url = serviceLink.url + 'SaltieApp/rest/cruise/user/registration/app';
 
                 var data = "userName=" + user.email + "&password=" + user.password + "&firstName=" + user.firstName + "&lastName=" + user.lastName;
                 $scope.status = "";
@@ -2414,12 +2425,17 @@ app.controller('loginSignUpController',function($scope, $location, $http, $rootS
                                 $rootScope.hidePhBook=true;
 								$rootScope.showProfileSet=false;
                                 $localStorage.userName = user.email;
+                                // $localStorage.authToken = data.token;
 								if($rootScope.logSignClicked=="Favourite")
 								{
                                 $rootScope.logsignModal.hide();
                                 favService.favorite($rootScope.tripidfav, $rootScope.indexfav);
 								}
-								 else if($rootScope.logSignClicked == "nextStep"){
+                                else if($rootScope.logSignClicked == "nextStep"){
+                                    $rootScope.logsignModal.hide();
+                                    $location.path('/app/emailUs');
+                                }
+                                else if($rootScope.logSignClicked == "engageUs"){
                                     $rootScope.logsignModal.hide();
                                     $location.path('/app/engageUser');
                                 }
@@ -2446,7 +2462,7 @@ app.controller('loginSignUpController',function($scope, $location, $http, $rootS
         $rootScope.Login = function(form, user) {
             if (form.$valid) //cheacking the form valid or not
             {
-                var url = serviceLink.url + 'CruiseAppVersion-0/rest/cruise/user/login';
+                var url = serviceLink.url + 'SaltieApp/rest/cruise/user/login';
                 var obj = {
                     userName: user.email1,
                     password: user.password1
@@ -2477,6 +2493,10 @@ app.controller('loginSignUpController',function($scope, $location, $http, $rootS
 								}
                                 else if($rootScope.logSignClicked == "nextStep"){
                                     $rootScope.logsignModal.hide();
+                                    $location.path('/app/emailUs');
+                                }
+                                else if($rootScope.logSignClicked == "engageUs"){
+                                    $rootScope.logsignModal.hide();
                                     $location.path('/app/engageUser');
                                 }
 								else
@@ -2497,6 +2517,98 @@ app.controller('loginSignUpController',function($scope, $location, $http, $rootS
 	
 });
 
+
+app.controller('emailUsController', function($scope, $state, $rootScope, $state, $location, $http, $localStorage, $ionicLoading, $ionicPopup, engageService, serviceLink) {
+    
+    $scope.detail = angular.copy($rootScope.TempDetail);
+    
+    $rootScope.engageData = $scope.detail;
+    //$rootScope.$emit('detailValue', $scope.detail);
+    //$scope.$broadcast('detailValue', { detailData: $scope.detail });
+    
+    $rootScope.TempDetail = "";
+    
+    $scope.personCount = [];
+    $scope.personCount = [0,1,2,3,4,5];
+    
+    $scope.gePrefContact = function(type){
+       $scope.pref = type;
+    }
+    //alert($rootScope.logSignClicked);
+    $scope.user = {};
+    $scope.user.firstName = $localStorage.Name.split(" ")[0];
+    $scope.user.lastName = $localStorage.Name.substr($localStorage.Name.indexOf(' ')+1);
+	var isIPad = ionic.Platform.isIPad();
+    var isIOS = ionic.Platform.isIOS();
+	  if(isIPad==true || isIOS==true)
+	  {
+ 		document.getElementById("signuphome").style.marginTop = "20px";
+	  }
+	
+	if(typeof analytics !== 'undefined') { analytics.trackView("Sign Up Home Controller"); }
+	
+    if ($localStorage.userName != "" || $localStorage.userName != null || $localStorage.userName != "Guest") {
+        $scope.close = function() {
+            $location.path('/start');
+        }
+       
+		
+
+        $scope.submitEmailUs = function(form, user) {
+                var kid = document.getElementById("kid");
+                var adult = document.getElementById("adult");
+                var senior = document.getElementById("senior");
+                var kids = kid.options[kid.selectedIndex].value;
+                var adults = adult.options[adult.selectedIndex].value;
+                var seniors = senior.options[senior.selectedIndex].value;
+               
+            if (form.$valid) //checking form valid or not
+            {
+                if($scope.pref == undefined){
+                    $scope.pref = "email";
+                }
+                
+                var url = serviceLink.url + 'SaltieApp/rest/cruise/requestQuote';
+                
+                var data = "firstName=" + user.firstName + "&lastName=" + user.lastName + "&email=" + user.email + "&phone=" + user.phone + "&tripId=" + $rootScope.detail.tripDetails.tripId + "&country=" + user.country + "&state=" + user.state + "&roomType=" + user.roomType + "&preferedContact =" + $scope.pref + "&adults=" + adults + "&kids=" + kids + "&seniors=" + seniors + "&comments=" + user.comment;
+                $scope.status = "";
+                
+                engageService.submit(url, data)
+                    .then(
+                        /* success function */
+                        function(status) {
+                            alert(status);
+                            $scope.status = status;
+                            if ($scope.status == 204) {
+                                alert(2);
+                                //$location.path('/emaillogin');
+                                $ionicLoading.hide();
+                            } else {
+                                //engageService.errors(form, $scope.status);
+                                alert(01);
+                            }
+
+                        }, function(error) {
+                            
+                        })
+            }
+        }
+    } else {
+        $state.go('app.lifeStyle');
+    }
+    //go back to listing from emailUs
+    $scope.goToListing = function(){
+        $location.path('/app/list');
+    }
+    
+    $scope.back = function() {
+            window.history.back();
+            $rootScope.TempDetail = $scope.detail;
+        console.log($rootScope.TempDetail);
+
+        }
+    
+});
 
 
 app.controller('modalCtrl',function($scope, $location, $http, $rootScope, $filter, $localStorage, $ionicLoading, serviceLink,$ionicPopup,loginService,$ionicModal,$ionicSlideBoxDelegate,$timeout,profileSet,profileGet,$sce,$filter){
@@ -2694,14 +2806,7 @@ app.controller('modalCtrl',function($scope, $location, $http, $rootScope, $filte
 	 {
 		 $scope.aboutModal.show();
 	 }
-     /* ==========================================================================
-  						engage User functionality
-   	========================================================================== */
-	
-	 $scope.engageClick=function()
-	 {
-         $location.path('/app/engageUser');
-	 }
+
 	 
 	/* ==========================================================================
   						Phone and Faq Modal functionality
@@ -2828,83 +2933,95 @@ app.controller('modalCtrl',function($scope, $location, $http, $rootScope, $filte
 	  }
 });
 //engage page  controller start here
-app.controller('engageFormCtrl', function($scope, $state, $rootScope, $state, $location, $http, $localStorage, $ionicLoading, $ionicPopup, engageService, serviceLink) {
-    $scope.detail = angular.copy($rootScope.TempDetail);
-    $rootScope.TempDetail = "";
-    
-    $scope.personCount = [];
-    $scope.personCount = [0,1,2,3,4,5];
-    
-    $scope.gePrefContact = function(type){
-       $scope.pref = type;
-    }
-    //alert($rootScope.logSignClicked);
-    $scope.user = {};
-    $scope.user.firstName = $localStorage.Name.split(" ")[0];
-    $scope.user.lastName = $localStorage.Name.substr($localStorage.Name.indexOf(' ')+1);
-	var isIPad = ionic.Platform.isIPad();
-    var isIOS = ionic.Platform.isIOS();
-	  if(isIPad==true || isIOS==true)
-	  {
- 		document.getElementById("signuphome").style.marginTop = "20px";
-	  }
-	
-	if(typeof analytics !== 'undefined') { analytics.trackView("Sign Up Home Controller"); }
-	
-    if ($localStorage.userName != "" || $localStorage.userName != null || $localStorage.userName != "Guest") {
-        $scope.close = function() {
-            $location.path('/start');
-        }
-       
-		
-
-        $scope.submitEmailUs = function(form, user) {
-                var kid = document.getElementById("kid");
-                var adult = document.getElementById("adult");
-                var senior = document.getElementById("senior");
-                var kids = kid.options[kid.selectedIndex].value;
-                var adults = adult.options[adult.selectedIndex].value;
-                var seniors = senior.options[senior.selectedIndex].value;
-               
-            if (form.$valid) //checking form valid or not
-            {
-                if($scope.pref == undefined){
-                    $scope.pref = "email";
-                }
-                
-                var url = serviceLink.url + 'SaltieApp/rest/cruise/requestQuote';
-                
-                var data = "firstName=" + user.firstName + "&lastName=" + user.lastName + "&email=" + user.email + "&phone=" + user.phone + "&tripId=" + $rootScope.detail.tripDetails.tripId + "&country=" + user.country + "&state=" + user.state + "&roomType=" + user.roomType + "&preferedContact =" + $scope.pref + "&adults=" + adults + "&kids=" + kids + "&seniors=" + seniors + "&comments=" + user.comment;
-                $scope.status = "";
-                
-                engageService.submit(url, data)
-                    .then(
-                        /* success function */
-                        function(status) {
-                            alert(status);
-                            $scope.status = status;
-                            if ($scope.status == 204) {
-                                alert(2);
-                                //$location.path('/emaillogin');
-                                $ionicLoading.hide();
-                            } else {
-                                //engageService.errors(form, $scope.status);
-                                alert(01);
-                            }
-
-                        }, function(error) {
-                            
-                        })
-            }
-        }
-    } else {
-        $state.go('app.lifeStyle');
-    }
-    //go back to listing from emailUs
-    $scope.goToListing = function(){
-        $location.path('/app/list');
-    }
-});
+//app.controller('engageFormCtrl', function($scope, $state, $rootScope, $state, $location, $http, $localStorage, $ionicLoading, $ionicPopup, engageService, serviceLink) {
+//    
+//    $scope.detail = angular.copy($rootScope.TempDetail);
+//    $rootScope.$emit('detailValue', $scope.detail);
+//    $scope.$broadcast('detailValue', { detailValue: $scope.detail });
+//    
+//    $rootScope.TempDetail = "";
+//    
+//    $scope.personCount = [];
+//    $scope.personCount = [0,1,2,3,4,5];
+//    
+//    $scope.gePrefContact = function(type){
+//       $scope.pref = type;
+//    }
+//    //alert($rootScope.logSignClicked);
+//    $scope.user = {};
+//    $scope.user.firstName = $localStorage.Name.split(" ")[0];
+//    $scope.user.lastName = $localStorage.Name.substr($localStorage.Name.indexOf(' ')+1);
+//	var isIPad = ionic.Platform.isIPad();
+//    var isIOS = ionic.Platform.isIOS();
+//	  if(isIPad==true || isIOS==true)
+//	  {
+// 		document.getElementById("signuphome").style.marginTop = "20px";
+//	  }
+//	
+//	if(typeof analytics !== 'undefined') { analytics.trackView("Sign Up Home Controller"); }
+//	
+//    if ($localStorage.userName != "" || $localStorage.userName != null || $localStorage.userName != "Guest") {
+//        $scope.close = function() {
+//            $location.path('/start');
+//        }
+//       
+//		
+//
+//        $scope.submitEmailUs = function(form, user) {
+//                var kid = document.getElementById("kid");
+//                var adult = document.getElementById("adult");
+//                var senior = document.getElementById("senior");
+//                var kids = kid.options[kid.selectedIndex].value;
+//                var adults = adult.options[adult.selectedIndex].value;
+//                var seniors = senior.options[senior.selectedIndex].value;
+//               
+//            if (form.$valid) //checking form valid or not
+//            {
+//                if($scope.pref == undefined){
+//                    $scope.pref = "email";
+//                }
+//                
+//                var url = serviceLink.url + 'SaltieApp/rest/cruise/requestQuote';
+//                
+//                var data = "firstName=" + user.firstName + "&lastName=" + user.lastName + "&email=" + user.email + "&phone=" + user.phone + "&tripId=" + $rootScope.detail.tripDetails.tripId + "&country=" + user.country + "&state=" + user.state + "&roomType=" + user.roomType + "&preferedContact =" + $scope.pref + "&adults=" + adults + "&kids=" + kids + "&seniors=" + seniors + "&comments=" + user.comment;
+//                $scope.status = "";
+//                
+//                engageService.submit(url, data)
+//                    .then(
+//                        /* success function */
+//                        function(status) {
+//                            alert(status);
+//                            $scope.status = status;
+//                            if ($scope.status == 204) {
+//                                alert(2);
+//                                //$location.path('/emaillogin');
+//                                $ionicLoading.hide();
+//                            } else {
+//                                //engageService.errors(form, $scope.status);
+//                                alert(01);
+//                            }
+//
+//                        }, function(error) {
+//                            
+//                        })
+//            }
+//        }
+//    } else {
+//        $state.go('app.lifeStyle');
+//    }
+//    //go back to listing from emailUs
+//    $scope.goToListing = function(){
+//        $location.path('/app/list');
+//    }
+//    
+//    $scope.back = function() {
+//            window.history.back();
+//            $rootScope.TempDetail = $scope.detail;
+//        console.log($rootScope.TempDetail);
+//
+//        }
+//    
+//});
 
 
 

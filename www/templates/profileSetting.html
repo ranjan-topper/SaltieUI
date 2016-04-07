@@ -36,7 +36,7 @@
 				
 			<div id="input" ng-hide="changePasshide">
 			<label class="item item-input color3" ng-class="{ 'has-errors' : authorizationForm.newPassword.$invalid && authorizationForm.$submitted, 'no-errors' : authorizationForm.newPassword.$valid}">
-              <input type="password" onselectstart="return false" onpaste="return false;" onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false" autocomplete=off name="newPassword" onkeypress="return AvoidSpace(event)" id="newPassword" placeholder="New Password" ng-keyup="resetFrom(authorizationForm)" ng-model="user.newPassword" ng-minlength="5" ng-maxlength="20" required>
+              <input type="password" onselectstart="return false" onpaste="return false;" onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false" autocomplete=off name="newPassword" onkeypress="return AvoidSpace(event)" id="newPassword" placeholder="New Password" ng-keyup="setConpassword(authorizationForm)" ng-model="user.newPassword" ng-minlength="5" ng-maxlength="20" required>
             </label>
 				<div class="error-container" ng-show="authorizationForm.newPassword.$error && authorizationForm.$submitted" ng-messages="authorizationForm.newPassword.$error">
                 <div ng-messages-include="templates/error-list.html"></div> 

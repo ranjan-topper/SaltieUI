@@ -1,4 +1,4 @@
-<ion-view cache-view="false" ng-init="init()" ng-controller="engageFormCtrl">
+<ion-view cache-view="false" ng-init="init()">
     <ion-nav-buttons side="left">
         <button class="button button-icon button-clear ion-ios-arrow-thin-left" id="back2" style="color: white" ng-click="back()">
         </button>
@@ -12,15 +12,16 @@
         <ion-slide-box delegate-handle="detailSlide" show-pager="false">
             <!--			auto-play="true" does-continue = "true"-->
             <ion-slide ng-if="detail.tripDetails.id == undefined || (redirectEmailUs == 'list' || redirectEmailUs == 'lifeStyle')">
-                <a type="item-text-wrap" href="" style='background-image:url("./img/about.png");' class="eventListPicture">
+                <a type="item-text-wrap" href="" style='background-image:url("./img/phonePage.jpg");' class="eventListPicture">
                 </a>
                 <div class="gradient"></div>
-				<div class="emailUs">
-				{{user.firstName}} you haven't selected any specific cruise. Please Provide detail about your exciting cruise in comments section. Else 
-                    Proceed to listings to pick a cruise of your choice. 
-				
-				</div>
-				
+                <div class="marginDetail">
+                    <div class="detaildes " id="{{ detail.tripDetails.tripName }}" style="top: 14.5vh; line-height:3vh"><span class="roman">
+                <span class="bold" style="font-size: 5vmin;">{{user.firstName}}</span>  you haven't selected any specific cruise. Please Provide detail about your exciting cruise in comments section. Else 
+                    Proceed to listings to pick a cruise of your choice.
+                </span>
+                    </div>
+                </div>
             </ion-slide>
             <ion-slide ng-if="detail.tripDetails.id !== undefined || redirectEmailUs == 'detail'">
                 <a type="item-text-wrap" href="" style='background-image:url("{{linkUrl}}images/ports/{{ detail.tripDetails.destinationImage[0]}}");' class="eventListPicture">
@@ -38,7 +39,7 @@
         </ion-slide-box>
         <div ng-if="detail.tripDetails.id == undefined || (redirectEmailUs == 'list' || redirectEmailUs == 'lifeStyle')">
                 <span class="button l-btn roman color3" ng-click="goToListing();" id="lth">
-                    View Listings
+                    View Listing
                 </span>
         </div>
         <div style="padding-top: 5%;">

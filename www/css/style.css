@@ -26,8 +26,6 @@
 * Ionic loader Css
 * Menu Page
 **/
-
-
 /* ==========================================================================
   	18. CabinType Modal
    ========================================================================== */
@@ -769,12 +767,14 @@ font-size: 5.5vmin;    text-decoration: none;
 	line-height: 1;
     color: white;
     font-size: 7vmin;
+    padding-right: 24vw;
 	
 }
 .tripdes
 {
     color: white;
     font-size: 4vmin;
+    padding-right: 24vw;
 
 }
 .shipName
@@ -2420,24 +2420,53 @@ color: rgb(176, 162, 131) !important;
     border-style: solid;
     border-color: #359EA5 !important;
 }
-
-
-
-
-
-
-.emailUs
-{
-	
-	    color: white;
+div.sail{
+  font-weight: 600;
+    right: -3px;
+    top: 24vh;
+    text-align: center;
     position: absolute;
-    bottom: 4vh;
-    font-size: 5vmin;
-    font-family: roman;
-    line-height: 1.2;
-    padding: 0 5vmin 0 5vmin;
+    display: inline-block;
+    width: 25vw;
+    height: 30px;
+    font-size: 4vmin;
+    background: #00232d;
+    padding: 4px 0px;
 }
-
-
+.overlay{
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background: rgba(255, 255, 255, 0.8);
+    z-index: 1;
+    position: absolute;
+}
+.popupBody{
+    top: 30vh;
+    position: absolute;
+    width: 100%;
+    height: 37vh;
+    /* background: url(../img/background.jpg) no-repeat center center fixed; */
+    /* background-size: 100%; */
+}
+.bookingPopup{
+    position: absolute;
+    color: #00707E;
+    font-size: 5vmin;
+    margin-right: 5vw;
+    bottom: 10vh;
+    font-family: light;
+}
+.engage-popup{
+    z-index: 1;
+    right: 0px;
+    position: absolute;
+    color: #00232D !important;
+    float: right;
+    font-size: 10vmin;
+    margin-right: 5%;
+    padding: 0px;
+}
 
 

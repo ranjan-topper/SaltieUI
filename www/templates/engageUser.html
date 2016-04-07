@@ -1,24 +1,48 @@
-<ion-view cache-view="false" ng-init="init()" ng-controller="detailController">
+<div>
+<ion-pan>
+<ion-view cache-view="false" ng-init="init()">
     <ion-nav-buttons side="left">
         <button class="button button-icon button-clear ion-ios-arrow-thin-left" id="back2" style="color: white" ng-click="back()">
         </button>
 
     </ion-nav-buttons>
 	<ion-nav-title>
-        <a href="" class="cruisecount" id="count" style="text-decoration: none;"><span class="bold">Engage</span></a>
+        <a href="" class="cruisecount" style="text-decoration: none;"><span class="bold">Engage Us</span></a>
     </ion-nav-title>
-<ion-content style="margin-top: 7vh;" class="" on-swipe-left="viewall(count)" scroll="false">
 
-</ion-content>
 
-	<div class="background homepageImg" ng-controller="detailController">
+	<div class="background homepageImg">
         <div class="destination" align="center">
-            <button type="submit" id="btn1" class="button button-block bookbtn color4 roman" style="width: 66%; color: #FFF">
+            <button type="submit" id="btn1" class="button button-block bookbtn color4 roman" ng-click="bookOnline()" style="width: 66%; color: #FFF">
                 Book Online</button>
             <button type="submit" id="btn2" class="button button-block bookbtn color3 roman" ng-click="engageUser()" style="width: 66%; color: #FFF">
                 Email</button>
-            <button type="submit" id="btn3" class="button button-block bookbtn roman" style="width: 66%;">
-                Call</button>
+<!--            <button type="submit" id="btn3" class="button button-block bookbtn roman" style="width: 66%;">-->
+                <a class="numberLink button button-block bookbtn roman" ng-href="tel:+1-800-684-3421" style="width: 66%; color: #00232d;">Call</a>
+<!--            </button>-->
         </div>
-    </div>	  
+    </div>
 </ion-view>
+</ion-pan>
+
+<ion-pan class="overlay" id="onlineBookibg-modal" ng-if="is_showBookingPopup == true" >
+    <div class="popupBody">
+        <button  class="button button-icon button-clear ion-ios-close-empty engage-popup"  id="cls11" ng-click="closePopup()"></button>
+        <ion-content>
+        <div class="marginDetail">
+            <div class="bookingPopup" id="{{ detail.tripDetails.tripName }}" style="top:0vh; line-height: 4.5vh;">
+                <span>
+                    <span class="bold">{{name}}</span> you haven't selected any specific cruise. Please Provide detail about your exciting cruise in comments section. Else 
+                    Proceed to listings to pick a cruise of your choice.                
+                </span>
+            </div>
+        </div>
+        </ion-content>
+        <ion-footer-bar>
+            <button class="button-block bookbt thin" id="readytobook" ng-click="goToList()">
+                View Listing
+            </button>
+        </ion-footer-bar>
+    </div>
+</ion-pan>
+</div>

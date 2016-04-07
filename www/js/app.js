@@ -53,7 +53,9 @@ app.run(function ($ionicPlatform,$rootScope, $state, $location,$ionicHistory)
 
 
 
-app.config(function($stateProvider, $urlRouterProvider) {
+app.config(function($stateProvider, $urlRouterProvider, $httpProvider) {    
+  $httpProvider.interceptors.push('TokenAuthInterceptor');
+  $httpProvider.defaults.headers["Content-Type"]= "application/json";
   $stateProvider
   .state('start', {
     url: "/start",
@@ -175,8 +177,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
       views: {
         'menuContent': {
           templateUrl: "templates/emailUs.html",
-		controller:'bookingController'
-
+        controller: "emailUsController"
         }
       }
     })
@@ -186,8 +187,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
       views: {
         'menuContent': {
           templateUrl: "templates/engageUser.html",
-		controller:'bookingController'
-
+        controller: 'engageController'
         }
       }
     });
@@ -196,3 +196,36 @@ app.config(function($stateProvider, $urlRouterProvider) {
 	
 
 });
+
+app.factory('TokenStorage', function() {
+   var storageKey = 'auth_token';
+   return {      
+      store : function(token) {
+         return localStorage.setItem(storageKey, token);
+      },
+      retrieve : function() {
+         return localStorage.getItem(storageKey);
+      },
+      clear : function() {
+         return localStorage.removeItem(storageKey);
+      }
+   };
+});
+app.factory('TokenAuthInterceptor', function($q, TokenStorage) {
+   return {
+      request: function(config) {
+         var authToken = TokenStorage.retrieve();
+         if (authToken) {
+            config.headers['X-Auth-Token'] = authToken;
+         }
+         return config;
+      },
+      responseError: function(error) {
+         if (error.status === 401 || error.status === 403) {
+            TokenStorage.clear();
+         }
+         return $q.reject(error);
+      }
+   };
+});
+
