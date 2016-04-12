@@ -8,7 +8,7 @@
     </ion-nav-title>
 	<ion-content style="margin-top: -1px;">
 	<div class="list list-item" ng-repeat="itinerary in userFav" >
-			<a type="item-text-wrap" ng-click="detail(itinerary.tripId)" id="detail{{itinerary.tripId}}" on-swipe-left="detail(itinerary.tripId)" href="" style='background-image:url("{{linkUrl}}images/ports/{{ itinerary.destinationImage[0][0] }}");' class="eventListPicture">
+			<a type="item-text-wrap" ng-click="detail(itinerary.tripId)" id="detail{{itinerary.tripId}}" on-swipe-left="detail(itinerary.tripId)" href="" style='background-image:url("{{linkUrl}}images/ports/{{ itinerary.destinationImage[0] }}");' class="eventListPicture">
 								<div class="gradient"></div>
 				<div class="marginList">
 				<div class="position" id="{{ itinerary.tripName}}"><span class="bold tripname overwrap" >{{ itinerary.tripName | capitalize:true }}</span>
@@ -20,11 +20,7 @@
 			</div>
 			<div class="shipName" id="{{ itinerary.shipName}}"><span class="roman ">{{ itinerary.shipName}}</span>
 			
-        </div>
-            <div class="sail">
-            <span class="thin ">Sailing &nbsp;</span>
-            <span class="bold">{{ itinerary.noOfSailing}}</span>			
-        </div>
+			</div>
 		<div class="price" id="{{ itinerary.priceFrom}}price"><span class="thin ">From &nbsp;{{'$'}}</span><span class="bold">{{ itinerary.priceFrom}}</span>
 			
 			</div>

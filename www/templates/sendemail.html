@@ -31,7 +31,7 @@
                 <div ng-messages-include="templates/error-list.html"></div> 
             </div>
 			<label class="item item-input color2" ng-class="{ 'has-errors' : authorizationForm.password.$invalid && authorizationForm.$submitted, 'no-errors' : authorizationForm.password.$valid}">
-              <input type="password" onselectstart="return false" onpaste="return false;" onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false" autocomplete=off name="password" id="password" onkeypress="return AvoidSpace(event)" ng-keyup="setpasswordc(authorizationForm)" placeholder="New Password" ng-model="user.password" ng-minlength="5" ng-maxlength="20" required>
+              <input type="password" onselectstart="return false" onpaste="return false;" onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false" autocomplete=off name="password" id="password" onkeypress="return AvoidSpace(event)" ng-keyup="resetFrom(authorizationForm)" placeholder="New Password" ng-model="user.password" ng-minlength="5" ng-maxlength="20" required>
             </label>
 				<div class="error-container" ng-show="authorizationForm.password.$error && authorizationForm.$submitted" ng-messages="authorizationForm.password.$error">
                 <div ng-messages-include="templates/error-list.html"></div> 
