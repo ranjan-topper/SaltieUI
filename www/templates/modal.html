@@ -1,7 +1,8 @@
+<div ng-controller="detailController">
 <ion-modal-view >
 	
         <ion-header-bar id="modal" class="bar bar-header modalHead"  >
-			<h2 class="title bold modalhead" id="{{roomType}}">{{category}}</h2>
+			<h2 class="title bold modalhead" id="{{category}}">{{category}}</h2>
           <button class="button button-icon button-primary modalClose ion-ios-close-empty" id="arrw" ng-click="cabinTypeClose()"></button>
         </ion-header-bar>
 
@@ -25,7 +26,7 @@
 			          <div class="list">
 		<div class="row list-item" >
 
-			 <div class="col light cabinItems" >
+			 <div class="col light cabinItems" style="">
                   <ul style="" ng-repeat="include in cabin.included">
 				 
 				 <li>{{include}}</li>
@@ -42,9 +43,14 @@
 				          
         </ion-content>
 	 <ion-footer-bar id="cabinType" ng-hide="readyBookDisable" style="background-color: #00707e;   border: none;">
+<!--
       <button class="button-block bookbt thin"  id="readyboook" ng-click="modal.hide();book1()">
 Ready to Book
 </button>
-
+-->
+        <button class="button-block bookbt thin" id="readytobook" ng-click="modal.hide();emailUs(category)">
+            Next Step
+        </button>
     </ion-footer-bar>
       </ion-modal-view>
+</div>

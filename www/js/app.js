@@ -21,7 +21,7 @@ app.run(function ($ionicPlatform,$rootScope, $state, $location,$ionicHistory)
 			{
                 $ionicHistory.goBack();
             }
-        },100);
+	},100);
 
   $ionicPlatform.ready(function() 
 	{
@@ -53,7 +53,9 @@ app.run(function ($ionicPlatform,$rootScope, $state, $location,$ionicHistory)
 
 
 
-app.config(function($stateProvider, $urlRouterProvider) {
+app.config(function($stateProvider, $urlRouterProvider, $httpProvider) {    
+  $httpProvider.interceptors.push('TokenAuthInterceptor');
+  $httpProvider.defaults.headers["Content-Type"]= "application/json";
   $stateProvider
   .state('start', {
     url: "/start",
@@ -168,9 +170,62 @@ app.config(function($stateProvider, $urlRouterProvider) {
 
         }
       }
+    })
+  
+  .state('app.emailUs', {
+      url: "/emailUs",
+      views: {
+        'menuContent': {
+          templateUrl: "templates/emailUs.html",
+        controller: "emailUsController"
+        }
+      }
+    })
+  
+  .state('app.engage', {
+      url: "/engageUser",
+      views: {
+        'menuContent': {
+          templateUrl: "templates/engageUser.html",
+        controller: 'engageController'
+        }
+      }
     });
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/start');
 	
 
 });
+
+app.factory('TokenStorage', function() {
+   var storageKey = 'auth_token';
+   return {      
+      store : function(token) {
+         return localStorage.setItem(storageKey, token);
+      },
+      retrieve : function() {
+         return localStorage.getItem(storageKey);
+      },
+      clear : function() {
+         return localStorage.removeItem(storageKey);
+      }
+   };
+});
+app.factory('TokenAuthInterceptor', function($q, TokenStorage) {
+   return {
+      request: function(config) {
+         var authToken = TokenStorage.retrieve();
+         if (authToken) {
+            config.headers['X-Auth-Token'] = authToken;
+         }
+         return config;
+      },
+      responseError: function(error) {
+         if (error.status === 401 || error.status === 403) {
+            TokenStorage.clear();
+         }
+         return $q.reject(error);
+      }
+   };
+});
+

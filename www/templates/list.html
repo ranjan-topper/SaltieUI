@@ -4,8 +4,12 @@
         </button>     
 	</ion-nav-buttons>
 	<ion-nav-title>
-	
-		<a href="" class="cruisecount" id="viewCount" style="text-decoration: none;"><span class="thin">View <span class="bold">{{count}}</span> Cruises</span></a>
+		<a href="" class="cruisecount" id="viewCount" style="text-decoration: none;">
+            <span class="bold">{{countSailing}}</span>
+            <span class="thin"> Sailings |</span>
+            <span class="bold"> {{count}}</span> 
+            <span class="thin">Cruises</span>
+        </a>
     </ion-nav-title>
 	<ion-content  id="filter">
 		<ion-scroll delegate-handle="filterScroll" direction="x" >
@@ -14,26 +18,6 @@
 		   </div>
 		   
 	  </ion-scroll>
-<!--
-		<div>
-		<ion-scroll delegate-handle="filterScroll" direction="x" >
-            <div class="row" style="transform: translate3d(-10px, 0px,0px);">
-                <div class="col col-50 button" id="any" ng-click="lifestyle('ANY','Any')" ng-class="{act: islengthActive('ANY'), button1: !islengthActive('ANY')}">
-						<a class="lifestyle">Any</a></div><span class="border"></span>
-                    
-						             <div class="col col-67 button" id="fewdays" ng-click="lifestyle('FEW DAY','FewDays')" ng-class="{act:islengthActive('FEW DAY'), button1: !islengthActive('FEW DAY')}">
-<a class="lifestyle" >Few Days</a></div><span class="border"></span>
-						                <div class="col col-50 button" id="oneweek" ng-click="lifestyle('ONE WEEK','OneWeek')" ng-class="{act: islengthActive('ONE WEEK'), button1: !islengthActive('ONE WEEK')}">
-<a class="lifestyle" >1 Week</a></div><span class="border"></span>
-						                <div class="col col-50 button" id="twoweek" ng-click="lifestyle('TWO WEEK','TwoWeek')" ng-class="{act: islengthActive('TWO WEEK'), button1: !islengthActive('TWO WEEK')}">
- <a class="lifestyle" >2 Weeks</a></div><span class="border"></span>
-						                <div class="col col-50 button" id="more" ng-click="lifestyle('MORE','More')" ng-class="{act: islengthActive('MORE'), button1: !islengthActive('MORE')}">
-<a class="lifestyle" >2+ Weeks</a></div>
-                </div>
-        </ion-scroll>
-		</div>
--->
-
 	</ion-content>
 	<ion-content delegate-handle="listPage" style="margin-top: 7vh;">
 	<div class="list list-item" ng-repeat="itinerary in list">
@@ -50,9 +34,14 @@
 			<div class="shipName" id="{{ itinerary.shipName}}"><span class="roman ">{{ itinerary.shipName}}</span>
 			
 			</div>
-		<div class="price" id="{{ itinerary.priceFrom}}price"><span class="thin ">From &nbsp;{{'$'}}</span><span class="bold">{{ itinerary.priceFrom}}</span>
-			
-			</div>
+        <div class="sail">
+            <span class="thin ">Sailings &nbsp;</span>
+            <span class="bold">{{ itinerary.noOfSailing}}</span>			
+        </div>
+		<div class="price" id="{{ itinerary.priceFrom}}price">
+            <span class="thin ">From &nbsp;{{'$'}}</span>
+            <span class="bold">{{ itinerary.priceFrom}}</span>			
+		</div>
 				</div>
 							</a>
 
