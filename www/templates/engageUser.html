@@ -35,18 +35,19 @@
         <button  class="button button-icon button-clear ion-ios-close-empty engage-popup"  id="cls11" ng-click="closePopup()"></button>
         <ion-content>
         <div class="marginDetail">
-            <div class="bookingPopup" id="{{ detail.tripDetails.tripName }}" style="top:0vh; line-height: 4.5vh;">
+            <div class="bookingPopup" id="{{ detail.tripDetails.tripName }}" style=" line-height: 4.5vh;">
                 <span>
                     <span class="bold">{{name}}</span> you haven't selected any specific cruise. Please Provide detail about your exciting cruise in comments section. Else 
                     Proceed to listings to pick a cruise of your choice.                
                 </span>
             </div>
-        </div>
-        </ion-content>
-        <ion-footer-bar>
-            <button class="button-block bookbt thin" id="readytobook" ng-click="goToList()">
+			    </div>
+			<div>
+			 <button class="button-block bookbt thin" id="readytobook" ng-click="goToList()">
                 View Listings
             </button>
-        </ion-footer-bar>
+			</div>
+        </ion-content>
+       
     </div>
 </ion-pan>

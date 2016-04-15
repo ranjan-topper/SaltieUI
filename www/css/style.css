@@ -2452,11 +2452,11 @@ div.sail{
     /* background-size: 100%; */
 }
 .bookingPopup{
-    position: absolute;
+    position: relative;
     color: #00707E;
     font-size: 5vmin;
     margin-right: 5vw;
-    bottom: 10vh;
+    bottom: 0vh;
     font-family: light;
 }
 .engage-popup{
