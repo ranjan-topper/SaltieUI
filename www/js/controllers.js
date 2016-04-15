@@ -145,7 +145,7 @@ app.controller('loginCtrl', function($scope, $state, $cordovaOauth, $localStorag
                         /* success function */
                         function(status) {
                             if (status == 200) {
-								$localStorage.Name=$scope.profileData.first_name;
+								$localStorage.Name=$scope.profileData.first_name+" "+$scope.profileData.last_name;
 								$rootScope.loginLogout="Log out";
 								$rootScope.showMyFav=false;
                                 $rootScope.showEngage = false;
@@ -523,6 +523,7 @@ app.controller('engageController', function($scope, $location, $http, $rootScope
     $scope.closePopup = function(){
         $scope.is_showBookingPopup = false;
     }
+    
 })
 
 //Lifestyle page controller start
@@ -1304,6 +1305,56 @@ app.factory('loginService', function($http, $q, $ionicLoading, $ionicPopup,$loca
 })
 
 
+
+
+
+app.factory('getCountryService', function($http, $q, $ionicLoading, $ionicPopup,$localStorage,$rootScope) {
+
+    //    Create a class that represents our name service.
+    function getCountryService() {
+        var self = this;
+        //    getName returns a promise which when fulfilled returns the name.
+        self.getCountry = function(url) {
+            //    Create a deferred operation.
+            var deferred = $q.defer();
+            $ionicLoading.show({
+                template: '<img src="./img/logo1.png" width="20%"/><br><ion-spinner icon="dots" class="spinner-balanced"/>'
+            });
+            //    Get the name from the server.
+            $http({
+                method: 'GET',
+                url: url,
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            })
+                .success(function(data, status) {
+//                    $ionicLoading.hide();
+//                    console.log(data);
+                    deferred.resolve(data);
+                })
+                .error(function(data, status) {
+//                    $ionicLoading.hide();
+//                    alert(status);
+                });
+
+            //    Now return the promise.
+            return deferred.promise;
+        };
+    };
+        return new getCountryService();
+
+});
+
+
+
+
+
+
+
+
+
+
 app.factory('engageService', function($http, $q, $ionicLoading, $ionicPopup,$localStorage,$rootScope) {
 
     //    Create a class that represents our name service.
@@ -1333,7 +1384,6 @@ app.factory('engageService', function($http, $q, $ionicLoading, $ionicPopup,$loc
                 .error(function(data, status) {
                     $ionicLoading.hide();
                     //deferred.resolve(status);
-                    alert(status);
                 });
 
             //    Now return the promise.
@@ -2341,7 +2391,7 @@ app.controller('loginSignUpController',function($scope, $location, $http, $rootS
                         function(status) {
                             if (status == 200) {
 								
-								$localStorage.Name=$scope.profileData.first_name;
+								$localStorage.Name=$scope.profileData.first_name+" "+$scope.profileData.last_name;
                                 $localStorage.userName = result.data.id;
 								//menu item do be displayed when facebook login
 								$rootScope.loginLogout="Log out";
@@ -2507,7 +2557,7 @@ app.controller('loginSignUpController',function($scope, $location, $http, $rootS
 });
 
 
-app.controller('emailUsController', function($scope, $state, $rootScope, $state, $location, $http, $localStorage, $ionicLoading, $ionicPopup, engageService, serviceLink) {
+app.controller('emailUsController', function($scope, $state, $rootScope, $state, $location, $http, $localStorage, $ionicLoading, $ionicPopup, engageService, serviceLink, getCountryService) {
     
     $scope.detail = angular.copy($rootScope.TempDetail);
     
@@ -2529,8 +2579,59 @@ app.controller('emailUsController', function($scope, $state, $rootScope, $state,
         "values": [ "Select Room Type", "Interior", "Oceanview", "Balcony", "Suite"] 
     };
     
+    /* ==========================================================================
+  						get country
+   	========================================================================== */
+  
+        var url = serviceLink.url+"SaltieApp/rest/cruise/countryAndState/all";
+        getCountryService.getCountry(url)
+                    .then(
+                        /* success function */
+                       function(data) {
+                            $scope.countryState = data;
+                            //$scope.states = data[0].state;
+                            $ionicLoading.hide();
+                            /*$scope.status = status;
+                            if ($scope.status == 204) {
+                                //alert(2);
+                                //$location.path('/emaillogin');
+                                $ionicLoading.hide();
+                            } else {
+                                //engageService.errors(form, $scope.status);
+                                //alert(01);
+                            }*/
+
+                        }, function(error) {
+                            //error handling goes here...
+                        })
+    /* ==========================================================================
+  						get Selected State
+   	========================================================================== */
+        
+//        $scope.getState = function(){
+//            var selectedCountry = document.getElementById("country").value;
+//            $scope.index = $scope.countryState[0].countryName.indexOf(selectedCountry);
+//            alert($scope.index);
+//            $scope.states = $scope.countryState[$scope.index].state;
+//        }
+        
+    /* ==========================================================================
+  						toggle pref contact
+   	========================================================================== */
+		
+    $scope.toggle = "email";
+    $scope.prefContact=function(toggle)
+    {
+        $scope.toggle=toggle;
+    }
+     $rootScope.activePrefContact=function(toggle)
+     {
+         return $scope.toggle==toggle;
+     }
+    
     
     $scope.gePrefContact = function(type){
+        
        $scope.pref = type;
     }
     //alert($rootScope.logSignClicked);
@@ -2560,6 +2661,7 @@ app.controller('emailUsController', function($scope, $state, $rootScope, $state,
                 var adults = adult.options[adult.selectedIndex].value;
                 var seniors = senior.options[senior.selectedIndex].value;
                 var roomType = document.getElementById("roomType").value;
+                var country = document.getElementById("country").value;
                
             if (form.$valid) //checking form valid or not
             {
@@ -2569,7 +2671,7 @@ app.controller('emailUsController', function($scope, $state, $rootScope, $state,
                 
                 var url = serviceLink.url + 'SaltieApp/rest/cruise/requestQuote';
                 
-                var data = "firstName=" + user.firstName + "&lastName=" + user.lastName + "&email=" + user.email + "&phone=" + user.phone + "&tripId=" + $rootScope.detail.tripDetails.tripId + "&country=" + user.country + "&state=" + user.state + "&roomType=" + user.roomType + "&preferedContact =" + $scope.pref + "&adults=" + adults + "&kids=" + kids + "&seniors=" + seniors + "&comments=" + user.comment;
+                var data = "firstName=" + user.firstName + "&lastName=" + user.lastName + "&email=" + user.email + "&phone=" + user.phone + "&tripId=" + $rootScope.detail.tripDetails.tripId + "&country=" + country + "&state=" + user.state + "&roomType=" + user.roomType + "&preferedContact =" + $scope.pref + "&adults=" + adults + "&kids=" + kids + "&seniors=" + seniors + "&comments=" + user.comment;
                 $scope.status = "";
                 
                 engageService.submit(url, data)

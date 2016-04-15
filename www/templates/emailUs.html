@@ -49,38 +49,37 @@
                    <label class="item item-input color3" ng-class="{ 'has-errors' : engageForm.firstName.$invalid && engageForm.$submitted, 'no-errors' : engageForm.firstName.$valid  && engageForm.$submitted}">
                         <input type="text" name="firstName" id="plc2" ng-keyup="resetFrom(engageForm)" placeholder="First Name" ng-model="user.firstName" ng-minlength="3" ng-maxlength="20" required="" class="ng-valid-minlength ng-valid-maxlength ng-valid-parse ng-invalid ng-invalid-required ng-pristine ng-touched">
                     </label>
-                    <div class="error-container" ng-show="engageForm.firstName.$error && engageForm.$submitted" ng-messages="engageForm.firstName.$error">
+                    <div class="error-container email-error" ng-show="engageForm.firstName.$error && engageForm.$submitted" ng-messages="engageForm.firstName.$error">
                         <div ng-messages-include="templates/error-list.html"></div> 
                     </div>
 
                     <label class="item item-input color2" ng-class="{ 'has-errors' : engageForm.lastName.$invalid && engageForm.$submitted, 'no-errors' : engageForm.lastName.$valid  && engageForm.$submitted}">
-                        <input type="text" name="lastName" id="plc2" ng-keyup="resetFrom(engageForm)" placeholder="Last Name" ng-model="user.lastName" ng-minlength="3" ng-maxlength="20" required="" class="ng-valid-minlength ng-valid-maxlength ng-valid-parse ng-invalid ng-invalid-required ng-pristine ng-touched">
+                        <input type="text" name="lastName" id="plc2" ng-keyup="resetFrom(engageForm)" placeholder="Last Name" ng-model="user.lastName" ng-minlength="1" ng-maxlength="20" required="" class="ng-valid-minlength ng-valid-maxlength ng-valid-parse ng-invalid ng-invalid-required ng-pristine ng-touched">
                     </label>
-                    <div class="error-container" ng-show="engageForm.lastName.$error && engageForm.$submitted" ng-messages="engageForm.lastName.$error">
+                    <div class="error-container email-error" ng-show="engageForm.lastName.$error && engageForm.$submitted" ng-messages="engageForm.lastName.$error">
                         <div ng-messages-include="templates/error-list.html"></div> 
                     </div>
 
                     <label class="item item-input color1" ng-class="{ 'has-errors' : engageForm.email.$invalid &amp;&amp; engageForm.$submitted, 'no-errors' : engageForm.email.$valid  &amp;&amp; engageForm.$submitted}">
                         <input type="email" name="email" id="plc1" ng-keyup="resetEmail(engageForm)" placeholder="Email" ng-model="user.email" required="" class="ng-pristine ng-untouched ng-valid-email ng-invalid ng-invalid-required">
                     </label>
-                    <div class="error-container" ng-show="engageForm.email.$error && engageForm.$submitted" ng-messages="engageForm.email.$error">
+                    <div class="error-container email-error" ng-show="engageForm.email.$error && engageForm.$submitted" ng-messages="engageForm.email.$error">
                         <div ng-messages-include="templates/error-list.html"></div> 
                     </div>
 
                     <label class="item item-input color4" ng-class="{ 'has-errors' : engageForm.phone.$invalid &amp;&amp; engageForm.$submitted, 'no-errors' : engageForm.phone.$valid  &amp;&amp; engageForm.$submitted}">
                         <input type="text" onselectstart="return false" name="phone" id="plc4" placeholder="Phone" ng-keyup="resetFrom(engageForm)" ng-model="user.phone" ng-minlength="10" ng-maxlength="10" required="" class="ng-valid-maxlength ng-valid-parse ng-invalid ng-invalid-required ng-valid-minlength ng-pristine ng-touched">
                     </label>
-                     <div class="error-container" ng-show="engageForm.phone.$error && engageForm.$submitted" ng-messages="engageForm.phone.$error">
+                     <div class="error-container email-error" ng-show="engageForm.phone.$error && engageForm.$submitted" ng-messages="engageForm.phone.$error">
                         <div ng-messages-include="templates/error-list.html"></div> 
                     </div>
 
-                    <div class="row">
+                    <div class="row" style="margin-bottom: 0.2vh;">
                         <div class="styled-select col  no-padding">
                             <label class="item item-input no-padding">
                                 <i class="ion-ios-arrow-down selectArrowCss" style="top: calc(35% - 4px);"></i>
-                                <select class="ng-invalid ng-invalid-required" id="cruiseLine" name="country" ng-model="user.country">
-                                    <option value="">USA</option>
-                                    <option value="USA">USA</option>
+                                <select class="ng-invalid ng-invalid-required" id="country" name="country">
+                                    <option ng-repeat="country in countryState" value="{{country.countryName}}">{{country.countryName}}</option>
                                 </select>
                             </label>
                         </div>
@@ -89,76 +88,36 @@
                                 <i class="ion-ios-arrow-down selectArrowCss" style="top: calc(35% - 4px);"></i>
                                 <select class="ng-invalid ng-invalid-required" id="cruiseLine" name="state" ng-model="user.state">
                                     <option value="">State</option>
-                                    <option value="AL">Alabama</option>
-                                    <option value="AK">Alaska</option>
-                                    <option value="AZ">Arizona</option>
-                                    <option value="AR">Arkansas</option>
-                                    <option value="CA">California</option>
-                                    <option value="CO">Colorado</option>
-                                    <option value="CT">Connecticut</option>
-                                    <option value="DE">Delaware</option>
-                                    <option value="DC">District Of Columbia</option>
-                                    <option value="FL">Florida</option>
-                                    <option value="GA">Georgia</option>
-                                    <option value="HI">Hawaii</option>
-                                    <option value="ID">Idaho</option>
-                                    <option value="IL">Illinois</option>
-                                    <option value="IN">Indiana</option>
-                                    <option value="IA">Iowa</option>
-                                    <option value="KS">Kansas</option>
-                                    <option value="KY">Kentucky</option>
-                                    <option value="LA">Louisiana</option>
-                                    <option value="ME">Maine</option>
-                                    <option value="MD">Maryland</option>
-                                    <option value="MA">Massachusetts</option>
-                                    <option value="MI">Michigan</option>
-                                    <option value="MN">Minnesota</option>
-                                    <option value="MS">Mississippi</option>
-                                    <option value="MO">Missouri</option>
-                                    <option value="MT">Montana</option>
-                                    <option value="NE">Nebraska</option>
-                                    <option value="NV">Nevada</option>
-                                    <option value="NH">New Hampshire</option>
-                                    <option value="NJ">New Jersey</option>
-                                    <option value="NM">New Mexico</option>
-                                    <option value="NY">New York</option>
-                                    <option value="NC">North Carolina</option>
-                                    <option value="ND">North Dakota</option>
-                                    <option value="OH">Ohio</option>
-                                    <option value="OK">Oklahoma</option>
-                                    <option value="OR">Oregon</option>
-                                    <option value="PA">Pennsylvania</option>
-                                    <option value="RI">Rhode Island</option>
-                                    <option value="SC">South Carolina</option>
-                                    <option value="SD">South Dakota</option>
-                                    <option value="TN">Tennessee</option>
-                                    <option value="TX">Texas</option>
-                                    <option value="UT">Utah</option>
-                                    <option value="VT">Vermont</option>
-                                    <option value="VA">Virginia</option>
-                                    <option value="WA">Washington</option>
-                                    <option value="WV">West Virginia</option>
-                                    <option value="WI">Wisconsin</option>
-                                    <option value="WY">Wyoming</option>
+                                    <option ng-repeat="state in states" value="{{state.stateCode}}">{{state.stateName}}</option>
                                 </select>
                             </label>
                         </div>
                     </div>
+<!--
                     <div class="styled-select">
                         <i class="ion-ios-arrow-down selectArrowCss"></i>
                         <select id="roomType" name="roomType" ng-model="roomCat.value" class="ng-invalid ng-invalid-required" ng-options="v for v in roomCat.values">
                             
                         </select>
                     </div>
+-->
+                     <div class="styled-select no-padding">
+                        <label class="item item-input no-padding">
+                            <i class="ion-ios-arrow-down selectArrowCss" style="top: calc(35% - 4px);"></i>
+                            <select id="roomType" name="roomType" ng-model="roomCat.value" class="ng-invalid ng-invalid-required" ng-options="v for v in roomCat.values">
+                            
+                        </select>
+                        </label>
+                    </div>
                     <div class="row" style="margin-top: 3vh;margin-bottom: 3vh;">
-                        <div class="col col-50 labelled-text roman" style="">Prefered Contact Method</div>
-                        <div class="col" style=" padding:0px">
-                            <span class="button sortByPrice roman prefCont" ng-click="sortBy('asc');gePrefContact('email');" id="lth" ng-class="{act2: isSortByActive('asc'), button1: !isSortByActive('asc')}">
+                        <div class="col col-50 labelled-text roman no-padding">Prefered Contact Method</div>
+                        <div class="col no-padding">
+                            <span class="button sortByPrice roman prefCont" ng-click="prefContact('email');gePrefContact('email');" id="lth" ng-class="{act2: activePrefContact('email'), button1: !activePrefContact('email')}">
                                 Email
                             </span>
                         </div>
                         <div class="col no-padding" align="right">
-                           <span class="button sortByPrice roman prefCont" ng-click="sortBy('desc');gePrefContact('phone');" id="htl" ng-class="{act2: isSortByActive('desc'), button1: !isSortByActive('desc')}">
+                           <span class="button sortByPrice roman prefCont" ng-click="prefContact('phone');gePrefContact('phone');" id="htl" ng-class="{act2: activePrefContact('phone'), button1: !activePrefContact('phone')}">
 					           Phone
 			               </span>
                         </div>
@@ -186,13 +145,18 @@
                             </select>
                         </div>
                     </div>
-                    <div class="list">
+                    <div ng-if="detail.tripDetails.id == undefined || (redirectEmailUs == 'list' || redirectEmailUs == 'lifeStyle')" class="list" ng-if="detail.tripDetails.id !== undefined || redirectEmailUs == 'detail'">
                         <label class="item item-input styled-input" style="margin-top: 3%" ng-class="{ 'has-errors' : engageForm.comment.$invalid &amp;&amp; engageForm.$submitted, 'no-errors' : engageForm.comment.$valid  &amp;&amp; engageForm.$submitted}">
                             <textarea  class="ng-invalid ng-invalid-required" placeholder="Comments" required="" name="comment" ng-model="user.comment"></textarea>
                         </label>
-                        <div class="error-container" ng-show="engageForm.comment.$error && engageForm.$submitted" ng-messages="engageForm.comment.$error">
+                        <div class="error-container email-error" ng-show="engageForm.comment.$error && engageForm.$submitted" ng-messages="engageForm.comment.$error">
                             <div ng-messages-include="templates/error-list.html"></div> 
                         </div>
+                    </div>
+                    <div class="list"  ng-if="detail.tripDetails.id !== undefined || redirectEmailUs == 'detail'" style="margin-bottom: 2vh">
+                        <label class="item item-input styled-input" style="margin-top: 3%" >
+                            <textarea  placeholder="Comments" required="" name="comment" ng-model="user.comment"></textarea>
+                        </label>
                     </div>
                 </div>
 <!--

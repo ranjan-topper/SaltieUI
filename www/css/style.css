@@ -2393,8 +2393,8 @@ color: rgb(176, 162, 131) !important;
     color: #9C867B !important;
 }
 .labelled-text{
-    font-size: 3.4vmin;
-/*    line-height: 5vh;*/
+    font-size: 3.2vmin;
+    line-height: 2.8;
     color: #00707e ;
 }
 .no-padding{
@@ -2428,8 +2428,8 @@ div.sail{
     text-align: center;
     position: absolute;
     display: inline-block;
-    width: 20vmin;
     line-height: 6vmin;
+    padding: 0px 5px;
     height: 6vmin;
     font-size: 3.5vmin;
     background: rgba(215, 216, 216, 0.59);
@@ -2474,4 +2474,13 @@ div.sail{
     height: 7.5vmin;
     min-height: 4.7vmin;
     line-height: 7.5vmin !important;
+    vertical-align: text-top;
+}
+.engageImg{
+    width: 100%;
+    height: 100%;
+    margin-top: 20px;
+}
+.email-error div{
+    color: #000000 !important;
 }
