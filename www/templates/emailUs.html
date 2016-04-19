@@ -7,7 +7,7 @@
     <ion-nav-title>
         <a href="" class="cruisecount" id="count" style="text-decoration: none;"><span class="thin">Email</span>&nbsp;<span class="bold">Us</span></a>
     </ion-nav-title>
-    <form name="engageForm" novalidate="" ng-submit="submitEmailUs(engageForm, user)" class="ng-valid-email ng-invalid ng-invalid-required ng-valid-minlength ng-valid-maxlength ng-dirty ng-valid-parse">
+    <form name="engageForm" novalidate=""  class="ng-valid-email ng-invalid ng-invalid-required ng-valid-minlength ng-valid-maxlength ng-dirty ng-valid-parse">
     <ion-content class="engageContentStart">
         <ion-slide-box delegate-handle="detailSlide" show-pager="false">
             <!--			auto-play="true" does-continue = "true"-->
@@ -155,7 +155,7 @@
                     </div>
                     <div class="list"  ng-if="detail.tripDetails.id !== undefined || redirectEmailUs == 'detail'" style="margin-bottom: 2vh">
                         <label class="item item-input styled-input" style="margin-top: 3%" >
-                            <textarea  placeholder="Comments" required="" name="comment" ng-model="user.comment"></textarea>
+                            <textarea  placeholder="Comments" name="comment" ng-model="user.comment"></textarea>
                         </label>
                     </div>
                 </div>
@@ -167,7 +167,7 @@
         </div>
     </ion-content>
     <ion-footer-bar style="background-color: #00707e;   border: none;">
-        <button class="button-block bookbt thin" id="readytobook">
+        <button class="button-block bookbt thin" ng-click="submitEmailUs(engageForm, user)" id="readytobook">
             Send
         </button>
 
