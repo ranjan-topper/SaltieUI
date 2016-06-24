@@ -25,9 +25,7 @@ app.controller('myFavouriteController', function($scope, $location, $ionicModal,
 
         $scope.myFav = function(myfavtripID) {
 
-            $ionicLoading.show({
-                template: '<img src="./img/logo1.png" width="20%"/><br><ion-spinner icon="dots" class="spinner-balanced"/>'
-            });
+           
             $http({
                 method: 'POST',
                 url: serviceLink.url + 'SaltieApp/rest/cruise/favourite/set',

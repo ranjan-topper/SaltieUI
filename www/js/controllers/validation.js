@@ -1,5 +1,6 @@
 app.controller('formValidation',function($scope, $location, $state, $http, $localStorage, $state, loginService, serviceLink,themeFilter){
 	
+	
 		$scope.setpassword = function(form,user) 
 		{
             form.password.$setValidity("password", true);
@@ -37,4 +38,8 @@ app.controller('formValidation',function($scope, $location, $state, $http, $loca
             form.passwordc.$setValidity("dontMatch", true);
 			form.$setPristine();
         }
+		
+		
+
+		
 });

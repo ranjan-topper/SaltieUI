@@ -12,9 +12,7 @@ app.controller('loginSignUpController',function($scope, $location, $http, $rootS
         
         $rootScope.facebookLogin = function() {
             facebookService.facebook().then(function(result) {
-                $ionicLoading.show({
-                    template: '<img src="./img/logo1.png" width="20%"/><br><ion-spinner icon="dots" class="spinner-balanced"/>'
-                });
+                
 
                 $scope.profileData = result.data; //assign facebook data to profiledata
                 //post request to store the facebook user detail in our database such as(email,firstname,lastname,token a unique id given by the facebook)

@@ -7,10 +7,7 @@ if(typeof analytics !== 'undefined') { analytics.trackView("App Main Controller"
 	
     $scope.myFavourite = function() {
         //service part of myfavourite page start
-        $ionicLoading.show({
-            //template: 'loading'
-            template: '<img src="./img/logo1.png" width="20%"/><br><ion-spinner icon="dots" class="spinner-balanced"/>'
-        });
+       
         $http({
             method: 'GET',
             url: serviceLink.url + 'SaltieApp/rest/cruise/favourite/list'
@@ -20,7 +17,6 @@ if(typeof analytics !== 'undefined') { analytics.trackView("App Main Controller"
 */
             $rootScope.userFav = data.tripList;
             $location.path('/app/myFavourite');
-            $ionicLoading.hide()
         });
 
     }

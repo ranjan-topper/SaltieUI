@@ -1,4 +1,4 @@
-app.controller('emailloginCtrl', function($scope, $location, $state, $http, $localStorage, $state, loginService, serviceLink) {
+app.controller('emailloginCtrl', function($scope, $location, $state, $http, $ionicLoading, $localStorage, $state, loginService, serviceLink) {
 	
 	var isIPad = ionic.Platform.isIPad();
   var isIOS = ionic.Platform.isIOS();
@@ -21,16 +21,20 @@ app.controller('emailloginCtrl', function($scope, $location, $state, $http, $loc
             if (form.$valid) //cheacking the form valid or not
             {
                 var url = serviceLink.url + 'SaltieApp/rest/cruise/user/login';
-                var obj = {
+                var obj ={
                     userName: user.email,
                     password: user.password
                 };
+				
                 var data = "userName=" + obj.userName + "&password=" + obj.password;
                 $scope.status = "";
                 loginService.login(url, data)
                     .then(
                         /* success function */
+				
+
                         function(status) {
+
                             $scope.status = status;
                             if ($scope.status == 200) {
                                 $localStorage.userName = user.email;
@@ -43,11 +47,17 @@ app.controller('emailloginCtrl', function($scope, $location, $state, $http, $loc
                         }, function(error) {
                             //If an error happened, handle it here
                         });
-
-
-
             }
         }
+		  $scope.sapceCheck = function () {
+			  $scope.keypresskeycode = event.keyCode;
+			  console.log($scope.keypresskeycode);
+			  if($scope.keypresskeycode == 32)
+			  return false;
+            };
+		
+
+		
     } else {
         $state.go('app.lifeStyle');
     }

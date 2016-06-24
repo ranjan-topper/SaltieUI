@@ -756,6 +756,9 @@ font-size: 5.5vmin;    text-decoration: none;
 
 .favorite
 {
+	    max-width: 50px;
+    width: 10%;
+    box-shadow: 0px 6px 26px rgba(0, 35, 45, 0.85);
     float: right;
     margin-right: 5vw;
     position: absolute;

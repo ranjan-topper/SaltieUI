@@ -5,7 +5,7 @@
 // 'starter.controllers' is found in controllers.js
 var app = angular.module('starter', ['ionic', 'ngStorage', 'ngCordova','ngMessages','starter.controllers','ngIOS9UIWebViewPatch']);
 
-app.run(function ($ionicPlatform,$rootScope, $state, $location,$ionicHistory) 
+app.run(function ($ionicPlatform,$rootScope, $state, $location,$ionicHistory,$ionicLoading) 
 {
 	$ionicPlatform.registerBackButtonAction(function (event)
 	{
@@ -49,6 +49,18 @@ app.run(function ($ionicPlatform,$rootScope, $state, $location,$ionicHistory)
             }
 		}
   	});
+	
+	
+	
+	
+    $rootScope.$on('loading:show', function() {
+      $ionicLoading.show({template: '<img src="./img/logo1.png" width="20%"/><br><ion-spinner icon="dots" class="spinner-balanced"/>'})
+    });
+
+    $rootScope.$on('loading:hide', function() {
+      $ionicLoading.hide()
+    });
+	
 })
 
 
@@ -211,21 +223,64 @@ app.factory('TokenStorage', function() {
       }
    };
 });
-app.factory('TokenAuthInterceptor', function($q, TokenStorage) {
-   return {
+app.factory('TokenAuthInterceptor', function($q, TokenStorage, $rootScope,$injector,$timeout) {
+ return {
+      requestError: function(config) {
+        $rootScope.$broadcast('loading:show')
+        return config;
+      },
       request: function(config) {
-         var authToken = TokenStorage.retrieve();
+        $rootScope.$broadcast('loading:show')
+
+        var authToken = TokenStorage.retrieve();
          if (authToken) {
             config.headers['X-Auth-Token'] = authToken;
          }
          return config;
       },
-      responseError: function(error) {
-         if (error.status === 401 || error.status === 403) {
+      response: function(response) {
+        $rootScope.$broadcast('loading:hide');
+        return response;
+		  
+      },
+      responseError: function(error){
+        $rootScope.$broadcast('loading:hide')
+       if (error.status === 401 || error.status === 403) {
             TokenStorage.clear();
          }
-         return $q.reject(error);
+          
+		  
+		  
+		  var $ionicPopup = $injector.get('$ionicPopup');
+            if (error.status === 0) {
+                var userInputDefer = $q.defer();                
+                var confirmPopup = $ionicPopup.confirm({
+                    title: 'No Connectivity!',
+                    template: 'Internet not available',
+                    okText: 'Retry'
+                });
+
+                confirmPopup.then(function(res) {
+                    if(res) {
+                        var $http = $injector.get('$http');
+                        userInputDefer.resolve($http(error.config));
+                    } else {
+                        userInputDefer.reject($q.reject(error));
+                    }
+                });
+
+                return userInputDefer.promise;
       }
-   };
+		           return $q.reject(error);
+
+    }
+ }
 });
+
+
+
+  			
+
+
+
 

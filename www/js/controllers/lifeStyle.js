@@ -43,13 +43,10 @@ app.controller('lifeStyleCtrl', function($scope, $location, $http, $rootScope, $
         $rootScope.page = "lifestyle"; //page remember form myfavourite page
 		
 		
-        $ionicLoading.show({
-            template: '<img src="./img/logo1.png" width="20%"/><br><ion-spinner icon="dots" class="spinner-balanced"/>'
-        });
+       
         $http.get(serviceLink.url + 'SaltieApp/rest/cruise/count').success(function(data) {
             $rootScope.lifestylecount = data;
 			$rootScope.count = $rootScope.lifestylecount[$localStorage.stylelife];
-            $ionicLoading.hide()
         });
 		
 		

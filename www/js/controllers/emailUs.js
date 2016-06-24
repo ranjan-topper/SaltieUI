@@ -1,9 +1,12 @@
 app.controller('emailUsController', function($scope, $state, $rootScope, $state, $location, $http, $localStorage, $ionicLoading, $ionicPopup, engageService, serviceLink, getCountryService) {
     var id="";
     $scope.detail = angular.copy($rootScope.TempDetail);
-	if($scope.detail!=null || $scope.detail!=undefined )
-		id=$scope.detail;
-    $rootScope.engageData = $scope.detail.tripID;
+	if($scope.detail != "")
+	{
+		id=$scope.detail.tripDetails.tripId;
+		    $rootScope.engageData = $scope.detail.tripDetails.tripId;
+
+	}
 	$scope.pref = "email";
     $rootScope.TempDetail = "";
     
@@ -116,7 +119,11 @@ app.controller('emailUsController', function($scope, $state, $rootScope, $state,
                                     buttons: [{
                                         text: 'Ok'
                                     }]
-                                }).then(function(res) {  $location.path('/app/engageUser');  });
+                                }).then(function(res) { 
+									$location.path('/app/engageUser');  
+									$rootScope.TempDetail = $scope.detail;
+								
+								});
                                 $ionicLoading.hide();
                             } else {
                                $ionicPopup.show({

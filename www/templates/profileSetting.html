@@ -27,7 +27,7 @@
             </div>
 				<div class="profileHead" id="firstName">Enter Password*</div>
 			<label class="item item-input color2 spacing" ng-class="{ 'has-errors' : authorizationForm.password.$invalid && authorizationForm.$submitted, 'no-errors' : authorizationForm.password.$valid}">
-              <input type="password" onkeypress="return AvoidSpace(event)"  onselectstart="return false" onpaste="return false;" onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false" autocomplete=off name="password" ng-keyup="setpassword(authorizationForm)" id="password" placeholder="Password" ng-model="user.oldPassword" required>
+              <input type="password" onkeyup="AvoidSpace(this)"  onselectstart="return false" onpaste="return false;" onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false" autocomplete=off name="password" ng-keyup="setpassword(authorizationForm)" id="password" placeholder="Password" ng-model="user.oldPassword" required>
             </label>
 				<div class="error-container" ng-show="authorizationForm.password.$error && authorizationForm.$submitted" ng-messages="authorizationForm.password.$error">
                 <div ng-messages-include="templates/error-list.html"></div> 
@@ -36,14 +36,14 @@
 				
 			<div id="input" ng-hide="changePasshide">
 			<label class="item item-input color3" ng-class="{ 'has-errors' : authorizationForm.newPassword.$invalid && authorizationForm.$submitted, 'no-errors' : authorizationForm.newPassword.$valid}">
-              <input type="password" onselectstart="return false" onpaste="return false;" onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false" autocomplete=off name="newPassword" onkeypress="return AvoidSpace(event)" id="newPassword" placeholder="New Password" ng-keyup="setConpassword(authorizationForm)" ng-model="user.newPassword" ng-minlength="5" ng-maxlength="20" required>
+              <input type="password" onselectstart="return false" onpaste="return false;" onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false" autocomplete=off name="newPassword" onkeyup="AvoidSpace(this)" id="newPassword" placeholder="New Password" ng-keyup="setConpassword(authorizationForm)" ng-model="user.newPassword" ng-minlength="5" ng-maxlength="20" required>
             </label>
 				<div class="error-container" ng-show="authorizationForm.newPassword.$error && authorizationForm.$submitted" ng-messages="authorizationForm.newPassword.$error">
                 <div ng-messages-include="templates/error-list.html"></div> 
             </div>
 				
 				<label class="item item-input color3" ng-class="{ 'has-errors' : authorizationForm.passwordc.$invalid && authorizationForm.$submitted, 'no-errors' : authorizationForm.passwordc.$valid}">
-              <input type="password" onselectstart="return false" onpaste="return false;" onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false" autocomplete=off name="passwordc" id="passwordc" onkeypress="return AvoidSpace(event)" ng-keyup="setConpassword(authorizationForm)" placeholder="Confirm Password" ng-model="user.passwordc" ng-minlength="5" ng-maxlength="20" required>
+              <input type="password" onselectstart="return false" onpaste="return false;" onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false" autocomplete=off name="passwordc" id="passwordc" onkeyup="AvoidSpace(this)" ng-keyup="setConpassword(authorizationForm)" placeholder="Confirm Password" ng-model="user.passwordc" ng-minlength="5" ng-maxlength="20" required>
             </label>
 				<div class="error-container" ng-show="authorizationForm.passwordc.$error && authorizationForm.$submitted" ng-messages="authorizationForm.passwordc.$error">
                 <div ng-messages-include="templates/error-list.html"></div> 

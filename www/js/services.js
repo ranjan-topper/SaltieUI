@@ -30,9 +30,7 @@ app.factory('loginService', function($http, $q, $ionicLoading, $ionicPopup,$loca
         self.login = function(url, data) {
             //    Create a deferred operation.
             var deferred = $q.defer();
-            $ionicLoading.show({
-                template: '<img src="./img/logo1.png" width="20%"/><br><ion-spinner icon="dots" class="spinner-balanced"/>'
-            });
+         
             //    Get the name from the server.
             $http({
                 method: 'POST',
@@ -40,17 +38,19 @@ app.factory('loginService', function($http, $q, $ionicLoading, $ionicPopup,$loca
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'                     
                 },
-                data: data
+                data: encodeURI(data)
             })
                 .success(function(data, status) {
-                    $ionicLoading.hide();
+                    if(status == 200)
+					{
 				    $localStorage.Name=data.user;
                     TokenStorage.store(data.token);
 				    $rootScope.favourite1=data.favourite;
+					}
                     deferred.resolve(status);
                 })
                 .error(function(data, status) {
-                    $ionicLoading.hide();
+                    
                     deferred.resolve(status);
 
                 });
@@ -81,7 +81,7 @@ app.factory('loginService', function($http, $q, $ionicLoading, $ionicPopup,$loca
                 }).then(function(res) {});
 			}
             else if (status == 404) {
-                $ionicLoading.hide();
+                
                 form.email.$setValidity("emailNot", false);
 //                $ionicPopup.show({
 //                    title: 'Error',
@@ -93,10 +93,10 @@ app.factory('loginService', function($http, $q, $ionicLoading, $ionicPopup,$loca
 //
 //                });
             } else if (status == 403) {
-                $ionicLoading.hide();
+                
                 alert();
             } else if (status == 401) {
-                $ionicLoading.hide();
+                
                 form.password.$setValidity("password", false);
 //                $ionicPopup.show({
 //                    title: 'Error',
@@ -106,7 +106,7 @@ app.factory('loginService', function($http, $q, $ionicLoading, $ionicPopup,$loca
 //                    }]
 //                }).then(function(res) {});
             } else if (status == 400) {
-                $ionicLoading.hide();
+                
                 $ionicPopup.show({
                     title: 'Field Missing',
                     subTitle: 'Bad Request',
@@ -117,7 +117,7 @@ app.factory('loginService', function($http, $q, $ionicLoading, $ionicPopup,$loca
 
                 });
             } else if (status == 302) {
-                $ionicLoading.hide();
+                
                 form.email.$setValidity("emailExist", false);
 //                $ionicPopup.show({
 //                    title: 'User name already exist',
@@ -128,7 +128,7 @@ app.factory('loginService', function($http, $q, $ionicLoading, $ionicPopup,$loca
 //                }).then(function(res) {
 //                });
             } else if (status == 412) {
-                $ionicLoading.hide();
+                
                 form.otp.$setValidity("otpMiss", false);
 //                $ionicPopup.show({
 //                    title: 'Error',
@@ -141,7 +141,7 @@ app.factory('loginService', function($http, $q, $ionicLoading, $ionicPopup,$loca
 			
 			else if(status == 498)
 			{
-				$ionicLoading.hide();
+				
                 form.otp.$setValidity("optExp", false);
 			}
 			else if(status == 423)
@@ -191,9 +191,7 @@ app.factory('getCountryService', function($http, $q, $ionicLoading, $ionicPopup,
         self.getCountry = function(url) {
             //    Create a deferred operation.
             var deferred = $q.defer();
-            $ionicLoading.show({
-                template: '<img src="./img/logo1.png" width="20%"/><br><ion-spinner icon="dots" class="spinner-balanced"/>'
-            });
+         
             //    Get the name from the server.
             $http({
                 method: 'GET',
@@ -203,12 +201,12 @@ app.factory('getCountryService', function($http, $q, $ionicLoading, $ionicPopup,
                 }
             })
                 .success(function(data, status) {
-//                    $ionicLoading.hide();
+//                    
 //                    console.log(data);
                     deferred.resolve(data);
                 })
                 .error(function(data, status) {
-//                    $ionicLoading.hide();
+//                    
 //                    alert(status);
                 });
 
@@ -230,9 +228,7 @@ app.factory('engageService', function($http, $q, $ionicLoading, $ionicPopup,$loc
         self.submit = function(url, data) {
             //    Create a deferred operation.
             var deferred = $q.defer();
-            $ionicLoading.show({
-                template: '<img src="./img/logo1.png" width="20%"/><br><ion-spinner icon="dots" class="spinner-balanced"/>'
-            });
+          
             //    Get the name from the server.
             $http({
                 method: 'POST',
@@ -243,13 +239,13 @@ app.factory('engageService', function($http, $q, $ionicLoading, $ionicPopup,$loc
                 data: data
             })
                 .success(function(data, status) {
-                    $ionicLoading.hide();
+                    
                     console.log(data);
 					console.log(status);
                     deferred.resolve(status);
                 })
                 .error(function(data, status) {
-                    $ionicLoading.hide();
+                    
                     deferred.resolve(data);
                 });
 
@@ -279,7 +275,7 @@ app.factory('engageService', function($http, $q, $ionicLoading, $ionicPopup,$loc
                 }).then(function(res) {});
 			}
             else if (status == 404) {
-                $ionicLoading.hide();
+                
                 form.email.$setValidity("emailNot", false);
 //                $ionicPopup.show({
 //                    title: 'Error',
@@ -291,7 +287,7 @@ app.factory('engageService', function($http, $q, $ionicLoading, $ionicPopup,$loc
 //
 //                });
             } else if (status == 401) {
-                $ionicLoading.hide();
+                
                 form.password.$setValidity("password", false);
 //                $ionicPopup.show({
 //                    title: 'Error',
@@ -301,7 +297,7 @@ app.factory('engageService', function($http, $q, $ionicLoading, $ionicPopup,$loc
 //                    }]
 //                }).then(function(res) {});
             } else if (status == 400) {
-                $ionicLoading.hide();
+                
                 $ionicPopup.show({
                     title: 'Field Missing',
                     subTitle: 'Bad Request',
@@ -312,7 +308,7 @@ app.factory('engageService', function($http, $q, $ionicLoading, $ionicPopup,$loc
 
                 });
             } else if (status == 302) {
-                $ionicLoading.hide();
+                
                 form.email.$setValidity("emailExist", false);
 //                $ionicPopup.show({
 //                    title: 'User name already exist',
@@ -323,7 +319,6 @@ app.factory('engageService', function($http, $q, $ionicLoading, $ionicPopup,$loc
 //                }).then(function(res) {
 //                });
             } else if (status == 412) {
-                $ionicLoading.hide();
                 form.otp.$setValidity("otpMiss", false);
 //                $ionicPopup.show({
 //                    title: 'Error',
@@ -336,7 +331,6 @@ app.factory('engageService', function($http, $q, $ionicLoading, $ionicPopup,$loc
 			
 			else if(status == 498)
 			{
-				$ionicLoading.hide();
                 form.otp.$setValidity("optExp", false);
 			}
 			else if(status == 423)
@@ -390,9 +384,7 @@ app.factory('facebookService', function($http, $q, $ionicLoading, $ionicPopup, $
                 $localStorage.accessToken = result.access_token; //accesstoken from facebook 
                 if ($localStorage.hasOwnProperty("accessToken") === true) {
                     //ionicloading is a busy cursor which display the template given below
-                    $ionicLoading.show({
-                        template: '<img src="./img/logo1.png" width="20%"/><br><ion-spinner icon="dots" class="spinner-balanced"/>'
-                    });
+                 
 
                     $http.get("https://graph.facebook.com/v2.2/me", {
                         params: {
@@ -433,8 +425,8 @@ app.factory('facebookService', function($http, $q, $ionicLoading, $ionicPopup, $
 //server link declaration
 app.factory('serviceLink', function() {
     return {
-//        url: 'http://104.236.50.241:8080/'
-		  url: 'http://159.203.121.122:8080/'
+        url: 'http://104.236.50.241:8080/'
+//		  url: 'http://159.203.121.122:8080/'
     };
 });
 
@@ -444,9 +436,7 @@ app.factory('favService', function($http, $q, $ionicLoading, $ionicPopup, $local
         var self = this;
         self.favorite = function(tripId, index) {
 //loader spinner
-            $ionicLoading.show({
-                template: '<img src="./img/logo1.png" width="20%"/><br><ion-spinner icon="dots" class="spinner-balanced"/>'
-            });
+          
 			//post request for favourite starts here
             $http({
                 method: 'POST',
@@ -456,7 +446,7 @@ app.factory('favService', function($http, $q, $ionicLoading, $ionicPopup, $local
                 },
                 data: "tripId=" + tripId
             }).success(function(data, status) {
-                $ionicLoading.hide();
+                
                 // console.log(data);
                 if (status == 200) {
                     FavouriteService.addNew(tripId);//calling FavouriteService Service were tripId is added and removed
@@ -486,16 +476,14 @@ app.factory('advanceFilter', function($http, $q, $ionicLoading, $ionicPopup, $lo
 				data.duration="";
 			}
 //loader spinner
-            $ionicLoading.show({
-                template: '<img src="./img/logo1.png" width="20%"/><br><ion-spinner icon="dots" class="spinner-balanced"/>'
-            });
+         
 			//post request for favourite starts here
             $http({
                 method: 'GET',
                 url: serviceLink.url + 'SaltieApp/rest/cruise/search?lifestyle='+data.style+'&duration='+data.duration+'&year='+data.year+'&month='+data.month+'&sortBy='+data.orderby+'&departPort='+data.ports+'&userName='+$localStorage.userName+'&shipName='+data.ship+'&cruiseLineName='+data.cruiseLine
             })
            .success(function(data) {
-                $ionicLoading.hide();
+                
                 // console.log(data);
 					                        deferred.resolve(data);
             });
@@ -514,11 +502,9 @@ app.factory('themeFilter', function($http, $q, $ionicLoading, $ionicPopup, $loca
         self.theme = function(data) {
 			 var deferred = $q.defer();
 //loader spinner
-            $ionicLoading.show({
-                template: '<img src="./img/logo1.png" width="20%"/><br><ion-spinner icon="dots" class="spinner-balanced"/>'
-            });
+           
            $http.get(serviceLink.url + 'SaltieApp/rest/cruise/theme5?lifestyle='+data.style+'&duration='+data.duration+'&year='+data.year+'&month='+data.month+'&port='+data.ports+'&shipName='+data.ship+'&cruiseLineName='+data.cruiseLine).success(function(data) {
-                $ionicLoading.hide();
+                
                 // console.log(data);
 			   deferred.resolve(data);
 
@@ -537,16 +523,13 @@ app.factory('profileGet',function($http, $q, $ionicLoading, $ionicPopup, $localS
         var self = this;
         self.profile = function() {
 			var deferred = $q.defer();
-        $ionicLoading.show({
-            //template: 'loading'
-            template: '<img src="./img/logo1.png" width="20%"/><br><ion-spinner icon="dots" class="spinner-balanced"/>'
-        });
+      
         $http({
             method: 'GET',
             url: serviceLink.url + 'SaltieApp/rest/cruise/user/detail'
         }).success(function(data) {
             
-			$ionicLoading.hide();
+			
 			deferred.resolve(data);
          }).error(function(data){
 			deferred.resolve("error value");
@@ -565,22 +548,20 @@ app.factory('profileSet', function($http, $q, $ionicLoading, $ionicPopup, $local
         self.profileS = function(data) {
 			//loader spinner
 			  var deferred = $q.defer();
-            $ionicLoading.show({
-                template: '<img src="./img/logo1.png" width="20%"/><br><ion-spinner icon="dots" class="spinner-balanced"/>'
-            });
+           
             $http({
                 method: 'POST',
                 url: serviceLink.url + 'SaltieApp/rest/cruise/user/editProfile ',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 },
-                data: data
+                data: encodeURI(data)
             }).success(function(data, status) {
-                    $ionicLoading.hide();
+                    
                     deferred.resolve(status);
                 })
                 .error(function(data, status) {
-                    $ionicLoading.hide();
+                    
                     deferred.resolve(status);
 
                 });
@@ -610,7 +591,7 @@ app.factory('profileSet', function($http, $q, $ionicLoading, $ionicPopup, $local
                 }).then(function(res) {});
 			}
           else if (status == 400) {
-                $ionicLoading.hide();
+                
                 $ionicPopup.show({
                     title: 'Field Missing',
                     subTitle: 'Bad Request',
@@ -621,7 +602,7 @@ app.factory('profileSet', function($http, $q, $ionicLoading, $ionicPopup, $local
 
                 });
             } else if (status == 412) {
-                $ionicLoading.hide();
+                
                 form.password.$setValidity("password", false);
             } 
 			
@@ -648,12 +629,9 @@ app.factory('detailData',function($http, $q, $ionicLoading, $ionicPopup, $localS
         self.detail = function() {
 			var deferred = $q.defer();
         var tripID = $rootScope.tripid;
-        $ionicLoading.show({
-            //template: 'loading'
-            template: '<img src="./img/logo1.png" width="20%"/><br><ion-spinner icon="dots" class="spinner-balanced"/>'
-        });
+       
         $http.get(serviceLink.url + 'SaltieApp/rest/cruise/details/' + tripID + '/tripId').success(function(data) {
-			$ionicLoading.hide();
+			
 			deferred.resolve(data);
          }).error(function(data){
 			deferred.resolve("error value");
@@ -664,3 +642,7 @@ app.factory('detailData',function($http, $q, $ionicLoading, $ionicPopup, $localS
 
     return new detailData();
 })
+
+
+
+

@@ -121,8 +121,7 @@ app.controller('modalCtrl',function($scope, $location, $http, $rootScope, $filte
         $scope.activityModal = function(index) {
 			$ionicSlideBoxDelegate.$getByHandle('detailSlide').stop();
 //			$ionicSlideBoxDelegate.$getByHandle('activity').slide(index,200);
-			
-			 $ionicLoading.show({
+ $ionicLoading.show({
                     template: '<img src="./img/logo1.png" width="20%"/><br><ion-spinner icon="dots" class="spinner-balanced"/>'
                 });
 						
@@ -134,6 +133,7 @@ app.controller('modalCtrl',function($scope, $location, $http, $rootScope, $filte
     							$ionicSlideBoxDelegate.$getByHandle('activity').slide(index);
 											$ionicLoading.hide();
 				},500);
+
 
 //			$timeout(function() {
 //								console.log(index);

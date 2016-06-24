@@ -22,9 +22,7 @@ app.controller('sendemailCtrl', function($scope, $location, $state, $localStorag
         $scope.Sendemail = function(form, user) {
             if (form.$valid) {
                 //ionicloading is a busy cursor which display the template given below
-                $ionicLoading.show({
-                    template: '<img src="./img/logo1.png" width="20%"/><br><ion-spinner icon="dots" class="spinner-balanced"/>'
-                });
+                
 
                 $http.get(serviceLink.url + 'SaltieApp/rest/cruise/user/forgot/email?email=' + user.email, {
 
@@ -58,9 +56,7 @@ app.controller('sendemailCtrl', function($scope, $location, $state, $localStorag
 
             if (form.$valid) {
 
-                $ionicLoading.show({
-                    template: '<img src="./img/logo1.png" width="20%"/><br><ion-spinner icon="dots" class="spinner-balanced"/>'
-                });
+                
 
                 $http({
                     method: 'POST',
@@ -72,6 +68,14 @@ app.controller('sendemailCtrl', function($scope, $location, $state, $localStorag
                     data: "email=" + $localStorage.emailver + "&password=" + user.password + "&code=" + user.otp
                 }).success(function(data, status, headers, config) {
                     if (status == 200) {
+						
+								$ionicPopup.show({
+                                    title: 'Success',
+                                    subTitle: 'Your Password has been reset',
+                                    buttons: [{
+                                        text: 'Ok'
+                                    }]
+                                }).then(function(res) {});
                         $ionicLoading.hide();
                         delete $localStorage.emailver;
                         $location.path('/emaillogin');

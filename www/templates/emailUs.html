@@ -68,7 +68,7 @@
                     </div>
 
                     <label class="item item-input color4" ng-class="{ 'has-errors' : engageForm.phone.$invalid &amp;&amp; engageForm.$submitted, 'no-errors' : engageForm.phone.$valid  &amp;&amp; engageForm.$submitted}">
-                        <input type="text" onselectstart="return false" name="phone" id="plc4" placeholder="Phone" ng-keyup="resetFrom(engageForm)" ng-model="user.phone" ng-minlength="10" ng-maxlength="10" required="" class="ng-valid-maxlength ng-valid-parse ng-invalid ng-invalid-required ng-valid-minlength ng-pristine ng-touched">
+                        <input type="number" onselectstart="return false" name="phone" id="plc4" placeholder="Phone" ng-keyup="resetFrom(engageForm)" ng-model="user.phone" ng-minlength="10" ng-maxlength="10" required="" class="ng-valid-maxlength ng-valid-parse ng-invalid ng-invalid-required ng-valid-minlength ng-pristine ng-touched">
                     </label>
                      <div class="error-container email-error" ng-show="engageForm.phone.$error && engageForm.$submitted" ng-messages="engageForm.phone.$error">
                         <div ng-messages-include="templates/error-list.html"></div> 

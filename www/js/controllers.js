@@ -126,8 +126,8 @@ app.filter('dollorCheck', function() {
 });
 
 
-
-function AvoidSpace(event) {
-    var k = event ? event.which : window.event.keyCode;
-    if (k == 32) return false;
+function AvoidSpace(t){
+  if(t.value.match(/\s/g)){
+    t.value=t.value.replace(/\s/g,'');
+  }
 }
