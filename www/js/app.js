@@ -64,8 +64,9 @@ app.run(function ($ionicPlatform,$rootScope, $state, $location,$ionicHistory,$io
 })
 
 
+app.config(function($stateProvider, $urlRouterProvider, $httpProvider,$ionicConfigProvider) {   
+	$ionicConfigProvider.tabs.style('standard').position('top');
 
-app.config(function($stateProvider, $urlRouterProvider, $httpProvider) {    
   $httpProvider.interceptors.push('TokenAuthInterceptor');
   $httpProvider.defaults.headers["Content-Type"]= "application/json";
   $stateProvider

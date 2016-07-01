@@ -1,4 +1,4 @@
-app.controller('listController', function($scope, $location, $rootScope, $filter, $localStorage, $http, $ionicLoading, FavouriteService, $timeout, $ionicScrollDelegate, $ionicModal, loginService, facebookService, serviceLink, favService,$ionicPopup,$q,detailData,$ionicSlideBoxDelegate) {
+app.controller('listController', function($scope, $location, $rootScope, $filter, $localStorage, $http, $ionicLoading, FavouriteService, $timeout, $ionicScrollDelegate, $ionicModal, loginService, facebookService, serviceLink, favService,$ionicPopup,$q,detailData,$ionicSlideBoxDelegate,curatorList) {
 	
 
 	if(typeof analytics !== 'undefined') { analytics.trackView("List Controller"); }
@@ -110,6 +110,51 @@ app.controller('listController', function($scope, $location, $rootScope, $filter
                             //If an error happened, handle it here
                         });
         }
+		
+		
+		//tab function
+		
+		$scope.onFilterTabSelected=function()
+		{
+			
+			$scope.filterIconShow=true;
+			$scope.filterCount=true;
+
+		}
+		$scope.onFilterTabDeselected=function()
+		{
+			$scope.filterCount=false;
+			$scope.filterIconShow=false;
+		}
+		
+		
+		
+		$scope.onCuratorTabSelected=function()
+		{
+			
+			$scope.curatorCount=true;
+			$scope.CuratorIconShow=true;
+			
+			 curatorList.curator()
+                    .then(
+                        /* success function */
+                        function(data) {
+								$scope.curatorListIteam=data.tripList;
+                                $ionicLoading.hide();
+                        },function(error) {
+                alert("There was a problem");
+                console.log(error);
+            });
+			
+			
+		}
+		$scope.onCuratorTabDeselected=function()
+		{
+			$scope.curatorCount=false;
+			$scope.CuratorIconShow=false;
+		}
+		
+		
 
 		//back button function
         	$scope.back = function() {

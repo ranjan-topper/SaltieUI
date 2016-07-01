@@ -19,7 +19,9 @@
 * 15. Common Css for LoginSignup, Signuphome, EmailLogin, Login and SendEmail Page
 * 16. Custromize Ionic Framework Css
 * 17. Common Modal css
-* 18. CabinType Modal	
+* 18. CabinType Modal
+* 19. Listing Page
+
 
 * Colors
 * Error
@@ -79,6 +81,58 @@
 /* ==========================================================================
    16. Custromize Ionic Framework Css
    ========================================================================== */
+.tab-item.tab-item-active, .tab-item.active, .tab-item.activated {
+       background-color: #339fa6;
+    opacity: 1;
+    color: white;
+}
+
+.tab-item .icon {
+    background: #9c867a;
+    display: block;
+    margin: 0 auto;
+    height: 7vh;
+    width: 25%;
+    font-size: 5vmin;
+    float: right;
+}
+
+
+.tab-item {
+        -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -moz-box-flex: 1;
+    -moz-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    font-size: 3vmin;
+    display: block;
+    line-height: 7vh;
+    overflow: hidden;
+    max-width: none;
+    height: 100%;
+    color: inherit;
+    text-align: center;
+    text-decoration: none;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-weight: 400;
+    /* font-size: 14px; */
+    font-family: roman;
+    opacity: 1;
+}
+
+.tabs-top > .tabs, .tabs.tabs-top {
+        top: 7vh;
+    height: 7vh;
+    padding-top: 0;
+    background-position: bottom;
+    border: 3px solid #9C867A !important;
+    border-right: 0 !important;
+    /* border-top: 3px; */
+    border-left: 0 !important;
+}
+
 .backdrop:not(.visible),
 .loading-container:not(.visible) { display: none; }
 
@@ -2486,4 +2540,154 @@ div.sail{
 }
 .email-error div{
     color: #000000 !important;
+}
+
+
+/* ==========================================================================
+	 19. Listing Page
+   ========================================================================== */
+.curatorComments
+{
+	      font-family: thin;
+    color: white;
+    font-size: 6vmin;
+    line-height: 1;
+}
+.curatorCommHead
+{
+    color: white;
+    font-size: 8vmin;
+    font-family: thin;
+    line-height: 1;
+}
+
+
+.curatorDetail{
+    height: 40vh;
+    margin-bottom: 2px;
+    background: url(../img/background.jpg) no-repeat center;
+    background-size: cover;
+}
+.layer {
+       background-color: rgba(51, 159, 166, 0.7);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 40vh;
+}
+
+.reviewList
+{
+	    font-size: 3.5vmin;
+    font-family: roman;
+}
+.cruiseReviewHead
+{
+	font-size: 3vmin;
+    font-weight: initial;
+    font-family: roman;
+    /* letter-spacing: 0px; */
+    color: #cccccc;
+}
+
+
+.cruiserReview
+{
+	    font-size: 2.5vmin;
+    position: absolute;
+    padding-left: 27vw;
+    padding-right: 5vw;
+}
+
+.curatorDiv
+{
+	    position: absolute;
+    vertical-align: middle;
+    width: 100%;
+    padding-left: 5vw;
+    top: 36vh;
+}
+
+.matchValue
+{
+    text-align: center;
+    position: absolute;
+    border-radius: 25px;
+    border: solid;
+    border-width: 2px;
+    border-color: white;
+    /* background: #73AD21; */
+    /* padding: 20px; */
+    line-height: 5vh;
+    width: 25vw;
+    font-family: roman;
+    height: 5vh;
+    font-size: 3vmin;
+
+}
+
+.curatorGradient
+{
+	 height: 16vh;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 10%, rgba(0, 35, 45, 0.89) 37%, rgb(0, 35, 45) 100%);
+
+    opacity: 1;
+	    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+	width: 100%;
+}
+
+.curatorMarginList
+{
+	padding-left: 5vw;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    bottom: 15vh;
+
+}
+
+
+.paddRight {
+      padding-right: 25%;
+}
+
+.showfilterIcon
+{
+    color: white;
+    height: 6.3vh;
+    right: 50%;
+    TEXT-ALIGN: center;
+    position: absolute;
+    width: 13%;
+    background-color: #007279;
+    font-size: 5vmin;
+}
+
+.CuratorfilterIcon {
+	color: white;
+    height: 6.3vh;
+    right: 0;
+    TEXT-ALIGN: center;
+    position: absolute;
+    width: 13%;
+    background-color: #007279;
+    font-size: 5vmin;
+}
+
+
+.curatorCommPadd
+{
+	    padding-left: 5vw;
+    padding-right: 5vw;
+    padding-top: 5vh;
+    padding-bottom: 5vh;
+}
+
+a.tab-item.tab-item-active span.tab-title.ng-binding
+{
+	padding-right: 25%;
 }

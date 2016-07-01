@@ -131,3 +131,32 @@ function AvoidSpace(t){
     t.value=t.value.replace(/\s/g,'');
   }
 }
+
+//
+//app.directive('clickicon', function ($timeout) {
+//    return {
+//        restrict: 'EAC',
+//        scope: true,
+//        link: function (scope, element, attrs) {
+//      console.log(element[0].querySelector('.tab-item .ion-ios-arrow-down'));
+//			console.log(element);
+//	
+//    }
+//}
+//});
+
+app.directive('clickicon', [
+  '$document',
+  function($document) {
+    return {
+      restrict: 'A',
+      scope: true,
+      link: function(scope, element, attrs) {
+        var x = angular.element(document.querySelector('.ion-ios-arrow-down'));
+        x.bind('click', function() {
+          console.log('clicked');
+        });
+      }
+    };
+  }
+]);

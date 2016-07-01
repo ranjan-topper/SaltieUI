@@ -1,17 +1,37 @@
 <ion-view cache-view="true" id="list" >
+	
+	
 	<ion-nav-buttons side="left" style="padding-left: 3%;">
 <button class="button button-icon button-clear ion-ios-arrow-thin-left navBarButton" id="back4" style="color: white;" ng-click="back()">
         </button>     
 	</ion-nav-buttons>
+	
 	<ion-nav-title>
-		<a href="" class="cruisecount" id="viewCount" style="text-decoration: none;">
+		<a href="" ng-show="filterCount" class="cruisecount" id="viewCount" style="text-decoration: none;">
             <span class="bold">{{countSailing}}</span>
             <span class="thin"> Sailings |</span>
             <span class="bold"> {{count}}</span> 
             <span class="thin">Cruises</span>
         </a>
+		<a href="" ng-show="curatorCount" class="cruisecount" id="viewCount" style="text-decoration: none;">
+            <span class="bold">{{curatorListIteam.length}}</span>
+            <span class="thin"> Recommendation</span>
+        </a>
     </ion-nav-title>
-	<ion-content  id="filter">
+	
+	<ion-tabs clickicon  class="tabs-top tabs-standard">
+		<div class="showfilterIcon" ng-click="showFilter()" ng-show="filterIconShow">
+			<i class="icon ion-ios-arrow-down" ></i>
+			</div>
+		<div class="CuratorfilterIcon" ng-show="CuratorIconShow">
+			<i class="icon ion-ios-arrow-down" ></i>
+			</div>
+		
+		
+            <ion-tab ng-class="myClass"  title="SHOW FILTERS" on-select="onFilterTabSelected()" on-deselect="onFilterTabDeselected()">
+				
+                <ion-content  id="filter">
+					
 		<ion-scroll delegate-handle="filterScroll" direction="x" >
 		   <div align="center" class="filter">
 			   <a class="button icon-right ion-ios-arrow-down" ng-click="showFilter()">SHOW FILTERS</a>
@@ -53,4 +73,74 @@
 		</div>
 		 <ion-infinite-scroll id="scroll"  ng-if="!noMoreItemsAvailable" on-infinite="loadMore()" distance='2%'></ion-infinite-scroll>
 	</ion-content>
+            </ion-tab>
+
+            <ion-tab title="CRUISE CURATOR" on-select="onCuratorTabSelected()" on-deselect="onCuratorTabDeselected()">
+                <ion-content delegate-handle="CuratorlistPage" style="margin-top: 7vh;">
+					<div class="curatorDetail">
+				
+					<div class="layer">
+						<div class="curatorCommPadd">
+							<div class="curatorCommHead">Cruise<br> Recommendation</div><br>
+							<div class="curatorComments">
+							We've analyzed thousands of reviews by cruiser like you to find highest rated cruise(s) to match your survery preferences.
+							</div>
+						</div>
+							</div>
+					</div>
+					
+					
+					
+	<div class="list list-item" ng-repeat="itinerary in curatorListIteam">
+			<a type="item-text-wrap" id="detail{{itinerary.tripId}}" ng-click="detail(itinerary.tripId)" on-swipe-left="detail(itinerary.tripId)" href="" style='background-image:url("{{linkUrl}}{{itinerary.destinationImage}}");height: 48vh;' class="eventListPicture">
+				<div class="gradient" style="height: 48vh;"></div>
+				<div class="curatorGradient" ></div>
+				<div class="curatorMarginList">
+				<div class="position" id="{{ itinerary.tripName}}"><span class="bold tripname overwrap" >{{ itinerary.tripName | capitalize:true }}</span>
+				<span class="roman overwrap tripdes">{{ itinerary.tripDesc.split("(")[0].trim()}}</span>
+				
+			</div>
+		<div class="cruiseLine" id="{{ itinerary.cruiseLineName}} cruiseline"><span class="bold">{{ itinerary.cruiseLineName}} Cruise Line</span>
+			
+			</div>
+			<div class="shipName" id="{{ itinerary.shipName}}"><span class="roman ">{{ itinerary.shipName}}</span>
+			
+			</div>
+       
+		<div class="price" id="{{ itinerary.priceFrom}}price">
+            <span class="thin ">From &nbsp;{{'$'}}</span>
+            <span class="bold">{{ itinerary.priceFrom}}</span>			
+		</div>
+				</div>
+				
+				<div class="curatorDiv">
+				
+				<span class="matchValue">
+					<span>{{itinerary.matchPercent}}%</span> <span>match</span> 
+					
+					</span>
+					<span class="cruiserReview">
+						<span class="cruiseReviewHead">Cruisers reviewed as:</span><br>
+						<span class="reviewList" ng-repeat="review in itinerary.reason | limitTo:4">
+							{{review | capitalize:true}}{{$last ? '' : ($index >= 2) ? ' and ' : ', '}}
+						</span>
+					
+					</span>
+					
+				
+				</div>
+				
+				
+				
+							</a>		
+<!--		{{isFavorite(itinerary.tripId);}}-->
+		<p><img id="{{$index}}" src="{{isFavorite(itinerary.tripId)}}" ng-click="favorite(itinerary.tripId,$index)" class="favorite" width="8%"></p>
+		
+
+		</div>
+	</ion-content>
+            </ion-tab>
+
+        </ion-tabs>
+	
 </ion-view>

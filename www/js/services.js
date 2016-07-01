@@ -425,7 +425,7 @@ app.factory('facebookService', function($http, $q, $ionicLoading, $ionicPopup, $
 //server link declaration
 app.factory('serviceLink', function() {
     return {
-        url: 'http://104.236.50.241:8080/'
+	        url: 'http://104.236.50.241:8080/'
 //		  url: 'http://159.203.121.122:8080/'
     };
 });
@@ -643,6 +643,28 @@ app.factory('detailData',function($http, $q, $ionicLoading, $ionicPopup, $localS
     return new detailData();
 })
 
+
+
+
+//curator list
+app.factory('curatorList',function($http, $q, $ionicLoading, $ionicPopup, $localStorage, serviceLink,$rootScope){
+ function curatorList() {
+        var self = this;
+        self.curator = function() {
+			var deferred = $q.defer();
+       
+        $http.get(serviceLink.url + 'SaltiePAS/api/explore/cruises?questions_liked=118,121,122,130,135,132,131,123,126,127,128&questions_disliked=129,120&questions_neutral=125,133&score=40').success(function(data) {
+			
+			deferred.resolve(data);
+         }).error(function(data){
+			deferred.resolve("error value");
+		});
+			return deferred.promise;
+		}
+		}
+
+    return new curatorList();
+})
 
 
 
