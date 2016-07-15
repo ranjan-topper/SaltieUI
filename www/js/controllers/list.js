@@ -162,6 +162,20 @@ app.controller('listController', function($scope, $location, $rootScope, $filter
             $location.path('/app/lifeStyle');
         }
 			
+			
+			
+			$scope.showPASFilter=function()
+			{
+				 $scope.pasModal.show();
+				var webFrame = angular.element(document.getElementById('PASframe'));
+				console.log(webFrame[0].querySelector(".salite-list-item-background-fade"))
+			}
+			 $scope.clickOnIframe=function()
+			 {
+				 console.log("hi");
+			 }
+				  
+			
 		
       }
 });

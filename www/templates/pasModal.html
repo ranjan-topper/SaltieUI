@@ -1,0 +1,14 @@
+<ion-modal-view>
+	
+	<ion-header-bar id="modal" class="bar bar-header bar-positive modalHead" >
+			<h2 class="title modalhead">PAS</h2>
+          <button class="button button-icon button-primary modalClose ion-ios-close-empty" id="modal" ng-click="pasModal.hide()"></button>
+        </ion-header-bar>
+	
+	<ion-content class="" style="margin-top: -30px;" id="PASfilterNew" >
+<div style="overflow:auto;-webkit-overflow-scrolling:touch">
+<iframe sandbox="allow-same-origin allow-scripts allow-popups allow-forms" id="PASframe" data-tap-disabled="true" src="{{trustSrc('http://stage-curator.saltie.cruises/#/whos-traveling?hide-navigation=t')}}" style="height: 100vh; width: 100vw;" frameborder="0"></iframe>
+		</div>
+		
+	</ion-content>
+</ion-modal-view>

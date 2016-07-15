@@ -205,8 +205,7 @@ h1
 }
 .ion-ios-upload-outline:before{
     content: "\f4ca";
-    font-size: 8vmin !important;
-
+    font-size: 7vmin !important;
 }
 
 .scroll-bar-indicator
@@ -1357,7 +1356,11 @@ color: white;
    ========================================================================== */
 .marginDetail
 {
-	margin-left: 5vw;
+	line-height: 1.2;
+	bottom: 5vh;
+    position: absolute;
+    margin-right: 5vw;
+    margin-left: 5vw;
 }
 
 .itinerarymap
@@ -1367,29 +1370,18 @@ color: white;
 }
 .detailhead
 {
-   
-    bottom: 14.5vh;
-    position: absolute;
-    line-height: 1;
     color: white;
-    margin-top: 0vw;
-	    margin-right: 5vw;
     font-size: 7vmin;
 }
 .detaildep {
-    position: absolute;
-    bottom: 5vh;
+	padding-top: 2vh;
     color: white;
-	margin-right: 5vw;
     font-size: 3.5vmin;
 }
 .detaildes
-{	    line-height: 1;
-    position: absolute;
+{	    
     color: white;
     font-size: 3.5vmin;
-	margin-right: 5vw;
-    bottom: 10vh;
 }
 
 
@@ -1684,7 +1676,7 @@ ion-scroll[delegate-handle=calendarScroll1] {
 
 
 ion-scroll[delegate-handle=filterScroll] {
-          height: 7vh;
+  height: 0vh;
     background-color: white;
     border: 3px solid #9C867A;
     border-right: 0;
@@ -2072,8 +2064,8 @@ transform: translate3d(-5px, 0px,0px);
 }
 
 #modalAll .bar .button.button-icon .icon:before, .bar .button.button-icon:before, .bar .button.button-icon.icon-left:before, .bar .button.button-icon.icon-right:before {
-       vertical-align: top;
-    font-size: 10vmin !important;
+      vertical-align: top;
+    font-size: 10vmin;
     line-height: 7vh !important;
 }
 
@@ -2546,7 +2538,58 @@ div.sail{
 /* ==========================================================================
 	 19. Listing Page
    ========================================================================== */
-.curatorComments
+
+.curatorFilterIcon
+{
+	    top: calc(50% - 2.5vh);
+    position: absolute;
+    width: 50%;
+    left: 50%;
+    height: 100%;
+}
+.searchFilterIcon
+{
+	    top: calc(50% - 2.5vh);
+    position: absolute;
+    width: 50%;
+    height: 100%;
+}
+
+.curatorPagetripdes
+{
+	    color: white;
+    font-size: 4vmin;
+    padding-right: 24vw;
+}
+
+.curatorPagecruiseLine
+{
+    font-size: 3.5vmin;
+    color: white;
+}
+
+.curatorPageshipName
+{
+    font-size: 3.5vmin;
+    color: white;
+}
+.curatorPageprice
+{
+	    float: right;
+    font-size: 3.5vmin;
+    color: white;
+}
+
+
+.curatroPosition{
+    line-height: 1.2;
+    padding-right: 5vw;
+    width: 100%;
+    position: absolute;
+    bottom: 16vh;
+    padding-left: 5vw;
+}
+	.curatorComments
 {
 	      font-family: thin;
     color: white;
@@ -2655,28 +2698,24 @@ div.sail{
       padding-right: 25%;
 }
 
-.showfilterIcon
+.downArrowIcon
 {
+	    /* border-color: #00232d; */
+       border-width: 3px;
+    border-radius: 30px;
     color: white;
-    height: 6.3vh;
-    right: 50%;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.66);
+    height: 5vh;
+    right: 6%;
+    line-height: 6vh;
     TEXT-ALIGN: center;
     position: absolute;
-    width: 13%;
-    background-color: #007279;
+    width: 5vh;
+    background-color: #9c867a;
     font-size: 5vmin;
 }
 
-.CuratorfilterIcon {
-	color: white;
-    height: 6.3vh;
-    right: 0;
-    TEXT-ALIGN: center;
-    position: absolute;
-    width: 13%;
-    background-color: #007279;
-    font-size: 5vmin;
-}
+
 
 
 .curatorCommPadd

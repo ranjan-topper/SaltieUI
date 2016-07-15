@@ -59,12 +59,10 @@
                 </a>
                 <div class="gradient"></div>
 				<div class="marginDetail">
-                <div class="detailhead " id="{{ detail.tripDetails.tripName }}"><span class="thin ">{{detail.tripDetails.noNight}} Night {{ detail.tripDetails.tripName | capitalize:true }}</span>
-                </div>
-                <div class="detaildes" id="{{ detail.tripDetails.cruiseLineName }} "><span class="bold">{{ detail.tripDetails.cruiseLineName }} Cruise Line </span><br><span class="roman">{{ detail.tripDetails.shipName }}</span>
-                </div>
-                <div class="detaildep" id="{{ detail.tripDetails.startDestination }}"><span class="roman">Departs {{ detail.tripDetails.startDestination.split("(")[0].trim() }} </span>
-                </div>
+               <span id="{{ detail.tripDetails.tripName }}" class="thin detailhead overwrap ">{{detail.tripDetails.noNight}} Night {{ detail.tripDetails.tripName | capitalize:true }}</span>
+				<span class="bold overwrap detaildes" id="{{ detail.tripDetails.cruiseLineName }} ">{{ detail.tripDetails.cruiseLineName }} Cruise Line 					</span>
+				<span class="roman overwrap detaildes">{{ detail.tripDetails.shipName }}</span>
+                <span id="{{ detail.tripDetails.startDestination }}" class="roman detaildep overwrap">Departs {{ detail.tripDetails.startDestination.split("(")[0].trim() }} </span>
 				</div>
             </ion-slide>
             <ion-slide  ng-click="activityModal($index)" ng-repeat="image in detail.tripDetails.ship.shipActivity">

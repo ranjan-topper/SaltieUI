@@ -20,16 +20,20 @@
     </ion-nav-title>
 	
 	<ion-tabs clickicon  class="tabs-top tabs-standard">
-		<div class="showfilterIcon" ng-click="showFilter()" ng-show="filterIconShow">
+		<div class="searchFilterIcon" ng-click="showFilter()" ng-show="filterIconShow">
+		<div class="downArrowIcon" >
 			<i class="icon ion-ios-arrow-down" ></i>
 			</div>
-		<div class="CuratorfilterIcon" ng-show="CuratorIconShow">
+		</div>
+		<div class="curatorFilterIcon" ng-click="showPASFilter()" ng-show="CuratorIconShow">
+		<div class="downArrowIcon" >
 			<i class="icon ion-ios-arrow-down" ></i>
 			</div>
-		
+		</div>
 		
             <ion-tab ng-class="myClass"  title="SHOW FILTERS" on-select="onFilterTabSelected()" on-deselect="onFilterTabDeselected()">
 				
+<!--
                 <ion-content  id="filter">
 					
 		<ion-scroll delegate-handle="filterScroll" direction="x" >
@@ -39,6 +43,7 @@
 		   
 	  </ion-scroll>
 	</ion-content>
+-->
 	<ion-content delegate-handle="listPage" style="margin-top: 7vh;">
 	<div class="list list-item" ng-repeat="itinerary in list">
 			<a type="item-text-wrap" id="detail{{itinerary.tripId}}" ng-click="detail(itinerary.tripId)" on-swipe-left="detail(itinerary.tripId)" href="" style='background-image:url("{{linkUrl}}images/ports/{{itinerary.destinationImage[0][0]}}");' class="eventListPicture">
@@ -95,23 +100,32 @@
 			<a type="item-text-wrap" id="detail{{itinerary.tripId}}" ng-click="detail(itinerary.tripId)" on-swipe-left="detail(itinerary.tripId)" href="" style='background-image:url("{{linkUrl}}{{itinerary.destinationImage}}");height: 48vh;' class="eventListPicture">
 				<div class="gradient" style="height: 48vh;"></div>
 				<div class="curatorGradient" ></div>
-				<div class="curatorMarginList">
-				<div class="position" id="{{ itinerary.tripName}}"><span class="bold tripname overwrap" >{{ itinerary.tripName | capitalize:true }}</span>
-				<span class="roman overwrap tripdes">{{ itinerary.tripDesc.split("(")[0].trim()}}</span>
-				
+				<div class="curatroPosition" id="{{ itinerary.tripName}}"><span class="bold tripname overwrap" >{{ itinerary.tripName | capitalize:true }}</span>
+				<span class="roman overwrap curatorPagetripdes">{{ itinerary.tripDesc.split("(")[0].trim()}}</span>
+				<span class="bold overwrap curatorPagecruiseLine" id="{{ itinerary.cruiseLineName}} cruiseline">{{ itinerary.cruiseLineName}} Cruise Line</span>
+				<span class="roman curatorPageshipName" id="{{ itinerary.shipName}}">{{ itinerary.shipName}}</span>	
+						<span class="curatorPageprice" id="{{ itinerary.priceFrom}}price">
+            <span class="thin ">From &nbsp;{{'$'}}</span>
+            <span class="bold">{{ itinerary.priceFrom}}</span>			
+		</span>
 			</div>
+
+<!--
 		<div class="cruiseLine" id="{{ itinerary.cruiseLineName}} cruiseline"><span class="bold">{{ itinerary.cruiseLineName}} Cruise Line</span>
 			
 			</div>
+
 			<div class="shipName" id="{{ itinerary.shipName}}"><span class="roman ">{{ itinerary.shipName}}</span>
 			
 			</div>
+-->
        
+<!--
 		<div class="price" id="{{ itinerary.priceFrom}}price">
             <span class="thin ">From &nbsp;{{'$'}}</span>
             <span class="bold">{{ itinerary.priceFrom}}</span>			
 		</div>
-				</div>
+-->
 				
 				<div class="curatorDiv">
 				
