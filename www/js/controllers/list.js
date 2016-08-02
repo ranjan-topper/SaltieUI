@@ -9,7 +9,7 @@ app.controller('listController', function($scope, $location, $rootScope, $filter
     } else {
         
         $rootScope.is_engaged = "list";
-        
+        $scope.curatorListIteam = "";
         $rootScope.userFav = [];
         $rootScope.favourite = [];
 		$rootScope.list = [];
@@ -134,18 +134,12 @@ app.controller('listController', function($scope, $location, $rootScope, $filter
 			
 			$scope.curatorCount=true;
 			$scope.CuratorIconShow=true;
-			
-			 curatorList.curator()
-                    .then(
-                        /* success function */
-                        function(data) {
-								$scope.curatorListIteam=data.tripList;
-                                $ionicLoading.hide();
-                        },function(error) {
-                alert("There was a problem");
-                console.log(error);
-            });
-			
+			 if($scope.curatorListIteam == "")
+			 {
+
+				$scope.pasModal.show();
+			 }
+
 			
 		}
 		$scope.onCuratorTabDeselected=function()
@@ -166,16 +160,105 @@ app.controller('listController', function($scope, $location, $rootScope, $filter
 			
 			$scope.showPASFilter=function()
 			{
+				
 				 $scope.pasModal.show();
-				var webFrame = angular.element(document.getElementById('PASframe'));
-				console.log(webFrame[0].querySelector(".salite-list-item-background-fade"))
+//				var webFrame = angular.element(document.getElementById('PASframe'));
+//				console.log(webFrame);
+		
+				
 			}
 			 $scope.clickOnIframe=function()
 			 {
-				 console.log("hi");
+				 		var x = document.getElementById("PASframe");
+ 				x.contentWindow.document.onclick = function() {
+        	console.log("frame contents clicked");
+    };
 			 }
-				  
 			
+
+
+
+			$rootScope.closePASModal=function(selectedData)
+            {
+
+            	console.log(selectedData);
+				if(selectedData[0].liked != undefined)
+				{
+					var liked ='';
+	
+
+					var likedData = JSON.parse(selectedData[0].liked);
+
+					angular.forEach(likedData , function(value, key) {
+  					liked += value + ',';
+					});
+					liked = liked.substring(0, liked.length - 1);
+
+						console.log(liked);
+				}
+				else
+				{
+										var liked ='';
+
+				}
+				if(selectedData[1].disliked != undefined)
+				{
+		
+					var disliked ='';
+					var dislikedData = JSON.parse(selectedData[1].disliked);
+					angular.forEach(dislikedData, function(value, key) {
+  					disliked += value + ',';
+					});
+					disliked = disliked.substring(0, disliked.length - 1);
+
+						console.log(disliked);
+				}
+				else{
+										var disliked ='';
+
+				}
+
+				if(selectedData[2].neutral != undefined)
+				{
+					var neutral ='';
+					var neutralData = JSON.parse(selectedData[2].neutral);
+					angular.forEach(neutralData, function(value, key) {
+  					neutral += value + ',';
+					});
+					neutral = neutral.substring(0, neutral.length - 1);
+
+						console.log(neutral);
+				}
+				else{
+									var neutral ='';
+				}
+ 				curatorList.curator(liked,neutral,disliked)
+                    .then(
+                        /* success function */
+                        function(data) {
+								$scope.curatorListIteam=data.tripList;
+								$scope.removePASModal();
+                                $ionicLoading.hide();
+
+                        },function(error) {
+                alert("There was a problem");
+                console.log(error);
+            });
+
+
+
+            }
+
+            $scope.removePASModal=function()
+            {
+								
+            					$scope.pasModal.remove();
+								$ionicModal.fromTemplateUrl('templates/pasModal.html', {
+				            	scope: $scope
+				        		}).then(function(modal) {
+				            	$scope.pasModal = modal;
+				        		});
+            }
 		
       }
 });

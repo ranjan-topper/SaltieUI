@@ -1,3 +1,27 @@
+function iframeclick() {
+//	console.log(document.getElementById("PASframe").contentWindow.document.body);
+//	console.log();
+//
+//	console.log(document.getElementById("PASframe").contentWindow.document.querySelectorAll('_ngcontent-dse-3'));
+    	var scope;
+
+    window.addEventListener('message',receiveMessage, false);
+    
+    function receiveMessage(evt)
+    {
+        console.log(evt.data);
+        if (evt.data )
+            {
+                 scope = angular.element(document.getElementById("PASModal")).scope();
+                 scope.$apply(function () {
+                    
+                    scope.closePASModal(evt.data);
+                    });
+            }
+    }
+}
+
+
 function filterPortName()
 {
 	var scope;

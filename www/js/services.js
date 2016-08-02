@@ -650,10 +650,10 @@ app.factory('detailData',function($http, $q, $ionicLoading, $ionicPopup, $localS
 app.factory('curatorList',function($http, $q, $ionicLoading, $ionicPopup, $localStorage, serviceLink,$rootScope){
  function curatorList() {
         var self = this;
-        self.curator = function() {
+        self.curator = function(liked,neutral,disliked) {
 			var deferred = $q.defer();
        
-        $http.get(serviceLink.url + 'SaltiePAS/api/explore/cruises?questions_liked=118,121,122,130,135,132,131,123,126,127,128&questions_disliked=129,120&questions_neutral=125,133&score=40').success(function(data) {
+        $http.get(serviceLink.url + 'SaltiePAS/api/explore/cruises?questions_liked='+liked+'&questions_disliked='+disliked+'&questions_neutral='+neutral+'&score=40').success(function(data) {
 			
 			deferred.resolve(data);
          }).error(function(data){

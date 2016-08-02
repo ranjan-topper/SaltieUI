@@ -3,6 +3,12 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
+
+var handleOpenURL = function(url) {
+    console.log("RECEIVED URL: " + url);
+};
+
+
 var app = angular.module('starter', ['ionic', 'ngStorage', 'ngCordova','ngMessages','starter.controllers','ngIOS9UIWebViewPatch']);
 
 app.run(function ($ionicPlatform,$rootScope, $state, $location,$ionicHistory,$ionicLoading) 
@@ -26,7 +32,8 @@ app.run(function ($ionicPlatform,$rootScope, $state, $location,$ionicHistory,$io
   $ionicPlatform.ready(function() 
 	{
 	  
-
+	  
+	  
 	    if(typeof analytics !== 'undefined') {
             analytics.startTrackerWithId("UA-70027379-1");
         } else {
@@ -227,7 +234,7 @@ app.factory('TokenStorage', function() {
 app.factory('TokenAuthInterceptor', function($q, TokenStorage, $rootScope,$injector,$timeout) {
  return {
       requestError: function(config) {
-        $rootScope.$broadcast('loading:show')
+        $rootScope.$broadcast('loading:show');
         return config;
       },
       request: function(config) {
@@ -237,6 +244,7 @@ app.factory('TokenAuthInterceptor', function($q, TokenStorage, $rootScope,$injec
          if (authToken) {
             config.headers['X-Auth-Token'] = authToken;
          }
+		  config.timeout = 10000;
          return config;
       },
       response: function(response) {
