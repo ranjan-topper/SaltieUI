@@ -29,7 +29,7 @@
     <gap:plugin name="org.apache.cordova.device" />
     <gap:plugin name="org.apache.cordova.device-motion" />
     <gap:plugin name="org.apache.cordova.device-orientation" />
-    <gap:plugin name="org.apache.cordova.inappbrowser" />
+   <plugin name="org.apache.cordova.inappbrowser" spec="0.5.2" source="pgb" />
 		<gap:plugin name="org.apache.cordova.splashscreen" />
 <gap:plugin name="cordova-plugin-x-socialsharing" source="npm" />	
 <plugin name="com.danielcwilson.plugins.googleanalytics" spec="0.6.1" source="pgb" />
