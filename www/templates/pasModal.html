@@ -2,12 +2,12 @@
 	
 	<ion-header-bar id="modal" class="bar bar-header bar-positive modalHead" >
 			<h2 class="title modalhead">PAS</h2>
-          <button class="button button-icon button-primary modalClose ion-ios-close-empty" id="modal" ng-click="removePASModal()"></button>
+          <button class="button button-icon button-primary modalClose ion-ios-close-empty" id="modal" ng-click="pasModal.hide()"></button>
         </ion-header-bar>
 	
-	<ion-content class="" style="margin-top: -30px;" id="PASfilterNew" >
-<div style="overflow-y: scroll;-webkit-overflow-scrolling:touch">
-<iframe sandbox="allow-same-origin allow-scripts allow-popups allow-forms" id="PASframe" data-tap-disabled="true" src="{{trustSrc('http://159.203.121.122:8080/TestPAS/')}}" style="height: 100vh; width: 100vw;" onload="iframeclick()" frameborder="0"></iframe>
+	<ion-content style="-webkit-overflow-scrolling: touch !important;overflow: scroll !important;" style="margin-top: -50px;" id="PASfilterNew" >
+<div >
+<iframe sandbox="allow-same-origin allow-scripts allow-popups allow-forms" id="PASframe" data-tap-disabled="true" src="{{trustSrc('http://159.203.121.122:8080/TestPAS/?hide-navigation=t')}}" style="height: 100vh; width: 100vw;" onload="iframeclick()" frameborder="0"></iframe>
 		</div>
 		
 	</ion-content>

@@ -9,7 +9,6 @@ app.controller('listController', function($scope, $location, $rootScope, $filter
     } else {
         
         $rootScope.is_engaged = "list";
-        $scope.curatorListIteam = "";
         $rootScope.userFav = [];
         $rootScope.favourite = [];
 		$rootScope.list = [];
@@ -19,7 +18,12 @@ app.controller('listController', function($scope, $location, $rootScope, $filter
 		$rootScope.page = "list";
         $scope.favoriteId = 0;
 		
-      
+      	$ionicModal.fromTemplateUrl('templates/pasModal.html', {
+				            	scope: $scope
+				        		}).then(function(modal) {
+				            	$scope.pasModal = modal;
+				        		});
+ 
 		
 		
 		//function to determine the favourited cruise
@@ -131,13 +135,14 @@ app.controller('listController', function($scope, $location, $rootScope, $filter
 		
 		$scope.onCuratorTabSelected=function()
 		{
-			
+						console.log($scope.curatorListIteam);
+
 			$scope.curatorCount=true;
 			$scope.CuratorIconShow=true;
-			 if($scope.curatorListIteam == "")
+			 if($rootScope.curatorListIteamTemp == undefined)
 			 {
 
-				$scope.pasModal.show();
+				$scope.showPASFilter();
 			 }
 
 			
@@ -160,7 +165,6 @@ app.controller('listController', function($scope, $location, $rootScope, $filter
 			
 			$scope.showPASFilter=function()
 			{
-				
 				 $scope.pasModal.show();
 //				var webFrame = angular.element(document.getElementById('PASframe'));
 //				console.log(webFrame);
@@ -180,13 +184,14 @@ app.controller('listController', function($scope, $location, $rootScope, $filter
 
 			$rootScope.closePASModal=function(selectedData)
             {
+					var neutral ='';
+					var liked ='';
+					var disliked ='';
+
 
             	console.log(selectedData);
 				if(selectedData[0].liked != undefined)
 				{
-					var liked ='';
-	
-
 					var likedData = JSON.parse(selectedData[0].liked);
 
 					angular.forEach(likedData , function(value, key) {
@@ -196,15 +201,8 @@ app.controller('listController', function($scope, $location, $rootScope, $filter
 
 						console.log(liked);
 				}
-				else
-				{
-										var liked ='';
-
-				}
 				if(selectedData[1].disliked != undefined)
 				{
-		
-					var disliked ='';
 					var dislikedData = JSON.parse(selectedData[1].disliked);
 					angular.forEach(dislikedData, function(value, key) {
   					disliked += value + ',';
@@ -213,14 +211,9 @@ app.controller('listController', function($scope, $location, $rootScope, $filter
 
 						console.log(disliked);
 				}
-				else{
-										var disliked ='';
-
-				}
 
 				if(selectedData[2].neutral != undefined)
 				{
-					var neutral ='';
 					var neutralData = JSON.parse(selectedData[2].neutral);
 					angular.forEach(neutralData, function(value, key) {
   					neutral += value + ',';
@@ -229,16 +222,19 @@ app.controller('listController', function($scope, $location, $rootScope, $filter
 
 						console.log(neutral);
 				}
-				else{
-									var neutral ='';
-				}
  				curatorList.curator(liked,neutral,disliked)
                     .then(
                         /* success function */
                         function(data) {
-								$scope.curatorListIteam=data.tripList;
-								$scope.removePASModal();
-                                $ionicLoading.hide();
+								$rootScope.curatorListIteamTemp=data.tripList;
+								$rootScope.curatorListIteam=angular.copy($rootScope.curatorListIteamTemp);
+								$scope.pasModal.remove(); 
+								$ionicModal.fromTemplateUrl('templates/pasModal.html', {
+				            	scope: $scope
+				        		}).then(function(modal) {
+				            	$scope.pasModal = modal;
+				        		});                               
+								$ionicLoading.hide();
 
                         },function(error) {
                 alert("There was a problem");
@@ -249,16 +245,8 @@ app.controller('listController', function($scope, $location, $rootScope, $filter
 
             }
 
-            $scope.removePASModal=function()
-            {
-								
-            					$scope.pasModal.remove();
-								$ionicModal.fromTemplateUrl('templates/pasModal.html', {
-				            	scope: $scope
-				        		}).then(function(modal) {
-				            	$scope.pasModal = modal;
-				        		});
-            }
+            
+          
 		
       }
 });
