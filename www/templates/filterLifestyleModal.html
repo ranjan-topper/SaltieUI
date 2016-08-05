@@ -44,18 +44,20 @@
 		</div>
 -->
 		<div class="styled-select" style="margin-top: 4%;">
+		<div class="filterHead">Cruise Line</div>
 			<i class="ion-ios-arrow-down selectArrowCss"></i>
 		<select id="cruiseLine" onchange="filterCruiseLine()">
-		<option value="">Cruise Line</option>
+		<option value="">Select</option>
 		 <option ng-repeat="cruiseLine in shipPort.cruiseLineName | orderBy:'toString()'" id="cl" value="{{cruiseLine}}">{{cruiseLine}}</option>
 		</select>
 		
 		</div>	
 	
 	<div class="styled-select">
+	<div class="filterHead">Port of Departure</div>
 		<i class="ion-ios-arrow-down selectArrowCss"></i>
 		<select id="portName" onchange="filterPortName()">
-		<option value="">Port of Departure</option>
+		<option value="">Select</option>
 		 <option ng-repeat="shipport in shipPort.ports | orderBy:'toString()'" id="sp" value="{{shipport}}">{{shipport.split(",")[0].split("(")[0].trim()}}</option>
 		</select>
 		
@@ -63,9 +65,10 @@
 		
 	
 	<div class="styled-select">
+	<div class="filterHead">Ship Name</div>
 		<i class="ion-ios-arrow-down selectArrowCss"></i>
 		<select id="shipName" onchange="filterShipName()">
-		<option value="">Ship Name</option>
+		<option value="">Select</option>
 		 <option ng-repeat="shipName in shipPort.shipName | orderBy:'toString()' " id="sn" value="{{shipName}}">{{shipName}}</option>
 		</select>
 		

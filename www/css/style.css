@@ -389,6 +389,11 @@ label {
 
 /* copy and paste functionality  */
 
+.list:last-child
+{
+    padding-bottom: 18vh !important;
+}
+
 input, textarea {
         -webkit-user-select: auto !important;
         -khtml-user-select: auto !important;
@@ -1117,9 +1122,7 @@ font-family: bold;
 
 .styled-select select {
         background: transparent;
-    font-family: bold;
     padding: 0px 0px 0px 15px;
-    margin-top: 2%;
 /*    margin-right: 2%;*/
     width: 53px;
     /* min-height: 42px; */
@@ -2113,10 +2116,11 @@ transform: translate3d(-5px, 0px,0px);
 }
 .modalhead
 {
-color: rgb(176, 162, 131) !important;
-    font-size: 150% !important;
+        color: #339fa6 !important;
+    font-size: 5vmin !important;
     right: 50px !important;
     left: 50px !important;
+    font-family: bold;
 }
 .modalFloat
 {
@@ -2712,8 +2716,34 @@ div.sail{
     font-size: 5vmin;
 }
 
+.noRecomBackbutton
+{
+    font-family: thin;
+    margin-bottom: 20px;
+    background-color: #005D69;
+    /* padding: 8px 0px 0px 0px; */
+    margin-top: 9.5%;
+    width: 53px;
+    height: 5.5vh;
+    font-size: 5vmin;
+    color: white;
+    text-align: center;
+    width: 100%;
+    line-height: 5.5vh;
+}
 
-
+.noRecomText
+{
+    text-align: center;
+    color: #339fa6;
+    font-family: light;
+    font-size: 5vmin;
+    line-height: 1;
+}
+.noRecomPadd
+{
+    padding:5vw;
+}
 
 .curatorCommPadd
 {

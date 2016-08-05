@@ -141,8 +141,12 @@ app.controller('listController', function($scope, $location, $rootScope, $filter
 			$scope.CuratorIconShow=true;
 			 if($rootScope.curatorListIteamTemp == undefined)
 			 {
-
+			 	$scope.noRecommendation=true;
 				$scope.showPASFilter();
+			 }
+			 else
+			 {
+			 	$scope.noRecommendation=false;
 			 }
 
 			
@@ -228,6 +232,16 @@ app.controller('listController', function($scope, $location, $rootScope, $filter
                         function(data) {
 								$rootScope.curatorListIteamTemp=data.tripList;
 								$rootScope.curatorListIteam=angular.copy($rootScope.curatorListIteamTemp);
+								 if($rootScope.curatorListIteamTemp == undefined)
+								 {
+								 	$scope.noRecommendation=true;
+								 }
+								 else
+								 {
+								 	$scope.noRecommendation=false;
+								 }
+
+
 								$scope.pasModal.remove(); 
 								$ionicModal.fromTemplateUrl('templates/pasModal.html', {
 				            	scope: $scope
