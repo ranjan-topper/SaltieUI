@@ -17,6 +17,12 @@ app.controller('listController', function($scope, $location, $rootScope, $filter
         $rootScope.noMoreItemsAvailable = false;
 		$rootScope.page = "list";
         $scope.favoriteId = 0;
+		$scope.pasBackBtFlag = 0;
+		$scope.flagForError = '';
+		
+		
+		
+		
 		
       	$ionicModal.fromTemplateUrl('templates/pasModal.html', {
 				            	scope: $scope
@@ -139,7 +145,7 @@ app.controller('listController', function($scope, $location, $rootScope, $filter
 
 			$scope.curatorCount=true;
 			$scope.CuratorIconShow=true;
-			 if($rootScope.curatorListIteamTemp == undefined)
+			 if($rootScope.curatorListIteamTemp == undefined || $rootScope.curatorListIteamTemp == "")
 			 {
 			 	$scope.noRecommendation=true;
 				$scope.showPASFilter();
@@ -192,7 +198,8 @@ app.controller('listController', function($scope, $location, $rootScope, $filter
 					var liked ='';
 					var disliked ='';
 
-
+				$scope.pasBackbtShow = false;
+						
             	console.log(selectedData);
 				if(selectedData[0].liked != undefined)
 				{
@@ -243,6 +250,8 @@ app.controller('listController', function($scope, $location, $rootScope, $filter
 
 
 								$scope.pasModal.remove(); 
+								$scope.pasBackBtFlag = 0;
+								$scope.flagForError = 'twice';
 								$ionicModal.fromTemplateUrl('templates/pasModal.html', {
 				            	scope: $scope
 				        		}).then(function(modal) {
@@ -259,7 +268,39 @@ app.controller('listController', function($scope, $location, $rootScope, $filter
 
             }
 
-            
+            $scope.pasModalBackButton=function()
+			{
+				if($scope.flagForError == 'twice')
+				{
+					$scope.pasBackBtFlag = $scope.pasBackBtFlag - 2;
+				}
+				else
+				{
+					$scope.pasBackBtFlag = $scope.pasBackBtFlag - 1;
+				}
+				
+				parent.history.back();
+				$scope.flagCheck();
+
+			}
+			$rootScope.pasBackbtShowFunc = function()
+			{
+				$scope.pasBackBtFlag = $scope.pasBackBtFlag + 1;
+				$scope.pasBackbtShow = true;
+			}
+			
+			$scope.flagCheck = function()
+			{
+				if($scope.pasBackBtFlag == 0)
+				{
+					$scope.pasBackbtShow = false;
+				}
+				else
+				{
+					$scope.pasBackbtShow = true;
+				}
+			}
+			
           
 		
       }

@@ -2114,6 +2114,11 @@ transform: translate3d(-5px, 0px,0px);
     color: white !important;
 
 }
+.modalBackArrow{
+    padding: 0 !important;
+    padding-left: 5vw !important;
+    color: white !important;
+}
 .modalhead
 {
         color: #339fa6 !important;
@@ -2553,9 +2558,10 @@ div.sail{
 }
 .searchFilterIcon
 {
-	    top: calc(50% - 2.5vh);
+	top: calc(50% - 2.5vh);
     position: absolute;
     width: 50%;
+    left: 0;
     height: 100%;
 }
 
