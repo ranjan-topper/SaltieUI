@@ -239,7 +239,7 @@ app.controller('listController', function($scope, $location, $rootScope, $filter
                         function(data) {
 								$rootScope.curatorListIteamTemp=data.tripList;
 								$rootScope.curatorListIteam=angular.copy($rootScope.curatorListIteamTemp);
-								 if($rootScope.curatorListIteamTemp == undefined)
+								 if($rootScope.curatorListIteamTemp == undefined || $rootScope.curatorListIteamTemp == "")
 								 {
 								 	$scope.noRecommendation=true;
 								 }
