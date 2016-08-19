@@ -915,7 +915,7 @@ font-size: 5.5vmin;    text-decoration: none;
 {
 	pointer-events: none;
 	right: 0;
-    top: calc(50% - 4px);
+    top: calc(50% - 0px);
     font-size: 5vmin;
     position: absolute;
     padding-right: 3vw;

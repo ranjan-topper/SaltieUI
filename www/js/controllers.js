@@ -4,15 +4,12 @@ function iframeclick() {
 //
 //	console.log(document.getElementById("PASframe").contentWindow.document.querySelectorAll('_ngcontent-dse-3'));
     	var scope;
-			console.log('hi');
 
     window.addEventListener('message',receiveMessage, false);
     
    function receiveMessage(evt)
     {
-		console.log(evt.origin);
 		scope = angular.element(document.getElementById("PASModal")).scope();
-        console.log(evt.data);
         if (evt.data && evt.data != 'backArrow' && evt.data != 'Question' && evt.data != 'whoTravel' && evt.data != 'Answer')
             {
                  scope.$apply(function () {

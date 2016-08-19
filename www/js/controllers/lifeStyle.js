@@ -46,6 +46,7 @@ app.controller('lifeStyleCtrl', function($scope, $location, $http, $rootScope, $
        
         $http.get(serviceLink.url + 'SaltieApp/rest/cruise/count').success(function(data) {
             $rootScope.lifestylecount = data;
+			$rootScope.countSailing= data.TotalSailing;
 			$rootScope.count = $rootScope.lifestylecount[$localStorage.stylelife];
         });
 		

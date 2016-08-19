@@ -4,7 +4,12 @@
         </button>     
 	</ion-nav-buttons>
 	<ion-nav-title>
-     <a href="" class="cruisecount" id="viewCount" style="text-decoration: none;" ng-click="viewall(count)"><span class="thin">View <span class="bold">{{count}}</span> Cruises</span></a>
+     <a href="" class="cruisecount" id="viewCount" style="text-decoration: none;" ng-click="viewall(count)">
+			<span class="bold">{{countSailing}}</span>
+            <span class="thin"> Sailings |</span>
+            <span class="bold"> {{count}}</span> 
+            <span class="thin">Cruises</span>	
+	</a>
     </ion-nav-title>
 	
   
