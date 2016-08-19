@@ -36,7 +36,7 @@ app.controller('lifeStyleCtrl', function($scope, $location, $http, $rootScope, $
 		$rootScope.filterShipPort1={style:"",duration:"",year:"",month:"",ports:"",ship:"",orderby:"asc",cruiseLine:"",flag:-1};
 		$rootScope.shipPort={lifestyle:"",duration:"",cruiseLineName:"",ports:"",shipName:"",year:"",month:""};
 		$rootScope.backArrow={ship:0,cruiseLine:0,port:0,month1:"",month2:"",month3:"",expType:"",duration:"",orderBy:"asc"}; 
-		$rootScope.month=[];
+//		$rootScope.month=[];
         $rootScope.userFav = [];
         $rootScope.favourite = [];
 		$rootScope.preStyle="";
