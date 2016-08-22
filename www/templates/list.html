@@ -86,9 +86,9 @@
 				
 					<div class="layer">
 						<div class="curatorCommPadd">
-							<div class="curatorCommHead">Cruise<br> Recommendation</div><br>
+							<div class="curatorCommHead">Cruise<br> Recommendations</div><br>
 							<div class="curatorComments">
-							We've analyzed thousands of reviews by cruiser like you to find highest rated cruise(s) to match your survery preferences.
+							We've analyzed thousands of reviews by cruisers like you to find highest rated cruise(s) to match your survery preferences.
 							</div>
 						</div>
 							</div>
@@ -144,7 +144,7 @@
 					
 					</span>
 					<span class="cruiserReview">
-						<span class="cruiseReviewHead">Cruisers reviewed as:</span><br>
+						<span class="cruiseReviewHead">Cruisers like it for:</span><br>
 						<span class="reviewList" ng-repeat="review in itinerary.reason | limitTo:4">
 							{{review | capitalize:true}}{{$last ? '' : ($index >= 2) ? ' and ' : ', '}}
 						</span>
