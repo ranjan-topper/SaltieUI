@@ -668,18 +668,4 @@ app.factory('curatorList',function($http, $q, $ionicLoading, $ionicPopup, $local
 
 
 
-app.service('iframeListener', function($window, $rootScope) {
-  
-  function receiveMessageFun() {
-    $window.addEventListener('message', function(e) {
-      $rootScope.$broadcast('app.receiveMessageEvent', e);
-    })
-  }
-
-  return {
-    "receiveMessage": receiveMessageFun
-  }
-});
-
-
 

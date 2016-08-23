@@ -1,4 +1,4 @@
-app.controller('listController', function($scope, $location, $rootScope, $filter, $localStorage, $http, $ionicLoading, FavouriteService, $timeout, $ionicScrollDelegate, $ionicModal, loginService, facebookService, serviceLink, favService, $ionicPopup, $q, detailData, $ionicSlideBoxDelegate, curatorList, iframeListener) {
+app.controller('listController', function($scope, $location, $rootScope, $filter, $localStorage, $http, $ionicLoading, FavouriteService, $timeout, $ionicScrollDelegate, $ionicModal, loginService, facebookService, serviceLink, favService, $ionicPopup, $q, detailData, $ionicSlideBoxDelegate, curatorList, $window) {
 
 
   if (typeof analytics !== 'undefined') {
@@ -262,28 +262,43 @@ app.controller('listController', function($scope, $location, $rootScope, $filter
       }
     }
 
+	
+	
+  $window.addEventListener('message', function(e) {
+      $scope.$broadcast('app.receiveMessageEvent', e);
+    })
 
 
-
-    iframeListener.receiveMessage();
-    $rootScope.$on('app.receiveMessageEvent', function(a, evt) {
+   
+    $scope.$on('app.receiveMessageEvent', function(a, evt) {
       console.info(evt.data);
 
-      if (evt.data && evt.data != 'backArrow' && evt.data != 'Question' && evt.data != 'whoTravel' && evt.data != 'Answer') {
+		  if (evt.data && evt.data != 'backArrow' && evt.data != 'Question' && evt.data != 'whoTravel' && evt.data != 'Answer' && evt.data != 'backArrow' && evt.data != 'nextArrow') {
 
-        $scope.closePASModal(evt.data);
-      } else if (evt.data == 'backArrow') {
+			$scope.closePASModal(evt.data);
+		  } else if (evt.data == 'backArrow') {
 
-        $scope.pasBackbtShowFunc();
-      } else if (evt.data == 'Question') {
+			$scope.pasBackbtShowFunc();
+		  } else if (evt.data == 'Question') {
 
-        $scope.pasBackbtShowFunc();
-      } else if (evt.data == 'whoTravel') {
+			$scope.pasBackbtShowFunc();
+		  } else if (evt.data == 'whoTravel') {
 
-        $scope.pasBackbtShowFunc();
-      } else if (evt.data == 'Answer') {
-        $scope.pasBackbtShowFunc();
-      } else {}
+			$scope.pasBackbtShowFunc();
+		  }
+//		else if (evt.data == 'Answer') {
+//			$scope.pasBackbtShowFunc();
+//		  } 
+			else if(evt.data == 'nextArrow')
+			{
+				$scope.pasBackbtShowFunc();
+			}
+			else if(evt.data == 'backArrow')
+			{
+				$scope.pasBackBtFlag = $scope.pasBackBtFlag - 1;
+			}
+		
+		else {}
       $scope.$apply();
     });
 
