@@ -1,58 +1,58 @@
-function iframeclick() {
-//	console.log(document.getElementById("PASframe").contentWindow.document.body);
-//	console.log();
+//function iframeclick() {
+////	console.log(document.getElementById("PASframe").contentWindow.document.body);
+////	console.log();
+////
+////	console.log(document.getElementById("PASframe").contentWindow.document.querySelectorAll('_ngcontent-dse-3'));
+//    	var scope;
 //
-//	console.log(document.getElementById("PASframe").contentWindow.document.querySelectorAll('_ngcontent-dse-3'));
-    	var scope;
-
-    window.addEventListener('message',receiveMessage, false);
-    
-   function receiveMessage(evt)
-    {
-		scope = angular.element(document.getElementById("PASModal")).scope();
-        if (evt.data && evt.data != 'backArrow' && evt.data != 'Question' && evt.data != 'whoTravel' && evt.data != 'Answer')
-            {
-                 scope.$apply(function () {
-                    
-                    scope.closePASModal(evt.data);
-                    });
-            }
-		
-		else if (evt.data == 'backArrow')
-		{
-			scope.$apply(function () {
-                    
-				scope.pasBackbtShowFunc();
-			});
-		}
-		else if (evt.data == 'Question')
-		{
-			scope.$apply(function () {
-                    
-				scope.pasBackbtShowFunc();
-			});
-		}
-		else if (evt.data == 'whoTravel')
-		{
-			scope.$apply(function () {
-                    
-				scope.pasBackbtShowFunc();
-			});
-		}
-		else if (evt.data == 'Answer')
-		{
-			scope.$apply(function () {
-                    
-				scope.pasBackbtShowFunc();
-			});
-		}
-		else{
-		}
-    }
-	
-	
-	
-}
+//    window.addEventListener('message',receiveMessage, false);
+//    
+//   function receiveMessage(evt)
+//    {
+//		scope = angular.element(document.getElementById("PASModal")).scope();
+//        if (evt.data && evt.data != 'backArrow' && evt.data != 'Question' && evt.data != 'whoTravel' && evt.data != 'Answer')
+//            {
+//                 scope.$apply(function () {
+//                    
+//                    scope.closePASModal(evt.data);
+//                    });
+//            }
+//		
+//		else if (evt.data == 'backArrow')
+//		{
+//			scope.$apply(function () {
+//                    
+//				scope.pasBackbtShowFunc();
+//			});
+//		}
+//		else if (evt.data == 'Question')
+//		{
+//			scope.$apply(function () {
+//                    
+//				scope.pasBackbtShowFunc();
+//			});
+//		}
+//		else if (evt.data == 'whoTravel')
+//		{
+//			scope.$apply(function () {
+//                    
+//				scope.pasBackbtShowFunc();
+//			});
+//		}
+//		else if (evt.data == 'Answer')
+//		{
+//			scope.$apply(function () {
+//                    
+//				scope.pasBackbtShowFunc();
+//			});
+//		}
+//		else{
+//		}
+//    }
+//	
+//	
+//	
+//}
 
 
 function filterPortName()
