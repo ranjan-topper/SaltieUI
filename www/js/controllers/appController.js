@@ -54,11 +54,11 @@ if(typeof analytics !== 'undefined') { analytics.trackView("App Main Controller"
 			$rootScope.resetFilterHome();
 			
 		}
-		
-        $location.path('/app/lifeStyle');
-        $localStorage.stylelife = "All";
-		
+ $rootScope.isFavorite();
+		 $localStorage.stylelife = "All";
         $rootScope.count = $rootScope.lifestylecount['All'];
+        $location.path('/app/lifeStyle');
+       
 
     }
 	

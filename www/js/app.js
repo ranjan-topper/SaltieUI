@@ -43,7 +43,7 @@ app.run(function ($ionicPlatform,$rootScope, $state, $location,$ionicHistory,$io
     // for form inputs)
 		if (window.cordova && window.cordova.plugins.Keyboard) 
 		{
-		  cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+		  cordova.plugins.Keyboard.hideKeyboardAccessoryBar(false);
 		}
 		if (window.StatusBar) 
 		{

@@ -37,8 +37,6 @@ app.controller('lifeStyleCtrl', function($scope, $location, $http, $rootScope, $
 		$rootScope.shipPort={lifestyle:"",duration:"",cruiseLineName:"",ports:"",shipName:"",year:"",month:""};
 		$rootScope.backArrow={ship:0,cruiseLine:0,port:0,month1:"",month2:"",month3:"",expType:"",duration:"",orderBy:"asc"}; 
 //		$rootScope.month=[];
-        $rootScope.userFav = [];
-        $rootScope.favourite = [];
 		$rootScope.preStyle="";
         $rootScope.page = "lifestyle"; //page remember form myfavourite page
 		
