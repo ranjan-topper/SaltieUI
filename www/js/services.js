@@ -425,8 +425,8 @@ app.factory('facebookService', function($http, $q, $ionicLoading, $ionicPopup, $
 //server link declaration
 app.factory('serviceLink', function() {
     return {
-	        url: 'http://104.236.50.241:8080/'
-//		  url: 'http://159.203.121.122:8080/'
+	       // url: 'http://104.236.50.241:8080/'
+			url: 'http://159.203.121.122:8080/'
     };
 });
 
