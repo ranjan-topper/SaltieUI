@@ -121,9 +121,9 @@ app.controller('listController', function($scope, $location, $rootScope, $filter
     //tab function
 
     $scope.onFilterTabSelected = function() {
-
-      $scope.filterIconShow = true;
-      $scope.filterCount = true;
+			$scope.pasBackBtFlag = 0;
+		  $scope.filterIconShow = true;
+		  $scope.filterCount = true;
 
     }
     $scope.onFilterTabDeselected = function() {
@@ -134,15 +134,16 @@ app.controller('listController', function($scope, $location, $rootScope, $filter
 
 
     $scope.onCuratorTabSelected = function() {
-      console.log($scope.curatorListIteam);
+		$scope.pasBackBtFlag = 1;
+		console.log($scope.curatorListIteam);
 
       $scope.curatorCount = true;
       $scope.CuratorIconShow = true;
       if ($rootScope.curatorListIteamTemp == undefined || $rootScope.curatorListIteamTemp == "") {
-        $scope.noRecommendation = true;
+        $rootScope.noRecommendation = true;
         $scope.showPASFilter();
       } else {
-        $scope.noRecommendation = false;
+        $rootScope.noRecommendation = false;
       }
 
 
@@ -157,150 +158,34 @@ app.controller('listController', function($scope, $location, $rootScope, $filter
     //back button function
     $scope.back = function() {
       $rootScope.page = "lifestyle";
-      $location.path('/app/lifeStyle');
+		if($scope.pasBackBtFlag == 1 && $rootScope.noRecommendation == true)
+		{
+			 $location.path('/app/pasPage');
+		}
+		else if($scope.pasBackBtFlag == 1 && $rootScope.noRecommendation == false)
+		{
+			$location.path('/app/pasCategory');
+		}
+		else
+		{
+			$location.path('/app/lifeStyle');
+		}
+      
     }
 
 
 
     $scope.showPASFilter = function() {
-      $scope.pasModal.show();
+       $location.path('/app/pasPage');
     }
-    $scope.clickOnIframe = function() {
-      var x = document.getElementById("PASframe");
-      x.contentWindow.document.onclick = function() {
-        console.log("frame contents clicked");
-      };
-    }
+  $scope.showCategoryPage = function()
+  {
+	         $location.path('/app/pasCategory');
+
+  }
 
 
 
-
-    $rootScope.closePASModal = function(selectedData) {
-      var neutral = '';
-      var liked = '';
-      var disliked = '';
-
-      $scope.pasBackbtShow = false;
-
-      console.log(selectedData);
-      if (selectedData[0].liked != undefined) {
-        var likedData = JSON.parse(selectedData[0].liked);
-
-        angular.forEach(likedData, function(value, key) {
-          liked += value + ',';
-        });
-        liked = liked.substring(0, liked.length - 1);
-
-        console.log(liked);
-      }
-      if (selectedData[1].disliked != undefined) {
-        var dislikedData = JSON.parse(selectedData[1].disliked);
-        angular.forEach(dislikedData, function(value, key) {
-          disliked += value + ',';
-        });
-        disliked = disliked.substring(0, disliked.length - 1);
-
-        console.log(disliked);
-      }
-
-      if (selectedData[2].neutral != undefined) {
-        var neutralData = JSON.parse(selectedData[2].neutral);
-        angular.forEach(neutralData, function(value, key) {
-          neutral += value + ',';
-        });
-        neutral = neutral.substring(0, neutral.length - 1);
-
-        console.log(neutral);
-      }
-      curatorList.curator(liked, neutral, disliked)
-        .then(
-          /* success function */
-          function(data) {
-            $rootScope.curatorListIteamTemp = data.tripList;
-            $rootScope.curatorListIteam = angular.copy($rootScope.curatorListIteamTemp);
-            if ($rootScope.curatorListIteamTemp == undefined || $rootScope.curatorListIteamTemp == "") {
-              $scope.noRecommendation = true;
-            } else {
-              $scope.noRecommendation = false;
-            }
-            $scope.pasModal.remove();
-            $scope.pasBackBtFlag = 0;
-
-            $ionicModal.fromTemplateUrl('templates/pasModal.html', {
-              scope: $scope
-            }).then(function(modal) {
-              $scope.pasModal = modal;
-            });
-            $ionicLoading.hide();
-
-          }, function(error) {
-            alert("There was a problem");
-            console.log(error);
-          });
-
-
-
-    }
-
-    $scope.pasModalBackButton = function() {
-
-      $scope.pasBackBtFlag = $scope.pasBackBtFlag - 1;
-      parent.history.back();
-      $scope.flagCheck();
-
-    }
-    $rootScope.pasBackbtShowFunc = function() {
-      $scope.pasBackBtFlag = $scope.pasBackBtFlag + 1;
-      $scope.pasBackbtShow = true;
-    }
-
-    $scope.flagCheck = function() {
-      if ($scope.pasBackBtFlag <= 0) {
-        $scope.pasBackbtShow = false;
-      } else {
-        $scope.pasBackbtShow = true;
-      }
-    }
-
-	
-	
-  $window.addEventListener('message', function(e) {
-      $scope.$broadcast('app.receiveMessageEvent', e);
-    })
-
-
-   
-    $scope.$on('app.receiveMessageEvent', function(a, evt) {
-      console.info(evt.data);
-
-		  if (evt.data && evt.data != 'backArrow' && evt.data != 'Question' && evt.data != 'whoTravel' && evt.data != 'Answer' && evt.data != 'backArrow' && evt.data != 'nextArrow') {
-
-			$scope.closePASModal(evt.data);
-		  } else if (evt.data == 'backArrow') {
-
-			$scope.pasBackbtShowFunc();
-		  } else if (evt.data == 'Question') {
-
-			$scope.pasBackbtShowFunc();
-		  } else if (evt.data == 'whoTravel') {
-
-			$scope.pasBackbtShowFunc();
-		  }
-//		else if (evt.data == 'Answer') {
-//			$scope.pasBackbtShowFunc();
-//		  } 
-			else if(evt.data == 'nextArrow')
-			{
-				$scope.pasBackbtShowFunc();
-			}
-			else if(evt.data == 'backArrow')
-			{
-				$scope.pasBackBtFlag = $scope.pasBackBtFlag - 1;
-			}
-		
-		else {}
-      $scope.$apply();
-    });
 
   }
 });

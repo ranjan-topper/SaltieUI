@@ -139,6 +139,11 @@ app.filter('orderByCategory', function() {
 });
 
 
+app.filter("trustUrl", ['$sce', function ($sce) {
+        return function (recordingUrl) {
+            return $sce.trustAsResourceUrl(recordingUrl);
+        };
+    }]);
 
 app.filter('orderByCabin', function() {
     return function(obj) {

@@ -170,6 +170,43 @@ app.config(function($stateProvider, $urlRouterProvider, $httpProvider,$ionicConf
       }
     })
   
+  .state('app.pasPage', {
+      url: "/pasPage",
+      views: {
+        'menuContent': {
+          templateUrl: "templates/pasPage.html",
+			controller:'pasPageController'
+        }
+      }
+    })
+  .state('app.pasWhoTravel', {
+      url: "/pasWhoTravel",
+      views: {
+        'menuContent': {
+          templateUrl: "templates/pasWhoTravel.html",
+			controller:'pasPageController'
+        }
+      }
+    })
+  .state('app.pasCategory', {
+      url: "/pasCategory",
+      views: {
+        'menuContent': {
+          templateUrl: "templates/pasCategory.html",
+			controller:'pasPageController'
+        }
+      }
+    })
+    .state('app.pasQuestion', {
+      url: "/pasQuestion",
+      views: {
+        'menuContent': {
+          templateUrl: "templates/pasQuestion.html",
+			controller:'pasPageController'
+        }
+      }
+    })
+  
   .state('app.detail', {
       url: "/detail",
       views: {

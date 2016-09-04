@@ -1,0 +1,20 @@
+<ion-view cache-view="true" id="question" >
+	
+	
+	<ion-nav-buttons side="left" style="padding-left: 3%;">
+
+	<button class="button button-icon button-clear ion-ios-arrow-thin-left navBarButton" id="PASback" style="color: white;" ng-click="pasQuestionBack()">
+        </button>
+	</ion-nav-buttons>
+	
+	<ion-nav-title>
+	<h2 class="title modalhead">Saltie Curator</h2>
+    </ion-nav-title>
+	
+	<ion-content style="-webkit-overflow-scrolling: touch !important;overflow: scroll !important;" style="margin-top: -50px;" id="PASfilterNew" >
+<div >
+<iframe sandbox="allow-same-origin allow-scripts allow-popups allow-forms" id="PASframe" data-tap-disabled="true" ng-src="{{questionUrl | trustUrl}}" style="height: 100vh; width: 100vw;"  frameborder="0"></iframe>
+		</div>
+	</ion-content>
+	
+</ion-view>
