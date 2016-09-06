@@ -58,9 +58,6 @@ app.controller('pasPageController', function($scope, $location, $rootScope, $fil
             alert("There was a problem");
             console.log(error);
           });
-
-
-
     }
 
 	$scope.pasWhoTravelBack = function()

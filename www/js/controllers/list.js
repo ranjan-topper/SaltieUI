@@ -21,7 +21,6 @@ app.controller('listController', function($scope, $location, $rootScope, $filter
     $scope.favoriteId = 0;
     $scope.pasBackBtFlag = 0;
 
-
     $ionicModal.fromTemplateUrl('templates/pasModal.html', {
       scope: $scope
     }).then(function(modal) {
@@ -134,14 +133,20 @@ app.controller('listController', function($scope, $location, $rootScope, $filter
 
 
     $scope.onCuratorTabSelected = function() {
+		
 		$scope.pasBackBtFlag = 1;
 		console.log($scope.curatorListIteam);
 
       $scope.curatorCount = true;
       $scope.CuratorIconShow = true;
       if ($rootScope.curatorListIteamTemp == undefined || $rootScope.curatorListIteamTemp == "") {
-        $rootScope.noRecommendation = true;
-        $scope.showPASFilter();
+		  $rootScope.noRecommendation = true;
+		  if($rootScope.firstTimeSelected == 0)
+		  {
+			  $scope.showPASFilter();
+			  $rootScope.firstTimeSelected = 1;
+		  }
+      
       } else {
         $rootScope.noRecommendation = false;
       }

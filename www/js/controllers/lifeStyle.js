@@ -3,7 +3,7 @@ app.controller('lifeStyleCtrl', function($scope, $location, $http, $rootScope, $
     $rootScope.TempDetail = "";
     $rootScope.engageData = "";
 	$rootScope.buttonType = "Select Room Type";
-
+	$rootScope.firstTimeSelected = 0;
 	if($localStorage.userName=="Guest")
 	{
 		$rootScope.loginLogout="Login";
