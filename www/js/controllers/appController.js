@@ -5,6 +5,16 @@ if(typeof analytics !== 'undefined') { analytics.trackView("App Main Controller"
 	$scope.screenWidth=screen.width;
 
 	
+		$rootScope.clickFilterFlag=0;
+		$rootScope.applyFilterFlag='';
+		$rootScope.filterShipPort={style:"",duration:"",year:"",month:"",ports:"",ship:"",orderby:"asc",cruiseLine:"",flag:-1};
+		$rootScope.filterShipPort1={style:"",duration:"",year:"",month:"",ports:"",ship:"",orderby:"asc",cruiseLine:"",flag:-1};
+		$rootScope.shipPort={lifestyle:"",duration:"",cruiseLineName:"",ports:"",shipName:"",year:"",month:""};
+		$rootScope.backArrow={ship:0,cruiseLine:0,port:0,month1:"",month2:"",month3:"",expType:"",duration:"",orderBy:"asc"}; 
+//		$rootScope.month=[];
+		$rootScope.preStyle="";
+	
+	
     $scope.myFavourite = function() {
         //service part of myfavourite page start
        
@@ -45,15 +55,15 @@ if(typeof analytics !== 'undefined') { analytics.trackView("App Main Controller"
     }
 
     $scope.home = function() {
-		$rootScope.applyFilterFlag=0;
+//		$rootScope.applyFilterFlag=0;
         $rootScope.engageData = "";
-		if($rootScope.clickFilterFlag!=0)
-		{
-			$rootScope.backArrow={ship:0,cruiseLine:0,port:0,month1:"",month2:"",month3:"",expType:"",duration:"",orderBy:"asc"}; 
-			$rootScope.filterShipPort1={style:"All",duration:"",year:"",month:"",ports:"",ship:"",orderby:"asc",cruiseLine:"",flag:-1};
-			$rootScope.resetFilterHome();
-			
-		}
+//		if($rootScope.clickFilterFlag!=0)
+//		{
+//			$rootScope.backArrow={ship:0,cruiseLine:0,port:0,month1:"",month2:"",month3:"",expType:"",duration:"",orderBy:"asc"}; 
+//			$rootScope.filterShipPort1={style:"All",duration:"",year:"",month:"",ports:"",ship:"",orderby:"asc",cruiseLine:"",flag:-1};
+//			$rootScope.resetFilterHome();
+//			
+//		}
 		 $localStorage.stylelife = "All";
         $rootScope.count = $rootScope.lifestylecount['All'];
         $location.path('/app/lifeStyle');

@@ -22,20 +22,16 @@ app.controller('lifeStyleCtrl', function($scope, $location, $http, $rootScope, $
 	}
 
 	
+
+	
+	
 	if(typeof analytics !== 'undefined') { analytics.trackView("LifeStyle Controller"); }
 
 //    HardwareBackButtonManager.disable();
     if ($localStorage.userName == "" || $localStorage.userName == null) {
         $location.path('/start');
     } else {
-		$rootScope.clickFilterFlag=0;
-		$rootScope.applyFilterFlag='';
-		$rootScope.filterShipPort={style:"",duration:"",year:"",month:"",ports:"",ship:"",orderby:"asc",cruiseLine:"",flag:-1};
-		$rootScope.filterShipPort1={style:"",duration:"",year:"",month:"",ports:"",ship:"",orderby:"asc",cruiseLine:"",flag:-1};
-		$rootScope.shipPort={lifestyle:"",duration:"",cruiseLineName:"",ports:"",shipName:"",year:"",month:""};
-		$rootScope.backArrow={ship:0,cruiseLine:0,port:0,month1:"",month2:"",month3:"",expType:"",duration:"",orderBy:"asc"}; 
-//		$rootScope.month=[];
-		$rootScope.preStyle="";
+
 		
         $rootScope.is_engaged = "lifeStyle";
         $rootScope.page = "lifestyle"; //page remember form myfavourite page

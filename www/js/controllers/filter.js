@@ -4,6 +4,7 @@ app.controller('filterController',function($scope, $location, $http, $rootScope,
    ========================================================================== */
 	$rootScope.orderBy="asc";
 	$rootScope.month=[];
+	
 		$rootScope.month[0]=[{month:"Jan",value: false,number:1},{ month:"Feb",value: false,number:2}, {month:"Mar",value: false,number:3}, {month:"Apr",value: false,number:4}, {month:"May",value: false,number:5},{month:"Jun",value: false,number:6},{ month:"Jul",value: false,number:7},{ month:"Aug", value: false,number:8}, {month:"Sep",value: false,number:9}, {month:"Oct",value: false,number:10},{month:"Nov",value: false,number:11},{ month:"Dec",value: false,number:12}];
 	
 	 	$rootScope.month[1]=[{month:"Jan",value: false,number:1},{ month:"Feb",value: false,number:2}, {month:"Mar",value: false,number:3}, {month:"Apr",value: false,number:4}, {month:"May",value: false,number:5},{month:"Jun",value: false,number:6},{ month:"Jul",value: false,number:7},{ month:"Aug", value: false,number:8}, {month:"Sep",value: false,number:9}, {month:"Oct",value: false,number:10},{month:"Nov",value: false,number:11},{ month:"Dec",value: false,number:12}];

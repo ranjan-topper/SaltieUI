@@ -1,6 +1,7 @@
 app.controller('startCtrl', function($scope, $location, $state, $localStorage, $timeout,$rootScope,serviceLink) {
 //    HardwareBackButtonManager.disable(); //HardwareBackButtonManager is a directive used to block the back button functionality of the mobile
-	$rootScope.linkUrl=serviceLink.url;
+		$rootScope.linkUrl=serviceLink.url;
+		
 	
 if(typeof analytics !== 'undefined') { analytics.trackView("Start Controller"); }
 if ($localStorage.userName == "" || $localStorage.userName == null || $localStorage.userName == "Guest") {

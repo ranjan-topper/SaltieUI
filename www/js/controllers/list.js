@@ -22,6 +22,8 @@ app.controller('listController', function($scope, $location, $rootScope, $filter
 		$scope.pasBackBtFlag = 0;
 		
 	  
+	  	
+	  
     $ionicModal.fromTemplateUrl('templates/pasModal.html', {
       scope: $scope
     }).then(function(modal) {
