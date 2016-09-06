@@ -1,4 +1,4 @@
-app.controller('listController', function($scope, $location, $rootScope, $filter, $localStorage, $http, $ionicLoading, FavouriteService, $timeout, $ionicScrollDelegate, $ionicModal, loginService, facebookService, serviceLink, favService, $ionicPopup, $q, detailData, $ionicSlideBoxDelegate, curatorList, $window) {
+app.controller('listController', function($scope, $location, $rootScope, $filter, $localStorage, $http, $ionicLoading, FavouriteService, $timeout, $ionicScrollDelegate, $ionicModal, loginService, facebookService, serviceLink, favService, $ionicPopup, $q, detailData, $ionicSlideBoxDelegate, curatorList, $window, themeFilter) {
 
 
   if (typeof analytics !== 'undefined') {
@@ -10,17 +10,18 @@ app.controller('listController', function($scope, $location, $rootScope, $filter
     $location.path('/start');
   } else {
 
-    $rootScope.is_engaged = "list";
-    $rootScope.userFav = [];
-    $rootScope.favourite = [];
-    $rootScope.list = [];
-    $scope.dayCount = [];
-    $rootScope.totalDisplayed = 0;
-    $rootScope.noMoreItemsAvailable = false;
-    $rootScope.page = "list";
-    $scope.favoriteId = 0;
-    $scope.pasBackBtFlag = 0;
-
+		$rootScope.is_engaged = "list";
+		$rootScope.userFav = [];
+		$rootScope.favourite = [];
+		$rootScope.list = [];
+		$scope.dayCount = [];
+		$rootScope.totalDisplayed = 0;
+		$rootScope.noMoreItemsAvailable = false;
+		$rootScope.page = "list";
+		$scope.favoriteId = 0;
+		$scope.pasBackBtFlag = 0;
+		
+	  
     $ionicModal.fromTemplateUrl('templates/pasModal.html', {
       scope: $scope
     }).then(function(modal) {
@@ -39,6 +40,85 @@ app.controller('listController', function($scope, $location, $rootScope, $filter
     }
 
 
+	
+	//filter functionality
+	
+		 
+		 $rootScope.showFilter=function()
+		 {
+			
+				 if($rootScope.applyFilterFlag==0)
+			 {
+				 $rootScope.clickFilterFlag=0;
+			 }
+			 if($rootScope.clickFilterFlag==0)
+			 {
+					$rootScope.filterModal.show();
+					$rootScope.preStyle="";
+				 $rootScope.preDuration="";
+				 $rootScope.filterShipPort={style:"All",duration:"",year:"",month:"",ports:"",ship:"",orderby:"asc",cruiseLine:"",flag:-1};
+				 document.getElementById("portName").selectedIndex= 0;
+				 document.getElementById("cruiseLine").selectedIndex= 0;
+				 document.getElementById("shipName").selectedIndex= 0;
+			 for(i=0;i<$rootScope.month.length;i++)
+			 {
+				 for(j=0;j<12;j++){
+					 $rootScope.month[i][j].value=false;
+				 }
+				 
+			 }
+				  $rootScope.filterLifstyle();
+				 $rootScope.clickFilterFlag=1;
+			 }
+			 else{
+				 $rootScope.shipPort=$rootScope.shipPort1;
+                 $timeout(function() {
+                     $rootScope.filterShipPort.style=$rootScope.backArrow.expType;
+					 $rootScope.preStyle=$rootScope.backArrow.expType;
+					 $rootScope.preDuration=$rootScope.backArrow.duration;
+                     $rootScope.filterShipPort.duration=$rootScope.backArrow.duration;
+					 $rootScope.filterShipPort.orderby= $rootScope.backArrow.orderBy;
+                     $rootScope.resetDateMonth($rootScope.backArrow.month1,0);
+					 $rootScope.resetDateMonth($rootScope.backArrow.month2,1);
+                     $rootScope.resetDateMonth($rootScope.backArrow.month3,2);
+                    document.getElementById("cruiseLine").selectedIndex=$rootScope.backArrow.cruiseLine;
+                    document.getElementById("portName").selectedIndex=$rootScope.backArrow.port;
+                    document.getElementById("shipName").selectedIndex=$rootScope.backArrow.ship;
+                }, 100); 
+				   $rootScope.filterModal.show();
+			 }
+		 }
+		 
+		  
+		 $rootScope.filterLifstyle=function()
+		 {
+			 if($rootScope.filterShipPort.style=="All")
+			{
+				$rootScope.filterShipPort.style="";
+			}
+			 
+			 
+			 themeFilter.theme($rootScope.filterShipPort)
+                    .then(
+                        /* success function */
+                        function(data) {
+								$rootScope.shipPort=data;
+                                $ionicLoading.hide();
+                        },function(error) {
+                alert("There was a problem");
+                console.log(error);
+            });
+			 
+			 
+			  $rootScope.filterModal.show();
+		 }
+	
+	
+	
+	
+	
+	
+	
     //load 10 data in list page and loadmore functionality
     $rootScope.loadMore = function() {
       console.log($rootScope.filterShipPort1.style);
@@ -52,8 +132,8 @@ app.controller('listController', function($scope, $location, $rootScope, $filter
           $ionicLoading.hide(); //hide the loading screen
           if (i != 0) {
             if ($rootScope.totalDisplayed == 0) {
-              $rootScope.count = data.AllCount;
-              $rootScope.countSailing = data.TotalSailing;
+              $rootScope.listCount = data.AllCount;
+              $rootScope.listCountSailing = data.TotalSailing;
             }
             $rootScope.list = $rootScope.list.concat(data.tripList); //concat 10-10 data for each call
             $rootScope.favourite = data.favourite;
@@ -165,7 +245,7 @@ app.controller('listController', function($scope, $location, $rootScope, $filter
       $rootScope.page = "lifestyle";
 		if($scope.pasBackBtFlag == 1 && $rootScope.noRecommendation == true)
 		{
-			 $location.path('/app/pasPage');
+			 $location.path('/app/pasCategory');
 		}
 		else if($scope.pasBackBtFlag == 1 && $rootScope.noRecommendation == false)
 		{

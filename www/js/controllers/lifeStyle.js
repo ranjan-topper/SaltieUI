@@ -1,4 +1,4 @@
-app.controller('lifeStyleCtrl', function($scope, $location, $http, $rootScope, $filter, $localStorage, $ionicLoading, serviceLink, $ionicModal,themeFilter,$ionicPopup,advanceFilter,$ionicScrollDelegate,$ionicSlideBoxDelegate,$timeout, facebookService) {
+app.controller('lifeStyleCtrl', function($scope, $location, $http, $rootScope, $filter, $localStorage, $ionicLoading, serviceLink, $ionicModal,$ionicScrollDelegate,$ionicSlideBoxDelegate,$timeout, facebookService) {
 	//initialise the rootscope details value
     $rootScope.TempDetail = "";
     $rootScope.engageData = "";
@@ -28,8 +28,6 @@ app.controller('lifeStyleCtrl', function($scope, $location, $http, $rootScope, $
     if ($localStorage.userName == "" || $localStorage.userName == null) {
         $location.path('/start');
     } else {
-        $rootScope.is_engaged = "lifeStyle";
-        
 		$rootScope.clickFilterFlag=0;
 		$rootScope.applyFilterFlag='';
 		$rootScope.filterShipPort={style:"",duration:"",year:"",month:"",ports:"",ship:"",orderby:"asc",cruiseLine:"",flag:-1};
@@ -38,6 +36,8 @@ app.controller('lifeStyleCtrl', function($scope, $location, $http, $rootScope, $
 		$rootScope.backArrow={ship:0,cruiseLine:0,port:0,month1:"",month2:"",month3:"",expType:"",duration:"",orderBy:"asc"}; 
 //		$rootScope.month=[];
 		$rootScope.preStyle="";
+		
+        $rootScope.is_engaged = "lifeStyle";
         $rootScope.page = "lifestyle"; //page remember form myfavourite page
 		
 		
@@ -56,75 +56,6 @@ app.controller('lifeStyleCtrl', function($scope, $location, $http, $rootScope, $
 		
 	
 
-		 
-		 $rootScope.showFilter=function()
-		 {
-			
-				 if($rootScope.applyFilterFlag==0)
-			 {
-				 $rootScope.clickFilterFlag=0;
-			 }
-			 if($rootScope.clickFilterFlag==0)
-			 {
-					$rootScope.filterModal.show();
-					$rootScope.preStyle="";
-				 $rootScope.preDuration="";
-				 $rootScope.filterShipPort={style:"All",duration:"",year:"",month:"",ports:"",ship:"",orderby:"asc",cruiseLine:"",flag:-1};
-				 document.getElementById("portName").selectedIndex= 0;
-				 document.getElementById("cruiseLine").selectedIndex= 0;
-				 document.getElementById("shipName").selectedIndex= 0;
-			 for(i=0;i<$rootScope.month.length;i++)
-			 {
-				 for(j=0;j<12;j++){
-					 $rootScope.month[i][j].value=false;
-				 }
-				 
-			 }
-				  $rootScope.filterLifstyle();
-				 $rootScope.clickFilterFlag=1;
-			 }
-			 else{
-				 $rootScope.shipPort=$rootScope.shipPort1;
-                 $timeout(function() {
-                     $rootScope.filterShipPort.style=$rootScope.backArrow.expType;
-					 $rootScope.preStyle=$rootScope.backArrow.expType;
-					 $rootScope.preDuration=$rootScope.backArrow.duration;
-                     $rootScope.filterShipPort.duration=$rootScope.backArrow.duration;
-					 $rootScope.filterShipPort.orderby= $rootScope.backArrow.orderBy;
-                     $rootScope.resetDateMonth($rootScope.backArrow.month1,0);
-					 $rootScope.resetDateMonth($rootScope.backArrow.month2,1);
-                     $rootScope.resetDateMonth($rootScope.backArrow.month3,2);
-                    document.getElementById("cruiseLine").selectedIndex=$rootScope.backArrow.cruiseLine;
-                    document.getElementById("portName").selectedIndex=$rootScope.backArrow.port;
-                    document.getElementById("shipName").selectedIndex=$rootScope.backArrow.ship;
-                }, 100); 
-				   $rootScope.filterModal.show();
-			 }
-		 }
-		 
-		  
-		 $rootScope.filterLifstyle=function()
-		 {
-			 if($rootScope.filterShipPort.style=="All")
-			{
-				$rootScope.filterShipPort.style="";
-			}
-			 
-			 
-			 themeFilter.theme($rootScope.filterShipPort)
-                    .then(
-                        /* success function */
-                        function(data) {
-								$rootScope.shipPort=data;
-                                $ionicLoading.hide();
-                        },function(error) {
-                alert("There was a problem");
-                console.log(error);
-            });
-			 
-			 
-			  $rootScope.filterModal.show();
-		 }
 		 
 		
     }
