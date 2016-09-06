@@ -1,4 +1,4 @@
-app.controller('pasPageController', function($scope, $location, $rootScope, $filter, $localStorage, $http, $ionicLoading, FavouriteService, $timeout, serviceLink, favService, $q, curatorList, $window,$ionicViewService,$sce) {
+app.controller('pasPageController', function($scope, $location, $rootScope, $filter, $localStorage, $http, $ionicLoading, FavouriteService, $timeout, serviceLink, favService, $q, curatorList, $window,$ionicViewService,$sce,$ionicTabsDelegate) {
 	
 	
 	
@@ -52,6 +52,9 @@ app.controller('pasPageController', function($scope, $location, $rootScope, $fil
             } else {
               $rootScope.noRecommendation = false;
             }
+			$timeout( function() {
+			$ionicTabsDelegate.$getByHandle('listTab').select(1);
+		  	},100);
 			 $location.path('/app/list');
             $ionicLoading.hide();
 
@@ -82,9 +85,10 @@ app.controller('pasPageController', function($scope, $location, $rootScope, $fil
 	
 	
     $scope.pasModalBackButton = function() {
-		
-		
-			 $location.path('/app/list');
+		  $timeout( function() {
+		$ionicTabsDelegate.$getByHandle('listTab').select(1);
+		  },100);
+		$location.path('/app/list');
 
 //      $scope.pasBackBtFlag = $scope.pasBackBtFlag - 1;
 //		if($scope.pasBackbtShow == false)

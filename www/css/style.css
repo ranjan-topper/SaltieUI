@@ -1357,6 +1357,14 @@ color: white;
 /* ==========================================================================
   	10. Detail Page
    ========================================================================== */
+
+.engagePopupDetail
+{
+	line-height: 1.2;
+    margin-right: 5vw;
+    margin-left: 5vw;
+    margin-bottom: 5vw;
+}
 .marginDetail
 {
 	line-height: 1.2;
