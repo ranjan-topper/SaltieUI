@@ -1,8 +1,4 @@
-app.controller('pasPageController', function($scope, $location, $rootScope, $filter, $localStorage, $http, $ionicLoading, FavouriteService, $timeout, serviceLink, favService, $q, curatorList, $window,$ionicViewService,$sce,$ionicTabsDelegate) {
-	
-	
-	
-	
+app.controller('pasPageController', function($scope, $location, $rootScope, $filter, $localStorage, $http, $ionicLoading, FavouriteService, $timeout, curatorList, $window, $ionicViewService, $ionicTabsDelegate) {
 
     $rootScope.closePASModal = function(selectedData) {
       var neutral = '';
@@ -153,4 +149,4 @@ app.controller('pasPageController', function($scope, $location, $rootScope, $fil
     });
 	
 	
-})
+});
