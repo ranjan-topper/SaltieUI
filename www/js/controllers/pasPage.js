@@ -120,7 +120,7 @@ app.controller('pasPageController', function($scope, $location, $rootScope, $fil
 
 		  if (evt.data.index == 0) {
 			  $scope.categoryID=evt.data.category_id;
-			  $rootScope.questionUrl= "http://159.203.121.122:8080/TestPAS/#questions?category_id="+evt.data.category_id+"&index=0&hide-navigation=t";
+			  $rootScope.questionUrl= "http://104.236.50.241/CruisePAS/#questions?category_id="+evt.data.category_id+"&index=0&hide-navigation=t";
 //			   $timeout(function() {
                  $location.path('/app/pasQuestion');
 //            }, 100);
