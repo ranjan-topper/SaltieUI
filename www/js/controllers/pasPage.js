@@ -1,5 +1,13 @@
-app.controller('pasPageController', function($scope, $location, $rootScope, $filter, $localStorage, $http, $ionicLoading, FavouriteService, $timeout, curatorList, $window, $ionicViewService, $ionicTabsDelegate) {
+app.controller('pasPageController', function($scope, $location, $rootScope, $http, $ionicLoading, $timeout, curatorList, $window, $ionicTabsDelegate) {
 
+	//$scope.pasUrl = "http://104.236.50.241/";
+	$scope.pasUrl = "http://159.203.121.122:8080/";
+	
+	$rootScope.pasPageUrl = $scope.pasUrl +"CruisePAS/?hide-navigation=t";
+	$rootScope.whoTravelUrl = $scope.pasUrl +"CruisePAS/#/whos-traveling?hide-navigation=t";
+	$rootScope.categoryUrl = $scope.pasUrl +"CruisePAS/#/categories?hide-navigation=t";
+	
+	
     $rootScope.closePASModal = function(selectedData) {
       var neutral = '';
       var liked = '';
@@ -120,7 +128,7 @@ app.controller('pasPageController', function($scope, $location, $rootScope, $fil
 
 		  if (evt.data.index == 0) {
 			  $scope.categoryID=evt.data.category_id;
-			  $rootScope.questionUrl= "http://104.236.50.241/CruisePAS/#questions?category_id="+evt.data.category_id+"&index=0&hide-navigation=t";
+			  $rootScope.questionUrl= $scope.pasUrl+"CruisePAS/#questions?category_id="+evt.data.category_id+"&index=0&hide-navigation=t";
 //			   $timeout(function() {
                  $location.path('/app/pasQuestion');
 //            }, 100);
