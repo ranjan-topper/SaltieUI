@@ -1,4 +1,4 @@
-app.controller('engageController', function($scope, $location, $http, $rootScope, $filter, $localStorage, $ionicLoading, serviceLink, $ionicModal,themeFilter,$ionicPopup,advanceFilter,$ionicScrollDelegate,$ionicSlideBoxDelegate,$timeout, facebookService){
+app.controller('engageController', function($scope, $location, $http, $rootScope, $localStorage){
     $scope.engageUser = function(){
     
         // $rootScope.TempDetail=angular.copy($rootScope.detail);
@@ -35,5 +35,10 @@ app.controller('engageController', function($scope, $location, $http, $rootScope
     $scope.closePopup = function(){
         $scope.is_showBookingPopup = false;
     }
+	
+	$scope.bookOnlineWeb = function()
+	{
+		 window.open('https://www.vivavoyage.com/', '_blank', 'closebuttoncaption=back');
+	}
     
 });
