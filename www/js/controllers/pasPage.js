@@ -1,7 +1,7 @@
 app.controller('pasPageController', function($scope, $location, $rootScope, $http, $ionicLoading, $timeout, curatorList, $window, $ionicTabsDelegate) {
 
-	//$scope.pasUrl = "http://104.236.50.241/";
-	$scope.pasUrl = "http://159.203.121.122:8080/";
+	$scope.pasUrl = "http://104.236.50.241/";
+//	$scope.pasUrl = "http://159.203.121.122:8080/";
 	
 	$rootScope.pasPageUrl = $scope.pasUrl +"CruisePAS/?hide-navigation=t";
 	$rootScope.whoTravelUrl = $scope.pasUrl +"CruisePAS/#/whos-traveling?hide-navigation=t";
