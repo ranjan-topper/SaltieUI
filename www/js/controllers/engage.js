@@ -21,11 +21,11 @@ app.controller('engageController', function($scope, $location, $http, $rootScope
     }
     $scope.back = function() {
         // $rootScope.engageData = "";
-        if($rootScope.TempDetail == "" || $rootScope.TempDetail == undefined){
-            $location.path('app/list');
-        }else{
+//        if($rootScope.TempDetail == "" || $rootScope.TempDetail == undefined){
+//            $location.path('app/list');
+//        }else{
             window.history.back();   
-        }
+//        }
         console.log($rootScope.TempDetail);
     }
     $scope.goToList = function(){
