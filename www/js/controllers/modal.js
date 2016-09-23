@@ -73,11 +73,6 @@ app.controller('modalCtrl', function($scope, $location, $http, $rootScope, $filt
     $scope.modal2 = modal;
   });
 
-  // $ionicModal.fromTemplateUrl('templates/pasModal.html', {
-  //           scope: $scope
-  //       }).then(function(modal) {
-  //           $scope.pasModal = modal;
-  //       });
 
 
   /* ==========================================================================

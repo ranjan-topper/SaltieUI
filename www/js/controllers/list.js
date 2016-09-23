@@ -21,17 +21,6 @@ app.controller('listController', function($scope, $location, $rootScope, $filter
 		$scope.favoriteId = 0;
 		$scope.pasBackBtFlag = 0;
 		
-	  
-	  	
-	  
-    $ionicModal.fromTemplateUrl('templates/pasModal.html', {
-      scope: $scope
-    }).then(function(modal) {
-      $scope.pasModal = modal;
-    });
-
-
-
     //function to determine the favourited cruise
     $rootScope.isFavourite = function(tripId) {
       for (i = 0; i < $rootScope.favourite.length; i++) {
