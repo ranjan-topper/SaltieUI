@@ -668,6 +668,27 @@ app.factory('curatorList',function($http, $q, $ionicLoading, $ionicPopup, $local
 
 
 
+//Discount Service 
+app.factory('discountVal',function($http, $q, $ionicLoading, $ionicPopup, $localStorage, serviceLink,$rootScope){
+ function discountVal() {
+        var self = this;
+        self.discount = function(url) {
+			var deferred = $q.defer();
+			
+				$http.get(serviceLink.url+url).success(function(data) {
+				deferred.resolve(data);
+			 	}).error(function(data){
+				deferred.resolve("error value");
+				});
+			return deferred.promise;
+		}
+		}
+
+    return new discountVal();
+})
+
+
+
 
 
 

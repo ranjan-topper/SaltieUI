@@ -1,13 +1,45 @@
-app.controller('detailController', function($scope, $state, $location, $ionicModal, $rootScope, $http, $ionicLoading, $localStorage, $ionicSlideBoxDelegate, $ionicScrollDelegate, $timeout, $ionicHistory, serviceLink, favService,$sce) {
+app.controller('detailController', function($scope, $state, $location, $ionicModal, $rootScope, $http, $ionicLoading, $localStorage, $ionicSlideBoxDelegate, $ionicScrollDelegate, $timeout, $ionicHistory, serviceLink, favService,$sce, discountVal) {
 
 	if(typeof analytics !== 'undefined') { analytics.trackView("Detail Controller"); }
 
     if ($localStorage.userName == "" || $localStorage.userName == null) {
         $location.path('/start');
     } else {
+		
+		
+//		$rootScope.discountValue = [{"cruiseLine":"Royal Caribean","color":"orange","shortDesc":"offer 1","longDesc":"up $1000 cashback","bookStartDate":"Feb 12, 2016","bookEndDate":"Feb 28, 2016","sailStartDate":null,"sailEndDate":null,"active":true},{"cruiseLine":"Royal Caribean","color":"red","shortDesc":"offer 1","longDesc":"up $1000 cashback","bookStartDate":"Feb 12, 2016","bookEndDate":"Feb 28, 2016","sailStartDate":null,"sailEndDate":null,"active":true}];
+		
         $rootScope.is_engaged = "detail";
 		$rootScope.load=false;
-	
+		$rootScope.page = "detail";
+
+		
+		$scope.openDiscountModal = function()
+		{
+			$scope.discountModal.show();
+		}
+		$rootScope.discountCall = function()
+		{
+			var url = 'SaltieApp/rest/cruise/'+$rootScope.tripid+'/offers/'+$rootScope.date+'/date';
+			discountVal.discount(url)
+			.then(
+			  /* success function */
+			  function(data) {
+				$rootScope.discountValue = data;
+				$ionicSlideBoxDelegate.update();
+			  }, function(error) {
+				//If an error happened, handle it here
+			  });
+		}
+		$scope.discountCall = function(date, first)
+			{
+				if(first)
+				{
+					console.log(date);
+					$rootScope.discountCall();
+				}
+			}
+		
         $rootScope.isFavorite = function(tripId) {
             $rootScope.URL = "./img/Unfavorite.png";
             if ($rootScope.favourite == null || $rootScope.favourite == undefined || $rootScope.favourite == "") {
@@ -88,7 +120,6 @@ app.controller('detailController', function($scope, $state, $location, $ionicMod
             }, 100);
         }
 
-        $rootScope.page = "detail";
 
         $scope.browserwindow = function() {
 
@@ -120,9 +151,11 @@ $rootScope.moreLoad=false;
         }
 
         $scope.displayPrice = function(prices, index, date) {
+			
             $rootScope.date = date;
             $rootScope.priceList = prices;
             $scope.index1 = index;
+			$rootScope.discountCall();
         };
        
 

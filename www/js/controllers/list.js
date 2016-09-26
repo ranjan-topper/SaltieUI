@@ -1,4 +1,4 @@
-app.controller('listController', function($scope, $location, $rootScope, $filter, $localStorage, $http, $ionicLoading, FavouriteService, $timeout, $ionicScrollDelegate, $ionicModal, loginService, facebookService, serviceLink, favService, $ionicPopup, $q, detailData, $ionicSlideBoxDelegate, curatorList, $window, themeFilter) {
+app.controller('listController', function($scope, $location, $rootScope, $filter, $localStorage, $http, $ionicLoading, FavouriteService, $timeout, $ionicScrollDelegate, $ionicModal, loginService, facebookService, serviceLink, favService, $ionicPopup, $q, detailData, $ionicSlideBoxDelegate, curatorList, $window, themeFilter,discountVal) {
 
 
   if (typeof analytics !== 'undefined') {
@@ -260,8 +260,36 @@ app.controller('listController', function($scope, $location, $rootScope, $filter
 
   }
 
-
-
+  		$scope.discountCall = function(tripid)
+		{
+			var url = 'SaltieApp/rest/cruise/'+tripid+'/offers';
+			discountVal.discount(url)
+			.then(
+			  /* success function */
+			  function(data) {
+				  $scope.showDiscountPopup(data);
+			  }, function(error) {
+				//If an error happened, handle it here
+			  });
+		}
+  
+  
+$scope.showDiscountPopup = function(data) {
+  // An elaborate, custom popup
+	$scope.discountData = data;
+  var discountPopup = $ionicPopup.show({
+    templateUrl: './templates/listDiscount.html',
+    title: 'Offers',
+    scope: $scope,
+	buttons: [{ // Array[Object] (optional). Buttons to place in the popup footer.
+    text: 'Ok',
+    onTap: function(e) {
+      // e.preventDefault() will stop the popup from closing when tapped.
+     discountPopup.close();
+    }
+  }]
+  });
+ }
 
   }
 });

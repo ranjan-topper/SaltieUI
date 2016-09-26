@@ -13,7 +13,7 @@
 
         <ion-scroll delegate-handle="calendarScroll" direction="x" on-swipe-right="enable1()">
             <div class="row">
-                <div class="button" ng-repeat="date in notSorted(detail.ItineraryDateInfo)" id="{{date}}" ng-init="prices = detail.ItineraryDateInfo[date];setPrice(prices,$index,date)" ng-click="displayPrice(prices,$index,date)" ng-class="{act: isActive($index),button1: !isActive($index)}">
+                <div class="button" ng-repeat="date in notSorted(detail.ItineraryDateInfo)" id="{{date}}" ng-init="prices = detail.ItineraryDateInfo[date];setPrice(prices,$index,date);discountCall(date,$first)" ng-click="displayPrice(prices,$index,date)" ng-class="{act: isActive($index),button1: !isActive($index)}">
 
                     <div class="row">
                         <div class="col"><span class="bold">{{date.split(",")[0] | uppercase}}</span>
@@ -107,11 +107,12 @@
                 </div>
 
             </section>
-
-
         </div>
-
+		
     </ion-content>
+	<div ng-if="discountValue.length > 0">
+			<img src="./img/discount.png" ng-click="openDiscountModal()" class="discountIcon">
+	</div>
     <ion-footer-bar style="background-color: #00707e;   border: none;">
         <button class="button-block bookbt thin" id="readytobook" ng-click="emailUs('detail')">
             Next Step

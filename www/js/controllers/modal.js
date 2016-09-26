@@ -59,6 +59,13 @@ app.controller('modalCtrl', function($scope, $location, $http, $rootScope, $filt
   }).then(function(modal) {
     $scope.modal = modal;
   })
+  
+   $ionicModal.fromTemplateUrl('templates/discountModal.html', {
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function(modal) {
+    $scope.discountModal = modal;
+  })
 
   $ionicModal.fromTemplateUrl('templates/video.html', {
     scope: $scope,
@@ -175,6 +182,8 @@ app.controller('modalCtrl', function($scope, $location, $http, $rootScope, $filt
       $rootScope.date = date;
     }
   };
+	
+	
 
   $scope.cabinTypeClose = function() {
     $scope.modal.hide();
@@ -309,5 +318,20 @@ app.controller('modalCtrl', function($scope, $location, $http, $rootScope, $filt
       user.passwordc = "";
     }
   }
+  
+  
+  
+  /* ==========================================================================
+  						Discount Modal functionality
+   	========================================================================== */
+  				$scope.discountChanged =function(index)
+		{
+			 $scope.slideIndex = index;
+		}
+	
+  		$scope.previous = function() {
+    	$ionicSlideBoxDelegate.$getByHandle('discountType').previous();
+  		};
+  
 
 });

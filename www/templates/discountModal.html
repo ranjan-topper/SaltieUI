@@ -1,0 +1,31 @@
+<ion-modal-view >
+	
+        <ion-header-bar id="modal" class="bar bar-header modalHead"  >
+			 <button class="button discountModalPrevious button-clear no-animation"
+                  ng-click="previous()" ng-if="slideIndex > 0">
+            Previous
+          </button>
+			<h2 class="title bold modalhead">{{discountValue.length}} Offers</h2>
+          <button class="button button-icon button-primary modalClose ion-ios-close-empty" id="arrw" ng-click="discountModal.hide()"></button>
+        </ion-header-bar>
+
+        <ion-content id="discount">
+			
+			
+			<ion-slide-box on-slide-changed="discountChanged($index)" delegate-handle="discountType">
+					<ion-slide  ng-repeat="offer in discountValue">
+						<div>
+						<div class="discountModalHead medium" style="padding: 5vw;">
+							{{offer.shortDesc}}
+						</div>
+						<div class="aboutCon1 thin" style="padding: 5vw;">
+							{{offer.longDesc}}
+						</div>
+						</div>
+						
+					</ion-slide>
+			</ion-slide-box>
+				          
+        </ion-content>
+	
+      </ion-modal-view>
