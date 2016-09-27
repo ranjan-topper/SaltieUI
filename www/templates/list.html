@@ -161,7 +161,8 @@
 <!--		{{isFavorite(itinerary.tripId);}}-->
 		<p><img id="{{$index}}" src="{{isFavorite(itinerary.tripId)}}" ng-click="favorite(itinerary.tripId,$index)" class="favorite" width="8%"></p>
 		
-
+	<div>
+	<img  ng-if="itinerary.anyOffer" src="./img/discountList.png" ng-click="discountCall(itinerary.tripId)" class="discountListIcon">	</div>
 		</div>
 	</ion-content>
             </ion-tab>
