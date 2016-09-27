@@ -1,4 +1,4 @@
-app.controller('lifeStyleCtrl', function($scope, $location, $http, $rootScope, $filter, $localStorage, $ionicLoading, serviceLink, $ionicModal,$ionicScrollDelegate,$ionicSlideBoxDelegate,$timeout, facebookService) {
+app.controller('lifeStyleCtrl', function($scope, $location, $http, $rootScope, $filter, $localStorage, $ionicLoading, serviceLink, $ionicModal,$ionicScrollDelegate,$ionicSlideBoxDelegate,$timeout, facebookService, $ionicTabsDelegate) {
 	//initialise the rootscope details value
     $rootScope.TempDetail = "";
     $rootScope.engageData = "";
@@ -47,7 +47,11 @@ app.controller('lifeStyleCtrl', function($scope, $location, $http, $rootScope, $
 		
 				
         $scope.viewall = function() {
+			
             $location.path('/app/list');
+			$timeout( function() {
+			$ionicTabsDelegate.$getByHandle('listTab').select(0);
+		  	},100);
         }
 		
 	

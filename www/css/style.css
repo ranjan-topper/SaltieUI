@@ -1358,10 +1358,14 @@ color: white;
   	10. Detail Page
    ========================================================================== */
 
-
-#discount .slider {
-    height: 94vh;
+#discount .slider-pager {
+	position: static;
+    z-index: 1;
+    width: 100%;
+    height: auto;
+    text-align: center;
 }
+
 .discountModalPrevious
 {
 	font-size: 4vmin !important;

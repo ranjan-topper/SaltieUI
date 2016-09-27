@@ -17,6 +17,7 @@ app.controller('detailController', function($scope, $state, $location, $ionicMod
 		$scope.openDiscountModal = function()
 		{
 			$scope.discountModal.show();
+			$rootScope.slideIndex = 0;		
 		}
 		$rootScope.discountCall = function()
 		{
@@ -26,7 +27,7 @@ app.controller('detailController', function($scope, $state, $location, $ionicMod
 			  /* success function */
 			  function(data) {
 				$rootScope.discountValue = data;
-				$ionicSlideBoxDelegate.update();
+				
 			  }, function(error) {
 				//If an error happened, handle it here
 			  });

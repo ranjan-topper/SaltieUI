@@ -75,7 +75,7 @@
 		<p><img id="{{$index}}" src="{{isFavorite(itinerary.tripId)}}" ng-click="favorite(itinerary.tripId,$index)" class="favorite" width="8%"></p>
 		
 		<div>
-	<img  src="./img/discountList.png" ng-click="discountCall(itinerary.tripId)" class="discountListIcon"></div>
+	<img  ng-if="itinerary.anyOffer" src="./img/discountList.png" ng-click="discountCall(itinerary.tripId)" class="discountListIcon"></div>
 		</div>
 		 <ion-infinite-scroll id="scroll"  ng-if="!noMoreItemsAvailable" on-infinite="loadMore()" distance='2%'></ion-infinite-scroll>
 	</ion-content>

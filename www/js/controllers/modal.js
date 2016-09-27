@@ -324,14 +324,28 @@ app.controller('modalCtrl', function($scope, $location, $http, $rootScope, $filt
   /* ==========================================================================
   						Discount Modal functionality
    	========================================================================== */
-  				$scope.discountChanged =function(index)
+  		$scope.discountChanged =function(index)
 		{
-			 $scope.slideIndex = index;
+			 $rootScope.slideIndex = index;
 		}
 	
   		$scope.previous = function() {
     	$ionicSlideBoxDelegate.$getByHandle('discountType').previous();
   		};
+	
+	
+		$scope.discountModalRemove = function()
+		{
+			
+			$scope.discountModal.remove();
+			 $ionicModal.fromTemplateUrl('templates/discountModal.html', {
+				scope: $scope,
+				animation: 'slide-in-up'
+			  }).then(function(modal) {
+				$scope.discountModal = modal;
+			  })
+
+		}
   
 
 });

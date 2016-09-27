@@ -1,4 +1,4 @@
-app.controller('listController', function($scope, $location, $rootScope, $filter, $localStorage, $http, $ionicLoading, FavouriteService, $timeout, $ionicScrollDelegate, $ionicModal, loginService, facebookService, serviceLink, favService, $ionicPopup, $q, detailData, $ionicSlideBoxDelegate, curatorList, $window, themeFilter,discountVal) {
+app.controller('listController', function($scope, $location, $rootScope, $localStorage, $http, $ionicLoading, $timeout, $ionicModal, serviceLink, favService, $ionicPopup, $q, detailData, $ionicSlideBoxDelegate, curatorList, themeFilter,discountVal,$ionicTabsDelegate) {
 
 
   if (typeof analytics !== 'undefined') {
@@ -206,8 +206,6 @@ app.controller('listController', function($scope, $location, $rootScope, $filter
     $scope.onCuratorTabSelected = function() {
 		
 		$scope.pasBackBtFlag = 1;
-		console.log($scope.curatorListIteam);
-
       $scope.curatorCount = true;
       $scope.CuratorIconShow = true;
       if ($rootScope.curatorListIteamTemp == undefined || $rootScope.curatorListIteamTemp == "") {
@@ -290,6 +288,7 @@ $scope.showDiscountPopup = function(data) {
   }]
   });
  }
+
 
   }
 });
