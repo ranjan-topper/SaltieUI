@@ -1395,7 +1395,7 @@ color: white;
 	position: absolute;
     width: 35px;
     left: 10px;
-    top: 12px;
+    top: 10px;
 }
 
 .engagePopupDetail
@@ -2620,15 +2620,18 @@ div.sail{
 .subButtonSize
 {
 	min-width: 37px;
+    font-size: 24px;
     min-height: 37px;
 }
 
 .mainButtonFloat
 {
-	    font-size: 25px;
-	    min-width: 55.5px;
-    background: #FF5722;
-    min-height: 55.5px;
+	    font-size: 22px;
+    width: 50px;
+    background: #9c867a;;
+    height: 50px;
+    min-width: 30px;
+    min-height: 30px;
 }
 .subButtonFloat2
 {
