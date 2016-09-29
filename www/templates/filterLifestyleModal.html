@@ -157,12 +157,21 @@ Sort by Price			</div>
 		</div>
 		
 	
+<!--
 		<div class="applyFilter" ng-click="applyFilter()" id="apply">
 		Apply Filters
 		
 		</div>
+-->
 	</ion-content>
 	
 	
+	 <ion-footer-bar id="apply" style="background-color: #00707e;   border: none;">
+        <button class="button-block bookbt thin" ng-click="applyFilter()">
+            Apply Filters
+        </button>
+    </ion-footer-bar>
+	  		 <div ng-include="'./templates/floatingButton.html'"></div>
+
 	
 </ion-modal-view>

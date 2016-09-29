@@ -1366,6 +1366,13 @@ color: white;
     text-align: center;
 }
 
+.discountDiv
+{
+	    text-align: center;
+    bottom: 90px;
+    right: 5vw;
+    position: absolute;
+}
 .discountModalPrevious
 {
 	font-size: 4vmin !important;
@@ -1385,11 +1392,10 @@ color: white;
 
 .discountIcon
 {
-	position: fixed;
-    z-index: 1;
-    width: 18%;
-    bottom: 10vh;
-    right: 5vw;
+	position: absolute;
+    width: 35px;
+    left: 10px;
+    top: 12px;
 }
 
 .engagePopupDetail
@@ -2599,6 +2605,57 @@ div.sail{
 /* ==========================================================================
 	 19. Listing Page
    ========================================================================== */
+.subButtomDiv
+{
+	display: -webkit-inline-box;
+	position: absolute;
+    bottom: 4vw;
+    right: 5vw;
+}
+.subButtonFloat1
+{
+	
+    background: #339fa6 !important;
+}
+.subButtonSize
+{
+	min-width: 37px;
+    min-height: 37px;
+}
+
+.mainButtonFloat
+{
+	    font-size: 25px;
+	    min-width: 55.5px;
+    background: #FF5722;
+    min-height: 55.5px;
+}
+.subButtonFloat2
+{
+	
+    background: #a0a0a0 !important
+}
+
+.button-float{
+    border: none;
+    color: white !important;
+    z-index: 12 !important;
+    border-radius: 50% !important;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26) !important;
+    -webkit-transform: translate3d(0, 0, 0) !important;
+    transform: translate3d(0, 0, 0) !important;
+    -webkit-transition: 0.2s linear !important;
+    transition: 0.2s linear !important;
+    -webkit-transition-property: -webkit-transform, all !important;
+    transition-property: transform, all !important;
+}
+
+.button-float:hover{
+  -webkit-transform: translate3d(0, -1px, 0)  !important;
+  transform: translate3d(0, -1px, 0) !important;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4) !important;
+    background: darken(red, 10%) !important;
+}
 
 .popup-buttons .button:last-child {
     background-color: #329ea5;

@@ -110,9 +110,21 @@
         </div>
 		
     </ion-content>
+	 		 <div ng-include="'./templates/floatingButton.html'"></div>
+
+<!--
 	<div ng-if="discountValue.length > 0">
 			<img src="./img/discount.png" ng-click="openDiscountModal()" class="discountIcon">
 	</div>
+-->
+	
+	
+	<div ng-if="discountValue.length > 0" class="button button-float mainButtonFloat discountDiv"  ng-click="openDiscountModal()">
+		<img src="./img/displain.png" class="discountIcon">
+	</div>
+	
+	
+	
     <ion-footer-bar style="background-color: #00707e;   border: none;">
         <button class="button-block bookbt thin" id="readytobook" ng-click="emailUs('detail')">
             Next Step

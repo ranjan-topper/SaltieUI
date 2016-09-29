@@ -289,6 +289,16 @@ $scope.showDiscountPopup = function(data) {
   });
  }
 
+//floating button action
+		$rootScope.floatButtonClicked = false;
+		$rootScope.onfloatingButton = function(floatButtonClicked){
+    	console.log(floatButtonClicked);
+    	$rootScope.floatButtonClicked = !floatButtonClicked;
+		};
+		$rootScope.phonecallTab = function ( phonenumber ) {
+		var call = "tel:" + phonenumber;
+		document.location.href = call;
+		}
 
   }
 });
