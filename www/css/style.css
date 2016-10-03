@@ -21,6 +21,7 @@
 * 17. Common Modal css
 * 18. CabinType Modal
 * 19. Listing Page
+* 20. Floating button
 
 
 * Colors
@@ -2236,9 +2237,9 @@ transform: translate3d(-5px, 0px,0px);
 
 .aboutCon1
 {
-       line-height: 1.3;
+	line-height: 1.3;
     font-size: 4.5vmin;
-    color: #aea081;
+    color: #339FA6 !important;
 }
 .aboutCon2
 {
@@ -2605,60 +2606,7 @@ div.sail{
 /* ==========================================================================
 	 19. Listing Page
    ========================================================================== */
-.subButtomDiv
-{
-	display: -webkit-inline-box;
-	position: absolute;
-    bottom: 4vw;
-    right: 5vw;
-}
-.subButtonFloat1
-{
-	
-    background: #339fa6 !important;
-}
-.subButtonSize
-{
-	min-width: 37px;
-    font-size: 24px;
-    min-height: 37px;
-}
 
-.mainButtonFloat
-{
-	    font-size: 22px;
-    width: 50px;
-    background: #9c867a;;
-    height: 50px;
-    min-width: 30px;
-    min-height: 30px;
-}
-.subButtonFloat2
-{
-	
-    background: #a0a0a0 !important
-}
-
-.button-float{
-    border: none;
-    color: white !important;
-    z-index: 12 !important;
-    border-radius: 50% !important;
-    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26) !important;
-    -webkit-transform: translate3d(0, 0, 0) !important;
-    transform: translate3d(0, 0, 0) !important;
-    -webkit-transition: 0.2s linear !important;
-    transition: 0.2s linear !important;
-    -webkit-transition-property: -webkit-transform, all !important;
-    transition-property: transform, all !important;
-}
-
-.button-float:hover{
-  -webkit-transform: translate3d(0, -1px, 0)  !important;
-  transform: translate3d(0, -1px, 0) !important;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4) !important;
-    background: darken(red, 10%) !important;
-}
 
 .popup-buttons .button:last-child {
     background-color: #329ea5;
@@ -2917,4 +2865,82 @@ ul.my-nav {
 a.tab-item.tab-item-active span.tab-title.ng-binding
 {
 	padding-right: 25%;
+}
+
+/* ==========================================================================
+	 20. Floating button
+   ========================================================================== */
+.subButtomDiv
+{
+	display: -webkit-inline-box;
+	position: absolute;
+    bottom: 4vw;
+    right: 5vw;
+}
+.subButtonFloat1
+{
+	
+    background: #339fa6 !important;
+}
+.subButtonSize
+{
+	min-width: 30px;
+    font-size: 20px;
+    min-height: 30px;
+    width: 40px;
+    height: 40px;
+}
+
+.mainButtonFloat
+{
+	    font-size: 16px;
+    width: 40px;
+    background: #9c867a;
+    height: 40px;
+    min-width: 30px;
+    min-height: 30px;
+}
+.subButtonFloat2
+{
+	
+    background: #a0a0a0 !important
+}
+
+.button-float{
+    border: none;
+    color: white !important;
+    z-index: 12 !important;
+    border-radius: 50% !important;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26) !important;
+    -webkit-transform: translate3d(0, 0, 0) !important;
+    transform: translate3d(0, 0, 0) !important;
+    -webkit-transition: 0.2s linear !important;
+    transition: 0.2s linear !important;
+    -webkit-transition-property: -webkit-transform, all !important;
+    transition-property: transform, all !important;
+}
+
+.button-float:hover{
+  -webkit-transform: translate3d(0, -1px, 0)  !important;
+  transform: translate3d(0, -1px, 0) !important;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4) !important;
+    background: darken(red, 10%) !important;
+}
+
+@media (min-width:481px)
+{
+	.mainButtonFloat {
+		font-size: 30px;
+		width: 70px;
+		height: 70px;
+		min-width: 30px;
+		min-height: 30px;
+	}
+	.subButtonSize {
+		min-width: 30px;
+		font-size: 35px;
+		min-height: 30px;
+		width: 70px;
+		height: 70px;
+	}
 }
