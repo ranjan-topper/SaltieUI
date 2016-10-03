@@ -2616,9 +2616,11 @@ div.sail{
 }
 
 ul.my-nav {
-   list-style-image: url(../img/points.png);
-    list-style-position: inside;
+   	list-style-image: url(../img/points.png);
     font-family: light;
+	list-style-position: outside;
+    margin-left: 40px;
+    line-height: 1.2;
 }
 .popup-container .popup {
     width: 90% !important;
