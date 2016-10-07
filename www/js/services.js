@@ -425,8 +425,8 @@ app.factory('facebookService', function($http, $q, $ionicLoading, $ionicPopup, $
 //server link declaration
 app.factory('serviceLink', function() {
     return {
-	       url: 'http://104.236.50.241:8080/'
-//		  url: 'http://159.203.121.122:8080/'
+	    //    url: 'http://104.236.50.241:8080/'
+		  url: 'http://159.203.121.122:8080/'
     };
 });
 
@@ -687,7 +687,24 @@ app.factory('discountVal',function($http, $q, $ionicLoading, $ionicPopup, $local
     return new discountVal();
 })
 
+//Email Booking Url Service 
+app.factory('sendUrlEmailService',function($http, $q, $ionicLoading, $ionicPopup, $localStorage, serviceLink,$rootScope){
+ function sendUrlEmailService() {
+        var self = this;
+        self.sendUrlEmail = function(emailId,url) {
+			var deferred = $q.defer();
+			
+				$http.get(serviceLink.url+'SaltieApp/rest/cruise/email?email='+emailId+'&link='+url).success(function(data, status) {
+				deferred.resolve(status);
+			 	}).error(function(data, status){
+				deferred.resolve("error value");
+				});
+			return deferred.promise;
+		}
+		}
 
+    return new sendUrlEmailService();
+})
 
 
 

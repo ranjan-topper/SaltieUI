@@ -11,7 +11,7 @@ var handleOpenURL = function(url) {
 
 var app = angular.module('starter', ['ionic', 'ngStorage', 'ngCordova','ngMessages','starter.controllers','ngIOS9UIWebViewPatch']);
 
-app.run(function ($ionicPlatform,$rootScope, $state, $location,$ionicHistory,$ionicLoading) 
+app.run(function ($ionicPlatform,$rootScope, $state, $location,$ionicHistory,$ionicLoading,$window) 
 {
 	$ionicPlatform.registerBackButtonAction(function (event)
 	{
@@ -68,7 +68,19 @@ app.run(function ($ionicPlatform,$rootScope, $state, $location,$ionicHistory,$io
       $ionicLoading.hide()
     });
 	
+	
+	
+
+    $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams) {
+     	 window.fbq('track', toState.name);
+    });
+
+	
+	
 })
+
+
+ 
 
 
 app.config(function($stateProvider, $urlRouterProvider, $httpProvider,$ionicConfigProvider) {   

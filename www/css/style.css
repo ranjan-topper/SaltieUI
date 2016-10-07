@@ -82,6 +82,12 @@
 /* ==========================================================================
    16. Custromize Ionic Framework Css
    ========================================================================== */
+   .popup-sub-title {
+    margin: 5px 0 0 0;
+    padding: 0;
+    font-weight: normal;
+    font-size: 4vmin;
+}
 .tab-item.tab-item-active, .tab-item.active, .tab-item.activated {
        background-color: #339fa6;
     opacity: 1;
@@ -2606,9 +2612,26 @@ div.sail{
 /* ==========================================================================
 	 19. Listing Page
    ========================================================================== */
+#emailBookUrl .error
+{
+    color:#B83E2C !important;
+}
 
+#emailBookUrl h1{
+    color: #9c867a;
+    line-height: 1.2;
+    font-size: 5vmin;
+    padding: 0;
+}
+
+#emailBookUrl h2{
+    color: #329ea5;
+    font-size: 4vmin;
+    line-height: 1.2;
+}
 
 .popup-buttons .button:last-child {
+    border: none;
     background-color: #329ea5;
     margin-right: 0px;
     color: white;
@@ -2654,7 +2677,7 @@ ul.my-nav {
 
 .curatorFilterIcon
 {
-	    top: calc(50% - 2.5vh);
+    top: calc(50% - 2.5vh);
     position: absolute;
     width: 50%;
     left: 50%;
