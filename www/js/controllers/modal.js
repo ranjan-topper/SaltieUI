@@ -178,7 +178,16 @@ app.controller('modalCtrl', function($scope, $location, $http, $rootScope, $filt
 
   $scope.setPrice = function(prices, index, date) {
     if (index == 0) {
-      $rootScope.priceList = prices;
+      $rootScope.pID = prices.pid;
+      $rootScope.priceList = prices.category;
+            if($rootScope.pID == 'NA')
+            {
+                $rootScope.pidVivaUrl = 'https://res.vivavoyage.com/Web/cruises/details.aspx?pid=874684';
+            }
+            else
+            {
+                $rootScope.pidVivaUrl = 'https://res.vivavoyage.com/Web/cruises/details.aspx?pid='+$rootScope.pID;
+            }
       $rootScope.date = date;
     }
   };

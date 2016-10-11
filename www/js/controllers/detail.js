@@ -128,7 +128,7 @@ app.controller('detailController', function($scope, $state, $location, $ionicMod
             return false;
 
         }
-$rootScope.moreLoad=false;
+        $rootScope.moreLoad=false;
         $scope.tripID = $rootScope.tripid;
 
         
@@ -152,15 +152,22 @@ $rootScope.moreLoad=false;
         }
 
         $scope.displayPrice = function(prices, index, date) {
-			
             $rootScope.date = date;
-            $rootScope.priceList = prices;
+            $rootScope.pID = prices.pid;
+            $rootScope.priceList = prices.category;
             $scope.index1 = index;
+            if($rootScope.pID == NA)
+            {
+                $rootScope.pidVivaUrl = 'https://res.vivavoyage.com/Web/cruises/details.aspx?pid=874684';
+            }
+            else
+            {
+                $rootScope.pidVivaUrl = 'https://res.vivavoyage.com/Web/cruises/details.aspx?pid='+$rootScope.pID;
+            }
+            
 			$rootScope.discountCall();
         };
-       
-
-
+     
         $rootScope.book1 = function(modal) {
             $scope.useragent = navigator.userAgent;
             $location.path('/app/booking');
