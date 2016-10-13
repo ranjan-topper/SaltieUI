@@ -48,15 +48,6 @@ app.controller('engageController', function($scope, $location, $http, $rootScope
 
 	$scope.bookOnlineWeb = function()
 	{   
-
-            $scope.detail = angular.copy($rootScope.TempDetail);
-            //$rootScope.TempDetail = "";
-            $scope.name = $localStorage.Name.split(" ")[0];
-                if($scope.detail == undefined || $scope.detail == "" || $scope.detail == null){
-                    $scope.is_showBookingPopup = true;
-                }
-                else{
-                    $scope.is_showBookingPopup = false;
                     var emailBookingUrlPopup = $ionicPopup.show({
                         template: `<div id="emailBookUrl">
                         <h1 class="light">Welcome To Saltie The Perfect Cruise Waiting For You, if you want to open website in different device</h1>
@@ -85,14 +76,14 @@ app.controller('engageController', function($scope, $location, $http, $rootScope
 
                             $scope.noThanks = function()
                             {
-                                window.open($scope.urlBookWeb, '_blank', 'closebuttoncaption=back');
+                                window.open('https://www.vivavoyage.com/', '_blank', 'closebuttoncaption=back');
                                 emailBookingUrlPopup.close();
                             }
                             $scope.okSendUrl = function(form)
                             {
                                 if(form.$valid)
                                 {
-                                        sendUrlEmailService.sendUrlEmail($scope.emailBook,$scope.urlBookWeb)
+                                        sendUrlEmailService.sendUrlEmail($scope.emailBook,'https://www.vivavoyage.com/')
                                             .then(
                                                 /* success function */
                                                 function(status) {
@@ -118,7 +109,5 @@ app.controller('engageController', function($scope, $location, $http, $rootScope
                                         });
                                 }
                             }
-                }
-     
 	}
 });
