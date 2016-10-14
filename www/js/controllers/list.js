@@ -1,4 +1,4 @@
-app.controller('listController', function ($scope, $location, $rootScope, $localStorage, $http, $ionicLoading, $timeout, $ionicModal, serviceLink, favService, $ionicPopup, $q, detailData, $ionicSlideBoxDelegate, curatorList, themeFilter, discountVal, $ionicTabsDelegate) {
+app.controller('listController', function ($scope, $location, $rootScope, $localStorage, $http, $ionicLoading, $timeout, $ionicModal, serviceLink, favService, $ionicPopup, $q, detailData, $ionicSlideBoxDelegate, curatorList, themeFilter, discountVal, $ionicTabsDelegate,  $ionicScrollDelegate, $window) {
 
 
   if (typeof analytics !== 'undefined') {
@@ -131,38 +131,36 @@ app.controller('listController', function ($scope, $location, $rootScope, $local
 
 
     //load 10 data in curator listing page
-    $rootScope.loadMoreCurator = function()
-    { 
-        $rootScope.curatorListServiceCall($localStorage.liked, $localStorage.neutral, $localStorage.disliked);
+    $rootScope.loadMoreCurator = function () {
+      $rootScope.curatorListServiceCall($localStorage.liked, $localStorage.neutral, $localStorage.disliked);
     }
-    $rootScope.curatorListServiceCall = function(liked, neutral, disliked)
-    {
-       
+    $rootScope.curatorListServiceCall = function (liked, neutral, disliked) {
+
       curatorList.curator(liked, neutral, disliked, $rootScope.startFromList)
         .then(
           /* success function */
-          function(data) {
+          function (data) {
             var i = data.tripList.length; //get the total length
-            if(i != 0)
-            {
-                $rootScope.startFromList =  $rootScope.startFromList + 10;
-                $scope.totalCuratorList = data.totalCount;
-                $rootScope.curatorListIteamTemp = $rootScope.curatorListIteamTemp.concat(data.tripList);
-                $rootScope.curatorListIteam = angular.copy($rootScope.curatorListIteamTemp);
+            if (i != 0) {
+              $rootScope.startFromList = $rootScope.startFromList + 10;
+              $scope.totalCuratorList = data.totalCount;
+              $rootScope.curatorListIteamTemp = $rootScope.curatorListIteamTemp.concat(data.tripList);
+              $rootScope.curatorListIteam = angular.copy($rootScope.curatorListIteamTemp);
+              $timeout(function() {
                 $scope.$broadcast('scroll.infiniteScrollComplete');
-                $scope.$broadcast('scroll.resize');
-                if ($rootScope.curatorListIteamTemp == undefined || $rootScope.curatorListIteamTemp == "") {
-                  $rootScope.noRecommendation = true;
-                } else {
-                  $rootScope.noRecommendation = false;
-                  $rootScope.noMoreCuratorItemsAvailable = false;
-                }
+              },500);
+              $scope.$broadcast('scroll.resize');
+              if ($rootScope.curatorListIteamTemp == undefined || $rootScope.curatorListIteamTemp == "") {
+                $rootScope.noRecommendation = true;
+              } else {
+                $rootScope.noRecommendation = false;
+                $rootScope.noMoreCuratorItemsAvailable = false;
+              }
+            } else {
+              $rootScope.noMoreCuratorItemsAvailable = true;
             }
-            else
-            {
-               $rootScope.noMoreCuratorItemsAvailable = true;
-            }
-          }, function(error) {
+          },
+          function (error) {
             alert("There was a problem");
             console.log(error);
           });
@@ -298,5 +296,91 @@ app.controller('listController', function ($scope, $location, $rootScope, $local
         }]
       });
     }
+
+
+    $rootScope.closePASModal = function (selectedData) {
+      var neutral = '';
+      var liked = '';
+      var disliked = '';
+      $scope.pasBackbtShow = false;
+      console.log(selectedData);
+      if (selectedData[0].liked != undefined) {
+        var likedData = JSON.parse(selectedData[0].liked);
+        angular.forEach(likedData, function (value, key) {
+          liked += value + ',';
+        });
+        liked = liked.substring(0, liked.length - 1);
+        console.log(liked);
+      }
+
+      if (selectedData[1].disliked != undefined) {
+        var dislikedData = JSON.parse(selectedData[1].disliked);
+        angular.forEach(dislikedData, function (value, key) {
+          disliked += value + ',';
+        });
+        disliked = disliked.substring(0, disliked.length - 1);
+        console.log(disliked);
+      }
+
+      if (selectedData[2].neutral != undefined) {
+        var neutralData = JSON.parse(selectedData[2].neutral);
+        angular.forEach(neutralData, function (value, key) {
+          neutral += value + ',';
+        });
+        neutral = neutral.substring(0, neutral.length - 1);
+        console.log(neutral);
+      }
+      $localStorage.liked = liked;
+      $localStorage.neutral = neutral;
+      $localStorage.disliked = disliked;
+      $rootScope.noMoreCuratorItemsAvailable = true;
+      $rootScope.curatorListIteam = [];
+      $rootScope.curatorListIteamTemp = [];
+      $rootScope.noRecommendation = false;
+      $rootScope.startFromList = 0;
+      $rootScope.curatorListServiceCall(liked, neutral, disliked);
+      $timeout(function () {
+        $ionicTabsDelegate.$getByHandle('listTab').select(1);
+        $ionicScrollDelegate.$getByHandle('CuratorlistPage').scrollTop();
+      }, 100);
+      $location.path('/app/list');
+    }
+
+
+    $window.addEventListener('message', function (evt) {
+      var task = evt.data.task; // task received in postMessage
+      switch (task) { // postMessage tasks
+        // begin button clicked
+        case 'beginBt':
+          $location.path('/app/pasWhoTravel');
+          break;
+
+          // whoTravel next button clicked
+        case 'whoTravel':
+          $location.path('/app/pasCategory');
+          break;
+
+          // when back arrow in the slider clicked
+        case 'slideBack':
+          $location.path('/app/pasCategory');
+          break;
+          //show recommendation clicked
+        case 'recom':
+          $rootScope.closePASModal(evt.data.selectedItem);
+          break;
+          //any category clicked
+        case 'categoryId':
+          $scope.categoryID = evt.data.category_id;
+          $rootScope.questionUrl = serviceLink.pasUrl + "CruisePAS/#questions?category_id=" + evt.data.category_id + "&index=0&hide-navigation=t";
+          //			   $timeout(function() {
+          $location.path('/app/pasQuestion');
+          //            }, 100);
+          break;
+
+          //default:
+      }
+      $scope.$apply();
+    }, true)
+
   }
 });

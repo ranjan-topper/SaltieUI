@@ -394,11 +394,18 @@ app.factory('facebookService', function ($http, $q, $ionicLoading, $ionicPopup, 
 });
 
 //server link declaration
-app.factory('serviceLink', function () {
-    return {
-        // url: 'http://104.236.50.241:8080/'
-              url: 'http://159.203.121.122:8080/'
-    };
+// app.factory('serviceLink', function () {
+//     return {
+//         // url: 'http://104.236.50.241:8080/'
+//               url: 'http://159.203.121.122:8080/'
+//     };
+// });
+
+app.constant('serviceLink', {
+    pasUrl: 'http://159.203.121.122:8080/',
+    // pasUrl: 'http://104.236.50.241/',
+     // url: 'http://104.236.50.241:8080/',
+    url: 'http://159.203.121.122:8080/'
 });
 
 //favourite service start here
@@ -488,7 +495,7 @@ app.factory('themeFilter', function ($http, $q, $ionicLoading, $ionicPopup, $loc
 });
 
 //profileGet
-app.factory('profileGet', function ($http, $q, $ionicLoading, $ionicPopup, $localStorage, serviceLink, $rootScope) {
+app.factory('profileGet', function ($http, $q, serviceLink) {
     function profileGet() {
         var self = this;
         self.profile = function () {
@@ -586,7 +593,7 @@ app.factory('profileSet', function ($http, $q, $ionicLoading, $ionicPopup, $loca
 });
 
 //detailData
-app.factory('detailData', function ($http, $q, $ionicLoading, $ionicPopup, $localStorage, serviceLink, $rootScope) {
+app.factory('detailData', function ($http, $q, serviceLink, $rootScope) {
     function detailData() {
         var self = this;
         self.detail = function () {
@@ -610,12 +617,12 @@ app.factory('detailData', function ($http, $q, $ionicLoading, $ionicPopup, $loca
 
 
 //curator list
-app.factory('curatorList', function ($http, $q, $ionicLoading, $ionicPopup, $localStorage, serviceLink, $rootScope) {
+app.factory('curatorList', function ($http, $q, serviceLink) {
     function curatorList() {
         var self = this;
         self.curator = function (liked, neutral, disliked, startFromList) {
             var deferred = $q.defer();
-            $http.get(serviceLink.url + 'SaltiePAS/api/explore/cruises?questions_liked=' + liked + '&questions_disliked=' + disliked + '&questions_neutral=' + neutral + '&score=40&size=10&start=' + startFromList).success(function (data) {
+            $http.get(serviceLink.url + 'SaltiePAS/api/explore/cruises?questions_liked=' + liked + '&questions_disliked=' + disliked + '&questions_neutral=' + neutral + '&score=25&size=10&start=' + startFromList).success(function (data) {
                 deferred.resolve(data);
             }).error(function (data) {
                 deferred.resolve("error value");
@@ -627,7 +634,7 @@ app.factory('curatorList', function ($http, $q, $ionicLoading, $ionicPopup, $loc
 })
 
 //Discount Service 
-app.factory('discountVal', function ($http, $q, $ionicLoading, $ionicPopup, $localStorage, serviceLink, $rootScope) {
+app.factory('discountVal', function ($http, $q, serviceLink) {
     function discountVal() {
         var self = this;
         self.discount = function (url) {
@@ -644,7 +651,7 @@ app.factory('discountVal', function ($http, $q, $ionicLoading, $ionicPopup, $loc
 })
 
 //Email Booking Url Service 
-app.factory('sendUrlEmailService', function ($http, $q, $ionicLoading, $ionicPopup, $localStorage, serviceLink, $rootScope) {
+app.factory('sendUrlEmailService', function ($http, $q, serviceLink) {
     function sendUrlEmailService() {
         var self = this;
         self.sendUrlEmail = function (emailId, url) {
