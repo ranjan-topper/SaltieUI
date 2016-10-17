@@ -64,7 +64,7 @@ app.controller('engageController', function ($scope, $location, $http, $rootScop
                                 <button ng-click="noThanks()" class="button ng-binding button-default">
                                 No Thanks
                                 </button>
-                                <button type="submit" ng-click="okSendUrl(emailBookForm)" class="button ng-binding button-default">
+                                <button type="submit" ng-click="okSendUrl(emailBookForm,emailBook)" class="button ng-binding button-default">
                                 Ok
                                 </button>
                             </div>
@@ -77,9 +77,9 @@ app.controller('engageController', function ($scope, $location, $http, $rootScop
             window.open('https://www.vivavoyage.com/', '_blank', 'closebuttoncaption=back');
             emailBookingUrlPopup.close();
         }
-        $scope.okSendUrl = function (form) {
+        $scope.okSendUrl = function (form,emailBook) {
             if (form.$valid) {
-                sendUrlEmailService.sendUrlEmail($scope.emailBook, 'https://www.vivavoyage.com/')
+                sendUrlEmailService.sendUrlEmail(emailBook, 'https://www.vivavoyage.com/')
                     .then(
                         /* success function */
                         function (status) {

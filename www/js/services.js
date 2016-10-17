@@ -1,7 +1,7 @@
 //FavouriteService
-app.service('FavouriteService', function ($rootScope) {
+app.service('FavouriteService', function($rootScope) {
 
-    this.addNew = function (tripId) {
+    this.addNew = function(tripId) {
 
 
         for (i = 0; i < $rootScope.userFav.length; i++) {
@@ -21,13 +21,13 @@ app.service('FavouriteService', function ($rootScope) {
 });
 
 //loginService
-app.factory('loginService', function ($http, $q, $ionicLoading, $ionicPopup, $localStorage, $rootScope, TokenStorage) {
+app.factory('loginService', function($http, $q, $ionicLoading, $ionicPopup, $localStorage, $rootScope, TokenStorage) {
 
     //    Create a class that represents our name service.
     function loginService() {
         var self = this;
         //    getName returns a promise which when fulfilled returns the name.
-        self.login = function (url, data) {
+        self.login = function(url, data) {
             //    Create a deferred operation.
             var deferred = $q.defer();
 
@@ -40,7 +40,7 @@ app.factory('loginService', function ($http, $q, $ionicLoading, $ionicPopup, $lo
                     },
                     data: encodeURI(data)
                 })
-                .success(function (data, status) {
+                .success(function(data, status) {
                     if (status == 200) {
                         $localStorage.Name = data.user;
                         TokenStorage.store(data.token);
@@ -48,7 +48,7 @@ app.factory('loginService', function ($http, $q, $ionicLoading, $ionicPopup, $lo
                     }
                     deferred.resolve(status);
                 })
-                .error(function (data, status) {
+                .error(function(data, status) {
 
                     deferred.resolve(status);
 
@@ -58,7 +58,7 @@ app.factory('loginService', function ($http, $q, $ionicLoading, $ionicPopup, $lo
             return deferred.promise;
         };
 
-        self.errors = function (form, status) {
+        self.errors = function(form, status) {
             if (status == 400) {
                 $ionicPopup.show({
                     title: 'Error',
@@ -66,7 +66,7 @@ app.factory('loginService', function ($http, $q, $ionicLoading, $ionicPopup, $lo
                     buttons: [{
                         text: 'Ok'
                     }]
-                }).then(function (res) {});
+                }).then(function(res) {});
             } else if (status == 500) {
                 $ionicPopup.show({
                     title: 'Error',
@@ -74,7 +74,7 @@ app.factory('loginService', function ($http, $q, $ionicLoading, $ionicPopup, $lo
                     buttons: [{
                         text: 'Ok'
                     }]
-                }).then(function (res) {});
+                }).then(function(res) {});
             } else if (status == 404) {
 
                 form.email.$setValidity("emailNot", false);
@@ -108,7 +108,7 @@ app.factory('loginService', function ($http, $q, $ionicLoading, $ionicPopup, $lo
                     buttons: [{
                         text: 'Ok'
                     }]
-                }).then(function (res) {
+                }).then(function(res) {
 
                 });
             } else if (status == 302) {
@@ -142,7 +142,7 @@ app.factory('loginService', function ($http, $q, $ionicLoading, $ionicPopup, $lo
                     buttons: [{
                         text: 'Ok'
                     }]
-                }).then(function (res) {});
+                }).then(function(res) {});
             } else if (status == 503) {
                 $ionicPopup.show({
                     title: 'Error',
@@ -150,7 +150,7 @@ app.factory('loginService', function ($http, $q, $ionicLoading, $ionicPopup, $lo
                     buttons: [{
                         text: 'Ok'
                     }]
-                }).then(function (res) {});
+                }).then(function(res) {});
             } else {
                 $ionicPopup.show({
                     title: 'Error',
@@ -158,7 +158,7 @@ app.factory('loginService', function ($http, $q, $ionicLoading, $ionicPopup, $lo
                     buttons: [{
                         text: 'Ok'
                     }]
-                }).then(function (res) {});
+                }).then(function(res) {});
 
             }
         };
@@ -167,13 +167,13 @@ app.factory('loginService', function ($http, $q, $ionicLoading, $ionicPopup, $lo
 });
 
 //getCountryService
-app.factory('getCountryService', function ($http, $q, $ionicLoading, $ionicPopup, $localStorage, $rootScope) {
+app.factory('getCountryService', function($http, $q, $ionicLoading, $ionicPopup, $localStorage, $rootScope) {
 
     //    Create a class that represents our name service.
     function getCountryService() {
         var self = this;
         //    getName returns a promise which when fulfilled returns the name.
-        self.getCountry = function (url) {
+        self.getCountry = function(url) {
             //    Create a deferred operation.
             var deferred = $q.defer();
 
@@ -185,12 +185,12 @@ app.factory('getCountryService', function ($http, $q, $ionicLoading, $ionicPopup
                         'Content-Type': 'application/x-www-form-urlencoded'
                     }
                 })
-                .success(function (data, status) {
+                .success(function(data, status) {
                     //                    
                     //                    console.log(data);
                     deferred.resolve(data);
                 })
-                .error(function (data, status) {
+                .error(function(data, status) {
                     //                    
                     //                    alert(status);
                 });
@@ -204,13 +204,13 @@ app.factory('getCountryService', function ($http, $q, $ionicLoading, $ionicPopup
 });
 
 //engageService
-app.factory('engageService', function ($http, $q, $ionicLoading, $ionicPopup, $localStorage, $rootScope) {
+app.factory('engageService', function($http, $q, $ionicLoading, $ionicPopup, $localStorage, $rootScope) {
 
     //    Create a class that represents our name service.
     function engageService() {
         var self = this;
         //    getName returns a promise which when fulfilled returns the name.
-        self.submit = function (url, data) {
+        self.submit = function(url, data) {
             //    Create a deferred operation.
             var deferred = $q.defer();
 
@@ -223,13 +223,13 @@ app.factory('engageService', function ($http, $q, $ionicLoading, $ionicPopup, $l
                     },
                     data: data
                 })
-                .success(function (data, status) {
+                .success(function(data, status) {
 
                     console.log(data);
                     console.log(status);
                     deferred.resolve(status);
                 })
-                .error(function (data, status) {
+                .error(function(data, status) {
 
                     deferred.resolve(data);
                 });
@@ -238,7 +238,7 @@ app.factory('engageService', function ($http, $q, $ionicLoading, $ionicPopup, $l
             return deferred.promise;
         };
 
-        self.errors = function (form, status) {
+        self.errors = function(form, status) {
             if (status == 400) {
                 $ionicPopup.show({
                     title: 'Error',
@@ -246,7 +246,7 @@ app.factory('engageService', function ($http, $q, $ionicLoading, $ionicPopup, $l
                     buttons: [{
                         text: 'Ok'
                     }]
-                }).then(function (res) {});
+                }).then(function(res) {});
             } else if (status == 500) {
                 $ionicPopup.show({
                     title: 'Error',
@@ -254,7 +254,7 @@ app.factory('engageService', function ($http, $q, $ionicLoading, $ionicPopup, $l
                     buttons: [{
                         text: 'Ok'
                     }]
-                }).then(function (res) {});
+                }).then(function(res) {});
             } else if (status == 404) {
 
                 form.email.$setValidity("emailNot", false);
@@ -285,7 +285,7 @@ app.factory('engageService', function ($http, $q, $ionicLoading, $ionicPopup, $l
                     buttons: [{
                         text: 'Ok'
                     }]
-                }).then(function (res) {
+                }).then(function(res) {
 
                 });
             } else if (status == 302) {
@@ -317,7 +317,7 @@ app.factory('engageService', function ($http, $q, $ionicLoading, $ionicPopup, $l
                     buttons: [{
                         text: 'Ok'
                     }]
-                }).then(function (res) {});
+                }).then(function(res) {});
             } else if (status == 503) {
                 $ionicPopup.show({
                     title: 'Error',
@@ -325,7 +325,7 @@ app.factory('engageService', function ($http, $q, $ionicLoading, $ionicPopup, $l
                     buttons: [{
                         text: 'Ok'
                     }]
-                }).then(function (res) {});
+                }).then(function(res) {});
             } else {
                 $ionicPopup.show({
                     title: 'Error',
@@ -333,7 +333,7 @@ app.factory('engageService', function ($http, $q, $ionicLoading, $ionicPopup, $l
                     buttons: [{
                         text: 'Ok'
                     }]
-                }).then(function (res) {});
+                }).then(function(res) {});
 
             }
         };
@@ -342,16 +342,16 @@ app.factory('engageService', function ($http, $q, $ionicLoading, $ionicPopup, $l
 });
 
 //facebookService
-app.factory('facebookService', function ($http, $q, $ionicLoading, $ionicPopup, $cordovaOauth, $localStorage, $rootScope) {
+app.factory('facebookService', function($http, $q, $ionicLoading, $ionicPopup, $cordovaOauth, $localStorage, $rootScope) {
 
     //    Create a class that represents our name service.
     function facebookService() {
         var self = this;
         //    getName returns a promise which when fulfilled returns the name.
-        self.facebook = function (url, data) {
+        self.facebook = function(url, data) {
             //    Create a deferred operation.
             var deferred = $q.defer();
-            $cordovaOauth.facebook("809674865765712", ["email", "read_stream", "user_website", "user_location", "user_relationships"]).then(function (result) {
+            $cordovaOauth.facebook("809674865765712", ["email", "read_stream", "user_website", "user_location", "user_relationships"]).then(function(result) {
                     $localStorage.accessToken = result.access_token; //accesstoken from facebook 
                     if ($localStorage.hasOwnProperty("accessToken") === true) {
                         //ionicloading is a busy cursor which display the template given below
@@ -363,27 +363,27 @@ app.factory('facebookService', function ($http, $q, $ionicLoading, $ionicPopup, 
                                 fields: "id,name,gender,location,website,picture,relationship_status,email,first_name,last_name",
                                 format: "json"
                             }
-                        }).then(function (result) {
+                        }).then(function(result) {
                             deferred.resolve(result);
-                        }, function (error) {
+                        }, function(error) {
                             $ionicPopup.show({
                                 title: 'Error',
                                 subTitle: 'There was a problem getting your profile.  Check the logs for details.',
                                 buttons: [{
                                     text: 'Ok'
                                 }]
-                            }).then(function (res) {});
+                            }).then(function(res) {});
 
                         });
                     }
-                }, function (error) {
+                }, function(error) {
                     $ionicPopup.show({
                         title: 'Error',
                         subTitle: 'There was a problem signing in!',
                         buttons: [{
                             text: 'Ok'
                         }]
-                    }).then(function (res) {});
+                    }).then(function(res) {});
                     console.log(error);
                 })
                 //    Now return the promise.
@@ -402,17 +402,17 @@ app.factory('facebookService', function ($http, $q, $ionicLoading, $ionicPopup, 
 // });
 
 app.constant('serviceLink', {
-    pasUrl: 'http://159.203.121.122:8080/',
-    // pasUrl: 'http://104.236.50.241/',
-     // url: 'http://104.236.50.241:8080/',
-    url: 'http://159.203.121.122:8080/'
+    // pasUrl: 'http://159.203.121.122:8080/',
+    pasUrl: 'http://104.236.50.241/',
+    url: 'http://104.236.50.241:8080/',
+    // url: 'http://159.203.121.122:8080/'
 });
 
 //favourite service start here
-app.factory('favService', function ($http, $q, $ionicLoading, $ionicPopup, $localStorage, FavouriteService, serviceLink) {
+app.factory('favService', function($http, $q, $ionicLoading, $ionicPopup, $localStorage, FavouriteService, serviceLink) {
     function favService() {
         var self = this;
-        self.favorite = function (tripId, index) {
+        self.favorite = function(tripId, index) {
             //loader spinner
 
             //post request for favourite starts here
@@ -423,7 +423,7 @@ app.factory('favService', function ($http, $q, $ionicLoading, $ionicPopup, $loca
                     'Content-Type': 'application/x-www-form-urlencoded'
                 },
                 data: "tripId=" + tripId
-            }).success(function (data, status) {
+            }).success(function(data, status) {
 
                 // console.log(data);
                 if (status == 200) {
@@ -444,10 +444,10 @@ app.factory('favService', function ($http, $q, $ionicLoading, $ionicPopup, $loca
 });
 
 // Advance filter servcie starts here
-app.factory('advanceFilter', function ($http, $q, $ionicLoading, $ionicPopup, $localStorage, FavouriteService, serviceLink) {
+app.factory('advanceFilter', function($http, $q, $ionicLoading, $ionicPopup, $localStorage, FavouriteService, serviceLink) {
     function advanceFilter() {
         var self = this;
-        self.filter = function (data) {
+        self.filter = function(data) {
             var deferred = $q.defer();
             if (data.duration == "") {
                 data.duration = "";
@@ -459,7 +459,7 @@ app.factory('advanceFilter', function ($http, $q, $ionicLoading, $ionicPopup, $l
                     method: 'GET',
                     url: serviceLink.url + 'SaltieApp/rest/cruise/search?lifestyle=' + data.style + '&duration=' + data.duration + '&year=' + data.year + '&month=' + data.month + '&sortBy=' + data.orderby + '&departPort=' + data.ports + '&userName=' + $localStorage.userName + '&shipName=' + data.ship + '&cruiseLineName=' + data.cruiseLine
                 })
-                .success(function (data) {
+                .success(function(data) {
 
                     // console.log(data);
                     deferred.resolve(data);
@@ -473,14 +473,14 @@ app.factory('advanceFilter', function ($http, $q, $ionicLoading, $ionicPopup, $l
 });
 
 //Theme filter service starts here
-app.factory('themeFilter', function ($http, $q, $ionicLoading, $ionicPopup, $localStorage, FavouriteService, serviceLink) {
+app.factory('themeFilter', function($http, $q, $ionicLoading, $ionicPopup, $localStorage, FavouriteService, serviceLink) {
     function themeFilter() {
         var self = this;
-        self.theme = function (data) {
+        self.theme = function(data) {
             var deferred = $q.defer();
             //loader spinner
 
-            $http.get(serviceLink.url + 'SaltieApp/rest/cruise/theme5?lifestyle=' + data.style + '&duration=' + data.duration + '&year=' + data.year + '&month=' + data.month + '&port=' + data.ports + '&shipName=' + data.ship + '&cruiseLineName=' + data.cruiseLine).success(function (data) {
+            $http.get(serviceLink.url + 'SaltieApp/rest/cruise/theme5?lifestyle=' + data.style + '&duration=' + data.duration + '&year=' + data.year + '&month=' + data.month + '&port=' + data.ports + '&shipName=' + data.ship + '&cruiseLineName=' + data.cruiseLine).success(function(data) {
 
                 // console.log(data);
                 deferred.resolve(data);
@@ -495,20 +495,20 @@ app.factory('themeFilter', function ($http, $q, $ionicLoading, $ionicPopup, $loc
 });
 
 //profileGet
-app.factory('profileGet', function ($http, $q, serviceLink) {
+app.factory('profileGet', function($http, $q, serviceLink) {
     function profileGet() {
         var self = this;
-        self.profile = function () {
+        self.profile = function() {
             var deferred = $q.defer();
 
             $http({
                 method: 'GET',
                 url: serviceLink.url + 'SaltieApp/rest/cruise/user/detail'
-            }).success(function (data) {
+            }).success(function(data) {
 
 
                 deferred.resolve(data);
-            }).error(function (data) {
+            }).error(function(data) {
                 deferred.resolve("error value");
             });
             return deferred.promise;
@@ -519,10 +519,10 @@ app.factory('profileGet', function ($http, $q, serviceLink) {
 });
 
 //profileSet
-app.factory('profileSet', function ($http, $q, $ionicLoading, $ionicPopup, $localStorage, serviceLink) {
+app.factory('profileSet', function($http, $q, $ionicLoading, $ionicPopup, $localStorage, serviceLink) {
     function profileSet() {
         var self = this;
-        self.profileS = function (data) {
+        self.profileS = function(data) {
             //loader spinner
             var deferred = $q.defer();
 
@@ -533,11 +533,11 @@ app.factory('profileSet', function ($http, $q, $ionicLoading, $ionicPopup, $loca
                         'Content-Type': 'application/x-www-form-urlencoded'
                     },
                     data: encodeURI(data)
-                }).success(function (data, status) {
+                }).success(function(data, status) {
 
                     deferred.resolve(status);
                 })
-                .error(function (data, status) {
+                .error(function(data, status) {
 
                     deferred.resolve(status);
 
@@ -546,7 +546,7 @@ app.factory('profileSet', function ($http, $q, $ionicLoading, $ionicPopup, $loca
         }
 
 
-        self.errors = function (form, status) {
+        self.errors = function(form, status) {
             if (status == 400) {
                 $ionicPopup.show({
                     title: 'Error',
@@ -554,7 +554,7 @@ app.factory('profileSet', function ($http, $q, $ionicLoading, $ionicPopup, $loca
                     buttons: [{
                         text: 'Ok'
                     }]
-                }).then(function (res) {});
+                }).then(function(res) {});
             } else if (status == 500) {
                 $ionicPopup.show({
                     title: 'Error',
@@ -562,7 +562,7 @@ app.factory('profileSet', function ($http, $q, $ionicLoading, $ionicPopup, $loca
                     buttons: [{
                         text: 'Ok'
                     }]
-                }).then(function (res) {});
+                }).then(function(res) {});
             } else if (status == 400) {
 
                 $ionicPopup.show({
@@ -571,7 +571,7 @@ app.factory('profileSet', function ($http, $q, $ionicLoading, $ionicPopup, $loca
                     buttons: [{
                         text: 'Ok'
                     }]
-                }).then(function (res) {
+                }).then(function(res) {
 
                 });
             } else if (status == 412) {
@@ -584,7 +584,7 @@ app.factory('profileSet', function ($http, $q, $ionicLoading, $ionicPopup, $loca
                     buttons: [{
                         text: 'Ok'
                     }]
-                }).then(function (res) {});
+                }).then(function(res) {});
 
             }
         };
@@ -593,17 +593,17 @@ app.factory('profileSet', function ($http, $q, $ionicLoading, $ionicPopup, $loca
 });
 
 //detailData
-app.factory('detailData', function ($http, $q, serviceLink, $rootScope) {
+app.factory('detailData', function($http, $q, serviceLink, $rootScope) {
     function detailData() {
         var self = this;
-        self.detail = function () {
+        self.detail = function() {
             var deferred = $q.defer();
             var tripID = $rootScope.tripid;
 
-            $http.get(serviceLink.url + 'SaltieApp/rest/cruise/details/' + tripID + '/tripId').success(function (data) {
+            $http.get(serviceLink.url + 'SaltieApp/rest/cruise/details/' + tripID + '/tripId').success(function(data) {
 
                 deferred.resolve(data);
-            }).error(function (data) {
+            }).error(function(data) {
                 deferred.resolve("error value");
             });
             return deferred.promise;
@@ -617,14 +617,14 @@ app.factory('detailData', function ($http, $q, serviceLink, $rootScope) {
 
 
 //curator list
-app.factory('curatorList', function ($http, $q, serviceLink) {
+app.factory('curatorList', function($http, $q, serviceLink) {
     function curatorList() {
         var self = this;
-        self.curator = function (liked, neutral, disliked, startFromList) {
+        self.curator = function(liked, neutral, disliked, startFromList) {
             var deferred = $q.defer();
-            $http.get(serviceLink.url + 'SaltiePAS/api/explore/cruises?questions_liked=' + liked + '&questions_disliked=' + disliked + '&questions_neutral=' + neutral + '&score=25&size=10&start=' + startFromList).success(function (data) {
+            $http.get(serviceLink.url + 'SaltiePAS/api/explore/cruises?questions_liked=' + liked + '&questions_disliked=' + disliked + '&questions_neutral=' + neutral + '&score=25&size=10&start=' + startFromList).success(function(data) {
                 deferred.resolve(data);
-            }).error(function (data) {
+            }).error(function(data) {
                 deferred.resolve("error value");
             });
             return deferred.promise;
@@ -634,14 +634,14 @@ app.factory('curatorList', function ($http, $q, serviceLink) {
 })
 
 //Discount Service 
-app.factory('discountVal', function ($http, $q, serviceLink) {
+app.factory('discountVal', function($http, $q, serviceLink) {
     function discountVal() {
         var self = this;
-        self.discount = function (url) {
+        self.discount = function(url) {
             var deferred = $q.defer();
-            $http.get(serviceLink.url + url).success(function (data) {
+            $http.get(serviceLink.url + url).success(function(data) {
                 deferred.resolve(data);
-            }).error(function (data) {
+            }).error(function(data) {
                 deferred.resolve("error value");
             });
             return deferred.promise;
@@ -651,14 +651,14 @@ app.factory('discountVal', function ($http, $q, serviceLink) {
 })
 
 //Email Booking Url Service 
-app.factory('sendUrlEmailService', function ($http, $q, serviceLink) {
+app.factory('sendUrlEmailService', function($http, $q, serviceLink) {
     function sendUrlEmailService() {
         var self = this;
-        self.sendUrlEmail = function (emailId, url) {
+        self.sendUrlEmail = function(emailId, url) {
             var deferred = $q.defer();
-            $http.get(serviceLink.url + 'SaltieApp/rest/cruise/email?email=' + emailId + '&link=' + url).success(function (data, status) {
+            $http.get(serviceLink.url + 'SaltieApp/rest/cruise/email?email=' + emailId + '&link=' + url).success(function(data, status) {
                 deferred.resolve(status);
-            }).error(function (data, status) {
+            }).error(function(data, status) {
                 deferred.resolve("error value");
             });
             return deferred.promise;

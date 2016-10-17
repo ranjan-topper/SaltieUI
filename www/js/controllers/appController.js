@@ -101,7 +101,7 @@ app.controller('AppCtrl', function ($scope, $ionicModal, $timeout, $ionicHistory
         //			
         //		}
         $localStorage.stylelife = "All";
-        $rootScope.count = $rootScope.lifestylecount['All'];
+        // $rootScope.count = $rootScope.lifestylecount['All'];
         $location.path('/app/lifeStyle');
 
 

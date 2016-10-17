@@ -1,56 +1,54 @@
 <ion-view id="signup-view" cache-view="false" hide-nav-bar="true" ng-controller="formValidation">
     <ion-content id="signuphome">
-		
-		<button  class="button button-icon button-clear ion-ios-close-empty closebutton"  id="cls11" ng-click="close()">
+
+        <button class="button button-icon button-clear ion-ios-close-empty closebutton" id="cls11" ng-click="close()">
         </button>
-<div  align="center" class="allHead">
-		
-		<p class="heading thin" id="heading11">Sign Up</p>
-			
-		</div>
-		<form name="authorizationForm" novalidate="" ng-submit="signUp(authorizationForm,user)">
-        	<div class="list list-inset" id="input">
-				
-				<label class="item item-input color1" ng-class="{ 'has-errors' : authorizationForm.email.$invalid && authorizationForm.$submitted, 'no-errors' : authorizationForm.email.$valid  && authorizationForm.$submitted}">
+        <div align="center" class="allHead">
+
+            <p class="heading thin" id="heading11">Sign Up</p>
+
+        </div>
+        <form name="authorizationForm" novalidate="" ng-submit="signUp(authorizationForm,user)">
+            <div class="list list-inset" id="input">
+
+            <label class="item item-input color1" ng-class="{ 'has-errors' : authorizationForm.email.$invalid && authorizationForm.$submitted, 'no-errors' : authorizationForm.email.$valid  && authorizationForm.$submitted}">
               <input type="email" name="email" id="plc1" ng-keyup="resetEmail(authorizationForm)" placeholder="Email" ng-model="user.email" required>
             </label>
-				<div class="error-container" ng-show="authorizationForm.email.$error && authorizationForm.$submitted" ng-messages="authorizationForm.email.$error">
-                <div ng-messages-include="templates/error-list.html"></div> 
-            </div>
-          
-            <label class="item item-input color2" ng-class="{ 'has-errors' : authorizationForm.username.$invalid && authorizationForm.$submitted, 'no-errors' : authorizationForm.username.$valid}">
+                <div class="error-container" ng-show="authorizationForm.email.$error && authorizationForm.$submitted" ng-messages="authorizationForm.email.$error">
+                    <div ng-messages-include="templates/error-list.html"></div>
+                </div>
+
+                <label class="item item-input color2" ng-class="{ 'has-errors' : authorizationForm.username.$invalid && authorizationForm.$submitted, 'no-errors' : authorizationForm.username.$valid}">
               <input type="text" name="username" id="plc2" ng-keyup="resetFrom(authorizationForm)" placeholder="First Name" ng-model="user.firstName" ng-minlength="3" ng-maxlength="20" required>
             </label>
-				<div class="error-container" ng-show="authorizationForm.username.$error && authorizationForm.$submitted" ng-messages="authorizationForm.username.$error">
-                <div ng-messages-include="templates/error-list.html"></div> 
-            </div>
-				<label class="item item-input color3" ng-class="{ 'has-errors' : authorizationForm.lastname.$invalid && authorizationForm.$submitted, 'no-errors' : authorizationForm.lastname.$valid}">
+                <div class="error-container" ng-show="authorizationForm.username.$error && authorizationForm.$submitted" ng-messages="authorizationForm.username.$error">
+                    <div ng-messages-include="templates/error-list.html"></div>
+                </div>
+                <label class="item item-input color3" ng-class="{ 'has-errors' : authorizationForm.lastname.$invalid && authorizationForm.$submitted, 'no-errors' : authorizationForm.lastname.$valid}">
               <input type="text" name="lastname" id="plc3" placeholder="Last Name" ng-keyup="resetFrom(authorizationForm)" ng-model="user.lastName" ng-minlength="1" ng-maxlength="20" required>
             </label>
-				<div class="error-container" ng-show="authorizationForm.lastname.$error && authorizationForm.$submitted" ng-messages="authorizationForm.lastname.$error">
-                <div ng-messages-include="templates/error-list.html"></div> 
-            </div>
-				
-            <label class="item item-input color4" ng-class="{ 'has-errors' : authorizationForm.password.$invalid && authorizationForm.$submitted, 'no-errors' : authorizationForm.password.$valid  && authorizationForm.$submitted}" >
+                <div class="error-container" ng-show="authorizationForm.lastname.$error && authorizationForm.$submitted" ng-messages="authorizationForm.lastname.$error">
+                    <div ng-messages-include="templates/error-list.html"></div>
+                </div>
+
+                <label class="item item-input color4" ng-class="{ 'has-errors' : authorizationForm.password.$invalid && authorizationForm.$submitted, 'no-errors' : authorizationForm.password.$valid  && authorizationForm.$submitted}">
               <input type="password" onselectstart="return false" onpaste="return false;" onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false" autocomplete=off name="password" onkeyup="AvoidSpace(this)" id="plc4" placeholder="Password" ng-keyup="resetFrom(authorizationForm)" ng-model="user.password" ng-minlength="5" ng-maxlength="20" required>
             </label>
-				
-				<div class="error-container" ng-show="authorizationForm.password.$error && authorizationForm.$submitted" ng-messages="authorizationForm.password.$error">
-                <div ng-messages-include="templates/error-list.html"></div> 
-            </div>
-				
-				<button type="submit" id="sign2" class="button button-block submitloginbt">
+
+                <div class="error-container" ng-show="authorizationForm.password.$error && authorizationForm.$submitted" ng-messages="authorizationForm.password.$error">
+                    <div ng-messages-include="templates/error-list.html"></div>
+                </div>
+
+                <button type="submit" id="sign2" class="button button-block submitloginbt">
 					Sign Up</button>
-				<div align="center" class="termservice" id="termss"><span class="roman">By signing up, I agree to Saltie’s Terms of Service</span></div>
-						</div>
-			
-			
+                <div align="center" class="termservice" id="termss"><span class="roman">By signing up, I agree to Saltie’s Terms of Service</span></div>
+            </div>
 
-    </form>
-		<div align="center" class="light signupbot" id="sharecruise">Sign Up to share cruise
-itineraries or book your cruise.</div>	
 
-			 </ion-content>
-	  
+
+        </form>
+        <div align="center" class="light signupbot" id="sharecruise">Sign Up to share cruise itineraries or book your cruise.</div>
+
+    </ion-content>
+
 </ion-view>
-
