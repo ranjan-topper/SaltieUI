@@ -13,8 +13,7 @@
 
         <ion-scroll delegate-handle="calendarScroll" direction="x" on-swipe-right="enable1()">
             <div class="row">
-                <div class="button" ng-repeat="date in notSorted(detail.ItineraryDateInfo)" id="{{date}}" ng-init="prices = detail.ItineraryDateInfo[date];setPrice(prices,$index,date);discountCall(date,$first)"
-                    ng-click="displayPrice(prices,$index,date)" ng-class="{act: isActive($index),button1: !isActive($index)}">
+                <div class="button" ng-repeat="date in notSorted(detail.ItineraryDateInfo)" id="{{date}}" ng-init="prices = detail.ItineraryDateInfo[date];setPrice(prices,$index,date);discountCall(date,$first)" ng-click="displayPrice(prices,$index,date)" ng-class="{act: isActive($index),button1: !isActive($index)}">
 
                     <div class="row">
                         <div class="col"><span class="bold">{{date.split(",")[0] | uppercase}}</span>
@@ -34,8 +33,7 @@
         <button ng-click="scrollleft1()" id="scrollft" class="button-icon ion-ios-arrow-right arrowbutton1" ng-class="{'hidearrow':show1}"></button>
         <ion-scroll delegate-handle="calendarScroll1" direction="x" on-swipe-right="enable()">
             <div class="row">
-                <div class="button" ng-repeat="cat in priceList | orderByCategory" id="{{cat}}" ng-click="displayCabin(cat,$index,priceList[cat][0])"
-                    ng-class="{act: isCabinActive($index), button1: !isCabinActive($index)}">
+                <div class="button" ng-repeat="cat in priceList | orderByCategory" id="{{cat}}" ng-click="displayCabin(cat,$index,priceList[cat][0])" ng-class="{act: isCabinActive($index), button1: !isCabinActive($index)}">
                     <div class="row">
                         <div class="col"><span class="bold">{{cat | uppercase}}</span>
                         </div>
@@ -54,11 +52,10 @@
 
     </ion-content>
     <ion-content class="detailContentStart">
-        <ion-slide-box delegate-handle="detailSlide" show-pager="false" auto-play="true" does-continue="true">
+        <ion-slide-box delegate-handle="detailSlide" show-pager="false">
             <!--			auto-play="true" does-continue = "true"-->
             <ion-slide>
-                <a type="item-text-wrap" href="" style='background-image:url("{{linkUrl}}images/ports/{{ detail.tripDetails.destinationImage[0]}}");'
-                    class="eventListPicture">
+                <a type="item-text-wrap" href="" style='background-image:url("{{linkUrl}}images/ports/{{ detail.tripDetails.destinationImage[0]}}");' class="eventListPicture">
                 </a>
                 <div class="gradient"></div>
                 <div class="marginDetail">
@@ -72,24 +69,18 @@
                 <a type="item-text-wrap" href="" style='background-image:url("{{linkUrl}}images/Activity/{{ image.activityImage }}");' class="eventListPicture">
                     <div class="gradient"></div>
                 </a>
-
             </ion-slide>
             <ion-slide ng-if="showVideoCheck()" ng-click="video()">
                 <div>
-                    <a type="item-text-wrap" href="" style='background-image:url("{{linkUrl}}images/videos/{{ detail.tripDetails.ship.videoImage }}");'
-                        class="eventListPicture">
+                    <a type="item-text-wrap" href="" style='background-image:url("{{linkUrl}}images/videos/{{ detail.tripDetails.ship.videoImage }}");' class="eventListPicture">
                         <div class="gradient"></div>
                     </a>
                     <button class="ytp-large-play-button ytp-button" aria-label="Watch Discover Royal Caribbean International's Vision-Class Ships"><svg height="100%" version="1.1" viewBox="0 0 68 48" width="100%"><path class="ytp-large-play-button-bg" d="m .66,37.62 c 0,0 .66,4.70 2.70,6.77 2.58,2.71 5.98,2.63 7.49,2.91 5.43,.52 23.10,.68 23.12,.68 .00,-1.3e-5 14.29,-0.02 23.81,-0.71 1.32,-0.15 4.22,-0.17 6.81,-2.89 2.03,-2.07 2.70,-6.77 2.70,-6.77 0,0 .67,-5.52 .67,-11.04 l 0,-5.17 c 0,-5.52 -0.67,-11.04 -0.67,-11.04 0,0 -0.66,-4.70 -2.70,-6.77 C 62.03,.86 59.13,.84 57.80,.69 48.28,0 34.00,0 34.00,0 33.97,0 19.69,0 10.18,.69 8.85,.84 5.95,.86 3.36,3.58 1.32,5.65 .66,10.35 .66,10.35 c 0,0 -0.55,4.50 -0.66,9.45 l 0,8.36 c .10,4.94 .66,9.45 .66,9.45 z" fill="#1f1f1e" fill-opacity="0.81"></path><path d="m 26.96,13.67 18.37,9.62 -18.37,9.55 -0.00,-19.17 z" fill="#fff"></path><path d="M 45.02,23.46 45.32,23.28 26.96,13.67 43.32,24.34 45.02,23.46 z" fill="#ccc"></path></svg></button>
-
-
-
                 </div>
             </ion-slide>
         </ion-slide-box>
-
+        <div class="saliIDPosition roman"><span class="bold">Sailing ID:</span><br>{{sailID}}</div>
         <img id="detail" src="{{isFavorite(tripID)}}" ng-click="favorite(tripID,'detail')" class="favorite" width="8%" style="position: absolute; right:0; top: 0px;">
-
         <div>
             <img class="itinerarymap" ng-src="{{linkUrl}}images/itinerarymaps/{{ detail.tripDetails.itineraryImage}}" width="100%" />
         </div>
@@ -98,22 +89,17 @@
                 <div class="cd-timeline-block" ng-repeat="itineraryday in detail.tripDetails.itineraryDay">
                     <div class="cd-timeline-img" ng-class="{colorChange:$first}">
                     </div>
-
                     <div class="cd-timeline-content">
                         <span class="bold timehead" id="{{itineraryday.day}}">{{itineraryday.day | capitalize:true}}</span>&nbsp;&nbsp;
                         <span class="thin timehead">{{dateFormat(date,$index) | date:'longDate'}}</span>
                         <br>
                         <span class="roman timehead1" id="{{itineraryday.portName}}">{{itineraryday.portName}}</span>
-
                         <div class="timecontent" id="{{itineraryday.portDesc}}"><span class="light">{{itineraryday.portDesc}}</span>
                         </div>
-
                     </div>
                 </div>
-
             </section>
         </div>
-
     </ion-content>
     <div ng-include="'./templates/floatingButton.html'"></div>
 
@@ -122,11 +108,10 @@
 			<img src="./img/discount.png" ng-click="openDiscountModal()" class="discountIcon">
 	</div>
 -->
-    <div ng-if="discountValue.length > 0" style="background: rgb(39, 162, 176);" class="button button-float mainButtonFloat discountDiv"
-        ng-click="openDiscountModal()">
+    <div ng-if="discountValue.length > 0" style="background: rgb(39, 162, 176);" class="button button-float mainButtonFloat discountDiv" ng-click="openDiscountModal()">
         <img src="./img/displain.png" class="discountIcon">
     </div>
-        <ion-footer-bar style="background-color: #00707e;   border: none;">
+    <ion-footer-bar style="background-color: #00707e;   border: none;">
         <button class="button-block bookbt thin" id="readytobook" ng-click="emailUs('detail')">
             Next Step
         </button>

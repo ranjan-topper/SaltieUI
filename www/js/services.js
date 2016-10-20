@@ -2,8 +2,6 @@
 app.service('FavouriteService', function($rootScope) {
 
     this.addNew = function(tripId) {
-
-
         for (i = 0; i < $rootScope.userFav.length; i++) {
             if ($rootScope.userFav[i].tripId === tripId)
                 $rootScope.userFav.splice(i, 1);
@@ -402,10 +400,11 @@ app.factory('facebookService', function($http, $q, $ionicLoading, $ionicPopup, $
 // });
 
 app.constant('serviceLink', {
-    // pasUrl: 'http://159.203.121.122:8080/',
-    pasUrl: 'http://104.236.50.241/',
-    url: 'http://104.236.50.241:8080/',
-    // url: 'http://159.203.121.122:8080/'
+    pasUrl: 'http://159.203.121.122:8080/',
+    // pasUrl: 'http://104.236.50.241/',
+    // url: 'http://104.236.50.241:8080/',
+    url: 'http://159.203.121.122:8080/',
+    termAndConditionVersion: 'V1.0'
 });
 
 //favourite service start here
@@ -665,4 +664,73 @@ app.factory('sendUrlEmailService', function($http, $q, serviceLink) {
         }
     }
     return new sendUrlEmailService();
+})
+
+//terms and condition get Service 
+app.factory('termAndConditionService', function($http, $q, serviceLink) {
+    function termAndConditionService() {
+        var self = this;
+        var config = {
+            headers: {
+                'terms_conditions': 'V1.0'
+            }
+        };
+        self.termAndCondition = function() {
+            var deferred = $q.defer();
+            $http.get(serviceLink.url + 'SaltieApp/rest/cruise/termsandcondition', config).success(function(data, status) {
+                deferred.resolve(status);
+            }).error(function(data, status) {
+                deferred.resolve("error value");
+            });
+            return deferred.promise;
+        }
+    }
+    return new termAndConditionService();
+})
+
+//terms and condition get Service 
+app.factory('termAndConditionService', function($http, $q, serviceLink) {
+    function termAndConditionService() {
+        var self = this;
+        var config = {
+            headers: {
+                'terms_conditions': serviceLink.termAndConditionVersion
+            }
+        };
+        self.termAndCondition = function() {
+            var deferred = $q.defer();
+            $http.get(serviceLink.url + 'SaltieApp/rest/cruise/termsandcondition', config).success(function(data, status) {
+                deferred.resolve(data);
+            }).error(function(data, status) {
+                deferred.resolve("error value");
+            });
+            return deferred.promise;
+        }
+    }
+    return new termAndConditionService();
+})
+
+//terms and condition set Service 
+app.factory('termAndConditionSetService', function($http, $q, serviceLink, $rootScope) {
+    function termAndConditionSetService() {
+        var self = this;
+        self.termAndConditionSet = function() {
+            var deferred = $q.defer();
+            $http({
+                method: 'POST',
+                url: serviceLink.url + 'SaltieApp/rest/cruise/termsandcondition',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'terms_conditions': serviceLink.termAndConditionVersion
+                },
+                data: ''
+            }).success(function(data, status) {
+                deferred.resolve(status);
+            }).error(function(data, status) {
+                deferred.resolve("error value");
+            });
+            return deferred.promise;
+        }
+    }
+    return new termAndConditionSetService();
 })

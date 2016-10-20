@@ -1,0 +1,31 @@
+<ion-modal-view>
+    <ion-header-bar id="modal" class="bar bar-header bar-positive modalHead">
+        <h2 class="title modalhead">Terms & Conditions</h2>
+        <button class="button button-icon button-primary modalClose ion-ios-close-empty" id="modal" ng-click="termAndCondition.hide()"></button>
+    </ion-header-bar>
+
+    <ion-content class="padding" direction="xy" style="padding: 5vw;">
+        <p>
+            The following Terms and Conditions (referred to herein as these “Terms and Conditions” or “Agreement”) apply to all travel and travel related Services offered for sale by Customer Experience Design Corporation, LLC dba Saltie and Saltie Curator (“Saltie”)
+            and/or its officers, directors, employees, representatives, affiliates, agents, or subcontractors (hereinafter referred to as “Saltie, “we,” or “us”). Saltie is located at 222 Third Street, Suite 0142, Cambridge, MA 02142. Our telephone number
+            is XXXXXX.
+        </p>
+        <p>
+            The terms “Service” or “Services” as used in these Terms and Conditions encompass: airfare, passage on cruises, charters, river boats, and other water vessels, ground transportation, hotel rooms, resorts, or other lodgings, tours, leisure or adventure
+            activities, equipment rentals, expeditions, trip insurance and any other travel or travel related products offered or sold by Saltie. The term “Trip” or “Tour” is defined as any one Service and/or package of Services offered or sold by us.
+            “Supplier” or “Vendor” refers to any provider of the Services we offer. “Itinerary” refers to the particularized schedule for a Trip. References herein to “Traveler,” “you,” or “your” shall apply to each and any of the following: a party participating
+            in an offered Trip and/or the party who purchases (or attempts to purchase) a Trip for themselves and/or others, including their Parent or Legal Guardian who accepts these Terms and Conditions on their behalf if the party participating is
+            not of legal age to enter into a binding legal contract on their own behalf.
+        </p>
+    </ion-content>
+    <ion-footer-bar>
+        <div class="row" style="background-color: #339fa6;">
+            <div class="col term_cond_foo_But_col">
+                <button class="button-block term_cond_foo_But" ng-click="termCondDecline()">Decline</button>
+            </div>
+            <div class="col term_cond_foo_But_col">
+                <button class="button-block term_cond_foo_But" ng-click="termCondAccept()">Accept</button>
+            </div>
+        </div>
+    </ion-footer-bar>
+</ion-modal-view>

@@ -1333,6 +1333,14 @@ a.button.icon-right:before {
   	10. Detail Page
    ========================================================================== */
 
+.saliIDPosition {
+    position: absolute;
+    top: 13vh;
+    font-size: 3.5vmin;
+    color: white;
+    right: 5vw;
+}
+
 #discount .slider-pager {
     position: static;
     z-index: 1;
@@ -2592,7 +2600,9 @@ ul.my-nav {
 }
 
 .discountListIcon {
-    width: 12%;
+    width: 11%;
+    max-width: 50px;
+    width: 10%;
     margin-left: 5vw;
     position: absolute;
     left: 0;
@@ -2862,7 +2872,6 @@ a.tab-item.tab-item-active span.tab-title.ng-binding {
         left: 12px;
         top: 12px;
     }
-
     .mainButtonFloat {
         font-size: 30px;
         width: 70px;
@@ -2877,4 +2886,24 @@ a.tab-item.tab-item-active span.tab-title.ng-binding {
         width: 70px;
         height: 70px;
     }
+}
+
+
+/*term and condition */
+
+.term_cond_foo_But_col {
+    text-align: center;
+    color: white;
+    border: solid;
+    border-left: none;
+    border-top: none;
+    border-bottom: none;
+}
+
+.term_cond_foo_But {
+    line-height: 5vh;
+    font-size: 4vmin;
+    border: none;
+    color: white;
+    background: #339fa6;
 }

@@ -1,25 +1,45 @@
-app.controller('engageController', function ($scope, $location, $http, $rootScope, $localStorage, $ionicPopup, sendUrlEmailService) {
-    $scope.engageUser = function () {
-
+app.controller('engageController', function($scope, $location, $http, $rootScope, $localStorage, $ionicPopup, sendUrlEmailService, termAndConditionService) {
+    $scope.engageUser = function() {
         // $rootScope.TempDetail=angular.copy($rootScope.detail);
         $location.path('/app/emailUs');
     }
 
-    //$scope.is_showBookingPopup = false;
-    $scope.bookOnline = function () {
-        $scope.detail = angular.copy($rootScope.TempDetail);
-        //$rootScope.TempDetail = "";
 
+    //terms and condition rest get api
+    termAndConditionService.termAndCondition()
+        .then(
+            /* success function */
+            function(data) {
+                if (data.termsAccepted) {
+                    $rootScope.termCondAccepted = true;
+                } else {
+                    $rootScope.termCondAccepted = false;
+                }
+
+            },
+            function(error) {
+                //If an error happened, handle it here
+            })
+
+    //$scope.is_showBookingPopup = false;
+    $scope.bookOnline = function() {
+        $scope.detail = angular.copy($rootScope.TempDetail);
         $scope.name = $localStorage.Name.split(" ")[0];
         if ($scope.detail == undefined || $scope.detail == "" || $scope.detail == null) {
             $scope.is_showBookingPopup = true;
         } else {
-            $scope.is_showBookingPopup = false;
-            $location.path('/app/booking');
+            if (!$rootScope.termCondAccepted) {
+                $scope.termAndCondition.show();
+                $scope.is_showBookingPopup = false;
+            } else {
+                $scope.is_showBookingPopup = false;
+                $location.path('/app/booking');
+            }
+
         }
         //$location.path('/app/emailUs');
     }
-    $scope.back = function () {
+    $scope.back = function() {
         // $rootScope.engageData = "";
         //        if($rootScope.TempDetail == "" || $rootScope.TempDetail == undefined){
         //            $location.path('app/list');
@@ -28,11 +48,11 @@ app.controller('engageController', function ($scope, $location, $http, $rootScop
         //        }
         console.log($rootScope.TempDetail);
     }
-    $scope.goToList = function () {
+    $scope.goToList = function() {
         $scope.is_showBookingPopup = false;
         $location.path('/app/list');
     }
-    $scope.closePopup = function () {
+    $scope.closePopup = function() {
         $scope.is_showBookingPopup = false;
     }
 
@@ -46,7 +66,7 @@ app.controller('engageController', function ($scope, $location, $http, $rootScop
         $scope.emailBook = '';
     }
 
-    $scope.bookOnlineWeb = function () {
+    $scope.bookOnlineWeb = function() {
         var emailBookingUrlPopup = $ionicPopup.show({
             template: `<div id="emailBookUrl">
                         <h1 class="light">Welcome to Saltie<br> 
@@ -73,16 +93,16 @@ app.controller('engageController', function ($scope, $location, $http, $rootScop
             scope: $scope
         });
 
-        $scope.noThanks = function () {
-            window.open('https://www.vivavoyage.com/', '_blank', 'closebuttoncaption=back');
+        $scope.noThanks = function() {
+            // window.open('https://www.vivavoyage.com/', '_blank', 'closebuttoncaption=back');
             emailBookingUrlPopup.close();
         }
-        $scope.okSendUrl = function (form,emailBook) {
+        $scope.okSendUrl = function(form, emailBook) {
             if (form.$valid) {
-                sendUrlEmailService.sendUrlEmail(emailBook, 'https://www.vivavoyage.com/')
+                sendUrlEmailService.sendUrlEmail(emailBook, $rootScope.pidVivaUrl)
                     .then(
                         /* success function */
-                        function (status) {
+                        function(status) {
                             if (status == 204) {
                                 emailBookingUrlPopup.close();
                                 $ionicPopup.show({
@@ -91,14 +111,14 @@ app.controller('engageController', function ($scope, $location, $http, $rootScop
                                     buttons: [{
                                         text: 'Ok'
                                     }]
-                                }).then(function (res) {
+                                }).then(function(res) {
 
                                 });
                             } else {
 
                             }
                         },
-                        function (error) {
+                        function(error) {
                             alert("There was a problem");
                             console.log(error);
                         });
