@@ -29,6 +29,7 @@ app.controller('engageController', function($scope, $location, $http, $rootScope
             $scope.is_showBookingPopup = true;
         } else {
             if (!$rootScope.termCondAccepted) {
+                $rootScope.clickedFromMenu = false;
                 $scope.termAndCondition.show();
                 $scope.is_showBookingPopup = false;
             } else {

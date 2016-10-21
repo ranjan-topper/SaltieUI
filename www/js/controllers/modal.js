@@ -2,6 +2,7 @@ app.controller('modalCtrl', function($scope, $location, $http, $rootScope, $loca
 
     $rootScope.linkUrl = serviceLink.url;
     $scope.readyBookDisable = false;
+    $rootScope.clickedFromMenu = true;
 
 
     /* ==========================================================================
@@ -33,7 +34,7 @@ app.controller('modalCtrl', function($scope, $location, $http, $rootScope, $loca
     $ionicModal.fromTemplateUrl('templates/termModal.html', {
         scope: $scope
     }).then(function(modal) {
-        $scope.termModal = modal;
+        $scope.termAndCondition = modal;
     })
 
     //filter modal start's here
@@ -79,13 +80,6 @@ app.controller('modalCtrl', function($scope, $location, $http, $rootScope, $loca
     }).then(function(modal) {
         $scope.modal2 = modal;
     });
-
-    $ionicModal.fromTemplateUrl('templates/termAndCondition.html', {
-        scope: $scope
-    }).then(function(modal) {
-        $scope.termAndCondition = modal;
-    });
-
 
     /* ==========================================================================
     						Close LoginSignUp modal
@@ -237,7 +231,8 @@ app.controller('modalCtrl', function($scope, $location, $http, $rootScope, $loca
     						Term Modal functionality
      	========================================================================== */
     $scope.termClick = function() {
-        $scope.termModal.show();
+        $rootScope.clickedFromMenu = true;
+        $scope.termAndCondition.show();
     }
 
     /* ==========================================================================
@@ -373,11 +368,11 @@ app.controller('modalCtrl', function($scope, $location, $http, $rootScope, $loca
                         $rootScope.termCondAccepted = true;
                         $location.path('/app/booking');
                         $scope.termAndCondition.remove();
-                        $ionicModal.fromTemplateUrl('templates/termAndCondition.html', {
+                        $ionicModal.fromTemplateUrl('templates/termModal.html', {
                             scope: $scope
                         }).then(function(modal) {
                             $scope.termAndCondition = modal;
-                        });
+                        })
                     } else {
                         $rootScope.termCondAccepted = false;
                     }
@@ -389,15 +384,12 @@ app.controller('modalCtrl', function($scope, $location, $http, $rootScope, $loca
     }
     $scope.termCondDecline = function() {
         $scope.termAndCondition.remove();
-        $ionicModal.fromTemplateUrl('templates/termAndCondition.html', {
+        $rootScope.clickedFromMenu = true;
+        $ionicModal.fromTemplateUrl('templates/termModal.html', {
             scope: $scope
         }).then(function(modal) {
             $scope.termAndCondition = modal;
-        });
+        })
         $location.path('/app/engageUser');
     }
-
-
-
-
 });

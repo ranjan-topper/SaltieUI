@@ -1,35 +1,39 @@
 <ion-view id="lifestyle" cache-view="true">
-	<ion-nav-buttons side="left">
-<button class="button button-icon button-clear ion-android-arrow-back" style="color: #00232d;">
-        </button>     
-	</ion-nav-buttons>
-	<ion-nav-title>
-     <a href="" class="cruisecount" id="viewCount" style="text-decoration: none;" ng-click="viewall(count)">
-			<span class="bold">{{countSailing}}</span>
+    <ion-nav-buttons side="left">
+        <button class="button button-icon button-clear ion-android-arrow-back" style="color: #00232d;">
+        </button>
+    </ion-nav-buttons>
+    <ion-nav-title>
+        <a href="" class="cruisecount" id="viewCount" style="text-decoration: none;" ng-click="viewall(count)">
+            <span class="bold">{{countSailing}}</span>
             <span class="thin"> Sailings |</span>
-            <span class="bold"> {{count}}</span> 
-            <span class="thin">Cruises</span>	
-	</a>
+            <span class="bold"> {{count}}</span>
+            <span class="thin">Cruises</span>
+        </a>
     </ion-nav-title>
-	
-  
-<ion-content style="margin-top: 0.6vh;" class="" on-swipe-left="viewall(count)" scroll="false">
-<div class="background homepageImg">
-      <div class="destination" align="center">
-		 <div class="medium" id="title" style="margin-bottom: 10%;">CARIBBEAN</div>
-		  <div><button class="button button-icon button-clear ion-android-arrow-forward" id="clck" ng-click="viewall(count)" style="color:white;font-size: 7vmin;">
-			  </button>  </div>
-      </div>
-	
-	<div class="lifestyleBottom">
-	<div class="medium lifeBottomText">We currently offer cruises to the Caribbean.<br>
-New destinations coming soon!
-		</div>
-	</div>
-	</div>
 
-</ion-content>
 
-	
-	  
+    <ion-content style="margin-top: 0.6vh;" class="" on-swipe-left="viewall(count)" scroll="false">
+        <div class="background homepageImg">
+            <div class="textAtTop roman">
+                <span class="textAtTophead bold">Welcome to Saltie!</span><br>
+                <span>We have two options to help you shop for cruises; Let Me Choose provides powerful filters to narrow down your search, and Be My Guide shows you cruises that match your interest!</span>
+                <br><span>The Perfect Cruise is Waiting for You</span>
+            </div>
+            <div class="destination" align="center">
+                <div class="medium" id="title" style="margin-bottom: 10%;">CARIBBEAN</div>
+                <div><button class="button button-icon button-clear ion-android-arrow-forward" id="clck" ng-click="viewall(count)" style="color:white;font-size: 7vmin;">
+			  </button> </div>
+            </div>
+
+            <div class="lifestyleBottom">
+                <div class="medium lifeBottomText">We currently offer cruises to the Caribbean.<br> New destinations coming soon!
+                </div>
+            </div>
+        </div>
+
+    </ion-content>
+
+
+
 </ion-view>

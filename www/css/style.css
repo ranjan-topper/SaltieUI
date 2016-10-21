@@ -1335,7 +1335,8 @@ a.button.icon-right:before {
 
 .saliIDPosition {
     position: absolute;
-    top: 13vh;
+    top: 30vh;
+    line-height: 1;
     font-size: 3.5vmin;
     color: white;
     right: 5vw;
@@ -1372,9 +1373,10 @@ a.button.icon-right:before {
 
 .discountIcon {
     position: absolute;
-    width: 25px;
-    left: 10px;
-    top: 10px;
+    max-width: 50px;
+    width: 10%;
+    left: 5vw;
+    top: 0px;
 }
 
 .engagePopupDetail {
@@ -1851,6 +1853,26 @@ ion-scroll[delegate-handle=filterScroll] {
 /* ==========================================================================
    08. Lifestyle page
    ========================================================================== */
+
+.textAtTop {
+    padding-left: 5vw;
+    padding-right: 5vw;
+    padding-top: 3vh;
+    line-height: 1;
+    text-align: center;
+    font-size: 4vmin;
+    color: white;
+}
+
+.textAtTophead {
+    font-size: 5vmin;
+    color: white;
+}
+
+.textAtTop span {
+    display: inline-block;
+    margin-bottom: 2vh;
+}
 
 .background {
     background: url('../img/back.jpg') no-repeat center center;
@@ -2864,14 +2886,6 @@ a.tab-item.tab-item-active span.tab-title.ng-binding {
 }
 
 @media (min-width:481px) {
-    .discountDiv {
-        bottom: 140px;
-    }
-    .discountIcon {
-        width: 50px;
-        left: 12px;
-        top: 12px;
-    }
     .mainButtonFloat {
         font-size: 30px;
         width: 70px;
@@ -2906,4 +2920,49 @@ a.tab-item.tab-item-active span.tab-title.ng-binding {
     border: none;
     color: white;
     background: #339fa6;
+}
+
+#tC p {
+    color: #339FA6;
+    font-family: roman;
+    font-size: 3.5vmin;
+    line-height: 1.2;
+}
+
+#tC p strong {
+    font-family: bold;
+    color: #aea081;
+}
+
+#tC ol {
+    list-style-position: inside;
+    list-style-type: decimal;
+}
+
+#tC ul {
+    padding-left: 5vw;
+    font-size: 3vmin;
+    list-style-position: outside;
+    color: #005D69;
+    line-height: 1.2;
+    font-family: roman;
+    list-style-type: disc;
+    ;
+}
+
+#tC ol li {
+    color: #339FA6;
+    font-family: roman;
+    font-size: 3.5vmin;
+    line-height: 1.2;
+}
+
+#tC ol li strong {
+    font-family: bold;
+    color: #aea081;
+}
+
+.olCssCustom {
+    padding-left: 5vw;
+    list-style-type: lower-alpha !important;
 }

@@ -52,7 +52,7 @@
 
     </ion-content>
     <ion-content class="detailContentStart">
-        <ion-slide-box delegate-handle="detailSlide" show-pager="false">
+        <ion-slide-box delegate-handle="detailSlide" show-pager="false" auto-play="true" does-continue="true">
             <!--			auto-play="true" does-continue = "true"-->
             <ion-slide>
                 <a type="item-text-wrap" href="" style='background-image:url("{{linkUrl}}images/ports/{{ detail.tripDetails.destinationImage[0]}}");' class="eventListPicture">
@@ -81,6 +81,9 @@
         </ion-slide-box>
         <div class="saliIDPosition roman"><span class="bold">Sailing ID:</span><br>{{sailID}}</div>
         <img id="detail" src="{{isFavorite(tripID)}}" ng-click="favorite(tripID,'detail')" class="favorite" width="8%" style="position: absolute; right:0; top: 0px;">
+        <div ng-if="discountValue.length > 0" ng-click="openDiscountModal()">
+            <img src="./img/deal.png" class="discountIcon">
+        </div>
         <div>
             <img class="itinerarymap" ng-src="{{linkUrl}}images/itinerarymaps/{{ detail.tripDetails.itineraryImage}}" width="100%" />
         </div>
@@ -108,9 +111,7 @@
 			<img src="./img/discount.png" ng-click="openDiscountModal()" class="discountIcon">
 	</div>
 -->
-    <div ng-if="discountValue.length > 0" style="background: rgb(39, 162, 176);" class="button button-float mainButtonFloat discountDiv" ng-click="openDiscountModal()">
-        <img src="./img/displain.png" class="discountIcon">
-    </div>
+
     <ion-footer-bar style="background-color: #00707e;   border: none;">
         <button class="button-block bookbt thin" id="readytobook" ng-click="emailUs('detail')">
             Next Step
