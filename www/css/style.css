@@ -115,7 +115,7 @@ html input[disabled] {
     -moz-flex: 1;
     -ms-flex: 1;
     flex: 1;
-    font-size: 3vmin;
+    font-size: 3.5vmin;
     display: block;
     line-height: 7vh;
     overflow: hidden;
@@ -1335,11 +1335,11 @@ a.button.icon-right:before {
 
 .saliIDPosition {
     position: absolute;
-    top: 30vh;
+    top: 32vh;
     line-height: 1;
     font-size: 3.5vmin;
     color: white;
-    right: 5vw;
+    left: 5vw;
 }
 
 #discount .slider-pager {
@@ -1398,7 +1398,7 @@ a.button.icon-right:before {
 
 .marginDetail {
     line-height: 1.2;
-    bottom: 5vh;
+    bottom: 8vh;
     position: absolute;
     margin-right: 5vw;
     margin-left: 5vw;
@@ -1857,7 +1857,7 @@ ion-scroll[delegate-handle=filterScroll] {
 .textAtTop {
     padding-left: 5vw;
     padding-right: 5vw;
-    padding-top: 3vh;
+    padding-top: 7vh;
     line-height: 1;
     text-align: center;
     font-size: 4vmin;
@@ -1871,7 +1871,7 @@ ion-scroll[delegate-handle=filterScroll] {
 
 .textAtTop span {
     display: inline-block;
-    margin-bottom: 2vh;
+    margin-bottom: 3vh;
 }
 
 .background {
@@ -1894,6 +1894,12 @@ ion-scroll[delegate-handle=filterScroll] {
     text-transform: uppercase;
     color: #9c867a;
     background: none;
+}
+
+.destinationMargin {
+    font-size: 7vmin;
+    color: white;
+    margin-top: 10vh;
 }
 
 .destination {

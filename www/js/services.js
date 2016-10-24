@@ -400,10 +400,10 @@ app.factory('facebookService', function($http, $q, $ionicLoading, $ionicPopup, $
 // });
 
 app.constant('serviceLink', {
-    pasUrl: 'http://159.203.121.122:8080/',
-    // pasUrl: 'http://104.236.50.241/',
-    // url: 'http://104.236.50.241:8080/',
-    url: 'http://159.203.121.122:8080/',
+    // pasUrl: 'http://159.203.121.122:8080/',
+    pasUrl: 'http://104.236.50.241/',
+    url: 'http://104.236.50.241:8080/',
+    // url: 'http://159.203.121.122:8080/',
     termAndConditionVersion: 'V1.0'
 });
 
@@ -653,9 +653,9 @@ app.factory('discountVal', function($http, $q, serviceLink) {
 app.factory('sendUrlEmailService', function($http, $q, serviceLink) {
     function sendUrlEmailService() {
         var self = this;
-        self.sendUrlEmail = function(emailId, url) {
+        self.sendUrlEmail = function(emailId, url, tripId) {
             var deferred = $q.defer();
-            $http.get(serviceLink.url + 'SaltieApp/rest/cruise/email?email=' + emailId + '&link=' + url).success(function(data, status) {
+            $http.get(serviceLink.url + 'SaltieApp/rest/cruise/email?tripId=' + tripId + '&email=' + emailId + '&link=' + url).success(function(data, status) {
                 deferred.resolve(status);
             }).error(function(data, status) {
                 deferred.resolve("error value");
@@ -672,7 +672,7 @@ app.factory('termAndConditionService', function($http, $q, serviceLink) {
         var self = this;
         var config = {
             headers: {
-                'terms_conditions': 'V1.0'
+                'terms_conditions': serviceLink.termAndConditionVersion
             }
         };
         self.termAndCondition = function() {
@@ -688,27 +688,7 @@ app.factory('termAndConditionService', function($http, $q, serviceLink) {
     return new termAndConditionService();
 })
 
-//terms and condition get Service 
-app.factory('termAndConditionService', function($http, $q, serviceLink) {
-    function termAndConditionService() {
-        var self = this;
-        var config = {
-            headers: {
-                'terms_conditions': serviceLink.termAndConditionVersion
-            }
-        };
-        self.termAndCondition = function() {
-            var deferred = $q.defer();
-            $http.get(serviceLink.url + 'SaltieApp/rest/cruise/termsandcondition', config).success(function(data, status) {
-                deferred.resolve(data);
-            }).error(function(data, status) {
-                deferred.resolve("error value");
-            });
-            return deferred.promise;
-        }
-    }
-    return new termAndConditionService();
-})
+
 
 //terms and condition set Service 
 app.factory('termAndConditionSetService', function($http, $q, serviceLink, $rootScope) {

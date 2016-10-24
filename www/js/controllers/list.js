@@ -12,7 +12,6 @@ app.controller('listController', function($scope, $location, $rootScope, $localS
         $rootScope.is_engaged = "list";
         $rootScope.userFav = [];
         $rootScope.favourite = [];
-        $rootScope.list = [];
         $scope.dayCount = [];
         $rootScope.totalDisplayed = 0;
         $rootScope.noMoreItemsAvailable = false;

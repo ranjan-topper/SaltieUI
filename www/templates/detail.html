@@ -79,7 +79,7 @@
                 </div>
             </ion-slide>
         </ion-slide-box>
-        <div class="saliIDPosition roman"><span class="bold">Sailing ID:</span><br>{{sailID}}</div>
+        <div class="saliIDPosition roman"><span class="bold">Sailing ID:</span> {{sailID}}</div>
         <img id="detail" src="{{isFavorite(tripID)}}" ng-click="favorite(tripID,'detail')" class="favorite" width="8%" style="position: absolute; right:0; top: 0px;">
         <div ng-if="discountValue.length > 0" ng-click="openDiscountModal()">
             <img src="./img/deal.png" class="discountIcon">

@@ -26,7 +26,7 @@
                 <i class="icon ion-ios-arrow-down"></i>
             </div>
         </div>
-        <ion-tab ng-class="myClass" title="LET ME CHOOSE" on-select="onFilterTabSelected()" on-deselect="onFilterTabDeselected()">
+        <ion-tab ng-class="myClass" title="Let Me Choose" on-select="onFilterTabSelected()" on-deselect="onFilterTabDeselected()">
             <ion-content delegate-handle="listPage" style="margin-top: 7vh;">
                 <div class="list list-item" ng-repeat="itinerary in list">
                     <a type="item-text-wrap" id="detail{{itinerary.tripId}}" ng-click="detail(itinerary.tripId)" on-swipe-left="detail(itinerary.tripId)" href="" style='background-image:url("{{linkUrl}}images/ports/{{itinerary.destinationImage[0][0]}}");' class="eventListPicture">
@@ -57,7 +57,7 @@
                 <ion-infinite-scroll id="scroll" ng-if="!noMoreItemsAvailable" on-infinite="loadMore()" distance='2%'></ion-infinite-scroll>
             </ion-content>
         </ion-tab>
-        <ion-tab title="BE MY GUIDE" on-select="onCuratorTabSelected()" on-deselect="onCuratorTabDeselected()">
+        <ion-tab title="Be My Guide" on-select="onCuratorTabSelected()" on-deselect="onCuratorTabDeselected()">
             <ion-content delegate-handle="CuratorlistPage" style="margin-top: 7vh;">
                 <div class="curatorDetail">
                     <div class="layer">

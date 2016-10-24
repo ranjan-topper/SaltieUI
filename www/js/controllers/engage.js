@@ -1,4 +1,5 @@
 app.controller('engageController', function($scope, $location, $http, $rootScope, $localStorage, $ionicPopup, sendUrlEmailService, termAndConditionService) {
+
     $scope.engageUser = function() {
         // $rootScope.TempDetail=angular.copy($rootScope.detail);
         $location.path('/app/emailUs');
@@ -100,7 +101,11 @@ app.controller('engageController', function($scope, $location, $http, $rootScope
         }
         $scope.okSendUrl = function(form, emailBook) {
             if (form.$valid) {
-                sendUrlEmailService.sendUrlEmail(emailBook, $rootScope.pidVivaUrl)
+                if ($rootScope.tripid == undefined) {
+                    $rootScope.tripid = '';
+                }
+
+                sendUrlEmailService.sendUrlEmail(emailBook, $rootScope.pidVivaUrl, $rootScope.tripid)
                     .then(
                         /* success function */
                         function(status) {

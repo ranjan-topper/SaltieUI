@@ -130,6 +130,7 @@ app.controller('detailController', function($scope, $state, $location, $ionicMod
 
 
         $scope.back = function() {
+            $rootScope.tripid = '';
             $rootScope.TempDetail = "";
             window.history.back();
             console.log($rootScope.TempDetail);
