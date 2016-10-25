@@ -1,4 +1,4 @@
-app.controller('AppCtrl', function ($scope, $ionicModal, $timeout, $ionicHistory, $localStorage, $location, $ionicLoading, $http, $rootScope, $state, serviceLink, $window, profileGet, profileSet, $ionicPopup, TokenStorage) {
+app.controller('AppCtrl', function($scope, $ionicModal, $timeout, $ionicHistory, $localStorage, $location, $http, $rootScope, $state, serviceLink, $window, profileGet, profileSet, TokenStorage, $ionicTabsDelegate, $ionicScrollDelegate) {
 
     if (typeof analytics !== 'undefined') {
         analytics.trackView("App Main Controller");
@@ -51,12 +51,12 @@ app.controller('AppCtrl', function ($scope, $ionicModal, $timeout, $ionicHistory
     //		$rootScope.month=[];
     $rootScope.preStyle = "";
 
-    $scope.myFavourite = function () {
+    $scope.myFavourite = function() {
         //service part of myfavourite page start
         $http({
             method: 'GET',
             url: serviceLink.url + 'SaltieApp/rest/cruise/favourite/list'
-        }).success(function (data) {
+        }).success(function(data) {
             /*
                 $rootScope.myFav = data.tripList;//myfav success is assigned to rootscope so that it can be accessed by all the controller
 */
@@ -69,7 +69,7 @@ app.controller('AppCtrl', function ($scope, $ionicModal, $timeout, $ionicHistory
 
     $scope.loginData = {};
 
-    $scope.logout = function () {
+    $scope.logout = function() {
         if ($rootScope.clickFilterFlag != 0) {
             $rootScope.resetFilterHome();
         }
@@ -83,14 +83,14 @@ app.controller('AppCtrl', function ($scope, $ionicModal, $timeout, $ionicHistory
         delete $localStorage.emailver;
         $state.go('start', {}, {
             reload: true
-        }).then(function () {
-            setTimeout(function () {
+        }).then(function() {
+            setTimeout(function() {
                 $window.location.reload(true);
             }, 500);
         })
     }
 
-    $scope.home = function () {
+    $scope.home = function() {
         //		$rootScope.applyFilterFlag=0;
         $rootScope.engageData = "";
         //		if($rootScope.clickFilterFlag!=0)
@@ -102,7 +102,11 @@ app.controller('AppCtrl', function ($scope, $ionicModal, $timeout, $ionicHistory
         //		}
         $localStorage.stylelife = "All";
         // $rootScope.count = $rootScope.lifestylecount['All'];
-        $location.path('/app/lifeStyle');
+        $timeout(function() {
+            $ionicTabsDelegate.$getByHandle('listTab').select(0);
+            $ionicScrollDelegate.$getByHandle('listPage').scrollTop();
+        }, 100);
+        $location.path('/app/list');
 
 
     }
@@ -112,7 +116,7 @@ app.controller('AppCtrl', function ($scope, $ionicModal, $timeout, $ionicHistory
   						engage User functionality
    	========================================================================== */
 
-    $scope.engageClick = function (type) {
+    $scope.engageClick = function(type) {
         if ($localStorage.userName == "Guest") {
             //             $rootScope.logSignClicked = "nextStep";
             $rootScope.logSignClicked = "engageUs";

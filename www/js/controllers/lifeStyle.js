@@ -5,7 +5,7 @@ app.controller('lifeStyleCtrl', function($scope, $location, $http, $rootScope, $
     $rootScope.list = [];
     $rootScope.buttonType = "Select Room Type";
     $rootScope.firstTimeSelected = 0;
-    $rootScope.pidVivaUrl = 'https://res.vivavoyage.com/Web/cruises/details.aspx?pid=874684';
+    $rootScope.pidVivaUrl = 'https://res.vivavoyage.com';
 
     if ($localStorage.userName == "Guest") {
         $rootScope.loginLogout = "Login";

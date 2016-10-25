@@ -400,10 +400,10 @@ app.factory('facebookService', function($http, $q, $ionicLoading, $ionicPopup, $
 // });
 
 app.constant('serviceLink', {
-    // pasUrl: 'http://159.203.121.122:8080/',
-    pasUrl: 'http://104.236.50.241/',
-    url: 'http://104.236.50.241:8080/',
-    // url: 'http://159.203.121.122:8080/',
+    pasUrl: 'http://159.203.121.122:8080/',
+    // pasUrl: 'http://104.236.50.241/',
+    // url: 'http://104.236.50.241:8080/',
+    url: 'http://159.203.121.122:8080/',
     termAndConditionVersion: 'V1.0'
 });
 

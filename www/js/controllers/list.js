@@ -252,19 +252,23 @@ app.controller('listController', function($scope, $location, $rootScope, $localS
 
         //back button function
         $scope.back = function() {
-            $rootScope.page = "lifestyle";
             if ($scope.pasBackBtFlag == 1 && $rootScope.noRecommendation == true) {
                 $location.path('/app/pasCategory');
             } else if ($scope.pasBackBtFlag == 1 && $rootScope.noRecommendation == false) {
                 $location.path('/app/pasCategory');
             } else {
+                $rootScope.page = "lifestyle";
                 $location.path('/app/lifeStyle');
             }
 
         }
 
         $scope.showPASFilter = function() {
-            $location.path('/app/pasPage');
+            if ($rootScope.curatorListIteamTemp == undefined || $rootScope.curatorListIteamTemp == "") {
+                $location.path('/app/pasPage');
+            } else {
+                $scope.showCategoryPage();
+            }
         }
         $scope.showCategoryPage = function() {
             $location.path('/app/pasCategory');
