@@ -155,7 +155,7 @@ app.controller('detailController', function($scope, $state, $location, $ionicMod
             $rootScope.priceList = prices.category;
             $scope.index1 = index;
             if ($rootScope.pID == "NA") {
-                $rootScope.pidVivaUrl = 'https://res.vivavoyage.com/Web/cruises/details.aspx?pid=874684';
+                $rootScope.pidVivaUrl = 'https://res.vivavoyage.com/';
             } else {
                 $rootScope.pidVivaUrl = 'https://res.vivavoyage.com/Web/cruises/details.aspx?pid=' + $rootScope.pID;
             }

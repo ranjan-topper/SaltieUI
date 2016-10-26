@@ -104,6 +104,9 @@ app.controller('engageController', function($scope, $location, $http, $rootScope
                 if ($rootScope.tripid == undefined) {
                     $rootScope.tripid = '';
                 }
+                if ($rootScope.TempDetail == '') {
+                    $rootScope.pidVivaUrl = 'https://res.vivavoyage.com/';
+                }
 
                 sendUrlEmailService.sendUrlEmail(emailBook, $rootScope.pidVivaUrl, $rootScope.tripid)
                     .then(

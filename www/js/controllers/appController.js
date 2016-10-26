@@ -93,6 +93,7 @@ app.controller('AppCtrl', function($scope, $ionicModal, $timeout, $ionicHistory,
     $scope.home = function() {
         //		$rootScope.applyFilterFlag=0;
         $rootScope.engageData = "";
+        $rootScope.TempDetail = '';
         //		if($rootScope.clickFilterFlag!=0)
         //		{
         //			$rootScope.backArrow={ship:0,cruiseLine:0,port:0,month1:"",month2:"",month3:"",expType:"",duration:"",orderBy:"asc"}; 

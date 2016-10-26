@@ -404,7 +404,7 @@ app.constant('serviceLink', {
     // pasUrl: 'http://104.236.50.241/',
     // url: 'http://104.236.50.241:8080/',
     url: 'http://159.203.121.122:8080/',
-    termAndConditionVersion: 'V1.0'
+    termAndConditionVersion: 'V2.0'
 });
 
 //favourite service start here
@@ -678,7 +678,7 @@ app.factory('termAndConditionService', function($http, $q, serviceLink) {
         self.termAndCondition = function() {
             var deferred = $q.defer();
             $http.get(serviceLink.url + 'SaltieApp/rest/cruise/termsandcondition', config).success(function(data, status) {
-                deferred.resolve(status);
+                deferred.resolve(data);
             }).error(function(data, status) {
                 deferred.resolve("error value");
             });
