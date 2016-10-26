@@ -264,7 +264,7 @@ app.controller('listController', function($scope, $location, $rootScope, $localS
         }
 
         $scope.showPASFilter = function() {
-            if ($rootScope.curatorListIteamTemp == undefined || $rootScope.curatorListIteamTemp == "") {
+            if ($rootScope.firstTimeSelected == 0) {
                 $location.path('/app/pasPage');
             } else {
                 $scope.showCategoryPage();

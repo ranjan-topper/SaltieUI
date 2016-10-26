@@ -181,7 +181,7 @@ app.controller('modalCtrl', function($scope, $location, $http, $rootScope, $loca
             $rootScope.sailID = prices.sailingId;
             $rootScope.priceList = prices.category;
             if ($rootScope.pID == 'NA') {
-                $rootScope.pidVivaUrl = 'https://res.vivavoyage.com/';
+                $rootScope.pidVivaUrl = 'https://res.vivavoyage.com/Web/cruises/details.aspx?pid=874684';
             } else {
                 $rootScope.pidVivaUrl = 'https://res.vivavoyage.com/Web/cruises/details.aspx?pid=' + $rootScope.pID;
             }

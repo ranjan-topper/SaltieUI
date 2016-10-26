@@ -94,6 +94,7 @@ app.controller('AppCtrl', function($scope, $ionicModal, $timeout, $ionicHistory,
         //		$rootScope.applyFilterFlag=0;
         $rootScope.engageData = "";
         $rootScope.TempDetail = '';
+        $rootScope.pidVivaUrl = 'https://res.vivavoyage.com';
         //		if($rootScope.clickFilterFlag!=0)
         //		{
         //			$rootScope.backArrow={ship:0,cruiseLine:0,port:0,month1:"",month2:"",month3:"",expType:"",duration:"",orderBy:"asc"}; 
