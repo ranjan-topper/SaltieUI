@@ -1,4 +1,4 @@
-app.controller('listController', function($scope, $location, $rootScope, $localStorage, $http, $ionicLoading, $timeout, $ionicModal, serviceLink, favService, $ionicPopup, $q, detailData, $ionicSlideBoxDelegate, curatorList, themeFilter, discountVal, $ionicTabsDelegate, $ionicScrollDelegate, $window) {
+app.controller('listController', function($scope, $location, $rootScope, $localStorage, $http, $ionicLoading, $timeout, $ionicModal, serviceLink, favService, $ionicPopup, $q, detailData, $ionicSlideBoxDelegate, curatorList, themeFilter, discountVal, $ionicTabsDelegate, $ionicScrollDelegate, $window, $state) {
 
 
     if (typeof analytics !== 'undefined') {
@@ -161,6 +161,9 @@ app.controller('listController', function($scope, $location, $rootScope, $localS
                                 $rootScope.noMoreCuratorItemsAvailable = false;
                             }
                         } else {
+                            if ($rootScope.curatorListIteamTemp.length == 0) {
+                                $rootScope.noRecommendation = true;
+                            }
                             $rootScope.noMoreCuratorItemsAvailable = true;
                         }
                     },
@@ -241,9 +244,13 @@ app.controller('listController', function($scope, $location, $rootScope, $localS
                     $scope.showPASFilter();
                     $rootScope.firstTimeSelected = 1;
                 } else if (!$rootScope.reachedPASCategory) {
-                    $location.path('/app/pasWhoTravel');
+                    if (!$rootScope.flagClickedShowRecom) {
+                        $location.path('/app/pasWhoTravel');
+                    }
                 } else {
-                    $location.path('/app/pasCategory');
+                    if (!$rootScope.flagClickedShowRecom) {
+                        $location.path('/app/pasCategory');
+                    }
                 }
 
             } else {
@@ -355,6 +362,7 @@ app.controller('listController', function($scope, $location, $rootScope, $localS
                 $ionicTabsDelegate.$getByHandle('listTab').select(1);
                 $ionicScrollDelegate.$getByHandle('CuratorlistPage').scrollTop();
             }, 100);
+            $rootScope.flagClickedShowRecom = true;
             $location.path('/app/list');
         }
 
@@ -364,18 +372,18 @@ app.controller('listController', function($scope, $location, $rootScope, $localS
             switch (task) { // postMessage tasks
                 // begin button clicked
                 case 'beginBt':
-                    $location.path('/app/pasWhoTravel');
+                    $state.go('app.pasWhoTravel');
                     break;
 
                     // whoTravel next button clicked
                 case 'whoTravel':
-                    $location.path('/app/pasCategory');
+                    $state.go('app.pasCategory');
                     $rootScope.reachedPASCategory = true;
                     break;
 
                     // when back arrow in the slider clicked
                 case 'slideBack':
-                    $location.path('/app/pasCategory');
+                    $state.go('app.pasCategory');
                     break;
                     //show recommendation clicked
                 case 'recom':
@@ -386,7 +394,7 @@ app.controller('listController', function($scope, $location, $rootScope, $localS
                     $scope.categoryID = evt.data.category_id;
                     $rootScope.questionUrl = serviceLink.pasUrl + "CruisePAS/#questions?category_id=" + evt.data.category_id + "&index=0&hide-navigation=t";
                     //			   $timeout(function() {
-                    $location.path('/app/pasQuestion');
+                    $state.go('app.pasQuestion');
                     //            }, 100);
                     break;
 

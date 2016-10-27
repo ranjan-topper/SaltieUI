@@ -18,17 +18,10 @@ app.controller('pasPageController', function($scope, $location, $rootScope, $tim
     }
 
     $scope.pasModalBackButton = function() {
-        if ($rootScope.noRecommendation) {
-            $timeout(function() {
-                $ionicTabsDelegate.$getByHandle('listTab').select(0);
-            }, 100);
-            $location.path('/app/list');
-        } else {
-            $timeout(function() {
-                $ionicTabsDelegate.$getByHandle('listTab').select(1);
-            }, 100);
-            $location.path('/app/list');
-        }
+        $timeout(function() {
+            $ionicTabsDelegate.$getByHandle('listTab').select(0);
+        }, 100);
+        $location.path('/app/list');
     }
 
 
