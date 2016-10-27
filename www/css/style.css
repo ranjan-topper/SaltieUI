@@ -2915,7 +2915,6 @@ a.tab-item.tab-item-active span.tab-title.ng-binding {
     text-align: center;
     color: white;
     border: solid;
-    border-left: none;
     border-top: none;
     border-bottom: none;
 }

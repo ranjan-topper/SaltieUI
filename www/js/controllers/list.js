@@ -18,6 +18,7 @@ app.controller('listController', function($scope, $location, $rootScope, $localS
         $rootScope.page = "list";
         $scope.favoriteId = 0;
         $scope.pasBackBtFlag = 0;
+        $rootScope.reachedPASCategory = false;
         if ($rootScope.curatorListIteamTemp == undefined || $rootScope.curatorListIteamTemp == "") {
             $rootScope.noRecommendation = true;
             $rootScope.curatorListIteamTemp = [];
@@ -239,6 +240,10 @@ app.controller('listController', function($scope, $location, $rootScope, $localS
                 if ($rootScope.firstTimeSelected == 0) {
                     $scope.showPASFilter();
                     $rootScope.firstTimeSelected = 1;
+                } else if (!$rootScope.reachedPASCategory) {
+                    $location.path('/app/pasWhoTravel');
+                } else {
+                    $location.path('/app/pasCategory');
                 }
 
             } else {
@@ -365,6 +370,7 @@ app.controller('listController', function($scope, $location, $rootScope, $localS
                     // whoTravel next button clicked
                 case 'whoTravel':
                     $location.path('/app/pasCategory');
+                    $rootScope.reachedPASCategory = true;
                     break;
 
                     // when back arrow in the slider clicked
