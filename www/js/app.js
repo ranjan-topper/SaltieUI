@@ -69,8 +69,10 @@ app.run(function($ionicPlatform, $rootScope, $state, $location, $ionicHistory, $
         window.fbq('track', toState.name);
     });
 
-
-
+    //initalize list item
+    $rootScope.list = [];
+    $rootScope.firstTimeSelected = 0;
+    $rootScope.pasPageReached = 'pasPage';
 })
 
 

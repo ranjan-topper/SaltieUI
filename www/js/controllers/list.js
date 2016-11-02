@@ -13,12 +13,15 @@ app.controller('listController', function($scope, $location, $rootScope, $localS
         $rootScope.userFav = [];
         $rootScope.favourite = [];
         $scope.dayCount = [];
-        $rootScope.totalDisplayed = 0;
-        $rootScope.noMoreItemsAvailable = false;
         $rootScope.page = "list";
         $scope.favoriteId = 0;
         $scope.pasBackBtFlag = 0;
-        $rootScope.reachedPASCategory = false;
+
+        if ($rootScope.list == undefined || $rootScope.list == "") {
+            $rootScope.noMoreItemsAvailable = false;
+            $rootScope.totalDisplayed = 0;
+        }
+
         if ($rootScope.curatorListIteamTemp == undefined || $rootScope.curatorListIteamTemp == "") {
             $rootScope.noRecommendation = true;
             $rootScope.curatorListIteamTemp = [];
@@ -243,13 +246,19 @@ app.controller('listController', function($scope, $location, $rootScope, $localS
                 if ($rootScope.firstTimeSelected == 0) {
                     $scope.showPASFilter();
                     $rootScope.firstTimeSelected = 1;
-                } else if (!$rootScope.reachedPASCategory) {
+                } else if ($rootScope.pasPageReached == 'pasPage') {
+                    if (!$rootScope.flagClickedShowRecom) {
+                        $location.path('/app/pasPage');
+                    }
+                } else if ($rootScope.pasPageReached == 'pasWhoTravel') {
                     if (!$rootScope.flagClickedShowRecom) {
                         $location.path('/app/pasWhoTravel');
                     }
                 } else {
-                    if (!$rootScope.flagClickedShowRecom) {
-                        $location.path('/app/pasCategory');
+                    if ($rootScope.pasPageReached == 'pasCategory') {
+                        if (!$rootScope.flagClickedShowRecom) {
+                            $location.path('/app/pasCategory');
+                        }
                     }
                 }
 
@@ -372,13 +381,14 @@ app.controller('listController', function($scope, $location, $rootScope, $localS
             switch (task) { // postMessage tasks
                 // begin button clicked
                 case 'beginBt':
+                    $rootScope.pasPageReached = 'pasWhoTravel';
                     $state.go('app.pasWhoTravel');
                     break;
 
                     // whoTravel next button clicked
                 case 'whoTravel':
+                    $rootScope.pasPageReached = 'pasCategory';
                     $state.go('app.pasCategory');
-                    $rootScope.reachedPASCategory = true;
                     break;
 
                     // when back arrow in the slider clicked

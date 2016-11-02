@@ -2,9 +2,7 @@ app.controller('lifeStyleCtrl', function($scope, $location, $http, $rootScope, $
     //initialise the rootscope details value
     $rootScope.TempDetail = "";
     $rootScope.engageData = "";
-    $rootScope.list = [];
     $rootScope.buttonType = "Select Room Type";
-    $rootScope.firstTimeSelected = 0;
     $rootScope.pidVivaUrl = 'https://res.vivavoyage.com';
 
     if ($localStorage.userName == "Guest") {
@@ -21,10 +19,6 @@ app.controller('lifeStyleCtrl', function($scope, $location, $http, $rootScope, $
         //default token header
         // $http.defaults.headers.common['X-Auth-Token']= $localStorage.auth_token;
     }
-
-
-
-
 
     if (typeof analytics !== 'undefined') { analytics.trackView("LifeStyle Controller"); }
 
