@@ -1,0 +1,49 @@
+<ion-modal-view>
+        <ion-header-bar id="modal" class="bar bar-header bar-positive modalHead" >
+			<h2 class="title modalhead">Ship Activity</h2>
+          <button class="button button-icon button-primary modalClose ion-ios-close-empty" id="modal" ng-click="closeModal()"></button>
+        </ion-header-bar>
+	
+        <ion-content class="padding" direction="xy" style="padding: 0px;" >
+<!--
+			
+					
+				 <a  type="item-text-wrap"  href="" style="margin-top: 2px;background-image:url('http://104.236.50.241:8080/images/Activity/{{ activity.activityImage }}');" class="eventListPicture">
+				 </a>
+						<div class="shipActiviyPadd">	
+ 						<div class="modalhead1" id="{{activity.activityTitle}}">
+							<span>{{activity.activityTitle}}</span>&nbsp;&nbsp;&nbsp;<span class="roman" style="color: #9c867a;">/</span>&nbsp;&nbsp;&nbsp;<span style="color: #aea081;">Other Features</span>
+						
+						</div>
+										<hr style="background-color: #00232d;">
+
+                 <p class="para" id="descr">
+					 {{activity.shortDesc}}
+						
+				</p>
+			</div>
+-->
+			
+			<ion-slide-box delegate-handle="activity" does-continue="true" show-pager="false">
+					<ion-slide  ng-repeat="act in detail.tripDetails.ship.shipActivity">
+					
+				 <a  type="item-text-wrap"  href="" style='margin-top: 2px;background-image:url("{{linkUrl}}images/Activity/{{ act.activityImage }}");' class="eventListPicture">
+				 </a>
+						<div class="shipActiviyPadd">	
+ 						<div class="modalhead1" id="{{act.activityTitle}}">
+							<span>{{act.activityTitle}}</span>&nbsp;&nbsp;&nbsp;<span class="roman" style="color: #9c867a;">/</span>&nbsp;&nbsp;&nbsp;<span style="color: #aea081;">Other Features</span>
+						
+						</div>
+										<hr style="background-color: #00232d;">
+
+                 <p class="para" id="descr">
+					 {{act.shortDesc}}
+						
+				</p>
+			</div>
+							
+						</ion-slide>
+					</ion-slide-box>
+        </ion-content>
+		 <div ng-include="'./templates/floatingButton.html'"></div>
+      </ion-modal-view>

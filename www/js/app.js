@@ -7,9 +7,8 @@ var app = angular.module('starter', ['ionic', 'ngStorage', 'ngCordova', 'ngMessa
 
 app.run(function($ionicPlatform, $rootScope, $state, $location, $ionicHistory, $ionicLoading, $window, $localStorage, $timeout, $ionicTabsDelegate, $ionicScrollDelegate, serviceLink) {
     $ionicPlatform.registerBackButtonAction(function(event) {
-        console.log(event);
-        if (($state.$current.name == "app.lifeStyle") ||
-            ($state.$current.name == "start")
+        if (($state.$current.name == "app.landingPage") ||
+            ($state.$current.name == "startingPage")
         ) {
             // H/W BACK button is disabled for these states (these views)
             // Do not go to the previous state (or view) for these states. 
@@ -45,8 +44,6 @@ app.run(function($ionicPlatform, $rootScope, $state, $location, $ionicHistory, $
     });
 
 
-
-
     $rootScope.$on('loading:show', function() {
         $ionicLoading.show({ template: '<img src="./img/logo1.png" width="20%"/><br><ion-spinner icon="dots" class="spinner-balanced"/>' })
     });
@@ -54,9 +51,6 @@ app.run(function($ionicPlatform, $rootScope, $state, $location, $ionicHistory, $
     $rootScope.$on('loading:hide', function() {
         $ionicLoading.hide()
     });
-
-
-
 
     $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams) {
         window.fbq('track', toState.name);
@@ -114,7 +108,7 @@ app.run(function($ionicPlatform, $rootScope, $state, $location, $ionicHistory, $
             $ionicScrollDelegate.$getByHandle('CuratorlistPage').scrollTop();
         }, 100);
         $rootScope.flagClickedShowRecom = true;
-        $location.path('/app/list');
+        $location.path('/app/listingPage');
     }
 
 
@@ -124,16 +118,16 @@ app.run(function($ionicPlatform, $rootScope, $state, $location, $ionicHistory, $
             // begin button clicked
             case 'beginBt':
                 $rootScope.pasPageReached = 'pasWhoTravel';
-                $state.go('app.pasWhoTravel');
+                $state.go('app.curatorWhoTravelPage');
                 break;
                 // whoTravel next button clicked
             case 'whoTravel':
                 $rootScope.pasPageReached = 'pasCategory';
-                $state.go('app.pasCategory');
+                $state.go('app.curatorCategoryPage');
                 break;
                 // when back arrow in the slider clicked
             case 'slideBack':
-                $state.go('app.pasCategory');
+                $state.go('app.curatorCategoryPage');
                 break;
                 //show recommendation clicked
             case 'recom':
@@ -144,7 +138,7 @@ app.run(function($ionicPlatform, $rootScope, $state, $location, $ionicHistory, $
                 $rootScope.categoryID = evt.data.category_id;
                 $rootScope.questionUrl = serviceLink.pasUrl + "CruisePAS/#questions?category_id=" + evt.data.category_id + "&index=0&hide-navigation=t";
                 //			   $timeout(function() {
-                $state.go('app.pasQuestion');
+                $state.go('app.curatorQuestionPage');
                 //            }, 100);
                 break;
                 //default:
@@ -160,185 +154,161 @@ app.run(function($ionicPlatform, $rootScope, $state, $location, $ionicHistory, $
 
 app.config(function($stateProvider, $urlRouterProvider, $httpProvider, $ionicConfigProvider) {
     $ionicConfigProvider.tabs.style('standard').position('top');
-
     $httpProvider.interceptors.push('TokenAuthInterceptor');
     $httpProvider.defaults.headers["Content-Type"] = "application/json";
     $stateProvider
-        .state('start', {
-            url: "/start",
-            templateUrl: "templates/start.html",
-            controller: 'startCtrl'
+        .state('startingPage', {
+            url: "/startingPage",
+            templateUrl: "templates/startingPage.html",
+            controller: 'startingPageCtrl'
         })
 
-    .state('signup', {
-        url: "/signup",
-        templateUrl: "templates/signup.html",
-        controller: 'signupCtrl'
+    .state('loginChoicePage', {
+        url: "/loginChoicePage",
+        templateUrl: "templates/loginChoicePage.html",
+        controller: 'loginChoicePageCtrl'
     })
 
-    .state('login', {
-        url: "/login",
-        templateUrl: "templates/login.html",
-        controller: 'loginCtrl'
-    })
-
-    .state('emaillogin', {
-        url: "/emaillogin",
-        templateUrl: "templates/emaillogin.html",
-        controller: 'emailloginCtrl'
+    .state('emailLoginPage', {
+        url: "/emailLoginPage",
+        templateUrl: "templates/emailLoginPage.html",
+        controller: 'emailLoginPageCtr'
 
     })
 
-    .state('signuphome', {
-        url: "/signuphome",
-        templateUrl: "templates/signuphome.html",
-        controller: 'signuphomeCtrl'
+    .state('signUpPage', {
+        url: "/signUpPage",
+        templateUrl: "templates/signUpPage.html",
+        controller: 'signUpPageCtr'
     })
 
-    .state('sendemail', {
-        url: "/sendemail/:email",
-        templateUrl: "templates/sendemail.html",
-        controller: 'sendemailCtrl'
+    .state('forgotPasswordPage', {
+        url: "/forgotPasswordPage/:email",
+        templateUrl: "templates/forgotPasswordPage.html",
+        controller: 'forgotPasswordPageCtr'
 
-    })
-
-    .state('profile', {
-        url: '/profile',
-        templateUrl: 'templates/profile.html',
-        controller: 'ProfileController'
-    })
-
-
-    .state('share', {
-        url: '/share',
-        templateUrl: 'templates/share.html',
-        controller: 'shareController'
     })
 
     //home state
-
 
     .state('app', {
         url: "/app",
         abstract: true,
         templateUrl: "templates/menu.html",
-        controller: 'AppCtrl'
+        controller: 'appMenuCtrl'
     })
 
 
-    .state('app.lifeStyle', {
-        url: "/lifeStyle",
+    .state('app.landingPage', {
+        url: "/landingPage",
         views: {
             'menuContent': {
-                templateUrl: "templates/lifeStyle.html",
-                controller: 'lifeStyleCtrl'
+                templateUrl: "templates/landingPage.html",
+                controller: 'landingPageCtrl'
             }
         }
     })
 
 
-    .state('app.list', {
-        url: "/list",
+    .state('app.listingPage', {
+        url: "/listingPage",
         views: {
             'menuContent': {
-                templateUrl: "templates/list.html",
-                controller: 'listController'
+                templateUrl: "templates/listingPage.html",
+                controller: 'listingPageCtrl'
             }
         }
     })
 
-    .state('app.myFavourite', {
-        url: "/myFavourite",
+    .state('app.myFavouritePage', {
+        url: "/myFavouritePage",
         views: {
             'menuContent': {
-                templateUrl: "templates/myFavourite.html",
-                controller: 'myFavouriteController'
+                templateUrl: "templates/myFavouritePage.html",
+                controller: 'myFavouritePageCtrl'
             }
         }
     })
 
-    .state('app.pasPage', {
-            url: "/pasPage",
+    .state('app.curatorBeginPage', {
+            url: "/curatorBeginPage",
             views: {
                 'menuContent': {
-                    templateUrl: "templates/pasPage.html",
-                    controller: 'pasPageController'
+                    templateUrl: "templates/curatorBeginPage.html",
+                    controller: 'curatorPageCtrl'
                 }
             }
         })
-        .state('app.pasWhoTravel', {
-            url: "/pasWhoTravel",
+        .state('app.curatorWhoTravelPage', {
+            url: "/curatorWhoTravelPage",
             views: {
                 'menuContent': {
-                    templateUrl: "templates/pasWhoTravel.html",
-                    controller: 'pasPageController'
+                    templateUrl: "templates/curatorWhoTravelPage.html",
+                    controller: 'curatorPageCtrl'
                 }
             }
         })
-        .state('app.pasCategory', {
-            url: "/pasCategory",
+        .state('app.curatorCategoryPage', {
+            url: "/curatorCategoryPage",
             views: {
                 'menuContent': {
-                    templateUrl: "templates/pasCategory.html",
-                    controller: 'pasPageController'
+                    templateUrl: "templates/curatorCategoryPage.html",
+                    controller: 'curatorPageCtrl'
                 }
             }
         })
-        .state('app.pasQuestion', {
-            url: "/pasQuestion",
+        .state('app.curatorQuestionPage', {
+            url: "/curatorQuestionPage",
             views: {
                 'menuContent': {
-                    templateUrl: "templates/pasQuestion.html",
-                    controller: 'pasPageController'
+                    templateUrl: "templates/curatorQuestionPage.html",
+                    controller: 'curatorPageCtrl'
                 }
             }
         })
 
-    .state('app.detail', {
-        url: "/detail",
+    .state('app.detailPage', {
+        url: "/detailPage",
         views: {
             'menuContent': {
-                templateUrl: "templates/detail.html",
-                controller: 'detailController'
+                templateUrl: "templates/detailPage.html",
+                controller: 'detailPageCtrl'
             }
         }
     })
 
-
-    .state('app.booking', {
-        url: "/booking",
+    .state('app.iframeBookingPage', {
+        url: "/iframeBookingPage",
         views: {
             'menuContent': {
-                templateUrl: "templates/booking.html",
-                controller: 'bookingController'
+                templateUrl: "templates/iframeBookingPage.html",
+                controller: 'iframeBookingPageCtrl'
 
             }
         }
     })
 
-    .state('app.emailUs', {
-        url: "/emailUs",
+    .state('app.emailUsPage', {
+        url: "/emailUsPage",
         views: {
             'menuContent': {
-                templateUrl: "templates/emailUs.html",
-                controller: "emailUsController"
+                templateUrl: "templates/emailUsPage.html",
+                controller: "emailUsPageCtrl"
             }
         }
     })
 
-    .state('app.engage', {
-        url: "/engageUser",
+    .state('app.shopAndBookPage', {
+        url: "/shopAndBookPage",
         views: {
             'menuContent': {
-                templateUrl: "templates/engageUser.html",
-                controller: 'engageController'
+                templateUrl: "templates/shopAndBookPage.html",
+                controller: 'shopAndBookPageCtrl'
             }
         }
     });
     // if none of the above states are matched, use this as the fallback
-    $urlRouterProvider.otherwise('/start');
-
-
+    $urlRouterProvider.otherwise('/startingPage');
 });
 
 app.factory('TokenStorage', function() {

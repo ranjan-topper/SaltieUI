@@ -29,38 +29,48 @@
     <script src="js/app.js"></script>
     <script src="js/services.js"></script>
     <script src="js/controllers.js"></script>
-    <script src="js/controllers/emailUs.js"></script>
-    <script src="js/controllers/login.js"></script>
-    <script src="js/controllers/emailLogin.js"></script>
-    <script src="js/controllers/sendEmail.js"></script>
-    <script src="js/controllers/signUpHome.js"></script>
-    <script src="js/controllers/appController.js"></script>
-    <script src="js/controllers/engage.js"></script>
-    <script src="js/controllers/lifeStyle.js"></script>
-    <script src="js/controllers/list.js"></script>
-    <script src="js/controllers/detail.js"></script>
-    <script src="js/controllers/myFavourite.js"></script>
-    <script src="js/controllers/validation.js"></script>
-    <script src="js/controllers/filter.js"></script>
-    <script src="js/controllers/loginSignup.js"></script>
-    <script src="js/controllers/modal.js"></script>
-    <script src="js/controllers/booking.js"></script>
-    <script src="js/controllers/share.js"></script>
-    <script src="js/controllers/start.js"></script>
-	<script src="js/controllers/pasPage.js"></script>
-
+    <script src="js/controllers/emailUsPageCtrl.js"></script>
+    <script src="js/controllers/loginChoicePageCtrl.js"></script>
+    <script src="js/controllers/emailLoginPageCtr.js"></script>
+    <script src="js/controllers/forgotPasswordPageCtr.js"></script>
+    <script src="js/controllers/signUpPageCtr.js"></script>
+    <script src="js/controllers/appMenuCtrl.js"></script>
+    <script src="js/controllers/shopAndBookPageCtrl.js"></script>
+    <script src="js/controllers/landingPageCtrl.js"></script>
+    <script src="js/controllers/listingPageCtrl.js"></script>
+    <script src="js/controllers/detailPageCtrl.js"></script>
+    <script src="js/controllers/myFavouritePageCtrl.js"></script>
+    <script src="js/controllers/formValidationCtrl.js"></script>
+    <script src="js/controllers/saltieFilterCtrl.js"></script>
+    <script src="js/controllers/loginSignUpCtrl.js"></script>
+    <script src="js/controllers/modalCtrl.js"></script>
+    <script src="js/controllers/iframeBookingPageCtrl.js"></script>
+    <script src="js/controllers/startingPageCtrl.js"></script>
+    <script src="js/controllers/curatorPageCtrl.js"></script>
 
   <!-- Facebook Pixel Code -->
 <script>
-!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
-n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
-document,'script','https://connect.facebook.net/en_US/fbevents.js');
- 
-fbq('init', '1585705951734198');
-fbq.disablePushState = true;
-</script>
+        ! function(f, b, e, v, n, t, s) {
+            if (f.fbq) return;
+            n = f.fbq = function() {
+                n.callMethod ?
+                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+            };
+            if (!f._fbq) f._fbq = n;
+            n.push = n;
+            n.loaded = !0;
+            n.version = '2.0';
+            n.queue = [];
+            t = b.createElement(e);
+            t.async = !0;
+            t.src = v;
+            s = b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t, s)
+        }(window, document, 'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '1789170684443853');
+        fbq.disablePushState = true;
+    </script>
 <!--
 <noscript><img height="1" width="1" style="display:none"
 src="https://www.facebook.com/tr?id=1585705951734198&ev=PageView&noscript=1"/>

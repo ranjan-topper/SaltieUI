@@ -1,0 +1,176 @@
+<ion-view cache-view="false" ng-init="init()">
+    <ion-nav-buttons side="left">
+        <button class="button button-icon button-clear ion-ios-arrow-thin-left" id="back2" style="color: white" ng-click="back()">
+        </button>
+
+    </ion-nav-buttons>
+    <ion-nav-title>
+        <a href="" class="cruisecount" id="count" style="text-decoration: none;"><span class="thin">Email</span>&nbsp;<span class="bold">Us</span></a>
+    </ion-nav-title>
+    <form name="engageForm" novalidate=""  class="ng-valid-email ng-invalid ng-invalid-required ng-valid-minlength ng-valid-maxlength ng-dirty ng-valid-parse">
+    <ion-content class="engageContentStart">
+        <ion-slide-box delegate-handle="detailSlide" show-pager="false">
+            <!--			auto-play="true" does-continue = "true"-->
+            <ion-slide ng-if="detail.tripDetails.id == undefined || (redirectEmailUs == 'list' || redirectEmailUs == 'lifeStyle')">
+                <a type="item-text-wrap" href="" style='background-image:url("./img/phonePage.jpg");' class="eventListPicture">
+                </a>
+                <div class="gradient"></div>
+                <div class="marginDetail">
+                    <div class="detaildes " id="{{ detail.tripDetails.tripName }}" style="top: 14.5vh; line-height:3vh"><span class="bold ">
+                {{user.firstName}} you haven't selected any specific cruise. Please Provide detail about your exciting cruise in comments section. Else 
+                    Proceed to listings to pick a cruise of your choice.
+                
+                </span>
+                    </div>
+                </div>
+            </ion-slide>
+            <ion-slide ng-if="detail.tripDetails.id !== undefined || redirectEmailUs == 'detail'">
+                <a type="item-text-wrap" href="" style='background-image:url("{{linkUrl}}images/ports/{{ detail.tripDetails.destinationImage[0]}}");' class="eventListPicture">
+                </a>
+                <div class="gradient"></div>
+                <div class="marginDetail">
+                    <div class="detailhead " id="{{ detail.tripDetails.tripName }}" style="top: 14.5vh;"><span class="thin ">{{detail.tripDetails.noNight}} Night {{ detail.tripDetails.tripName | capitalize:true }}</span>
+                    </div>
+                    <div class="detaildes" id="{{ detail.tripDetails.cruiseLineName }} "><span class="bold">{{ detail.tripDetails.cruiseLineName }} Cruise Line </span><br><span class="roman">{{ detail.tripDetails.shipName }}</span>
+                    </div>
+                    <div class="detaildep" id="{{ detail.tripDetails.startDestination }}"><span class="roman">Departs {{ detail.tripDetails.startDestination.split("(")[0].trim() }} </span>
+                    </div>
+                </div>
+            </ion-slide>
+        </ion-slide-box>
+        <div ng-if="detail.tripDetails.id == undefined || (redirectEmailUs == 'list' || redirectEmailUs == 'lifeStyle')">
+                <span class="button l-btn roman color3" ng-click="goToListing();" id="lth">
+                    View Listings
+                </span>
+        </div>
+        <div style="padding-top: 5%;">
+            
+                <div class="list list-inset" id="input">                    
+                   <label class="item item-input color3" ng-class="{ 'has-errors' : engageForm.firstName.$invalid && engageForm.$submitted, 'no-errors' : engageForm.firstName.$valid  && engageForm.$submitted}">
+                        <input type="text" name="firstName" id="plc2" ng-keyup="resetFrom(engageForm)" placeholder="First Name" ng-model="user.firstName" ng-minlength="3" ng-maxlength="20" required="" class="ng-valid-minlength ng-valid-maxlength ng-valid-parse ng-invalid ng-invalid-required ng-pristine ng-touched">
+                    </label>
+                    <div class="error-container email-error" ng-show="engageForm.firstName.$error && engageForm.$submitted" ng-messages="engageForm.firstName.$error">
+                        <div ng-messages-include="templates/error-list.html"></div> 
+                    </div>
+
+                    <label class="item item-input color2" ng-class="{ 'has-errors' : engageForm.lastName.$invalid && engageForm.$submitted, 'no-errors' : engageForm.lastName.$valid  && engageForm.$submitted}">
+                        <input type="text" name="lastName" id="plc2" ng-keyup="resetFrom(engageForm)" placeholder="Last Name" ng-model="user.lastName" ng-minlength="1" ng-maxlength="20" required="" class="ng-valid-minlength ng-valid-maxlength ng-valid-parse ng-invalid ng-invalid-required ng-pristine ng-touched">
+                    </label>
+                    <div class="error-container email-error" ng-show="engageForm.lastName.$error && engageForm.$submitted" ng-messages="engageForm.lastName.$error">
+                        <div ng-messages-include="templates/error-list.html"></div> 
+                    </div>
+
+                    <label class="item item-input color1" ng-class="{ 'has-errors' : engageForm.email.$invalid &amp;&amp; engageForm.$submitted, 'no-errors' : engageForm.email.$valid  &amp;&amp; engageForm.$submitted}">
+                        <input type="email" name="email" id="plc1" ng-keyup="resetEmail(engageForm)" placeholder="Email" ng-model="user.email" required="" class="ng-pristine ng-untouched ng-valid-email ng-invalid ng-invalid-required">
+                    </label>
+                    <div class="error-container email-error" ng-show="engageForm.email.$error && engageForm.$submitted" ng-messages="engageForm.email.$error">
+                        <div ng-messages-include="templates/error-list.html"></div> 
+                    </div>
+
+                    <label class="item item-input color4" ng-class="{ 'has-errors' : engageForm.phone.$invalid &amp;&amp; engageForm.$submitted, 'no-errors' : engageForm.phone.$valid  &amp;&amp; engageForm.$submitted}">
+                        <input type="number" onselectstart="return false" name="phone" id="plc4" placeholder="Phone" ng-keyup="resetFrom(engageForm)" ng-model="user.phone" ng-minlength="10" ng-maxlength="10" required="" class="ng-valid-maxlength ng-valid-parse ng-invalid ng-invalid-required ng-valid-minlength ng-pristine ng-touched">
+                    </label>
+                     <div class="error-container email-error" ng-show="engageForm.phone.$error && engageForm.$submitted" ng-messages="engageForm.phone.$error">
+                        <div ng-messages-include="templates/error-list.html"></div> 
+                    </div>
+
+                    <div class="row" style="margin-bottom: 0.2vh;">
+                        <div class="styled-select col  no-padding">
+                            <label class="item item-input no-padding">
+                                <i class="ion-ios-arrow-down selectArrowCss" style="top: calc(35% - 4px);"></i>
+                                <select class="ng-invalid ng-invalid-required" id="country" name="country">
+                                    <option ng-repeat="country in countryState" value="{{country.countryName}}">{{country.countryName}}</option>
+                                </select>
+                            </label>
+                        </div>
+                        <div class="styled-select col no-padding">
+                            <label class="item item-input no-padding">
+                                <i class="ion-ios-arrow-down selectArrowCss" style="top: calc(35% - 4px);"></i>
+                                <select class="ng-invalid ng-invalid-required" id="cruiseLine" name="state" ng-model="user.state">
+                                    <option value="">State</option>
+                                    <option ng-repeat="state in states" value="{{state.stateCode}}">{{state.stateName}}</option>
+                                </select>
+                            </label>
+                        </div>
+                    </div>
+<!--
+                    <div class="styled-select">
+                        <i class="ion-ios-arrow-down selectArrowCss"></i>
+                        <select id="roomType" name="roomType" ng-model="roomCat.value" class="ng-invalid ng-invalid-required" ng-options="v for v in roomCat.values">
+                            
+                        </select>
+                    </div>
+-->
+                     <div class="styled-select no-padding">
+                        <label class="item item-input no-padding">
+                            <i class="ion-ios-arrow-down selectArrowCss" style="top: calc(35% - 4px);"></i>
+                            <select id="roomType" name="roomType" ng-model="roomCat.value" class="ng-invalid ng-invalid-required" ng-options="v for v in roomCat.values">
+                            
+                        </select>
+                        </label>
+                    </div>
+                    <div class="row" style="margin-top: 3vh;margin-bottom: 3vh;">
+                        <div class="col col-50 labelled-text roman no-padding">Prefered Contact Method</div>
+                        <div class="col no-padding">
+                            <span class="button sortByPrice roman prefCont" ng-click="prefContact('email');gePrefContact('email');" id="lth" ng-class="{act2: activePrefContact('email'), button1: !activePrefContact('email')}">
+                                Email
+                            </span>
+                        </div>
+                        <div class="col no-padding" align="right">
+                           <span class="button sortByPrice roman prefCont" ng-click="prefContact('phone');gePrefContact('phone');" id="htl" ng-class="{act2: activePrefContact('phone'), button1: !activePrefContact('phone')}">
+					           Phone
+			               </span>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 0px">
+                        <div class="styled-select col no-padding" style="margin-right:1vh">
+                            <span class="labelled-text roman" style="text-align: center;display: block">Adults(14-54)</span>
+                            <i class="ion-ios-arrow-down selectArrowCss" style="top: calc(50% - -5px);"></i>
+                            <select name="kids" id="adult">                            
+                                <option ng-repeat="count in personCount" value="{{count}}">{{count}}</option>
+                            </select>
+                        </div>
+                        <div class="styled-select col no-padding" style="margin-right:1vh">
+                            <span class="labelled-text roman" style="text-align: center;display: block">Kids(0-13)</span>
+                            <i class="ion-ios-arrow-down selectArrowCss" style="top: calc(50% - -5px);"></i>
+                            <select name="kids" id="kid">                            
+                                <option ng-repeat="count in personCount" value="{{count}}">{{count}}</option>
+                            </select>
+                        </div>
+                        <div class="styled-select col no-padding">
+                            <span class="labelled-text roman" style="text-align: center;display: block">Seniors(55+)</span>
+                            <i class="ion-ios-arrow-down selectArrowCss" style="top: calc(50% - -5px);"></i>
+                            <select name="kids" id="senior">                            
+                                <option ng-repeat="count in personCount" value="{{count}}">{{count}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div ng-if="detail.tripDetails.id == undefined || (redirectEmailUs == 'list' || redirectEmailUs == 'lifeStyle')" class="list" ng-if="detail.tripDetails.id !== undefined || redirectEmailUs == 'detail'">
+                        <label class="item item-input styled-input" style="margin-top: 3%" ng-class="{ 'has-errors' : engageForm.comment.$invalid &amp;&amp; engageForm.$submitted, 'no-errors' : engageForm.comment.$valid  &amp;&amp; engageForm.$submitted}">
+                            <textarea  class="ng-invalid ng-invalid-required" placeholder="Comments" required="" name="comment" ng-model="user.comment"></textarea>
+                        </label>
+                        <div class="error-container email-error" ng-show="engageForm.comment.$error && engageForm.$submitted" ng-messages="engageForm.comment.$error">
+                            <div ng-messages-include="templates/error-list.html"></div> 
+                        </div>
+                    </div>
+                    <div class="list"  ng-if="detail.tripDetails.id !== undefined || redirectEmailUs == 'detail'" style="margin-bottom: 2vh">
+                        <label class="item item-input styled-input" style="margin-top: 3%" >
+                            <textarea  placeholder="Comments" name="comment" ng-model="user.comment"></textarea>
+                        </label>
+                    </div>
+                </div>
+<!--
+                <button type="submit" id="sign2" class="button button-block submitloginbt bookbt">
+					Send </button>
+-->
+            
+        </div>
+    </ion-content>
+    <ion-footer-bar style="background-color: #00707e;   border: none;">
+        <button class="button-block bookbt thin" ng-click="submitEmailUs(engageForm, user)" id="readytobook">
+            Send
+        </button>
+
+    </ion-footer-bar>
+        </form>
+</ion-view>

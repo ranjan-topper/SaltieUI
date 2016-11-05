@@ -1,0 +1,16 @@
+<ion-view>
+	<ion-nav-buttons side="left">
+        <button class="button button-icon button-clear ion-ios-arrow-thin-left"  id="back1" style=" color:white;" ng-click="back()">
+        </button>
+	</ion-nav-buttons>
+<ion-nav-title>
+        <a href="" class="cruisecount" id="count" style="text-decoration: none;"><span class="thin">Your</span>&nbsp;<span class="bold">Cruise</span></a>
+    </ion-nav-title>
+	<ion-content id="height">
+		<div style="height: 100%;overflow:auto;-webkit-overflow-scrolling:touch">
+<iframe  data-tap-disabled="true" src="{{pidVivaUrl  | trustUrl}}" style="height: 100%; width: 100%;" frameborder="0"></iframe>
+		</div>
+		
+	 
+</ion-content>
+</ion-view>
