@@ -2078,6 +2078,11 @@ transform: translate3d(-5px, 0px,0px);
    17. Common Modal css
    ========================================================================== */
 
+.paddingTopForModal {
+    top: 0 !important;
+    padding-top: 7vh;
+}
+
 #modalAll .headerBar {
     background-color: transparent;
     border: none;
@@ -2232,6 +2237,28 @@ input.button.button-block {
 .faqModalPadd {
     margin-left: 8vmin;
     margin-right: 8vmin;
+}
+
+#faq p {
+    color: #339FA6;
+    font-family: roman;
+    font-size: 3.5vmin;
+    line-height: 1.2;
+}
+
+#faq p strong {
+    font-family: bold;
+    color: #aea081;
+}
+
+#faq p span.subTopic {
+    color: #00232d;
+}
+
+#faq div ol {
+    color: #b4a78a;
+    text-decoration: underline;
+    padding: 0vh 0px 4vh 0px;
 }
 
 
@@ -2970,4 +2997,19 @@ a.tab-item.tab-item-active span.tab-title.ng-binding {
 .olCssCustom {
     padding-left: 5vw;
     list-style-type: lower-alpha !important;
+}
+
+
+/* Privacy Policy Css*/
+
+#privacyPolicy p {
+    color: #339FA6;
+    font-family: roman;
+    font-size: 3.5vmin;
+    line-height: 1.2;
+}
+
+#privacyPolicy p strong {
+    font-family: bold;
+    color: #aea081;
 }

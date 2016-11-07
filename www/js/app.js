@@ -23,7 +23,7 @@ app.run(function($ionicPlatform, $rootScope, $state, $location, $ionicHistory, $
 
 
         if (typeof analytics !== 'undefined') {
-            analytics.startTrackerWithId("UA-70027379-1");
+            analytics.startTrackerWithId("UA-86946650-1");
         } else {
             console.log("Google Analytics Unavailable");
         }

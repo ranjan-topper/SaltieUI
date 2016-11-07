@@ -1,4 +1,4 @@
-app.controller('modalCtrl', function($scope, $location, $http, $rootScope, $localStorage, $ionicLoading, serviceLink, $ionicPopup, loginService, $ionicModal, $ionicSlideBoxDelegate, $timeout, profileSet, profileGet, $sce, $filter, termAndConditionSetService) {
+app.controller('modalCtrl', function($scope, $anchorScroll, $location, $http, $rootScope, $ionicScrollDelegate, $localStorage, $ionicLoading, serviceLink, $ionicPopup, loginService, $ionicModal, $ionicSlideBoxDelegate, $timeout, profileSet, profileGet, $sce, $filter, termAndConditionSetService) {
 
     $rootScope.linkUrl = serviceLink.url;
     $scope.readyBookDisable = false;
@@ -81,11 +81,15 @@ app.controller('modalCtrl', function($scope, $location, $http, $rootScope, $loca
         $scope.modal2 = modal;
     });
 
+    $ionicModal.fromTemplateUrl('templates/privacyPolicyModal.html', {
+        scope: $scope
+    }).then(function(modal) {
+        $scope.privacyPolicyModal = modal;
+    });
     /* ==========================================================================
     						Close LoginSignUp modal
      	========================================================================== */
     $rootScope.closeLoginSign = function() {
-
             $rootScope.logsignModal.remove();
             $rootScope.hideForm = true;
             $ionicModal.fromTemplateUrl('templates/loginSignup.html', {
@@ -225,6 +229,36 @@ app.controller('modalCtrl', function($scope, $location, $http, $rootScope, $loca
 
     $scope.faqClick = function() {
         $scope.faqModal.show();
+    }
+    $scope.scrollMe = function(anchor) {
+        $location.hash(anchor);
+        var handle = $ionicScrollDelegate.$getByHandle('content');
+        console.log(anchor);
+
+        handle.anchorScroll();
+    };
+    $scope.closeFAQ = function() {
+        $scope.faqModal.remove();
+        $ionicModal.fromTemplateUrl('templates/faqModal.html', {
+            scope: $scope
+        }).then(function(modal) {
+            $scope.faqModal = modal;
+        })
+    }
+
+    /* ==========================================================================
+    						Privacy Policy Modal functionality
+     	========================================================================== */
+    $scope.privacyPolicyClick = function() {
+        $scope.privacyPolicyModal.show();
+    }
+    $scope.closePrivacyPolicy = function() {
+        $scope.privacyPolicyModal.remove();
+        $ionicModal.fromTemplateUrl('templates/privacyPolicyModal.html', {
+            scope: $scope
+        }).then(function(modal) {
+            $scope.privacyPolicyModal = modal;
+        });
     }
 
     /* ==========================================================================
