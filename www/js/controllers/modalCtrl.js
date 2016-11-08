@@ -268,6 +268,14 @@ app.controller('modalCtrl', function($scope, $anchorScroll, $location, $http, $r
         $rootScope.clickedFromMenu = true;
         $scope.termAndCondition.show();
     }
+    $scope.closeTermsCond = function() {
+        $scope.termAndCondition.remove();
+        $ionicModal.fromTemplateUrl('templates/termModal.html', {
+            scope: $scope
+        }).then(function(modal) {
+            $scope.termAndCondition = modal;
+        })
+    }
 
     /* ==========================================================================
     						ProfileSetting Modal functionality

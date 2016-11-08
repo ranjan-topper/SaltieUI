@@ -2078,11 +2078,6 @@ transform: translate3d(-5px, 0px,0px);
    17. Common Modal css
    ========================================================================== */
 
-.paddingTopForModal {
-    top: 0 !important;
-    padding-top: 7vh;
-}
-
 #modalAll .headerBar {
     background-color: transparent;
     border: none;
