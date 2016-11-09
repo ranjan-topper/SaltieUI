@@ -52,6 +52,10 @@ app.controller('shopAndBookPageCtrl', function($scope, $location, $http, $rootSc
         //        }
         console.log($rootScope.TempDetail);
     }
+
+    $scope.triggerCall = function(number) {
+        document.location.href = 'tel:' + number
+    }
     $scope.goToList = function() {
         $scope.is_showBookingPopup = false;
         $location.path('/app/listingPage');

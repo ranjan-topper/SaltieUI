@@ -2252,8 +2252,13 @@ input.button.button-block {
 
 #faq div ol {
     color: #b4a78a;
+    font-family: bold;
     text-decoration: underline;
     padding: 0vh 0px 4vh 0px;
+}
+
+#faq div ol li {
+    margin-bottom: 1.5vh !important;
 }
 
 

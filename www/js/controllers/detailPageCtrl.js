@@ -6,14 +6,11 @@ app.controller('detailPageCtrl', function($scope, $state, $location, $ionicModal
         $location.path('/startingPage');
     } else {
 
-
         //		$rootScope.discountValue = [{"cruiseLine":"Royal Caribean","color":"orange","shortDesc":"offer 1","longDesc":"up $1000 cashback","bookStartDate":"Feb 12, 2016","bookEndDate":"Feb 28, 2016","sailStartDate":null,"sailEndDate":null,"active":true},{"cruiseLine":"Royal Caribean","color":"red","shortDesc":"offer 1","longDesc":"up $1000 cashback","bookStartDate":"Feb 12, 2016","bookEndDate":"Feb 28, 2016","sailStartDate":null,"sailEndDate":null,"active":true}];
 
         $rootScope.is_engaged = "detail";
         $rootScope.load = false;
         $rootScope.page = "detail";
-
-
         $scope.openDiscountModal = function() {
             $scope.discountModal.show();
             $rootScope.slideIndex = 0;
