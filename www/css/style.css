@@ -115,7 +115,7 @@ html input[disabled] {
     -moz-flex: 1;
     -ms-flex: 1;
     flex: 1;
-    font-size: 3.5vmin;
+    font-size: 4vmin;
     display: block;
     line-height: 7vh;
     overflow: hidden;

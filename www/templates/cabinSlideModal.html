@@ -9,7 +9,6 @@
         <ion-content>
             <ion-slide-box on-slide-changed="cabinSlideChanged($index)" delegate-handle="cabinType" does-continue="true" show-pager="false">
                 <ion-slide ng-repeat="cabin in cabinInfo | orderByCabin">
-
                     <img ng-src="{{linkUrl}}images/CabinType/{{cabin.image}}" width="100%" />
                     <div class="cabinTypeBorder">
                         <div class="cabinTitle">

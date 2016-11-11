@@ -56,11 +56,6 @@ app.controller('landingPageCtrl', function($scope, $location, $http, $rootScope,
             console.log(floatButtonClicked);
             $rootScope.floatButtonClicked = !floatButtonClicked;
         };
-        $rootScope.phonecallTab = function(phonenumber) {
-            var call = "tel:" + phonenumber;
-            document.location.href = call;
-        }
-
 
     }
 });

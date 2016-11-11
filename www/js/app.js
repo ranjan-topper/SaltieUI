@@ -42,7 +42,9 @@ app.run(function($ionicPlatform, $rootScope, $state, $location, $ionicHistory, $
             }
         }
     });
-
+    $rootScope.triggerCall = function(number) {
+        document.location.href = 'tel:' + number;
+    }
 
     $rootScope.$on('loading:show', function() {
         $ionicLoading.show({ template: '<img src="./img/logo1.png" width="20%"/><br><ion-spinner icon="dots" class="spinner-balanced"/>' })
