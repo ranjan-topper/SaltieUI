@@ -32,7 +32,7 @@
     <gap:plugin name="cordova-plugin-inappbrowser" source="npm"/>
 	<gap:plugin name="cordova-plugin-splashscreen" source="npm"/>
 	<gap:plugin name="cordova-plugin-x-socialsharing" source="npm" />	
-	<plugin name="com.danielcwilson.plugins.googleanalytics" spec="0.6.1" source="pgb" />
+	<plugin name="com.danielcwilson.plugins.googleanalytics" spec="0.6.1" source="npm" />
 
     <icon src="resources/android/icon/drawable-ldpi-icon.png"  gap:platform="android" density="ldpi"/>
     <icon src="resources/android/icon/drawable-mdpi-icon.png"  gap:platform="android" density="mdpi"/>
