@@ -8,37 +8,43 @@ app.controller('modalCtrl', function($scope, $anchorScroll, $location, $http, $r
     /* ==========================================================================
     						All Modal declaration
      	========================================================================== */
-    $ionicModal.fromTemplateUrl('templates/aboutModal.html', {
+    $ionicModal.fromTemplateUrl('templates/modalPage/aboutModal.html', {
         scope: $scope
     }).then(function(modal) {
         $scope.aboutModal = modal;
     })
 
-    $ionicModal.fromTemplateUrl('templates/profileSettingModal.html', {
+    $ionicModal.fromTemplateUrl('templates/modalPage/listScreenGuideModal.html', {
+        scope: $scope
+    }).then(function(modal) {
+        $scope.listScreenGuideModal = modal;
+    })
+
+    $ionicModal.fromTemplateUrl('templates/modalPage/profileSettingModal.html', {
         scope: $scope
     }).then(function(modal) {
         $scope.profileSet = modal;
     })
 
-    $ionicModal.fromTemplateUrl('templates/phoneModal.html', {
+    $ionicModal.fromTemplateUrl('templates/modalPage/phoneModal.html', {
         scope: $scope
     }).then(function(modal) {
         $scope.phoneModal = modal;
     })
-    $ionicModal.fromTemplateUrl('templates/faqModal.html', {
+    $ionicModal.fromTemplateUrl('templates/modalPage/faqModal.html', {
         scope: $scope
     }).then(function(modal) {
         $scope.faqModal = modal;
     })
 
-    $ionicModal.fromTemplateUrl('templates/termModal.html', {
+    $ionicModal.fromTemplateUrl('templates/modalPage/termModal.html', {
         scope: $scope
     }).then(function(modal) {
         $scope.termAndCondition = modal;
     })
 
     //filter modal start's here
-    $ionicModal.fromTemplateUrl('templates/filterLifestyleModal.html', {
+    $ionicModal.fromTemplateUrl('templates/modalPage/filterLifestyleModal.html', {
         scope: $rootScope
     }).then(function(modal) {
         $rootScope.filterModal = modal;
@@ -46,7 +52,7 @@ app.controller('modalCtrl', function($scope, $anchorScroll, $location, $http, $r
 
 
     //modal declaration
-    $ionicModal.fromTemplateUrl('templates/loginSignup.html', {
+    $ionicModal.fromTemplateUrl('templates/modalPage/loginSignup.html', {
         scope: $rootScope
     }).then(function(modal) {
         $rootScope.logsignModal = modal;
@@ -54,34 +60,34 @@ app.controller('modalCtrl', function($scope, $anchorScroll, $location, $http, $r
 
 
 
-    $ionicModal.fromTemplateUrl('templates/cabinSlideModal.html', {
+    $ionicModal.fromTemplateUrl('templates/modalPage/cabinSlideModal.html', {
         scope: $scope,
         animation: 'slide-in-up'
     }).then(function(modal) {
         $scope.modal = modal;
     })
 
-    $ionicModal.fromTemplateUrl('templates/discountModal.html', {
+    $ionicModal.fromTemplateUrl('templates/modalPage/discountModal.html', {
         scope: $scope,
         animation: 'slide-in-up'
     }).then(function(modal) {
         $scope.discountModal = modal;
     })
 
-    $ionicModal.fromTemplateUrl('templates/activityVideoModal.html', {
+    $ionicModal.fromTemplateUrl('templates/modalPage/activityVideoModal.html', {
         scope: $scope,
         hardwareBackButtonClose: false
     }).then(function(modal) {
         $scope.showVideo = modal;
     })
 
-    $ionicModal.fromTemplateUrl('templates/shipActivityModal.html', {
+    $ionicModal.fromTemplateUrl('templates/modalPage/shipActivityModal.html', {
         scope: $scope
     }).then(function(modal) {
         $scope.modal2 = modal;
     });
 
-    $ionicModal.fromTemplateUrl('templates/privacyPolicyModal.html', {
+    $ionicModal.fromTemplateUrl('templates/modalPage/privacyPolicyModal.html', {
         scope: $scope
     }).then(function(modal) {
         $scope.privacyPolicyModal = modal;
@@ -92,7 +98,7 @@ app.controller('modalCtrl', function($scope, $anchorScroll, $location, $http, $r
     $rootScope.closeLoginSign = function() {
             $rootScope.logsignModal.remove();
             $rootScope.hideForm = true;
-            $ionicModal.fromTemplateUrl('templates/loginSignup.html', {
+            $ionicModal.fromTemplateUrl('templates/modalPage/loginSignup.html', {
                 scope: $rootScope
             }).then(function(modal) {
                 $rootScope.logsignModal = modal;
@@ -108,7 +114,7 @@ app.controller('modalCtrl', function($scope, $anchorScroll, $location, $http, $r
 
     $scope.closeVidio = function() {
         $scope.showVideo.remove();
-        $ionicModal.fromTemplateUrl('templates/activityVideoModal.html', {
+        $ionicModal.fromTemplateUrl('templates/modalPage/activityVideoModal.html', {
             scope: $scope,
             hardwareBackButtonClose: false
         }).then(function(modal) {
@@ -239,7 +245,7 @@ app.controller('modalCtrl', function($scope, $anchorScroll, $location, $http, $r
     };
     $scope.closeFAQ = function() {
         $scope.faqModal.remove();
-        $ionicModal.fromTemplateUrl('templates/faqModal.html', {
+        $ionicModal.fromTemplateUrl('templates/modalPage/faqModal.html', {
             scope: $scope
         }).then(function(modal) {
             $scope.faqModal = modal;
@@ -254,7 +260,7 @@ app.controller('modalCtrl', function($scope, $anchorScroll, $location, $http, $r
     }
     $scope.closePrivacyPolicy = function() {
         $scope.privacyPolicyModal.remove();
-        $ionicModal.fromTemplateUrl('templates/privacyPolicyModal.html', {
+        $ionicModal.fromTemplateUrl('templates/modalPage/privacyPolicyModal.html', {
             scope: $scope
         }).then(function(modal) {
             $scope.privacyPolicyModal = modal;
@@ -270,7 +276,7 @@ app.controller('modalCtrl', function($scope, $anchorScroll, $location, $http, $r
     }
     $scope.closeTermsCond = function() {
         $scope.termAndCondition.remove();
-        $ionicModal.fromTemplateUrl('templates/termModal.html', {
+        $ionicModal.fromTemplateUrl('templates/modalPage/termModal.html', {
             scope: $scope
         }).then(function(modal) {
             $scope.termAndCondition = modal;
@@ -300,7 +306,7 @@ app.controller('modalCtrl', function($scope, $anchorScroll, $location, $http, $r
 
     $scope.closeProfile = function() {
         $scope.profileSet.remove();
-        $ionicModal.fromTemplateUrl('templates/profileSettingModal.html', {
+        $ionicModal.fromTemplateUrl('templates/modalPage/profileSettingModal.html', {
             scope: $scope
         }).then(function(modal) {
             $scope.profileSet = modal;
@@ -321,35 +327,38 @@ app.controller('modalCtrl', function($scope, $anchorScroll, $location, $http, $r
         }
         if (form.$valid) //checking form valid or not
         {
+            if (user.oldPassword.length > 5) {
+                if (user.newPassword == '' || user.newPassword == undefined) {
+                    user.newPassword = "";
+                }
+                var data = "userName=" + $localStorage.userName + "&firstName=" + user.firstName + "&lastName=" + user.lastName + "&oldPassword=" + user.oldPassword + "&newPassword=" + user.newPassword;
+                $scope.status = "";
+                profileSet.profileS(data)
+                    .then(
+                        /* success function */
+                        function(status) {
+                            $scope.status = status;
+                            if ($scope.status == 200) {
+                                $ionicPopup.show({
+                                    title: 'Success',
+                                    subTitle: 'Your Profile is Updated',
+                                    buttons: [{
+                                        text: 'Ok'
+                                    }]
+                                }).then(function(res) {});
+                                $localStorage.Name = user.firstName;
+                                $scope.closeProfile();
+                            } else {
+                                profileSet.errors(form, $scope.status);
+                            }
 
-            if (user.newPassword == '' || user.newPassword == undefined) {
-                user.newPassword = "";
+                        },
+                        function(error) {
+                            //If an error happened, handle it here
+                        })
+            } else {
+                form.password.$setValidity("password", false);
             }
-            var data = "userName=" + $localStorage.userName + "&firstName=" + user.firstName + "&lastName=" + user.lastName + "&oldPassword=" + user.oldPassword + "&newPassword=" + user.newPassword;
-            $scope.status = "";
-            profileSet.profileS(data)
-                .then(
-                    /* success function */
-                    function(status) {
-                        $scope.status = status;
-                        if ($scope.status == 200) {
-                            $ionicPopup.show({
-                                title: 'Success',
-                                subTitle: 'Your Profile is Updated',
-                                buttons: [{
-                                    text: 'Ok'
-                                }]
-                            }).then(function(res) {});
-                            $localStorage.Name = user.firstName;
-                            $scope.closeProfile();
-                        } else {
-                            profileSet.errors(form, $scope.status);
-                        }
-
-                    },
-                    function(error) {
-                        //If an error happened, handle it here
-                    })
         }
     }
 
@@ -387,7 +396,7 @@ app.controller('modalCtrl', function($scope, $anchorScroll, $location, $http, $r
     $scope.discountModalRemove = function() {
 
         $scope.discountModal.remove();
-        $ionicModal.fromTemplateUrl('templates/discountModal.html', {
+        $ionicModal.fromTemplateUrl('templates/modalPage/discountModal.html', {
             scope: $scope,
             animation: 'slide-in-up'
         }).then(function(modal) {
@@ -410,7 +419,7 @@ app.controller('modalCtrl', function($scope, $anchorScroll, $location, $http, $r
                         $rootScope.termCondAccepted = true;
                         $location.path('/app/iframeBookingPage');
                         $scope.termAndCondition.remove();
-                        $ionicModal.fromTemplateUrl('templates/termModal.html', {
+                        $ionicModal.fromTemplateUrl('templates/modalPage/termModal.html', {
                             scope: $scope
                         }).then(function(modal) {
                             $scope.termAndCondition = modal;
@@ -427,11 +436,32 @@ app.controller('modalCtrl', function($scope, $anchorScroll, $location, $http, $r
     $scope.termCondDecline = function() {
         $scope.termAndCondition.remove();
         $rootScope.clickedFromMenu = true;
-        $ionicModal.fromTemplateUrl('templates/termModal.html', {
+        $ionicModal.fromTemplateUrl('templates/modalPage/termModal.html', {
             scope: $scope
         }).then(function(modal) {
             $scope.termAndCondition = modal;
         })
         $location.path('/app/shopAndBookPage');
+    }
+
+    /* ==========================================================================
+           						List Screen Guide Modal functionality
+            	========================================================================== */
+    $scope.isCheckedDontShow = false;
+    $scope.checkToggle = $localStorage.listGuideShown;
+
+    $scope.updateLocalStorage = function(checkToggle) {
+        console.log(checkToggle);
+        $localStorage.listGuideShown = checkToggle;
+    };
+    $scope.listScreenGuideRemove = function() {
+        $scope.listScreenGuideModal.remove();
+        $rootScope.okGotItClicked = true;
+        $ionicModal.fromTemplateUrl('templates/modalPage/listScreenGuideModal.html', {
+            scope: $scope
+        }).then(function(modal) {
+            $scope.listScreenGuideModal = modal;
+        })
+
     }
 });

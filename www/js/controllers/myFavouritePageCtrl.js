@@ -80,7 +80,7 @@ app.controller('myFavouritePageCtrl', function($scope, $location, $ionicModal, $
             // An elaborate, custom popup
             $scope.discountData = data;
             var discountPopup = $ionicPopup.show({
-                templateUrl: './templates/listDiscount.html',
+                templateUrl: './templates/popupPage/listDiscountPopUp.html',
                 title: 'Offers',
                 scope: $scope,
                 buttons: [{ // Array[Object] (optional). Buttons to place in the popup footer.

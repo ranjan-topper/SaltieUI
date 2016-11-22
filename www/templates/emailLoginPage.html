@@ -14,7 +14,7 @@
               <input type="email" id="email1" name="email" ng-keyup="resetEmail(authorizationForm)" placeholder="Email" ng-model="user.email" required>
             </label>
                 <div class="error-container" ng-show="authorizationForm.email.$error && authorizationForm.$submitted" ng-messages="authorizationForm.email.$error">
-                    <div ng-messages-include="templates/error-list.html"></div>
+                    <div ng-messages-include="templates/errorPage/error-list.html"></div>
                 </div>
 
 
@@ -22,7 +22,7 @@
               <input type="password" onselectstart="return false" onpaste="return false;" onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false" autocomplete=off id="password1" name="password"  onkeyup="AvoidSpace(this)" ng-keyup="setpassword(authorizationForm)" placeholder="Password" ng-model="user.password" required>
             </label>
                 <div class="error-container" ng-show="authorizationForm.password.$error && authorizationForm.$submitted" ng-messages="authorizationForm.password.$error">
-                    <div ng-messages-include="templates/error-list.html"></div>
+                    <div ng-messages-include="templates/errorPage/error-list.html"></div>
                 </div>
 
 

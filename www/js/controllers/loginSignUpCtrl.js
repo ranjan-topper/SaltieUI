@@ -125,52 +125,56 @@ app.controller('loginSignUpCtrl', function($scope, $location, $http, $rootScope,
     $rootScope.Login = function(form, user) {
         if (form.$valid) //cheacking the form valid or not
         {
-            var url = serviceLink.url + 'SaltieApp/rest/cruise/user/login';
-            var obj = {
-                userName: user.email1,
-                password: user.password1
-            };
-            var data = "userName=" + obj.userName + "&password=" + obj.password;
-            $scope.status = "";
-            loginService.login(url, data)
-                .then(
-                    /* success function */
-                    function(status) {
-                        $scope.status = status;
-                        if ($scope.status == 200) {
-                            //menu item do be displayed when login
-                            $rootScope.loginLogout = "Log out";
-                            $rootScope.showMyFav = false;
-                            $rootScope.showEngage = false;
-                            $rootScope.hidePhBook = true;
-                            $rootScope.showProfileSet = false;
-                            $localStorage.userName = user.email1;
-                            //favourite the cruise while login is finished
-                            if ($rootScope.logSignClicked == "Favourite") {
-                                $rootScope.logsignModal.hide();
-                                if ($rootScope.favourite1 != null || $rootScope.favourite1 != '')
-                                    $rootScope.favourite = angular.copy($rootScope.favourite1);
-                                if ($rootScope.isFavourite($rootScope.tripidfav) == false)
-                                    favService.favorite($rootScope.tripidfav, $rootScope.indexfav);
-                            } else if ($rootScope.logSignClicked == "nextStep") {
-                                $rootScope.logsignModal.hide();
-                                $location.path('/app/shopAndBookPage');
-                            } else if ($rootScope.logSignClicked == "engageUs") {
-                                $rootScope.logsignModal.hide();
-                                $location.path('/app/shopAndBookPage');
+            if (user.password1.length > 5) {
+                var url = serviceLink.url + 'SaltieApp/rest/cruise/user/login';
+                var obj = {
+                    userName: user.email1,
+                    password: user.password1
+                };
+                var data = "userName=" + obj.userName + "&password=" + obj.password;
+                $scope.status = "";
+                loginService.login(url, data)
+                    .then(
+                        /* success function */
+                        function(status) {
+                            $scope.status = status;
+                            if ($scope.status == 200) {
+                                //menu item do be displayed when login
+                                $rootScope.loginLogout = "Log out";
+                                $rootScope.showMyFav = false;
+                                $rootScope.showEngage = false;
+                                $rootScope.hidePhBook = true;
+                                $rootScope.showProfileSet = false;
+                                $localStorage.userName = user.email1;
+                                //favourite the cruise while login is finished
+                                if ($rootScope.logSignClicked == "Favourite") {
+                                    $rootScope.logsignModal.hide();
+                                    if ($rootScope.favourite1 != null || $rootScope.favourite1 != '')
+                                        $rootScope.favourite = angular.copy($rootScope.favourite1);
+                                    if ($rootScope.isFavourite($rootScope.tripidfav) == false)
+                                        favService.favorite($rootScope.tripidfav, $rootScope.indexfav);
+                                } else if ($rootScope.logSignClicked == "nextStep") {
+                                    $rootScope.logsignModal.hide();
+                                    $location.path('/app/shopAndBookPage');
+                                } else if ($rootScope.logSignClicked == "engageUs") {
+                                    $rootScope.logsignModal.hide();
+                                    $location.path('/app/shopAndBookPage');
+                                } else {
+                                    $rootScope.logsignModal.hide();
+                                    $rootScope.share();
+                                }
                             } else {
-                                $rootScope.logsignModal.hide();
-                                $rootScope.share();
+                                loginService.errors(form, $scope.status);
                             }
-                        } else {
-                            loginService.errors(form, $scope.status);
-                        }
 
 
-                    },
-                    function(error) {
-                        //If an error happened, handle it here
-                    });
+                        },
+                        function(error) {
+                            //If an error happened, handle it here
+                        });
+            } else {
+                form.password.$setValidity("password", false);
+            }
         }
     }
 

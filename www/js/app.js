@@ -58,6 +58,12 @@ app.run(function($ionicPlatform, $rootScope, $state, $location, $ionicHistory, $
         window.fbq('track', toState.name);
     });
 
+    //list show Guide Screen
+    if ($localStorage.listGuideShown == undefined || $localStorage.listGuideShown == null) {
+        $localStorage.listGuideShown = false;
+    }
+
+
     //initalize list item
     $rootScope.list = [];
     $rootScope.firstTimeSelected = 0;

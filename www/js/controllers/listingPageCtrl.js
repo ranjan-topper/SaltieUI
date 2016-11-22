@@ -17,6 +17,14 @@ app.controller('listingPageCtrl', function($scope, $location, $rootScope, $local
         $scope.favoriteId = 0;
         $scope.pasBackBtFlag = 0;
 
+        // opens the modal only one time
+        if (!$localStorage.listGuideShown) {
+            if (!$rootScope.okGotItClicked) {
+                $scope.listScreenGuideModal.show();
+            }
+        }
+
+
         if ($rootScope.list == undefined || $rootScope.list == "") {
             $rootScope.noMoreItemsAvailable = false;
             $rootScope.totalDisplayed = 0;
@@ -312,7 +320,7 @@ app.controller('listingPageCtrl', function($scope, $location, $rootScope, $local
             // An elaborate, custom popup
             $scope.discountData = data;
             var discountPopup = $ionicPopup.show({
-                templateUrl: './templates/listDiscount.html',
+                templateUrl: './templates/popupPage/listDiscountPopUp.html',
                 title: 'Offers',
                 scope: $scope,
                 buttons: [{ // Array[Object] (optional). Buttons to place in the popup footer.
@@ -324,9 +332,6 @@ app.controller('listingPageCtrl', function($scope, $location, $rootScope, $local
                 }]
             });
         }
-
-
-
 
     }
 });

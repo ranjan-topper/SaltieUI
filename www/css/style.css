@@ -22,6 +22,7 @@
 * 18. CabinType Modal
 * 19. Listing Page
 * 20. Floating button
+* 21. Listing page Guide
 
 
 * Colors
@@ -1807,12 +1808,9 @@ ion-scroll[delegate-handle=filterScroll] {
         line-height: 7vh;
     }
     .arrowbutton {
-        line-height: 21vh;
-        top: 0px;
-        /* right: 5vw; */
+        top: 8vh;
         border: none;
         padding-right: 5%;
-        /* min-width: 0px; */
         color: #00707E;
         position: absolute;
         font-size: 8vmin;
@@ -3012,4 +3010,64 @@ a.tab-item.tab-item-active span.tab-title.ng-binding {
 #privacyPolicy p strong {
     font-family: bold;
     color: #aea081;
+}
+
+
+/* ==========================================================================
+                21. Listing page Guide
+   ========================================================================== */
+
+#listGuide .button {
+    border-color: #ffffff;
+    background-color: #ffffff;
+    color: #00232d;
+    height: 7vh !important;
+    font-size: 4vmin;
+    line-height: 7vh;
+    min-height: 35px;
+}
+
+#listGuide.modal {
+    background-color: rgba(0, 35, 45, 0.85);
+}
+
+#listGuide .paddingGuide {
+    padding: 6vmin;
+}
+
+#listGuide .checkbox {
+    display: inline-flex;
+    line-height: 1.7;
+}
+
+#listGuide .item {
+    color: #ffffff;
+    font-family: thin;
+    background: transparent;
+}
+
+#listGuide .checkbox input:before,
+.checkbox-icon:before {
+    background: rgba(255, 255, 255, 0);
+}
+
+#listGuide p.boldHead {
+    font-size: 7vmin;
+    text-align: center;
+    line-height: 2;
+}
+
+#listGuide p.subHead {
+    font-size: 5vmin;
+}
+
+#listGuide p {
+    padding: 1vh 0 1vh 0;
+    font-size: 4vmin;
+    color: white;
+    font-family: roman;
+}
+
+#listGuide div img {
+    padding: 2vh 0 2vh 0;
 }

@@ -15,20 +15,20 @@
               <input type="email" name="email" id="plc1" ng-keyup="resetEmail(authorizationForm)" placeholder="Email" ng-model="user.email" required>
             </label>
                 <div class="error-container" ng-show="authorizationForm.email.$error && authorizationForm.$submitted" ng-messages="authorizationForm.email.$error">
-                    <div ng-messages-include="templates/error-list.html"></div>
+                    <div ng-messages-include="templates/errorPage/error-list.html"></div>
                 </div>
 
                 <label class="item item-input color2" ng-class="{ 'has-errors' : authorizationForm.username.$invalid && authorizationForm.$submitted, 'no-errors' : authorizationForm.username.$valid}">
               <input type="text" name="username" id="plc2" ng-keyup="resetFrom(authorizationForm)" placeholder="First Name" ng-model="user.firstName" ng-minlength="3" ng-maxlength="20" required>
             </label>
                 <div class="error-container" ng-show="authorizationForm.username.$error && authorizationForm.$submitted" ng-messages="authorizationForm.username.$error">
-                    <div ng-messages-include="templates/error-list.html"></div>
+                    <div ng-messages-include="templates/errorPage/error-list.html"></div>
                 </div>
                 <label class="item item-input color3" ng-class="{ 'has-errors' : authorizationForm.lastname.$invalid && authorizationForm.$submitted, 'no-errors' : authorizationForm.lastname.$valid}">
               <input type="text" name="lastname" id="plc3" placeholder="Last Name" ng-keyup="resetFrom(authorizationForm)" ng-model="user.lastName" ng-minlength="1" ng-maxlength="20" required>
             </label>
                 <div class="error-container" ng-show="authorizationForm.lastname.$error && authorizationForm.$submitted" ng-messages="authorizationForm.lastname.$error">
-                    <div ng-messages-include="templates/error-list.html"></div>
+                    <div ng-messages-include="templates/errorPage/error-list.html"></div>
                 </div>
 
                 <label class="item item-input color4" ng-class="{ 'has-errors' : authorizationForm.password.$invalid && authorizationForm.$submitted, 'no-errors' : authorizationForm.password.$valid  && authorizationForm.$submitted}">
@@ -36,7 +36,7 @@
             </label>
 
                 <div class="error-container" ng-show="authorizationForm.password.$error && authorizationForm.$submitted" ng-messages="authorizationForm.password.$error">
-                    <div ng-messages-include="templates/error-list.html"></div>
+                    <div ng-messages-include="templates/errorPage/error-list.html"></div>
                 </div>
 
                 <button type="submit" id="sign2" class="button button-block submitloginbt">

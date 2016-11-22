@@ -19,34 +19,38 @@ app.controller('emailLoginPageCtr', function($scope, $location, $http, $ionicLoa
         $scope.Login = function(form, user) {
             if (form.$valid) //cheacking the form valid or not
             {
-                var url = serviceLink.url + 'SaltieApp/rest/cruise/user/login';
-                var obj = {
-                    userName: user.email,
-                    password: user.password
-                };
+                if (user.password.length > 5) {
+                    var url = serviceLink.url + 'SaltieApp/rest/cruise/user/login';
+                    var obj = {
+                        userName: user.email,
+                        password: user.password
+                    };
 
-                var data = "userName=" + obj.userName + "&password=" + obj.password;
-                $scope.status = "";
-                loginService.login(url, data)
-                    .then(
-                        /* success function */
-
-
-                        function(status) {
-
-                            $scope.status = status;
-                            if ($scope.status == 200) {
-                                $localStorage.userName = user.email;
-                                $location.path('app/landingPage');
-                            } else {
-                                loginService.errors(form, $scope.status);
-                            }
+                    var data = "userName=" + obj.userName + "&password=" + obj.password;
+                    $scope.status = "";
+                    loginService.login(url, data)
+                        .then(
+                            /* success function */
 
 
-                        },
-                        function(error) {
-                            //If an error happened, handle it here
-                        });
+                            function(status) {
+
+                                $scope.status = status;
+                                if ($scope.status == 200) {
+                                    $localStorage.userName = user.email;
+                                    $location.path('app/landingPage');
+                                } else {
+                                    loginService.errors(form, $scope.status);
+                                }
+
+
+                            },
+                            function(error) {
+                                //If an error happened, handle it here
+                            });
+                } else {
+                    form.password.$setValidity("password", false);
+                }
             }
         }
         $scope.sapceCheck = function() {
