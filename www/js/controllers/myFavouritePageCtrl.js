@@ -1,4 +1,4 @@
-app.controller('myFavouritePageCtrl', function($scope, $location, $ionicModal, $rootScope, $http, $ionicLoading, $localStorage, FavouriteService, $ionicHistory, serviceLink, detailData, $ionicSlideBoxDelegate, discountVal, $ionicPopup) {
+app.controller('myFavouritePageCtrl', function($scope, $location, $ionicModal, $rootScope, $http, $ionicLoading, $localStorage, FavouriteService, serviceLink, detailData, $ionicSlideBoxDelegate, discountVal, $ionicPopup) {
 
     if (typeof analytics !== 'undefined') { analytics.trackView("My Favourite Controller"); }
 

@@ -1,8 +1,6 @@
 app.controller('startingPageCtrl', function($scope, $location, $state, $localStorage, $timeout, $rootScope, serviceLink) {
     //    HardwareBackButtonManager.disable(); //HardwareBackButtonManager is a directive used to block the back button functionality of the mobile
     $rootScope.linkUrl = serviceLink.url;
-
-
     if (typeof analytics !== 'undefined') { analytics.trackView("Starting Page Controller"); }
     if ($localStorage.userName == "" || $localStorage.userName == null || $localStorage.userName == "Guest") {
 
@@ -12,8 +10,6 @@ app.controller('startingPageCtrl', function($scope, $location, $state, $localSto
             $scope.swipetohome();
         }, 10000);
         $scope.swipetohome = function() {
-
-
             $timeout.cancel(timer); //cancel the timeout which is started before for 10 seconds
             $location.path('/app/landingPage');
         }

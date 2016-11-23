@@ -1,4 +1,4 @@
-app.controller('detailPageCtrl', function($scope, $state, $location, $ionicModal, $rootScope, $http, $ionicLoading, $localStorage, $ionicSlideBoxDelegate, $ionicScrollDelegate, $timeout, $ionicHistory, serviceLink, favService, $sce, discountVal) {
+app.controller('detailPageCtrl', function($scope, $state, $location, $rootScope, $http, $ionicLoading, $localStorage, $ionicSlideBoxDelegate, $ionicScrollDelegate, $timeout, favService, discountVal) {
 
     if (typeof analytics !== 'undefined') { analytics.trackView("Detail Controller"); }
 
@@ -191,7 +191,7 @@ app.controller('detailPageCtrl', function($scope, $state, $location, $ionicModal
 
                 var url = "http://stage-share.saltie.cruises/Saltie-site/index.html?trip=" + btoa($scope.tripID).split('=')[0] + "&user=" + btoa($localStorage.Name).split('=')[0];
                 console.log(url);
-                window.plugins.socialsharing.share("This exciting cruise is brought to you by Saltie.", $rootScope.detail.tripDetails.tripDesc, null, url);
+                window.plugins.socialsharing.share("This exciting cruise is brought to you by Saltie. The Perfect Cruise is Waiting for you!", $rootScope.detail.tripDetails.tripDesc, null, url);
             }
         }
 

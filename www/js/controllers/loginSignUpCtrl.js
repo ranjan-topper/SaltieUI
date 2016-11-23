@@ -1,4 +1,4 @@
-app.controller('loginSignUpCtrl', function($scope, $location, $http, $rootScope, $filter, $localStorage, $ionicLoading, serviceLink, $ionicPopup, loginService, favService, facebookService) {
+app.controller('loginSignUpCtrl', function($scope, $location, $http, $rootScope, $localStorage, $ionicLoading, serviceLink, $ionicPopup, loginService, favService, facebookService) {
 
     //toggle the email login field function
     $rootScope.hideForm = true;

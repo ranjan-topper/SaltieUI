@@ -1,4 +1,4 @@
-app.controller('landingPageCtrl', function($scope, $location, $http, $rootScope, $filter, $localStorage, $ionicLoading, serviceLink, $ionicModal, $ionicScrollDelegate, $ionicSlideBoxDelegate, $timeout, facebookService, $ionicTabsDelegate) {
+app.controller('landingPageCtrl', function($scope, $location, $http, $rootScope, $localStorage, serviceLink, $timeout, $ionicTabsDelegate) {
     //initialise the rootscope details value
     $rootScope.TempDetail = "";
     $rootScope.engageData = "";

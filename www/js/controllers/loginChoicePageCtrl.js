@@ -1,4 +1,4 @@
-app.controller('loginChoicePageCtrl', function($scope, $state, $cordovaOauth, $localStorage, $location, $http, $ionicLoading, facebookService, loginService, $ionicPopup, serviceLink, $rootScope) {
+app.controller('loginChoicePageCtrl', function($scope, $state, $localStorage, $location, $ionicLoading, facebookService, loginService, $ionicPopup, serviceLink, $rootScope) {
 
 
     var isIPad = ionic.Platform.isIPad();

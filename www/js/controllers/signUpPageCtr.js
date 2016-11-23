@@ -1,4 +1,4 @@
-app.controller('signUpPageCtr', function($scope, $state, $location, $http, $localStorage, $ionicLoading, $ionicPopup, loginService, serviceLink) {
+app.controller('signUpPageCtr', function($scope, $state, $location, $localStorage, $ionicLoading, loginService, serviceLink) {
 
     var isIPad = ionic.Platform.isIPad();
     var isIOS = ionic.Platform.isIOS();

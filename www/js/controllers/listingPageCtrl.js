@@ -1,4 +1,4 @@
-app.controller('listingPageCtrl', function($scope, $location, $rootScope, $localStorage, $http, $ionicLoading, $timeout, $ionicModal, serviceLink, favService, $ionicPopup, $q, detailData, $ionicSlideBoxDelegate, curatorList, themeFilter, discountVal, $ionicTabsDelegate, $ionicScrollDelegate, $window, $state) {
+app.controller('listingPageCtrl', function($scope, $location, $rootScope, $localStorage, $http, $ionicLoading, $timeout, serviceLink, favService, $ionicPopup, $q, detailData, $ionicSlideBoxDelegate, curatorList, themeFilter, discountVal) {
 
 
     if (typeof analytics !== 'undefined') {

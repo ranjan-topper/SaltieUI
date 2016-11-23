@@ -1,4 +1,4 @@
-app.controller('iframeBookingPageCtrl', function($scope, $location, $ionicModal, $rootScope, $http, $ionicLoading, $localStorage, $ionicNavBarDelegate) {
+app.controller('iframeBookingPageCtrl', function($scope, $location, $rootScope, $localStorage) {
 
     if ($localStorage.userName == "" || $localStorage.userName == null) {
         $location.path('/startingPage');

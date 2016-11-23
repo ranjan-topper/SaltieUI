@@ -1,4 +1,4 @@
-app.controller('saltieFilterCtrl', function($scope, $location, $http, $rootScope, $filter, $localStorage, $ionicLoading, serviceLink, $ionicModal, themeFilter, $ionicPopup, advanceFilter, $ionicScrollDelegate, $timeout) {
+app.controller('saltieFilterCtrl', function($scope, $location, $http, $rootScope, $ionicLoading, $ionicPopup, advanceFilter, $ionicScrollDelegate, $timeout) {
     /* ==========================================================================
   						declaring values
    ========================================================================== */

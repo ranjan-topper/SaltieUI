@@ -1,4 +1,4 @@
-app.controller('modalCtrl', function($scope, $anchorScroll, $location, $http, $rootScope, $ionicScrollDelegate, $localStorage, $ionicLoading, serviceLink, $ionicPopup, loginService, $ionicModal, $ionicSlideBoxDelegate, $timeout, profileSet, profileGet, $sce, $filter, termAndConditionSetService) {
+app.controller('modalCtrl', function($scope, $anchorScroll, $location, $http, $rootScope, $ionicScrollDelegate, $localStorage, $ionicLoading, serviceLink, $ionicPopup, $ionicModal, $ionicSlideBoxDelegate, $timeout, profileSet, profileGet, $sce, $filter, termAndConditionSetService) {
 
     $rootScope.linkUrl = serviceLink.url;
     $scope.readyBookDisable = false;
@@ -191,7 +191,7 @@ app.controller('modalCtrl', function($scope, $anchorScroll, $location, $http, $r
             $rootScope.sailID = prices.sailingId.substring(4);
             $rootScope.priceList = prices.category;
             if ($rootScope.pID == 'NA') {
-                $rootScope.pidVivaUrl = 'https://res.vivavoyage.com/Web/cruises/details.aspx?pid=874684';
+                $rootScope.pidVivaUrl = 'https://res.vivavoyage.com/Web/cruises/details.aspx?pid=734348';
             } else {
                 $rootScope.pidVivaUrl = 'https://res.vivavoyage.com/Web/cruises/details.aspx?pid=' + $rootScope.pID;
             }

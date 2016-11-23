@@ -1,4 +1,4 @@
-app.controller('appMenuCtrl', function($scope, $ionicModal, $timeout, $ionicHistory, $localStorage, $location, $http, $rootScope, $state, serviceLink, $window, profileGet, profileSet, TokenStorage, $ionicTabsDelegate, $ionicScrollDelegate) {
+app.controller('appMenuCtrl', function($scope, $timeout, $localStorage, $location, $http, $rootScope, $state, serviceLink, $window, TokenStorage, $ionicTabsDelegate, $ionicScrollDelegate) {
 
     if (typeof analytics !== 'undefined') {
         analytics.trackView("App Main Controller");
