@@ -8031,6 +8031,21 @@ label {
 /* ==========================================================================
    01. General Styles
    ========================================================================== */
+.platform-ios.platform-cordova:not(.fullscreen) .bar-header:not(.bar-subheader) {
+  margin-top: 20px; }
+
+.platform-ios.platform-cordova:not(.fullscreen) .bar-header:not(.bar-subheader) > * {
+  margin-top: 0px; }
+
+.platform-ios.platform-cordova:not(.fullscreen) .tabs-top > .tabs, .platform-ios.platform-cordova:not(.fullscreen) .tabs.tabs-top {
+  margin-top: 20px !important; }
+
+.platform-ios.platform-cordova:not(.fullscreen) .has-header, .platform-ios.platform-cordova:not(.fullscreen) .bar-subheader {
+  top: calc(7vh + 20px) !important; }
+
+.button-float:hover {
+  background: #9c867a !important; }
+
 /* copy and paste functionality  */
 .list:last-child {
   padding-bottom: 18vh !important; }
@@ -10149,7 +10164,7 @@ a.tab-item.tab-item-active span.tab-title.ng-binding {
   -webkit-transform: translate3d(0, -1px, 0) !important;
   transform: translate3d(0, -1px, 0) !important;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4) !important;
-  background: #cc0000 !important; }
+  background: #9c867a !important; }
 
 @media (min-width: 481px) {
   .mainButtonFloat {
