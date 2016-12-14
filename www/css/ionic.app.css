@@ -8031,6 +8031,15 @@ label {
 /* ==========================================================================
    01. General Styles
    ========================================================================== */
+@media (min-width: 680px) {
+  .modal {
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    min-height: 240px;
+    width: 100%; } }
+
 .platform-ios.platform-cordova:not(.fullscreen) .bar-header:not(.bar-subheader) {
   margin-top: 20px; }
 
@@ -10259,7 +10268,8 @@ a.tab-item.tab-item-active span.tab-title.ng-binding {
   background-color: rgba(0, 35, 45, 0.85); }
 
 #listGuide .paddingGuide {
-  padding: 6vmin; }
+  padding: 6vmin;
+  line-height: 1; }
 
 #listGuide .checkbox {
   display: inline-flex;
