@@ -8844,12 +8844,43 @@ a.button .icon:before, a.button.icon:before, a.button.icon-left:before, a.button
   	10. Detail Page
    ========================================================================== */
 .saliIDPosition {
-  position: absolute;
-  top: 32vh;
+  display: block;
   line-height: 1;
   font-size: 3.5vmin;
   color: white;
-  left: 5vw; }
+  padding-top: 1vh; }
+
+.detailtextDiv {
+  top: 0px;
+  position: absolute;
+  width: 100%;
+  height: 40vh;
+  pointer-events: none; }
+
+.customSliderPager {
+  position: absolute;
+  bottom: 25px;
+  left: 0;
+  z-index: 100;
+  width: 100%;
+  height: 20px;
+  text-align: center; }
+
+.customSliderPager .customSlider-pager-page {
+  display: inline-block;
+  margin: 0px 3px;
+  width: 15px;
+  color: #000;
+  text-decoration: none;
+  opacity: 0.3; }
+
+.customSliderPager .customSlider-pager-page.active {
+  -webkit-transition: opacity 0.4s ease-in;
+  transition: opacity 0.4s ease-in;
+  opacity: 1; }
+
+.customSliderPager .icon {
+  font-size: 8px; }
 
 #discount .slider-pager {
   position: static;
@@ -9919,15 +9950,15 @@ div.sail {
   color: white;
   font-family: roman; }
 
-ul.my-nav {
+.my-nav ul {
   list-style-image: url(../img/points.png);
   font-family: light;
   list-style-position: outside;
-  margin-left: 40px;
   line-height: 1.2; }
 
 .popup-container .popup {
-  width: 90% !important; }
+  width: 90% !important;
+  background-color: white; }
 
 .popup-title {
   font-family: bold;
@@ -9935,7 +9966,8 @@ ul.my-nav {
   font-size: 5vmin !important; }
 
 .popup-head {
-  padding: 5vw; }
+  padding: 5vw;
+  border: none; }
 
 .popup-body {
   color: #9c867a !important;
@@ -9944,7 +9976,8 @@ ul.my-nav {
   overflow: auto; }
 
 .my-nav li {
-  padding-bottom: 2vh; }
+  padding-bottom: 2vh;
+  margin-left: 40px; }
 
 .discountListIcon {
   width: 11%;
