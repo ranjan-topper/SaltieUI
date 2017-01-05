@@ -8056,7 +8056,7 @@ label {
   background: #9c867a !important; }
 
 /* copy and paste functionality  */
-.list:last-child {
+#list .list.list-item:last-child {
   padding-bottom: 18vh !important; }
 
 input, textarea {
@@ -8475,7 +8475,7 @@ hr {
 .selectArrowCss {
   pointer-events: none;
   right: 0;
-  top: calc(50% - 0px);
+  line-height: 6vh;
   font-size: 5vmin;
   position: absolute;
   padding-right: 3vw; }
@@ -8880,7 +8880,13 @@ a.button .icon:before, a.button.icon:before, a.button.icon-left:before, a.button
   opacity: 1; }
 
 .customSliderPager .icon {
-  font-size: 8px; }
+  font-size: 15px; }
+
+#discount .slider-slide {
+  min-height: 720px; }
+
+#discount .my-nav ul {
+  margin-bottom: 6vh; }
 
 #discount .slider-pager {
   position: static;
@@ -9842,6 +9848,9 @@ transform: translate3d(-5px, 0px,0px);
 .no-padding {
   padding: 0px; }
 
+.less-padding {
+  padding: 0.2vh; }
+
 .bookbtn {
   line-height: 7vh !important;
   min-height: 7vh !important;
@@ -9854,6 +9863,7 @@ transform: translate3d(-5px, 0px,0px);
   width: 100%;
   height: 4.7vh;
   min-height: 7vh;
+  line-height: 7vh;
   font-size: 5vmin !important;
   color: #FFFFFF !important;
   text-align: center;
