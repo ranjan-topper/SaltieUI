@@ -9513,6 +9513,9 @@ transform: translate3d(-5px, 0px,0px);
 /* ==========================================================================
    17. Common Modal css
    ========================================================================== */
+#privacyPolicy a, #tC a {
+  color: #00232d; }
+
 #modalAll .headerBar {
   background-color: transparent;
   border: none; }
@@ -10263,12 +10266,13 @@ a.tab-item.tab-item-active span.tab-title.ng-binding {
 
 #tC ul {
   padding-left: 5vw;
-  font-size: 3vmin;
+  font-size: 3.5vmin;
   list-style-position: outside;
   color: #005D69;
   line-height: 1.2;
   font-family: roman;
-  list-style-type: disc; }
+  list-style-type: disc;
+  margin-left: 4vh; }
 
 #tC ol li {
   color: #339FA6;
