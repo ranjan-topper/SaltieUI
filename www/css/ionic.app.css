@@ -10275,10 +10275,20 @@ a.tab-item.tab-item-active span.tab-title.ng-binding {
   margin-left: 4vh; }
 
 #tC ol li {
-  color: #339FA6;
+  color: #00232d;
   font-family: roman;
   font-size: 3.5vmin;
-  line-height: 1.2; }
+  line-height: 1.2;
+  padding: 5px 0 5px 0; }
+
+#tC h4 {
+  display: inline;
+  font-family: bold;
+  color: #aea081;
+  font-size: 3.5vmin; }
+
+#tC .tableContentPadd {
+  padding-left: 10% !important; }
 
 #tC ol li strong {
   font-family: bold;
@@ -10298,6 +10308,9 @@ a.tab-item.tab-item-active span.tab-title.ng-binding {
 #privacyPolicy p strong {
   font-family: bold;
   color: #aea081; }
+
+#privacyPolicy .privacyPPad {
+  padding-left: 25px; }
 
 /* ==========================================================================
                 21. Listing page Guide
